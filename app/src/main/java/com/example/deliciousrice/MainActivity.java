@@ -15,6 +15,6 @@ public class MainActivity extends AppCompatActivity {
         // tran the ngoc
         /// ngoc co thich hoa cua van k
         // chê nhaaa kaka
-        // xinh thee ma che a
+        // phuc bi loi r
     }
 }
