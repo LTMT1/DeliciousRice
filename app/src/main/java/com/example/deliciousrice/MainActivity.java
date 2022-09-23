@@ -12,5 +12,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //nguyen duc thinh 2002
         //van yeu hoa
+        // tran the ngoc
     }
 }
