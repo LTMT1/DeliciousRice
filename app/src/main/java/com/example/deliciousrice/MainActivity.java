@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         //nguyen duc thinh 2002
         //van yeu hoa
         // tran the ngoc
-        /// ngoc co thich hoa cua van k
-//sasas
+        /// ngoc co thich
+        // phuc mai don toi nhớ
     }
 }
