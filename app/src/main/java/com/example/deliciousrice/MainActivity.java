@@ -14,6 +14,6 @@ public class MainActivity extends AppCompatActivity {
         //van yeu hoa
         // tran the ngoc
         //superIdolggfg
-        //ddd
+
     }
 }
