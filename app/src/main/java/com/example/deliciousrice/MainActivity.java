@@ -17,5 +17,6 @@ public class MainActivity extends AppCompatActivity {
         // chê nhaaa kaka
         // phuc bi loi r
         // xinh the ma che a o
+        // xinh nmha ko thuộc về mình kakaa
     }
 }
