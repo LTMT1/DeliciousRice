@@ -13,9 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeliciousRice"
         tools:targetApi="31">
-        <activity
-            android:name=".Activity.ForgotPassActivity"
-            android:exported="false" />
+        <activity android:name=".Activity.ForgotPassActivity" />
         <activity
             android:name=".Activity.HelloScreenActivity"
             android:exported="true" >
@@ -26,13 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.RegisterActivity"/>
-        <activity
-            android:name=".Activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
