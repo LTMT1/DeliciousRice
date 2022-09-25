@@ -10,7 +10,7 @@
     tools:context=".Activity.HelloScreenActivity">
 
     <ImageView
-        android:id="@+id/imghellosceen"
+        android:id="@+id/imgHelloScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/imghelloscreen" />

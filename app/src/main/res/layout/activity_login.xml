@@ -11,11 +11,12 @@
         android:layout_width="350dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/imgbackLG"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_width="10dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/ic_back" />
 
     <TextView
         android:layout_width="match_parent"
