@@ -16,6 +16,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        BarColor.setStatusBarColor(this);
+
         tvTextDangKy = findViewById(R.id.tvTextDangky);
         tvDangNhap = findViewById(R.id.tvDangNhap);
         tvQuenMK = findViewById(R.id.tvQuenMK);

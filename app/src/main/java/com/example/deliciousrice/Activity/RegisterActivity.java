@@ -17,6 +17,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        BarColor.setStatusBarColor(this);
+
         ivBack = findViewById(R.id.ivBack);
 
         ivBack.setOnClickListener(v -> backToLogin());

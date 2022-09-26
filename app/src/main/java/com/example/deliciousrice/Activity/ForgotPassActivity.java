@@ -15,6 +15,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_pass);
+        BarColor.setStatusBarColor(this);
 
         tvGui = findViewById(R.id.tvGui);
 

@@ -18,6 +18,8 @@ public class HelloScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello_screen);
+        BarColor.setStatusBarColor(this);
+
         imghellosceen = findViewById(R.id.imgHelloScreen);
         linear = findViewById(R.id.linear);
         imghellosceen.setX(2000);

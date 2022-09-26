@@ -21,4 +21,9 @@
     <string name="nh_p_l_i_m_t_kh_u_m_i">Nhập lại mật khẩu mới</string>
     <string name="g_i">Gửi</string>
     <string name="l_u">Lưu</string>
+    <string name="shop">Shop</string>
+    <string name="explore">Explore</string>
+    <string name="cart">Cart</string>
+    <string name="favorite">Favorite</string>
+    <string name="account">Account</string>
 </resources>

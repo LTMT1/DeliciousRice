@@ -1,4 +1,4 @@
-package com.example.deliciousrice.ui.dashboard;
+package com.example.deliciousrice.ui.explore;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
