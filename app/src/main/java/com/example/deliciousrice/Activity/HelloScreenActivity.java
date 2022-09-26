@@ -18,7 +18,7 @@ public class HelloScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello_screen);
-        imghellosceen = findViewById(R.id.imghellosceen);
+        imghellosceen = findViewById(R.id.imgHelloScreen);
         linear = findViewById(R.id.linear);
         imghellosceen.setX(2000);
         imghellosceen.animate().translationXBy(-2000).setDuration(3000);

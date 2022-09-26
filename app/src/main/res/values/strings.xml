@@ -4,4 +4,21 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="ng_k">Đăng ký</string>
+    <string name="ng_nh_p">Đăng nhập</string>
+    <string name="nh_p_email_v_m_t_kh_u_c_a_b_n">Nhập email và mật khẩu của bạn</string>
+    <string name="nh_p_email">Nhập email</string>
+    <string name="qu_n_m_t_kh_u">Quên mật khẩu ?</string>
+    <string name="kh_ng_c_t_i_kho_n">Không có tài khoản?</string>
+    <string name="nh_p_th_ng_tin_ng_nh_p_c_a_b_n">Nhập thông tin đăng nhập của bạn</string>
+    <string name="nh_p_password">Nhập Password</string>
+    <string name="h_v_t_n">Họ và tên</string>
+    <string name="email">Email</string>
+    <string name="nh_p_m_t_kh_u">Nhập mật khẩu</string>
+    <string name="nh_p_l_i_m_t_kh_u">Nhập lại mật khẩu</string>
+    <string name="vui_l_ng_nh_p_email_ho_c_s_di_ng_t_m_ki_m_t_i_kho_n_c_a_b_n">Vui lòng nhập email hoặc số di động để tìm kiếm tài khoản của bạn.</string>
+    <string name="nh_p_m_t_kh_u_m_i">Nhập mật khẩu mới</string>
+    <string name="nh_p_l_i_m_t_kh_u_m_i">Nhập lại mật khẩu mới</string>
+    <string name="g_i">Gửi</string>
+    <string name="l_u">Lưu</string>
 </resources>
