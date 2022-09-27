@@ -15,5 +15,6 @@ public class MainActivity extends AppCompatActivity {
         // tran the ngoc
         //SuperIdol
         //Long dep trai
+        //alo
     }
 }
