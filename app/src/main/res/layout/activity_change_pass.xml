@@ -10,72 +10,90 @@
       android:id="@+id/ivBack"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginStart="25dp"
+      android:layout_marginTop="25dp"
       android:src="@drawable/ic_back"
-      android:layout_marginTop="20dp"
-      android:layout_marginStart="20dp"
 
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toTopOf="parent" />
+
 
   <ImageView
       android:id="@+id/ivLogo"
       android:layout_width="128dp"
       android:layout_height="89dp"
-      android:src="@drawable/imghelloscreen"
       android:layout_marginStart="20dp"
+      android:layout_marginTop="16dp"
 
+      android:src="@drawable/imghelloscreen"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.46"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
-
+      app:layout_constraintTop_toTopOf="parent" />
 
   <EditText
       android:id="@+id/edtPassChange"
       android:layout_width="0dp"
-      android:layout_height="60dp"
+      android:layout_height="50dp"
       android:layout_marginHorizontal="30dp"
       android:layout_marginTop="120dp"
-      android:hint="@string/nh_p_m_t_kh_u_m_i"
+      android:background="@drawable/bg_edit_text"
       android:drawableStart="@drawable/ic_lock"
       android:drawablePadding="12dp"
+      android:hint="@string/nh_p_m_t_kh_u_m_i"
       android:paddingStart="16dp"
-      android:background="@drawable/bg_edit_text"
 
-      app:layout_constraintTop_toBottomOf="@id/ivLogo"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"/>
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
   <EditText
       android:id="@+id/edtRePassChange"
       android:layout_width="0dp"
-      android:layout_height="60dp"
+      android:layout_height="50dp"
       android:layout_marginHorizontal="30dp"
       android:layout_marginTop="10dp"
-      android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
+      android:background="@drawable/bg_edit_text"
       android:drawableStart="@drawable/ic_lock"
       android:drawablePadding="12dp"
+      android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
       android:paddingStart="16dp"
-      android:background="@drawable/bg_edit_text"
 
-      app:layout_constraintTop_toBottomOf="@id/edtPassChange"
+      app:layout_constraintBottom_toTopOf="@+id/guideline4"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"/>
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/edtPassChange"
+      app:layout_constraintVertical_bias="0.086" />
 
   <TextView
       android:id="@+id/tvDangKy"
       android:layout_width="0dp"
       android:layout_height="55dp"
-      android:layout_marginTop="30dp"
       android:layout_marginHorizontal="80dp"
-      android:text="@string/l_u"
-      android:gravity="center"
-      android:textSize="20sp"
-      android:textStyle="bold"
-      android:textColor="@color/white"
       android:background="@drawable/bg_btn"
+      android:gravity="center"
+      android:text="@string/l_u"
+      android:textColor="@color/white"
+      android:textSize="20sp"
 
-      app:layout_constraintTop_toBottomOf="@id/edtRePassChange"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toTopOf="@+id/guideline4"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"/>
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/edtRePassChange" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.7" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline6"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
