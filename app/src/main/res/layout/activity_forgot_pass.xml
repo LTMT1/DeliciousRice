@@ -21,30 +21,27 @@
         android:id="@+id/ivLogo"
         android:layout_width="128dp"
         android:layout_height="89dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-
+        android:layout_marginTop="5dp"
         android:src="@drawable/imghelloscreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/tvTitleQuenMK"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:text="@string/vui_l_ng_nh_p_email_ho_c_s_di_ng_t_m_ki_m_t_i_kho_n_c_a_b_n"
         android:textColor="@color/black"
 
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivLogo" />
-
 
     <EditText
         android:id="@+id/edtEmailQuenMK"
@@ -84,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.65" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"

@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.shop.ShopFragment">
 
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="128dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="5dp"
-        android:src="@drawable/imghelloscreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
@@ -25,16 +14,18 @@
         app:cardCornerRadius="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
-        app:layout_constraintVertical_bias="0.025">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imgSilde"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:iss_auto_cycle="true"
-            app:iss_period="2500"/>
+            app:iss_period="2500" />
 
 
     </androidx.cardview.widget.CardView>

@@ -19,6 +19,11 @@
     <string name="vui_l_ng_nh_p_email_ho_c_s_di_ng_t_m_ki_m_t_i_kho_n_c_a_b_n">Vui lòng nhập email hoặc số di động để tìm kiếm tài khoản của bạn.</string>
     <string name="nh_p_m_t_kh_u_m_i">Nhập mật khẩu mới</string>
     <string name="nh_p_l_i_m_t_kh_u_m_i">Nhập lại mật khẩu mới</string>
+    <string name="da_co_tai_khoan_chua">Đã có tài khoản chưa ?</string>
+
+    <string name="g_oo">Google</string>
+    <string name="fa_ce">Facebook</string>
+
     <string name="g_i">Gửi</string>
     <string name="l_u">Lưu</string>
     <string name="shop">Shop</string>

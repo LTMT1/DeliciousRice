@@ -17,6 +17,8 @@
         android:textColor="@color/black"
         android:textSize="32sp"
 
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,9 +80,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.702"
+        app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/edtPassWordDangNhap" />
+        app:layout_constraintTop_toBottomOf="@id/edtPassWordDangNhap"
+        app:layout_constraintVertical_bias="0.2" />
 
     <CheckBox
         android:id="@+id/ckbNhoMK"
@@ -89,7 +92,7 @@
 
 
         android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
@@ -104,20 +107,19 @@
         app:layout_constraintBottom_toBottomOf="@id/ckbNhoMK"
         app:layout_constraintStart_toEndOf="@id/ckbNhoMK"
         app:layout_constraintTop_toTopOf="@id/ckbNhoMK"
-        app:layout_constraintVertical_bias="0.576" />
+        app:layout_constraintVertical_bias="0.423" />
 
     <TextView
         android:id="@+id/tvDangNhap"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/bg_btn"
         android:gravity="center"
         android:text="@string/ng_nh_p"
         android:textColor="@color/white"
         android:textSize="20sp"
-
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,10 +157,8 @@
         android:id="@+id/cvGoogle"
         android:layout_width="130dp"
         android:layout_height="55dp"
-
         android:layout_marginTop="48dp"
         android:layout_marginEnd="10dp"
-
         android:background="#F8F7F7"
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -171,8 +171,8 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="24dp"
 
@@ -232,8 +232,8 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
 
@@ -259,5 +259,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

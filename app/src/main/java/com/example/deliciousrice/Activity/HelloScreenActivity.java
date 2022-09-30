@@ -29,7 +29,7 @@ public class HelloScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 linear.setVisibility(View.GONE);
-                Intent intent = new Intent(HelloScreenActivity.this, LoginActivity.class);
+                Intent intent = new Intent(HelloScreenActivity.this, LoginFaGoActivity.class);
                 startActivity(intent);
                 finish();
             }
