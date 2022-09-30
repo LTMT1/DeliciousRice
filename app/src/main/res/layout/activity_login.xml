@@ -7,6 +7,18 @@
     android:orientation="vertical"
     tools:context=".Activity.LoginActivity">
 
+    <ImageView
+        android:id="@+id/ivBackpaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_back"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/tvDangNhapTitle"
         android:layout_width="wrap_content"
@@ -17,10 +29,12 @@
         android:textColor="@color/black"
         android:textSize="32sp"
 
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -78,7 +92,6 @@
         android:text="@string/qu_n_m_t_kh_u"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -92,9 +105,11 @@
 
 
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvDangNhap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toBottomOf="@+id/edtPassWordDangNhap"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvNhoMK"
@@ -114,30 +129,37 @@
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/bg_btn"
         android:gravity="center"
         android:text="@string/ng_nh_p"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toBottomOf="@+id/tvQuenMK"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvKhongTK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="192dp"
         android:text="@string/kh_ng_c_t_i_kho_n"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintHorizontal_chainStyle="packed"
 
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/cvGoogle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/tvTextDangky"
-        app:layout_constraintTop_toBottomOf="@id/tvDangNhap" />
+        app:layout_constraintTop_toBottomOf="@id/tvDangNhap"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvTextDangky"
@@ -147,10 +169,10 @@
         android:layout_marginTop="15dp"
         android:text="@string/ng_k"
         android:textColor="#B43838"
-        android:textSize="16sp"
 
-        app:layout_constraintLeft_toRightOf="@id/tvKhongTK"
-        app:layout_constraintRight_toRightOf="parent"
+
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvKhongTK"
         app:layout_constraintTop_toBottomOf="@id/tvDangNhap" />
 
     <androidx.cardview.widget.CardView
@@ -161,9 +183,11 @@
         android:layout_marginEnd="10dp"
         android:background="#F8F7F7"
         app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTextDangky">
+        app:layout_constraintTop_toBottomOf="@id/tvTextDangky"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -187,9 +211,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:textSize="14sp"
+                android:text="@string/g_oo"
                 android:textColor="@color/black"
-                android:text="Google"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.318"
@@ -209,21 +233,24 @@
         android:layout_marginTop="48dp"
         android:background="#F8F7F7"
         app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintLeft_toRightOf="@id/cvGoogle"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/tvTextDangky">
+        app:layout_constraintTop_toBottomOf="@id/tvTextDangky"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:text="@string/fa_ce"
                 android:textColor="@color/black"
-                android:text="Facebook"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.333"
@@ -243,7 +270,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.48" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
@@ -258,7 +284,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

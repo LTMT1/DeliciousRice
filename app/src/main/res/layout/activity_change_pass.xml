@@ -34,7 +34,7 @@
   <EditText
       android:id="@+id/edtPassChange"
       android:layout_width="0dp"
-      android:layout_height="50dp"
+      android:layout_height="60dp"
       android:layout_marginHorizontal="30dp"
       android:layout_marginTop="120dp"
       android:background="@drawable/bg_edit_text"
@@ -50,9 +50,9 @@
   <EditText
       android:id="@+id/edtRePassChange"
       android:layout_width="0dp"
-      android:layout_height="50dp"
+      android:layout_height="60dp"
       android:layout_marginHorizontal="30dp"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="25dp"
       android:background="@drawable/bg_edit_text"
       android:drawableStart="@drawable/ic_lock"
       android:drawablePadding="12dp"
@@ -61,15 +61,17 @@
 
       app:layout_constraintBottom_toTopOf="@+id/guideline4"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.491"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/edtPassChange"
-      app:layout_constraintVertical_bias="0.086" />
+      app:layout_constraintVertical_bias="0.0" />
 
   <TextView
       android:id="@+id/tvDangKy"
       android:layout_width="0dp"
       android:layout_height="55dp"
       android:layout_marginHorizontal="80dp"
+      android:layout_marginTop="30dp"
       android:background="@drawable/bg_btn"
       android:gravity="center"
       android:text="@string/l_u"
@@ -80,14 +82,15 @@
       app:layout_constraintBottom_toTopOf="@+id/guideline4"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/edtRePassChange" />
+      app:layout_constraintTop_toBottomOf="@+id/edtRePassChange"
+      app:layout_constraintVertical_bias="0.214" />
 
   <androidx.constraintlayout.widget.Guideline
       android:id="@+id/guideline4"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      app:layout_constraintGuide_percent="0.7" />
+      app:layout_constraintGuide_percent="0.85" />
 
   <androidx.constraintlayout.widget.Guideline
       android:id="@+id/guideline6"

@@ -23,12 +23,14 @@
 
     <string name="g_oo">Google</string>
     <string name="fa_ce">Facebook</string>
+    <string name="login_fa">Đăng nhập với Facebook</string>
+    <string name="login_go">Đăng nhập với Google</string>
 
     <string name="g_i">Gửi</string>
     <string name="l_u">Lưu</string>
-    <string name="shop">Shop</string>
-    <string name="explore">Explore</string>
-    <string name="cart">Cart</string>
-    <string name="favorite">Favorite</string>
-    <string name="account">Account</string>
+    <string name="shop">Trang Chủ</string>
+    <string name="explore">Tìm Kiếm</string>
+    <string name="cart">Giỏ Hàng</string>
+    <string name="favorite">Yêu Thích</string>
+    <string name="account">Tài Khoản</string>
 </resources>

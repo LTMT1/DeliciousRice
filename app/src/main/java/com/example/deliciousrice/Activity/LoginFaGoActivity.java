@@ -27,17 +27,18 @@ public class LoginFaGoActivity extends AppCompatActivity {
         cvLoginFacebook = findViewById(R.id.cvLoginFacebook);
 
         tvLoginDangNhap = findViewById(R.id.tvLoginDangNhap);
-        tvLoginDangNhap.setOnClickListener( v -> LoginDangNhap());
         tvTextLoginDangky = findViewById(R.id.tvTextLoginDangky);
-        tvTextLoginDangky.setOnClickListener(v -> ManDangKy());
+
+        tvLoginDangNhap.setOnClickListener( v -> loginDangNhap());
+        tvTextLoginDangky.setOnClickListener(v -> manDangKy());
 
     }
-    private  void LoginDangNhap(){
+    private  void loginDangNhap(){
         Intent intent=new Intent(this,LoginActivity.class);
         startActivity(intent);
 
     }
-    private  void  ManDangKy(){
+    private  void  manDangKy(){
         Intent intent=new Intent(this,RegisterActivity.class);
         startActivity(intent);
     }

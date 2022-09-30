@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.deliciousrice.MainActivity2;
@@ -12,6 +13,12 @@ import com.example.deliciousrice.R;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView tvTextDangKy, tvDangNhap, tvQuenMK;
+    private ImageView ivBackpa;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,10 +28,18 @@ public class LoginActivity extends AppCompatActivity {
         tvTextDangKy = findViewById(R.id.tvTextDangky);
         tvDangNhap = findViewById(R.id.tvDangNhap);
         tvQuenMK = findViewById(R.id.tvQuenMK);
+        ivBackpa = findViewById(R.id.ivBackpaa);
 
+        ivBackpa.setOnClickListener(v -> manLogin());
         tvDangNhap.setOnClickListener(v -> dangNhap());
         tvTextDangKy.setOnClickListener(v -> dangKy());
         tvQuenMK.setOnClickListener(v -> quenMK());
+    }
+
+    private  void manLogin(){
+        Intent intent = new Intent(LoginActivity.this, LoginFaGoActivity.class);
+        startActivity(intent);
+
     }
 
     private void dangNhap(){
