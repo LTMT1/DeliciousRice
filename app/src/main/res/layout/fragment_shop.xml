@@ -12,6 +12,20 @@
         android:layout_height="wrap_content"
         android:background="#ecdfdf">
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#F9514F"
+            android:text="Trang Chủ"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#181725"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
@@ -22,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.842"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:layout_constraintVertical_bias="0.0">
 
             <com.denzcoskun.imageslider.ImageSlider
