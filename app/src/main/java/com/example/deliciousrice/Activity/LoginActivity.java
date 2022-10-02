@@ -1,9 +1,11 @@
 package com.example.deliciousrice.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +16,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView tvTextDangKy, tvDangNhap, tvQuenMK;
     private ImageView ivBackpa;
-
+    private ConstraintLayout ctlGoogle, ctlFacebook;
+    private LoginFaGoActivity loginFaGoActivity;
 
 
 
@@ -29,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         tvDangNhap = findViewById(R.id.tvDangNhap);
         tvQuenMK = findViewById(R.id.tvQuenMK);
         ivBackpa = findViewById(R.id.ivBackpaa);
+        ctlFacebook = findViewById (R.id.ctlFacebook);
+        ctlGoogle = findViewById (R.id.ctlGoogle);
 
         ivBackpa.setOnClickListener(v -> manLogin());
         tvDangNhap.setOnClickListener(v -> dangNhap());

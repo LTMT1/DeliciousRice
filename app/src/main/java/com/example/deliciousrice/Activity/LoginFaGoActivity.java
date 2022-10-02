@@ -130,7 +130,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
             Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
         }
     }
-    private void loginGoogle(){
+    public void loginGoogle(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
