@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activity.LoginFaGoActivity">
 
 
@@ -180,7 +181,8 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -191,11 +193,12 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintHorizontal_bias="0.566"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView6"
         app:srcCompat="@drawable/ic_thanhngang" />
