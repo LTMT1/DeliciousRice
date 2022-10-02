@@ -33,4 +33,7 @@
     <string name="cart">Giỏ Hàng</string>
     <string name="favorite">Yêu Thích</string>
     <string name="account">Tài Khoản</string>
+    <string name="facebook_app_id">624096392604145</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
 </resources>

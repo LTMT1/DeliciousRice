@@ -54,4 +54,8 @@ dependencies {
 
     //radius button
     implementation 'com.google.android.material:material:1.4.0'
+    //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    //google
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
 }
