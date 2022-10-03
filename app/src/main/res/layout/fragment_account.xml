@@ -149,6 +149,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
 
+            android:background="#f2f2f2"
             android:id="@+id/cl_contact"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -205,7 +206,7 @@
             android:id="@+id/cl_policy"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-
+            android:background="#f2f2f2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -258,6 +259,7 @@
             app:srcCompat="@drawable/ic_vienduoi" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="#f2f2f2"
             android:id="@+id/cl_setting"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -317,11 +319,11 @@
             android:id="@+id/cl_doipass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-
+            android:background="#f2f2f2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_policy">
+            app:layout_constraintTop_toBottomOf="@+id/imageView8">
 
             <ImageView
 
