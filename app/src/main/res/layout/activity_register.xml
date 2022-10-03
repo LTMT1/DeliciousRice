@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:ignore="OnClick"
     tools:context=".Activity.LoginActivity">
 
     <ImageView
@@ -14,7 +15,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_back"
-
+        android:onClick="BackToLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

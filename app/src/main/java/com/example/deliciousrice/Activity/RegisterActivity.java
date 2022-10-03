@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,12 +20,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         BarColor.setStatusBarColor(this);
 
-        ivBack = findViewById(R.id.ivBack);
-
-        ivBack.setOnClickListener(v -> backToLogin());
     }
 
-    private void backToLogin(){
+    public void BackToLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
