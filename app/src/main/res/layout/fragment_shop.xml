@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="3dp"
                 app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.denzcoskun.imageslider.ImageSlider
+
                     android:id="@+id/imgSilde"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
