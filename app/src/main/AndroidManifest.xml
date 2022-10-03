@@ -19,6 +19,9 @@
         android:theme="@style/Theme.DeliciousRice"
         tools:targetApi="31">
         <activity
+            android:name=".EditAddress"
+            android:exported="false" />
+        <activity
             android:name=".ui.account.Activity.ReceiptActivity"
             android:exported="false">
             <meta-data
