@@ -13,6 +13,7 @@
         android:background="#F9514F"
         android:gravity="center"
         android:text="Giỏi Hàng"
+        android:fontFamily="@font/be_vietnam_bold"
         android:textColor="#181725"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -48,28 +49,21 @@
                 android:src="@drawable/img_sp" />
         </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_margin="3dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/cart_item_delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView19"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:text="Cơm gà nướng mật ong"
+            android:fontFamily="@font/be_vietnam_medium"
             android:textColor="#000000"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toEndOf="@+id/cardView6"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="100dp"
@@ -94,7 +88,7 @@
                 android:id="@+id/imageView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/cart_item_cong"
+                android:src="@drawable/explore_cong"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -103,7 +97,7 @@
                 android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/cart_item_tru"
+                android:src="@drawable/explore_tru"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -113,7 +107,7 @@
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:fontFamily="@font/be_vietnam_medium"            android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
             android:text="45.000 đ"
             android:textColor="#000000 "

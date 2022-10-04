@@ -11,8 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#F9514F"
+        android:fontFamily="@font/be_vietnam_bold"
         android:gravity="center"
         android:text="Tài Khoản"
+
         android:textColor="#181725"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -104,6 +106,7 @@
                 android:src="@drawable/ic_receipt" />
 
             <TextView
+                android:fontFamily="@font/be_vietnam_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lịch sử đơn hàng  "
@@ -130,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Địa chỉ "
+                android:fontFamily="@font/be_vietnam_medium"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -176,6 +180,7 @@
                 android:text="Liên hệ và góp ý "
                 android:textColor="#000000"
                 android:textSize="16sp"
+                android:fontFamily="@font/be_vietnam_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView12"
                 app:layout_constraintTop_toTopOf="parent"
@@ -231,6 +236,7 @@
                 android:layout_marginStart="20dp"
                 android:text="Điều khoản và Chính sách "
                 android:textColor="#000000"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView14"
@@ -288,6 +294,7 @@
                 android:text="Cài đặt "
                 android:textColor="#000000"
                 android:textSize="16sp"
+                android:fontFamily="@font/be_vietnam_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView15"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -344,6 +351,7 @@
                 android:text="Đổi  mật khẩu"
                 android:textColor="#000000"
                 android:textSize="16sp"
+                android:fontFamily="@font/be_vietnam_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView13"
                 app:layout_constraintTop_toTopOf="parent" />

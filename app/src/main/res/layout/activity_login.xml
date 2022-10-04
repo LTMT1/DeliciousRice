@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".Activity.LoginActivity">
 
     <ImageView
@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
-        android:src="@drawable/ic_back"
         android:onClick="onClickBackSceen"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/be_vietnam_medium"
         android:text="@string/ng_nh_p"
         android:textColor="@color/black"
         android:textSize="32sp"
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/be_vietnam_medium"
         android:text="@string/nh_p_email_v_m_t_kh_u_c_a_b_n"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -60,6 +62,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_mess"
         android:drawablePadding="12dp"
+        android:fontFamily="@font/be_vietnam_medium"
         android:hint="@string/nh_p_email"
         android:paddingStart="16dp"
 
@@ -76,6 +79,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
+        android:fontFamily="@font/be_vietnam_medium"
         android:hint="@string/nh_p_password"
         android:paddingStart="16dp"
 
@@ -90,10 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/be_vietnam_medium"
+        android:onClick="onClickForgotPassword"
         android:text="@string/qu_n_m_t_kh_u"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:onClick="onClickForgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -117,10 +122,10 @@
         android:id="@+id/tvNhoMK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/be_vietnam_medium"
         android:text="Lưu mật khẩu. "
         android:textColor="@color/black"
         android:textSize="16sp"
-
         app:layout_constraintBottom_toBottomOf="@id/ckbNhoMK"
         app:layout_constraintStart_toEndOf="@id/ckbNhoMK"
         app:layout_constraintTop_toTopOf="@id/ckbNhoMK"
@@ -146,15 +151,14 @@
         app:layout_constraintVertical_bias="0.007" />
 
 
-
     <TextView
         android:id="@+id/tvKhongTK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/be_vietnam_medium"
         android:text="@string/kh_ng_c_t_i_kho_n"
-
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/tvDangNhap"
@@ -165,10 +169,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="@string/ng_k"
-        android:onClick="onClickRegisteraccount"
-        android:textColor="#B43838"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/be_vietnam_medium"
+        android:onClick="onClickRegisteraccount"
+        android:text="@string/ng_k"
+        android:textColor="#B43838"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvDangNhap"
         app:layout_constraintHorizontal_bias="0.012"
@@ -190,10 +195,10 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/ctlGoogle"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
@@ -211,10 +216,11 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:text="@string/g_oo"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:layout_marginLeft="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
@@ -241,17 +247,18 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctlFacebook"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ctlFacebook">
+            android:layout_height="match_parent">
 
-             <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:text="@string/fa_ce"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                 android:layout_marginLeft="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent" />

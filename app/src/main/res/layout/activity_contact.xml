@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.account.Activity.ContactActivity">
-    <ImageView
-        android:id="@+id/img_back_setting"
+     <ImageView
+        android:id="@+id/img_back_Contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -21,12 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="30dp"
-        android:text="Liên hệ và góp ý  "
+        android:text="@string/lien_he"
+        android:fontFamily="@font/be_vietnam_medium"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.402"
-        app:layout_constraintStart_toEndOf="@+id/img_back_setting"
+        app:layout_constraintStart_toEndOf="@+id/img_back_Contact"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

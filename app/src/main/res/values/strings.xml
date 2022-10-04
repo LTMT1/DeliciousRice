@@ -4,8 +4,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="ng_k">Đăng ký</string>
-    <string name="ng_nh_p">Đăng nhập</string>
+
+
     <string name="nh_p_email_v_m_t_kh_u_c_a_b_n">Nhập email và mật khẩu của bạn</string>
     <string name="nh_p_email">Nhập email</string>
     <string name="qu_n_m_t_kh_u">Quên mật khẩu ?</string>
@@ -22,19 +22,57 @@
     <string name="nh_p_l_i_m_t_kh_u_m_i">Nhập lại mật khẩu mới</string>
     <string name="da_co_tai_khoan_chua">Đã có tài khoản chưa ?</string>
 
-    <string name="g_oo">Google</string>
-    <string name="fa_ce">Facebook</string>
-    <string name="login_fa">Đăng nhập với Facebook</string>
-    <string name="login_go">Đăng nhập với Google</string>
 
+    <!--Nút bấm -->
+     <string name="g_oo">Google</string>
+     <string name="fa_ce">Facebook</string>
+     <string name="login_fa">Đăng nhập với Facebook</string>
+     <string name="login_go">Đăng nhập với Google</string>
+     <string name="ng_k">Đăng ký</string>
+     <string name="ng_nh_p">Đăng nhập</string>
+
+ <!--   Tiêu đề Trang                              -->
+    <string name="dia_chi">Địa chỉ</string>
+    <string name="dia_chi_ban">Địa điểm của bạn</string>
+    <string name="add_dia">Thêm địa chỉ </string>
+    <string name="sua_dia">Sửa địa chỉ </string>
+
+
+    <string name="doi_pass">Đổi mật khẩu</string>
+    <string name="sua_thong_t">Sửa thông tin</string>
+    <string name="h_v_t">Họ và tên</string>
+    <string name="s_d_t">Số điện thoại</string>
+    <string name="d_c_E">Địa chỉ Email</string>
+    <string name="n_s">Ngày sinh</string>
+
+
+    <string name="dieu_khoan_vs_chinh">Điều khoản và Chính sách</string>
+
+
+    <string name="lich_s_h_d">Lịch sử hóa đơn</string>
+
+
+    <string name="c_d">Cài đặt </string>
+    <string name="gi_d_t">Giao diện tối</string>
+    <string name="cai_d_t_b">Cài đặt thông báo</string>
+
+
+
+
+
+    <string name="lien_he">Liên hệ và góp ý  </string>
+
+    /////////////////////
     <string name="g_i">Gửi</string>
-    <string name="l_u">Lưu Thông Tin</string>
+    <string name="l_u">Lưu </string>
     <string name="dang_xuat">Đăng Xuất</string>
     <string name="shop">Trang Chủ</string>
     <string name="explore">Tìm Kiếm</string>
     <string name="cart">Giỏ Hàng</string>
     <string name="favorite">Yêu Thích</string>
     <string name="account">Tài Khoản</string>
+
+
     <string name="facebook_app_id">624096392604145</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>

@@ -33,6 +33,7 @@
   <EditText
       android:id="@+id/edtPassChange"
       android:layout_width="0dp"
+      android:fontFamily="@font/be_vietnam_medium"
       android:layout_height="60dp"
       android:layout_marginHorizontal="30dp"
       android:layout_marginTop="120dp"
@@ -51,6 +52,7 @@
       android:layout_width="0dp"
       android:layout_height="60dp"
       android:layout_marginHorizontal="30dp"
+      android:fontFamily="@font/be_vietnam_medium"
       android:layout_marginTop="25dp"
       android:background="@drawable/bg_edit_text"
       android:drawableStart="@drawable/ic_lock"
@@ -65,8 +67,8 @@
       app:layout_constraintTop_toBottomOf="@id/edtPassChange"
       app:layout_constraintVertical_bias="0.0" />
 
-  <TextView
-      android:id="@+id/tvDangKy"
+  <Button
+      android:id="@+id/btnLuu"
       android:layout_width="0dp"
       android:layout_height="55dp"
       android:layout_marginHorizontal="80dp"
@@ -75,8 +77,8 @@
       android:gravity="center"
       android:text="@string/l_u"
       android:textColor="@color/white"
-      android:textSize="20sp"
 
+      android:textSize="20sp"
       android:textStyle="bold"
       app:layout_constraintBottom_toTopOf="@+id/guideline4"
       app:layout_constraintEnd_toEndOf="parent"
