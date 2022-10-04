@@ -248,7 +248,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //register
-    public void onClickRegister(View view) {
+    public void onClickRegisteraccount(View view) {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }

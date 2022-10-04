@@ -14,10 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_back"
         android:onClick="BackToLogin"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/tvDangNhapTitle"
@@ -124,6 +125,7 @@
         android:background="@drawable/bg_btn"
         android:gravity="center"
         android:text="@string/ng_k"
+        android:onClick="onClickRegister"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -167,8 +169,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
-        android:text="@string/ng_k"
+        android:text="@string/ng_nh_p"
         android:textColor="#B43838"
+        android:onClick="BackToLogin"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

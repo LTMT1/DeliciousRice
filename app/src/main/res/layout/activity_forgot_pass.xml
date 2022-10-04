@@ -13,7 +13,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/ic_back"
-
+        android:onClick="BackToLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,6 +73,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:onClick="onCLickForgotPassword"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

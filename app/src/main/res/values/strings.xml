@@ -10,6 +10,7 @@
     <string name="nh_p_email">Nhập email</string>
     <string name="qu_n_m_t_kh_u">Quên mật khẩu ?</string>
     <string name="kh_ng_c_t_i_kho_n">Không có tài khoản?</string>
+    <string name="d_c_t_k">Bạn đã có tài khoản?</string>
     <string name="nh_p_th_ng_tin_ng_nh_p_c_a_b_n">Nhập thông tin đăng ký của bạn</string>
     <string name="nh_p_password">Nhập Password</string>
     <string name="h_v_t_n">Họ và tên</string>
