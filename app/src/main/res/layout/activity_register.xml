@@ -45,7 +45,6 @@
         android:text="@string/nh_p_th_ng_tin_ng_nh_p_c_a_b_n"
         android:textColor="@color/black"
         android:textSize="18sp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDangNhapTitle" />
 
