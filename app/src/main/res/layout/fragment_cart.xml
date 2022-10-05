@@ -21,7 +21,137 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.apachat.swipereveallayout.core.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="8dp"
+        app:dragEdge="right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+        app:mode="same_level">
+
+        <FrameLayout
+            android:layout_width="60dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginLeft="5dp"
+                android:layout_width="64dp"
+                android:layout_height="125dp"
+                android:backgroundTint="#ff0000"
+                app:cardCornerRadius="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:fontFamily="@font/be_vietnam_medium"
+                    android:textColor="@color/white"
+                    android:text="Delete"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginRight="5dp"
+            android:background="@drawable/bg_borders_sp"
+            android:layout_width="match_parent"
+            android:layout_height="125dp">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView6"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:src="@drawable/img_sp"
+                app:cardCornerRadius="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_sp" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:fontFamily="@font/be_vietnam_medium"
+                android:id="@+id/textView19"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Cơm gà nướng mật ong"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/cardView6"
+                app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                    app:layout_constraintStart_toEndOf="@+id/imageView7"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/explore_cong"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/explore_tru"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:fontFamily="@font/be_vietnam_medium"
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="45.000 đ"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.apachat.swipereveallayout.core.SwipeLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginHorizontal="10dp"
@@ -32,7 +162,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvGioiHang">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView6"
+            android:id="@+id/cardView66"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_margin="7dp"
@@ -51,18 +181,18 @@
 
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/textView191"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="4dp"
-            android:text="Cơm gà nướng mật ong"
             android:fontFamily="@font/be_vietnam_medium"
+            android:text="Cơm gà nướng mật ong"
             android:textColor="#000000"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.45"
-            app:layout_constraintStart_toEndOf="@+id/cardView6"
+            app:layout_constraintStart_toEndOf="@+id/cardView66"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,22 +200,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/cardView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView19">
+            app:layout_constraintStart_toEndOf="@+id/cardView66"
+            app:layout_constraintTop_toBottomOf="@+id/textView191">
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/textView115"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView10"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintEnd_toStartOf="@+id/imageView110"
+                app:layout_constraintStart_toEndOf="@+id/imageView77"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/imageView110"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/explore_cong"
@@ -94,7 +224,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imageView77"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/explore_tru"
@@ -104,11 +234,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/textView210"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/be_vietnam_medium"            android:layout_marginRight="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/be_vietnam_medium"
             android:text="45.000 đ"
             android:textColor="#000000 "
             android:textSize="16dp"
@@ -120,6 +251,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout8"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="36dp"
