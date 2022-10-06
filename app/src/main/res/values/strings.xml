@@ -24,14 +24,14 @@
 
 
     <!--Nút bấm -->
-     <string name="g_oo">Google</string>
-     <string name="fa_ce">Facebook</string>
-     <string name="login_fa">Đăng nhập với Facebook</string>
-     <string name="login_go">Đăng nhập với Google</string>
-     <string name="ng_k">Đăng ký</string>
-     <string name="ng_nh_p">Đăng nhập</string>
+    <string name="g_oo">Google</string>
+    <string name="fa_ce">Facebook</string>
+    <string name="login_fa">Đăng nhập với Facebook</string>
+    <string name="login_go">Đăng nhập với Google</string>
+    <string name="ng_k">Đăng ký</string>
+    <string name="ng_nh_p">Đăng nhập</string>
 
- <!--   Tiêu đề Trang                              -->
+    <!--   Tiêu đề Trang                              -->
     <string name="dia_chi">Địa chỉ</string>
     <string name="dia_chi_ban">Địa điểm của bạn</string>
     <string name="add_dia">Thêm địa chỉ </string>
@@ -55,9 +55,6 @@
     <string name="c_d">Cài đặt </string>
     <string name="gi_d_t">Giao diện tối</string>
     <string name="cai_d_t_b">Cài đặt thông báo</string>
-
-
-
 
 
     <string name="lien_he">Liên hệ và góp ý  </string>
