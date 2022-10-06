@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="5dp"
-        android:layout_height="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         android:src="@drawable/ic_back"
         android:onClick="BackToLogin"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,70 +25,34 @@
         android:layout_height="89dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/imghelloscreen"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTitleQuenMK"
-        android:layout_width="0dp"
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"/>-->
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/be_vietnam_medium"
-        android:text="@string/vui_l_ng_nh_p_email_ho_c_s_di_ng_t_m_ki_m_t_i_kho_n_c_a_b_n"
-        android:textColor="@color/black"
-
-        android:textSize="18sp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_borders_search"
+        android:backgroundTint="#F2F3F2"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        app:queryBackground="@null"
+        app:queryHint="Nhập email của bạn" />
 
-    <EditText
-        android:id="@+id/edtEmailQuenMK"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/bg_edit_text"
-        android:drawableStart="@drawable/ic_mess"
-        android:drawablePadding="12dp"
-        android:fontFamily="@font/be_vietnam_medium"
-        android:hint="@string/nh_p_email"
-        android:paddingStart="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.733"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitleQuenMK" />
-
-    <Button
-        android:id="@+id/tvGui"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginHorizontal="80dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/bg_btn"
-        android:gravity="center"
-        android:text="Gửi"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:onClick="onCLickForgotPassword"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailQuenMK"
-        app:layout_constraintVertical_bias="0.337" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
