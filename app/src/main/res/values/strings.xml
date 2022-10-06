@@ -21,6 +21,9 @@
     <string name="nh_p_m_t_kh_u_m_i">Nhập mật khẩu mới</string>
     <string name="nh_p_l_i_m_t_kh_u_m_i">Nhập lại mật khẩu mới</string>
     <string name="da_co_tai_khoan_chua">Đã có tài khoản chưa ?</string>
+    <string name="h_t_t_k_b">Hãy tìm tài khoản của bạn</string>
+    <string name="V_l_n_e">Vui lòng nhập email để tìm kiếm tài khoản của bạn.</string>
+    <string name="m_d_d_g">Mã đã được gửi đến chỉ email của bạn. Hãy Nhập mã đó tại đây</string>
 
 
     <!--Nút bấm -->

@@ -21,24 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:onClick="BackToLogin"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="OnClick" />
 
-
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="128dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/imghelloscreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!--<androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -48,21 +37,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"/>-->
 
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="85dp"
         android:background="@drawable/bg_borders_search"
         android:backgroundTint="#F2F3F2"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        app:layout_constraintTop_toTopOf="parent"
         app:queryBackground="@null"
         app:queryHint="Nhập email của bạn" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -83,14 +72,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Hãy tìm tài khoản của bạn"
+        android:text="@string/h_t_t_k_b"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +93,7 @@
         android:layout_marginHorizontal="85dp"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="Vui lòng nhập email để tìm kiếm tài khoản của bạn."
+        android:text="@string/V_l_n_e"
         android:textColor="#474545"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"

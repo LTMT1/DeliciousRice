@@ -53,7 +53,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/be_vietnam_medium"
         android:gravity="center"
-        android:text="Mã đã được gửi đến chỉ email của bạn. Hãy Nhập mã đó tại đây"
+        android:text="@string/m_d_d_g"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
