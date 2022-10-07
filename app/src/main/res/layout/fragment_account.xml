@@ -12,10 +12,9 @@
         android:layout_height="50dp"
         android:background="#F9514F"
         android:fontFamily="@font/be_vietnam_bold"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="Tài Khoản"
-
-        android:textColor="#181725"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

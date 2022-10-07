@@ -45,7 +45,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_pass);
         BarColor.setStatusBarColor(this);
-        edtEmailQuenMK = findViewById(R.id.edtEmailQuenMK);
+        //edtEmailQuenMK = findViewById(R.id.edtEmailQuenMK);
 
     }
 

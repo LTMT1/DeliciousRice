@@ -42,12 +42,13 @@ public class LoginFaGoActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_fa_go);
+
+        BarColor.setStatusBarColor(this);
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(getApplication ());
         cvLoginGoogle = findViewById(R.id.cvLoginGoogle);
