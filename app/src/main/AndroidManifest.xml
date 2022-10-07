@@ -64,13 +64,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.account.Activity.ChangeiPassActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ui.account.Activity.SettingActivity"
             android:exported="false">
             <meta-data

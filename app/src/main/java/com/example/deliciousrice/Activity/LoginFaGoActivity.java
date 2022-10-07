@@ -50,37 +50,39 @@ public class LoginFaGoActivity extends AppCompatActivity {
         BarColor.setStatusBarColor(this);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(getApplication ());
+        AppEventsLogger.activateApp(getApplication());
         cvLoginGoogle = findViewById(R.id.cvLoginGoogle);
         cvLoginFacebook = findViewById(R.id.cvLoginFacebook);
 
         tvLoginDangNhap = findViewById(R.id.tvLoginDangNhap);
         tvTextLoginDangky = findViewById(R.id.tvTextLoginDangky);
 
-        tvLoginDangNhap.setOnClickListener( v -> loginDangNhap());
+        tvLoginDangNhap.setOnClickListener(v -> loginDangNhap());
         tvTextLoginDangky.setOnClickListener(v -> manDangKy());
-        loginFacebook ();
-        loginGoogle ();
+        loginFacebook();
+        loginGoogle();
 
     }
-    private  void loginDangNhap(){
-        Intent intent=new Intent(this,LoginActivity.class);
+
+    private void loginDangNhap() {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 
     }
-    private  void  manDangKy(){
-        Intent intent=new Intent(this,RegisterActivity.class);
+
+    private void manDangKy() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
-    public void loginFacebook(){
+    public void loginFacebook() {
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult> () {
+                new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        startActivity (new Intent (LoginFaGoActivity.this, MainActivity2.class));
-                        Toast.makeText (LoginFaGoActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show ();
+                        startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
+                        Toast.makeText(LoginFaGoActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -93,13 +95,14 @@ public class LoginFaGoActivity extends AppCompatActivity {
                         // App code
                     }
                 });
-        cvLoginFacebook.setOnClickListener (new View.OnClickListener () {
+        cvLoginFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginManager.getInstance().logInWithReadPermissions(LoginFaGoActivity.this, Arrays.asList("public_profile"));
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -111,6 +114,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
             handleSignInResult(task);
         }
     }
+
     private void handleSignInResult(Task<GoogleSignInAccount> task) {
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
@@ -123,7 +127,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
             }
-            startActivity(new Intent(LoginFaGoActivity.this,MainActivity2.class));
+            startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -131,7 +135,8 @@ public class LoginFaGoActivity extends AppCompatActivity {
             Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
         }
     }
-    public void loginGoogle(){
+
+    public void loginGoogle() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -150,6 +155,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
             }
         });
     }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, 100);
