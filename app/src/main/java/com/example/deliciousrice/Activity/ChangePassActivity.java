@@ -3,6 +3,7 @@ package com.example.deliciousrice.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -35,9 +36,11 @@ public class ChangePassActivity extends AppCompatActivity {
     }
 
     public void onCLickChangepass(View view) {
+        Intent intent = getIntent();
+        String str_email = intent.getStringExtra("email");
         String str_passnew = edtPassChange.getText().toString().trim();
         String str_repassnew = edtRePassChange.getText().toString().trim();
-        String urlchangepass = "https://website1812.000webhostapp.com/Coffee/changepassnew.php";
+        String urlchangepass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/ChangePassword.php";
 
         if (!validatepass() || !validaterepass()) {
             return;
@@ -52,6 +55,10 @@ public class ChangePassActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     if (response.equalsIgnoreCase("Thay đổi mật khẩu thành công")) {
                         Toast.makeText(ChangePassActivity.this, response, Toast.LENGTH_SHORT).show();
+                        edtPassChange.setText("");
+                        edtRePassChange.setText("");
+                        Intent intent1 = new Intent(ChangePassActivity.this, LoginActivity.class);
+                        startActivity(intent1);
                     } else {
                         Toast.makeText(ChangePassActivity.this, response, Toast.LENGTH_SHORT).show();
                     }
@@ -66,7 +73,7 @@ public class ChangePassActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-//                    params.put("Gmail",timKiem.getGmail());
+                    params.put("email", str_email);
                     params.put("passnew", str_passnew);
                     params.put("repassnew", str_repassnew);
                     return params;

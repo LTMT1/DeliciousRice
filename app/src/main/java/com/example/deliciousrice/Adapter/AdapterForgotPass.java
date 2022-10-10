@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -37,11 +39,14 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.ForgotPassHolder> {
-
+    private Random randomcode = new Random();
+    private int otp;
     Context context;
     ArrayList<Customer> CustomerArrayList;
+    Customer customer;
 
     public AdapterForgotPass(Context context, ArrayList<Customer> CustomerArrayList) {
         this.context = context;
@@ -57,12 +62,13 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
 
     @Override
     public void onBindViewHolder(@NonNull AdapterForgotPass.ForgotPassHolder holder, @SuppressLint("RecyclerView") int position) {
-        Customer timKiem = CustomerArrayList.get(position);
+        customer = CustomerArrayList.get(position);
+        otp = randomcode.nextInt((999999 - 100000) + 100000);
         Glide.with(context)
-                .load(timKiem.getImage())
+                .load(customer.getImage())
                 .into(holder.imgCustomer);
-        holder.tvusername.setText(timKiem.getUser_name());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.tvusername.setText(customer.getUser_name());
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -79,25 +85,25 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
-                                Log.e(response, "opts");
                                 if (response.equalsIgnoreCase("success")) {
-                                    Intent intent = new Intent(context, ConfirmOTPActivity.class);
-                                    intent.putExtra("data", timKiem);
-                                    context.startActivity(intent);
+                                    Intent intent = new Intent(v.getContext(), ConfirmOTPActivity.class);
+                                    intent.putExtra("otp", otp);
+                                    intent.putExtra("data", customer);
+                                    v.getContext().startActivity(intent);
                                 }
                             }
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-                                Toast.makeText(context, "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(v.getContext(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
                             }
                         }) {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
                                 Map<String, String> params = new HashMap<String, String>();
-                                Log.e(timKiem.getEmail(), " timKiem.getEmail()");
-                                params.put("email", timKiem.getEmail());
+                                params.put("email", customer.getEmail());
+                                params.put("otp", String.valueOf(otp));
                                 return params;
 
                             }
@@ -128,11 +134,11 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
     public class ForgotPassHolder extends RecyclerView.ViewHolder {
         ImageView imgCustomer;
         TextView tvusername;
-        CardView cardView;
+        ConstraintLayout constraintLayout;
 
         public ForgotPassHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.CarviewCustomer);
+            constraintLayout = itemView.findViewById(R.id.contranitCustomer);
             imgCustomer = (ImageView) itemView.findViewById(R.id.ImgCustomer);
             tvusername = (TextView) itemView.findViewById(R.id.tvUsernameCustomer);
         }
