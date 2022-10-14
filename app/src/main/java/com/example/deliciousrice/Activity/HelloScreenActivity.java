@@ -14,6 +14,7 @@ import com.example.deliciousrice.R;
 public class HelloScreenActivity extends AppCompatActivity {
     private ImageView imghellosceen;
     private LinearLayout linear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

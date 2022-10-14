@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.databinding.FragmentAccountBinding;
 import com.example.deliciousrice.ui.account.Activity.AddressActivity;
-import com.example.deliciousrice.ui.account.Activity.ChangeiPassActivity;
 import com.example.deliciousrice.ui.account.Activity.ContactActivity;
 import com.example.deliciousrice.ui.account.Activity.InformationActivity;
 import com.example.deliciousrice.ui.account.Activity.PolicyActivity;
@@ -34,9 +33,6 @@ public class AccountFragment extends Fragment {
     private ConstraintLayout clSetting;
     private ConstraintLayout clDoipass;
     private TextView tvDangXuat;
-
-
-
 
 
     private FragmentAccountBinding binding;
@@ -58,40 +54,35 @@ public class AccountFragment extends Fragment {
 
         tvDangXuat = root.findViewById(R.id.tvDangXuat);
 
-        clThongtin.setOnClickListener( view -> {
-            Intent intent=new Intent(getContext(), InformationActivity.class);
+        clThongtin.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), InformationActivity.class);
             startActivity(intent);
 
         });
-        llayReceipt.setOnClickListener( view -> {
-            Intent intent=new Intent(getContext(), ReceiptActivity.class);
+        llayReceipt.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), ReceiptActivity.class);
             startActivity(intent);
 
         });
-        llayAddress.setOnClickListener( view -> {
-            Intent intent=new Intent(getContext(), AddressActivity.class);
+        llayAddress.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), AddressActivity.class);
             startActivity(intent);
 
         });
-        clContact.setOnClickListener( view -> {
-            Intent intent=new Intent(getContext(), ContactActivity.class);
-            startActivity(intent);
-
-        });
-
-        clPolicy.setOnClickListener( view -> {
-            Intent intent=new Intent(getContext(), PolicyActivity.class);
+        clContact.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), ContactActivity.class);
             startActivity(intent);
 
         });
 
-        clDoipass.setOnClickListener( view -> {
-            Intent intent=new Intent(getContext(), ChangeiPassActivity.class);
+        clPolicy.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), PolicyActivity.class);
             startActivity(intent);
 
         });
-        clSetting.setOnClickListener( view -> {
-            Intent intent=new Intent(getContext(), SettingActivity.class);
+
+        clSetting.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), SettingActivity.class);
             startActivity(intent);
 
         });
