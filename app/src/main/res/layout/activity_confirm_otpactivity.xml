@@ -84,8 +84,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:onClick="onCLickSendOtp"
         android:text="Gửi lại mã"
+
+        android:allowClickWhenDisabled="true"
         android:textColor="#780A0A"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"

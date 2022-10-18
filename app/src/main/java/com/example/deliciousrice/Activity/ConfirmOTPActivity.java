@@ -1,43 +1,81 @@
 package com.example.deliciousrice.Activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.deliciousrice.Adapter.AdapterForgotPass;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.R;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 public class ConfirmOTPActivity extends AppCompatActivity {
     private EditText editTextCheckOTP;
-    private Random randomcode = new Random();
-    private int otp;
     Customer customer;
+    TextView resend;
+    private long backPressTime;
+    private Toast mToast;
+    CountDownTimer countDownTimer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_otpactivity);
         editTextCheckOTP = findViewById(R.id.editTextCheckOTP);
+        resend = findViewById(R.id.tvguilaima);
         customer = (Customer) getIntent().getSerializableExtra("data");
-        otp = randomcode.nextInt((999999 - 100000) + 100000);
+        resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AdapterForgotPass.buttonSendEmail(customer.getEmail());
+                countDownTimer = new CountDownTimer(30000, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                        resend.setEnabled(false);
+                        resend.setText("gửi lại mã(" + l / 1000 + ")");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        resend.setEnabled(true);
+                        resend.setText("gửi lại mã");
+                    }
+                };
+                countDownTimer.start();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        countDownTimer.cancel();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressTime + 2000 > System.currentTimeMillis()) {
+            mToast.cancel();
+            Intent intent = new Intent(getApplicationContext(), HelloScreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+
+        } else {
+            mToast = Toast.makeText(ConfirmOTPActivity.this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+        backPressTime = System.currentTimeMillis();
     }
 
     public void onCLickBackForgotPass(View view) {
@@ -49,10 +87,9 @@ public class ConfirmOTPActivity extends AppCompatActivity {
         Intent intents = getIntent();
         int Chechotp = intents.getIntExtra("otp", 0);
         String str_otp = editTextCheckOTP.getText().toString().trim();
-        if (str_otp.equalsIgnoreCase(String.valueOf(Chechotp)) || str_otp.equalsIgnoreCase(String.valueOf(otp))) {
+        if (str_otp.equalsIgnoreCase(String.valueOf(Chechotp))) {
             intents.removeExtra("otp");
-            otp = otp;
-            //
+//            otp = otp;
             editTextCheckOTP.setText("");
             Intent intent = new Intent(this, ChangePassActivity.class);
             intent.putExtra("email", customer.getEmail());
@@ -64,34 +101,34 @@ public class ConfirmOTPActivity extends AppCompatActivity {
         }
     }
 
-    public void onCLickSendOtp(View view) {
-        String apiForgotPass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/ForgotPassword.php";
-        final ProgressDialog progressDialog = new ProgressDialog(ConfirmOTPActivity.this);
-        progressDialog.setMessage("Please Wait..");
-        progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, apiForgotPass, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(ConfirmOTPActivity.this, "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("otp", String.valueOf(otp));
-                params.put("email", customer.getEmail());
-                return params;
-
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmOTPActivity.this);
-        requestQueue.add(request);
-    }
+//    public void onCLickSendOtp(View view) {
+//        String apiForgotPass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/ForgotPassword.php";
+//        final ProgressDialog progressDialog = new ProgressDialog(ConfirmOTPActivity.this);
+//        progressDialog.setMessage("Please Wait..");
+//        progressDialog.show();
+//        StringRequest request = new StringRequest(Request.Method.POST, apiForgotPass, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                progressDialog.dismiss();
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                progressDialog.dismiss();
+//                Toast.makeText(ConfirmOTPActivity.this, "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("otp", String.valueOf(otp));
+//                params.put("email", customer.getEmail());
+//                return params;
+//
+//            }
+//        };
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmOTPActivity.this);
+//        requestQueue.add(request);
+//    }
 }

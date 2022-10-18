@@ -105,9 +105,9 @@
                 android:src="@drawable/ic_receipt" />
 
             <TextView
-                android:fontFamily="@font/be_vietnam_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Lịch sử đơn hàng  "
                 android:textColor="#000000"
                 android:textSize="16sp" />
@@ -131,8 +131,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Địa chỉ "
                 android:fontFamily="@font/be_vietnam_medium"
+                android:text="Địa chỉ "
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -176,10 +176,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Liên hệ và góp ý "
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:fontFamily="@font/be_vietnam_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView12"
                 app:layout_constraintTop_toTopOf="parent"
@@ -233,9 +233,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Điều khoản và Chính sách "
                 android:textColor="#000000"
-                android:fontFamily="@font/be_vietnam_medium"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView14"
@@ -290,10 +290,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Cài đặt "
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:fontFamily="@font/be_vietnam_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView15"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -347,10 +347,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Đổi  mật khẩu"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:fontFamily="@font/be_vietnam_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView13"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -380,7 +380,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <Button
         android:id="@+id/tvDangXuat"
         android:layout_width="0dp"
         android:layout_height="55dp"

@@ -24,6 +24,8 @@ import java.util.Map;
 public class ChangePassActivity extends AppCompatActivity {
     private EditText edtPassChange;
     private EditText edtRePassChange;
+    private long backPressTime;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,24 @@ public class ChangePassActivity extends AppCompatActivity {
         edtRePassChange = findViewById(R.id.edtRePassChange);
 
     }
+    @Override
+    public void onBackPressed() {
+        if (backPressTime + 2000 > System.currentTimeMillis()){
+            mToast.cancel();
 
+            Intent intent = new Intent(getApplicationContext(), HelloScreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+
+        }else {
+            mToast = Toast.makeText(ChangePassActivity.this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+        backPressTime = System.currentTimeMillis();
+    }
     public void onCLickChangepass(View view) {
         Intent intent = getIntent();
         String str_email = intent.getStringExtra("email");
