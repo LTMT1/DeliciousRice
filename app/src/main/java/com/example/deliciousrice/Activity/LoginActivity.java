@@ -68,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
         edtPassWordDangNhap = findViewById(R.id.edtPassWordDangNhap);
         ctlFacebook = findViewById(R.id.ctlFacebook);
         ctlGoogle = findViewById(R.id.ctlGoogle);
-        loginFB();
-        loginGoogle();
+//        loginFB();
+//        loginGoogle();
         getPreferences();
     }
 

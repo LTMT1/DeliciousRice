@@ -62,6 +62,8 @@ dependencies {
     //radius button
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     //facebook
+    implementation 'com.facebook.android:facebook-login:5.11.0'
+    implementation 'com.facebook.android:facebook-android-sdk:4.5.0'
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
     //google
     implementation 'com.google.android.gms:play-services-auth:20.3.0'

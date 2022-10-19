@@ -72,8 +72,7 @@
     <string name="favorite">Yêu Thích</string>
     <string name="account">Tài Khoản</string>
 
-
-    <string name="facebook_app_id">624096392604145</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">56789</string>
+    <string name="facebook_app_id">1125742061638886</string>
+    <string name="fb_login_protocol_scheme">fb1125742061638886</string>
+    <string name="facebook_client_token">91d0141051fbfdc3451686e064c72b5e</string>
 </resources>

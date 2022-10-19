@@ -60,23 +60,6 @@ public class ConfirmOTPActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressTime + 2000 > System.currentTimeMillis()) {
-            mToast.cancel();
-            Intent intent = new Intent(getApplicationContext(), HelloScreenActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("EXIT", true);
-            startActivity(intent);
-            finish();
-            System.exit(0);
-
-        } else {
-            mToast = Toast.makeText(ConfirmOTPActivity.this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT);
-            mToast.show();
-        }
-        backPressTime = System.currentTimeMillis();
-    }
 
     public void onCLickBackForgotPass(View view) {
         Intent intent = new Intent(ConfirmOTPActivity.this, ForgotPassActivity.class);

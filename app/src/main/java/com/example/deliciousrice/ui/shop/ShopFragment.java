@@ -74,7 +74,7 @@ public class ShopFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.rcyProductCombo);
         recyclerViewNew = view.findViewById(R.id.rcyProductNew);
-
+        recyclerViewHot = view.findViewById(R.id.rcyProductHot);
         Gson gson = new GsonBuilder().serializeNulls().create();
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
