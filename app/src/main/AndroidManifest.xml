@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
     <uses-permission
         android:name="com.google.android.gms.permission.AD_ID"
         tools:node="remove" />
@@ -23,11 +21,13 @@
         android:theme="@style/Theme.DeliciousRice"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.ConfirmOTPActivity"
+            android:name=".ActivityDetail"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".SendOtpActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".Activity.ConfirmOTPActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".SendOtpActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".ui.account.Activity.EditAddressActivity"
             android:exported="false" />

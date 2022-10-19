@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_marginTop="10dp"
     android:layout_marginHorizontal="8dp"
+    android:id="@+id/layout_item_product_hot"
     android:layout_height="120dp">
 
     <androidx.cardview.widget.CardView
@@ -19,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imgProductHot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -27,6 +29,7 @@
 
 
     <ImageView
+        android:id="@+id/imgProductFavouriteHot"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginBottom="20dp"
@@ -36,8 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:id="@+id/tvProductNameHot"
         android:fontFamily="@font/be_vietnam_medium"
-        android:id="@+id/textView19"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10dp"
@@ -59,10 +62,10 @@
         android:textColor="#9F9F9F "
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintTop_toBottomOf="@+id/tvProductNameHot" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/tvPriceProductHot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
