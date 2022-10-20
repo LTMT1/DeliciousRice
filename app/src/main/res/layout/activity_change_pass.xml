@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+
     tools:context=".Activity.ForgotPassActivity">
 
     <ImageView
@@ -44,7 +46,7 @@
         android:fontFamily="@font/be_vietnam_medium"
         android:hint="@string/nh_p_m_t_kh_u_m_i"
         android:paddingStart="16dp"
-
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivLogo" />
@@ -61,7 +63,7 @@
         android:fontFamily="@font/be_vietnam_medium"
         android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
         android:paddingStart="16dp"
-
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"

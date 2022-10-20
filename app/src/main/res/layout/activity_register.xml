@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:ignore="OnClick"
     tools:context=".Activity.LoginActivity">
 
@@ -94,6 +95,7 @@
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
         android:hint="@string/nh_p_m_t_kh_u"
+        android:inputType="textPassword"
         android:paddingStart="16dp"
         android:fontFamily="@font/be_vietnam_medium"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +114,7 @@
         android:drawablePadding="12dp"
         android:hint="@string/nh_p_l_i_m_t_kh_u"
         android:fontFamily="@font/be_vietnam_medium"
+        android:inputType="textPassword"
         android:paddingStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"

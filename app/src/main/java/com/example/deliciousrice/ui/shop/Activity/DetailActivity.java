@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.deliciousrice.R;
 
-public class ActivityDetail extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

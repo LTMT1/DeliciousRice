@@ -34,6 +34,7 @@
     <string name="ng_k">Đăng ký</string>
     <string name="ng_nh_p">Đăng nhập</string>
 
+
     <!--   Tiêu đề Trang                              -->
     <string name="dia_chi">Địa chỉ</string>
     <string name="dia_chi_ban">Địa điểm của bạn</string>
@@ -62,6 +63,7 @@
 
     <string name="lien_he">Liên hệ và góp ý  </string>
 
+
     /////////////////////
     <string name="g_i">Gửi</string>
     <string name="l_u">Lưu </string>
@@ -71,6 +73,7 @@
     <string name="cart">Giỏ Hàng</string>
     <string name="favorite">Yêu Thích</string>
     <string name="account">Tài Khoản</string>
+
 
     <string name="facebook_app_id">1125742061638886</string>
     <string name="fb_login_protocol_scheme">fb1125742061638886</string>

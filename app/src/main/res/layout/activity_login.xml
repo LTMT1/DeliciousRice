@@ -82,7 +82,8 @@
         android:fontFamily="@font/be_vietnam_medium"
         android:hint="@string/nh_p_password"
         android:paddingStart="16dp"
-
+        app:passwordToggleEnabled="true"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

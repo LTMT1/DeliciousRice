@@ -52,7 +52,7 @@
             android:background="@drawable/bg_edit_text"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="12dp"
-
+            android:inputType="textPassword"
             android:hint="@string/nh_p_m_t_kh_u_m_i"
             android:paddingStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +71,7 @@
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="12dp"
             android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
+            android:inputType="textPassword"
             android:paddingStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
