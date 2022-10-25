@@ -90,6 +90,7 @@ public class HelloScreenActivity extends AppCompatActivity {
         String apilogin = "https://appsellrice.000webhostapp.com/Deliciousrice/API/Login.php";
         final ProgressDialog progressDialog = new ProgressDialog(HelloScreenActivity.this);
         progressDialog.setMessage("Please Wait..");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, apilogin, new com.android.volley.Response.Listener<String>() {
             @Override

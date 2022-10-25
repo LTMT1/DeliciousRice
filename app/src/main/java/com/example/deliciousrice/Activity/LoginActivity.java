@@ -53,9 +53,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtEmailDangNhap;
     private EditText edtPassWordDangNhap;
-    private ConstraintLayout ctlGoogle, ctlFacebook;
-    private CallbackManager callbackManager;
-    private GoogleSignInClient mGoogleSignInClient;
     CheckBox checkBox;
 
     @Override
@@ -66,96 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.ckbNhoMK);
         edtEmailDangNhap = findViewById(R.id.edtEmailDangNhap);
         edtPassWordDangNhap = findViewById(R.id.edtPassWordDangNhap);
-        ctlFacebook = findViewById(R.id.ctlFacebook);
-        ctlGoogle = findViewById(R.id.ctlGoogle);
-//        loginFB();
-//        loginGoogle();
         getPreferences();
-    }
-
-    private void loginFB() {
-        callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        startActivity(new Intent(LoginActivity.this, MainActivity2.class));
-                        Toast.makeText(LoginActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
-        ctlFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile"));
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> task) {
-        try {
-            GoogleSignInAccount account = task.getResult(ApiException.class);
-            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-            if (acct != null) {
-                String personName = acct.getDisplayName();
-                String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
-                String personId = acct.getId();
-                Uri personPhoto = acct.getPhotoUrl();
-            }
-            startActivity(new Intent(LoginActivity.this, MainActivity2.class));
-            // Signed in successfully, show authenticated UI.
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
-        }
-    }
-
-    public void loginGoogle() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        cvLoginGoogle.setSize(SignInButton.SIZE_STANDARD);
-        ctlGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.ctlGoogle:
-                        signIn();
-                        break;
-                }
-            }
-        });
-    }
-
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, 100);
     }
 
     //Login
@@ -166,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             String apilogin = "https://appsellrice.000webhostapp.com/Deliciousrice/API/Login.php";
             final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
             progressDialog.setMessage("Please Wait..");
+            progressDialog.setCancelable(false);
             progressDialog.show();
             String strname = edtEmailDangNhap.getText().toString().trim();
             String strpass = edtPassWordDangNhap.getText().toString().trim();

@@ -66,6 +66,7 @@ public class ChangePassActivity extends AppCompatActivity {
         } else {
             final ProgressDialog progressDialog = new ProgressDialog(ChangePassActivity.this);
             progressDialog.setMessage("Please Wait..");
+            progressDialog.setCancelable(false);
             progressDialog.show();
             RequestQueue requestQueue = Volley.newRequestQueue(ChangePassActivity.this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, urlchangepass, new Response.Listener<String>() {

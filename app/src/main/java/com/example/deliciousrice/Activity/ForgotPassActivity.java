@@ -73,6 +73,7 @@ public class ForgotPassActivity extends AppCompatActivity {
             String apiforgotpass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/FindAccount.php";
             final ProgressDialog progressDialog = new ProgressDialog(ForgotPassActivity.this);
             progressDialog.setMessage("Please Wait..");
+            progressDialog.setCancelable(false);
             progressDialog.show();
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             StringRequest stringRequest = new StringRequest(Request.Method.POST, apiforgotpass, new Response.Listener<String>() {

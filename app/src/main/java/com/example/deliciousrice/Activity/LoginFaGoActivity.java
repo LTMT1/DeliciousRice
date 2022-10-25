@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,6 +44,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONObject;
@@ -53,15 +55,18 @@ import java.util.Map;
 public class LoginFaGoActivity extends AppCompatActivity {
     private CardView cvLoginGoogle;
     private LoginButton loginButton;
-    private TextView tvLoginDangNhap;
-    private TextView tvTextLoginDangky;
 
-    String name,firstname,picture;
+    String name, firstname, picture;
     int id;
-    private CallbackManager callbackManager;
-    private GoogleSignInClient mGoogleSignInClient;
+    String personGivenName, personEmail, personId;
     private long backPressTime;
     private Toast mToast;
+
+    private CallbackManager callbackManager;
+
+    private GoogleSignInClient mGoogleSignInClient;
+    GoogleSignInOptions signInOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,33 +74,119 @@ public class LoginFaGoActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login_fa_go);
         BarColor.setStatusBarColor(this);
-
         overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
         cvLoginGoogle = findViewById(R.id.cvLoginGoogle);
         loginButton = (LoginButton) findViewById(R.id.login_button);
 
-        tvLoginDangNhap = findViewById(R.id.tvLoginDangNhap);
-        tvTextLoginDangky = findViewById(R.id.tvTextLoginDangky);
-
-        tvLoginDangNhap.setOnClickListener(v -> loginDangNhap());
-        tvTextLoginDangky.setOnClickListener(v -> manDangKy());
         loginFacebook();
         loginGoogle();
 
     }
-    private void loginDangNhap() {
+
+    public void loginDangNhap(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 
     }
 
-    private void manDangKy() {
+    public void manDangKy(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
+
+    public void loginGoogle() {
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, signInOptions);
+        cvLoginGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.cvLoginGoogle:
+                        signIn();
+                        break;
+
+                }
+            }
+        });
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 1000);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                task.getResult(ApiException.class);
+                handleSignInResult(task);
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> task) {
+        try {
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+            if (acct != null) {
+                personGivenName = acct.getDisplayName();
+                personEmail = acct.getEmail();
+                personId = acct.getId();
+            }
+            RegisterGoogle(personId, personGivenName, personEmail);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void RegisterGoogle(String idg, String nameg, String Emailg) {
+        final ProgressDialog progressDialog = new ProgressDialog(LoginFaGoActivity.this);
+        progressDialog.setMessage("Please Wait..");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, "https://appsellrice.000webhostapp.com/Deliciousrice/API/RegisterGoogle.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equalsIgnoreCase("Đăng kí Thành Công")) {
+                    startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
+                    progressDialog.dismiss();
+                    Toast.makeText(LoginFaGoActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplication(), "Trước đây tài khoản gmail này đã đăng kí rồi, vui lòng nhập gmail khác.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplication(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", idg);
+                params.put("email", Emailg);
+                params.put("username", nameg);
+                return params;
+
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
+        requestQueue.add(request);
+    }
+
     @Override
     public void onBackPressed() {
-        if (backPressTime + 2000 > System.currentTimeMillis()){
+        if (backPressTime + 2000 > System.currentTimeMillis()) {
             mToast.cancel();
 
             Intent intent = new Intent(getApplicationContext(), HelloScreenActivity.class);
@@ -105,18 +196,20 @@ public class LoginFaGoActivity extends AppCompatActivity {
             finish();
             System.exit(0);
 
-        }else {
+        } else {
             mToast = Toast.makeText(LoginFaGoActivity.this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT);
             mToast.show();
         }
         backPressTime = System.currentTimeMillis();
     }
+
     public void loginFacebook() {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 final ProgressDialog progressDialog = new ProgressDialog(LoginFaGoActivity.this);
                 progressDialog.setMessage("Please Wait..");
+                progressDialog.setCancelable(false);
                 progressDialog.show();
                 result();
                 new Handler().postDelayed(new Runnable() {
@@ -140,92 +233,37 @@ public class LoginFaGoActivity extends AppCompatActivity {
 
     private void result() {
 
-        GraphRequest graphRequest=GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
             @Override
             public void onCompleted(@Nullable JSONObject jsonObject, @Nullable GraphResponse graphResponse) {
-                Log.e("ssss",graphResponse.getJSONObject().toString());
+                Log.e("ssss", graphResponse.getJSONObject().toString());
                 try {
-                    name=jsonObject.getString("name");
-                    firstname=jsonObject.getString("first_name");
-                    id=jsonObject.getInt("id");
-                    picture="https://graph.facebook.com/"+id+"/picture?style=large";
-                    Log.e("",""+name+firstname+picture+id);
-                    InsertAccface(id,picture,name);
-                }catch (Exception e){
+                    name = jsonObject.getString("name");
+                    firstname = jsonObject.getString("first_name");
+                    id = jsonObject.getInt("id");
+                    picture = jsonObject.getJSONObject("picture").getJSONObject("data").getString("url");
+                    Log.e("", "" + name + firstname + picture + id);
+                    InsertAccface(id, picture, name);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
         });
-        Bundle bundle=new Bundle();
-        bundle.putString("fields","name,email,first_name,picture");
+        Bundle bundle = new Bundle();
+        bundle.putString("fields", "name,email,first_name,picture.type(large)");
         graphRequest.setParameters(bundle);
         graphRequest.executeAsync();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> task) {
-        try {
-            GoogleSignInAccount account = task.getResult(ApiException.class);
-            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-            if (acct != null) {
-                String personName = acct.getDisplayName();
-                String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
-                String personId = acct.getId();
-                Uri personPhoto = acct.getPhotoUrl();
-            }
-            startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
-            // Signed in successfully, show authenticated UI.
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
-        }
-    }
-
-    public void loginGoogle() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        cvLoginGoogle.setSize(SignInButton.SIZE_STANDARD);
-        cvLoginGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.cvLoginGoogle:
-                        signIn();
-                        break;
-
-                }
-            }
-        });
-    }
-
-    @Override
     protected void onStart() {
+         mGoogleSignInClient.signOut();
         LoginManager.getInstance().logOut();
         super.onStart();
     }
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, 100);
-    }
-    private void InsertAccface(int idf,String picturef,String namef){
+
+    private void InsertAccface(int idf, String picturef, String namef) {
         StringRequest request = new StringRequest(Request.Method.POST, "https://appsellrice.000webhostapp.com/Deliciousrice/API/RegisterFacebook.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -256,4 +294,5 @@ public class LoginFaGoActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
         requestQueue.add(request);
     }
+
 }

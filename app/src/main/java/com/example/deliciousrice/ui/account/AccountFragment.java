@@ -32,6 +32,9 @@ import com.example.deliciousrice.ui.account.Activity.PolicyActivity;
 import com.example.deliciousrice.ui.account.Activity.ReceiptActivity;
 import com.example.deliciousrice.ui.account.Activity.SettingActivity;
 import com.example.deliciousrice.ui.explore.DashboardViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class AccountFragment extends Fragment {
 
@@ -44,7 +47,7 @@ public class AccountFragment extends Fragment {
     private ConstraintLayout clDoipass;
     private Button tvDangXuat;
     private MainActivity2 main;
-
+    private GoogleSignInClient mGoogleSignInClient;
     private FragmentAccountBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,11 +68,10 @@ public class AccountFragment extends Fragment {
         tvDangXuat = root.findViewById(R.id.tvDangXuat);
         tvDangXuat.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), LoginActivity.class);
-            Log.e("ahaah","");
             SharedPreferences preferences = getContext().getSharedPreferences("user_file", MODE_PRIVATE);
             SharedPreferences.Editor editor=preferences.edit();
             editor.clear();
-            Log.e("ahaah","sss");
+            mGoogleSignInClient.signOut();
             startActivity(intent);
             main.finish();
         });
