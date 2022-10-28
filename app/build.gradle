@@ -82,4 +82,7 @@ dependencies {
     //mail
     implementation 'com.sun.mail:android-mail:1.6.0'
     implementation 'com.sun.mail:android-activation:1.6.0'
+
+    //Loading bar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }
