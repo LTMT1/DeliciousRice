@@ -47,7 +47,6 @@ public class AccountFragment extends Fragment {
     private ConstraintLayout clDoipass;
     private Button tvDangXuat;
     private MainActivity2 main;
-    private GoogleSignInClient mGoogleSignInClient;
     private FragmentAccountBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -68,10 +67,8 @@ public class AccountFragment extends Fragment {
         tvDangXuat = root.findViewById(R.id.tvDangXuat);
         tvDangXuat.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), LoginActivity.class);
-            SharedPreferences preferences = getContext().getSharedPreferences("user_file", MODE_PRIVATE);
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.clear();
-            mGoogleSignInClient.signOut();
+            SharedPreferences.Editor editor = getContext().getSharedPreferences("user_file", MODE_PRIVATE).edit();
+            editor.clear().commit();
             startActivity(intent);
             main.finish();
         });

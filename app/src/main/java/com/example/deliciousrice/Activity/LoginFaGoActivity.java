@@ -59,6 +59,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
     String name, firstname, picture;
     int id;
     String personGivenName, personEmail, personId;
+    Uri personpicture;
     private long backPressTime;
     private Toast mToast;
 
@@ -135,18 +136,19 @@ public class LoginFaGoActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
             if (acct != null) {
+                personpicture=acct.getPhotoUrl();
                 personGivenName = acct.getDisplayName();
                 personEmail = acct.getEmail();
                 personId = acct.getId();
             }
-            RegisterGoogle(personId, personGivenName, personEmail);
+            RegisterGoogle(personId, personGivenName,personpicture, personEmail);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    private void RegisterGoogle(String idg, String nameg, String Emailg) {
+    private void RegisterGoogle(String idg, String nameg,Uri picture  , String Emailg) {
         final ProgressDialog progressDialog = new ProgressDialog(LoginFaGoActivity.this);
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
@@ -175,6 +177,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id", idg);
                 params.put("email", Emailg);
+                params.put("image",String.valueOf(picture));
                 params.put("username", nameg);
                 return params;
 

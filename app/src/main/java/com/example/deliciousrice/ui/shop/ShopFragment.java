@@ -1,6 +1,8 @@
 package com.example.deliciousrice.ui.shop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +22,17 @@ import com.example.deliciousrice.Adapter.AdapterProduct;
 import com.example.deliciousrice.Adapter.AdapterProductHot;
 import com.example.deliciousrice.Adapter.AdapterProductNew;
 import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.Model.ProductHot;
 import com.example.deliciousrice.Model.ProductNew;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.databinding.FragmentShopBinding;
+import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
@@ -46,6 +51,7 @@ public class ShopFragment extends Fragment {
     AdapterProduct adapterProduct;
     AdapterProductNew adapterProductNew;
     AdapterProductHot adapterProductHot;
+    MainActivity2 main;
 
     private FragmentShopBinding binding;
 
@@ -56,6 +62,7 @@ public class ShopFragment extends Fragment {
 
         binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         return root;
     }
 
@@ -63,6 +70,7 @@ public class ShopFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         imgSilde = view.findViewById(R.id.imgSilde);
+        main = (MainActivity2) getActivity();
         ArrayList<SlideModel> models=new ArrayList<>();
         models.add(new SlideModel(R.drawable.img_silde1,null));
         models.add(new SlideModel(R.drawable.img_silde2,null));
@@ -111,8 +119,11 @@ public class ShopFragment extends Fragment {
                 recyclerView.setHasFixedSize(true);
                 //   GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL, false));
-                adapterProduct = new AdapterProduct(productList, ShopFragment.this, product -> {
-                    Toast.makeText(getContext(), "product: " + product.getProduct_name(), Toast.LENGTH_SHORT).show();
+                adapterProduct = new AdapterProduct(productList, ShopFragment.this,product -> {
+                    Intent intent=new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra("idcustomer",main.getId_customer());
+                    intent.putExtra("getdataproduct",product);
+                    startActivity(intent);
                 });
                 recyclerView.setAdapter(adapterProduct);
             }
