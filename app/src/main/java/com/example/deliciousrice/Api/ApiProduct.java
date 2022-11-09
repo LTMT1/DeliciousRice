@@ -23,10 +23,10 @@ public interface ApiProduct {
     Call<ArrayList<Product>> getListProduct();
 
     @GET("productNew.php")
-    Call<ArrayList<ProductNew>> getListProductNew();
+    Call<ArrayList<Product>> getListProductNew();
 
     @GET("productHot.php")
-    Call<ArrayList<ProductHot>> getListProductHot();
+    Call<ArrayList<Product>> getListProductHot();
 
     @FormUrlEncoded
     @POST("getdataCustomer.php")

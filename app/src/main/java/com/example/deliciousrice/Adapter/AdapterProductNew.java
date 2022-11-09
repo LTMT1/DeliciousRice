@@ -22,11 +22,11 @@ import java.util.ArrayList;
 
 public class AdapterProductNew extends RecyclerView.Adapter<AdapterProductNew.ProductNewViewHolder> {
 
-    private ArrayList<ProductNew> data;
+    private ArrayList<Product> data;
     private ShopFragment context;
     private ProductNewItemClick productNewItemClick;
 
-    public AdapterProductNew(ArrayList<ProductNew> data, ShopFragment context, ProductNewItemClick productNewItemClick) {
+    public AdapterProductNew(ArrayList<Product> data, ShopFragment context, ProductNewItemClick productNewItemClick) {
         this.data = data;
         this.context = context;
         this.productNewItemClick = productNewItemClick;
@@ -41,11 +41,11 @@ public class AdapterProductNew extends RecyclerView.Adapter<AdapterProductNew.Pr
 
     @Override
     public void onBindViewHolder(@NonNull AdapterProductNew.ProductNewViewHolder holder, int position) {
-        ProductNew productNew = data.get(position);
-        holder.tvNameProductNew.setText(productNew.getProduct_name_new());
-        Glide.with(context).load(productNew.getImage_new()).centerCrop().into(holder.imgProductNew);
-        holder.tvMassPoductNew.setText(productNew.getProcessing_time_new());
-        holder.tvPricePoductNew.setText(String.valueOf(productNew.getPrice_new()));
+        Product productNew = data.get(position);
+        holder.tvNameProductNew.setText(productNew.getProduct_name());
+        Glide.with(context).load(productNew.getImage()).centerCrop().into(holder.imgProductNew);
+        holder.tvMassPoductNew.setText(productNew.getProcessing_time());
+        holder.tvPricePoductNew.setText(String.valueOf(productNew.getPrice()));
         holder.cstrItemProductNew.setOnClickListener(v -> {
             productNewItemClick.itemProductNewClick(productNew);
         });

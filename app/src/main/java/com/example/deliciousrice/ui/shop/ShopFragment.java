@@ -1,7 +1,9 @@
 package com.example.deliciousrice.ui.shop;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.example.deliciousrice.Adapter.AdapterProduct;
 import com.example.deliciousrice.Adapter.AdapterProductHot;
 import com.example.deliciousrice.Adapter.AdapterProductNew;
 import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.Model.ProductHot;
@@ -47,7 +50,6 @@ public class ShopFragment extends Fragment {
     private ImageSlider imgSilde;
 
     RecyclerView recyclerView,recyclerViewNew, recyclerViewHot;
-    ApiProduct apiProduct;
     AdapterProduct adapterProduct;
     AdapterProductNew adapterProductNew;
     AdapterProductHot adapterProductHot;
@@ -83,21 +85,19 @@ public class ShopFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rcyProductCombo);
         recyclerViewNew = view.findViewById(R.id.rcyProductNew);
         recyclerViewHot = view.findViewById(R.id.rcyProductHot);
-        Gson gson = new GsonBuilder().serializeNulls().create();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://appsellrice.000webhostapp.com/Deliciousrice/API/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(okHttpClient)
-                .build();
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading Image. Wait a minute...... \n Vội ăn đấm 👊👊👊 đấy!!!");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 5000);
 
-        apiProduct = retrofit.create(ApiProduct.class);
         CallApi_Combo();
         CallApi_New();
         CallApi_Hot();
@@ -110,6 +110,7 @@ public class ShopFragment extends Fragment {
     }
 
     private void CallApi_Combo(){
+        ApiProduct apiProduct = ApiService.getService();
         Call<ArrayList<Product>> listCallProduct = apiProduct.getListProduct();
         listCallProduct.enqueue(new Callback<ArrayList<Product>>() {
             @Override
@@ -136,44 +137,52 @@ public class ShopFragment extends Fragment {
     }
 
     private void CallApi_New(){
-        Call<ArrayList<ProductNew>> listCallProductNew = apiProduct.getListProductNew();
-        listCallProductNew.enqueue(new Callback<ArrayList<ProductNew>>() {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<ArrayList<Product>> listCallProductNew = apiProduct.getListProductNew();
+        listCallProductNew.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<ArrayList<ProductNew>> call, Response<ArrayList<ProductNew>> response) {
-                ArrayList<ProductNew>  productNews = new ArrayList<>();
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                ArrayList<Product>  productNews = new ArrayList<>();
                 productNews = response.body();
                 recyclerViewNew.setHasFixedSize(true);
                 recyclerViewNew.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL, false));
                 adapterProductNew = new AdapterProductNew(productNews, ShopFragment.this, productNew -> {
-                    Toast.makeText(getContext(), "product: " + productNew.getProduct_name_new(), Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra("idcustomer",main.getId_customer());
+                    intent.putExtra("getdataproduct",productNew);
+                    startActivity(intent);
                 });
                 recyclerViewNew.setAdapter(adapterProductNew);
             }
 
             @Override
-            public void onFailure(Call<ArrayList<ProductNew>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
 
             }
         });
     }
 
     private void CallApi_Hot(){
-        Call<ArrayList<ProductHot>> listCallProductHot = apiProduct.getListProductHot();
-        listCallProductHot.enqueue(new Callback<ArrayList<ProductHot>>() {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<ArrayList<Product>> listCallProductHot = apiProduct.getListProductHot();
+        listCallProductHot.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<ArrayList<ProductHot>> call, Response<ArrayList<ProductHot>> response) {
-                ArrayList<ProductHot> productHots = new ArrayList<>();
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                ArrayList<Product> productHots = new ArrayList<>();
                 productHots = response.body();
                 recyclerViewHot.setHasFixedSize(true);
                 recyclerViewHot.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
                 adapterProductHot = new AdapterProductHot(productHots, ShopFragment.this, productHot -> {
-                    Toast.makeText(getContext(), "product: " + productHot.getProduct_name_hot(), Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra("idcustomer",main.getId_customer());
+                    intent.putExtra("getdataproduct",productHot);
+                    startActivity(intent);
                 });
-                recyclerViewHot.setAdapter(adapterProduct);
+                recyclerViewHot.setAdapter(adapterProductHot);
             }
 
             @Override
-            public void onFailure(Call<ArrayList<ProductHot>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
 
             }
         });
