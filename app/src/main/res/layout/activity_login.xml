@@ -26,11 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:text="@string/ng_nh_p"
-        android:textColor="@color/black"
         android:textSize="32sp"
-
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.333"
@@ -44,11 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/be_vietnam_medium"
         android:text="@string/nh_p_email_v_m_t_kh_u_c_a_b_n"
-        android:textColor="@color/black"
+        style="@style/Text"
         android:textSize="18sp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDangNhapTitle" />
 
@@ -62,10 +58,9 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_mess"
         android:drawablePadding="12dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:hint="@string/nh_p_email"
         android:paddingStart="16dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -79,7 +74,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:hint="@string/nh_p_password"
         android:paddingStart="16dp"
         app:passwordToggleEnabled="true"
@@ -90,22 +85,21 @@
         app:layout_constraintTop_toBottomOf="@id/edtEmailDangNhap"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/tvQuenMK"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/be_vietnam_medium"
         android:onClick="onClickForgotPassword"
         android:text="@string/qu_n_m_t_kh_u"
-        android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.633"
+        app:layout_constraintEnd_toEndOf="@+id/edtPassWordDangNhap"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/edtPassWordDangNhap"
-        app:layout_constraintVertical_bias="0.2" />
-
+        app:layout_constraintTop_toBottomOf="@id/edtPassWordDangNhap" />
 
     <TextView
         android:id="@+id/tvDangNhap"
@@ -130,13 +124,13 @@
         android:id="@+id/tvKhongTK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="15dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:text="@string/kh_ng_c_t_i_kho_n"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/tvDangNhap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDangNhap" />
 
     <TextView
@@ -150,8 +144,6 @@
         android:text="@string/ng_k"
         android:textColor="#B43838"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvDangNhap"
-        app:layout_constraintHorizontal_bias="0.012"
         app:layout_constraintStart_toEndOf="@+id/tvKhongTK"
         app:layout_constraintTop_toBottomOf="@+id/tvDangNhap" />
 

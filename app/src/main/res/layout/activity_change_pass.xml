@@ -43,7 +43,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:hint="@string/nh_p_m_t_kh_u_m_i"
         android:paddingStart="16dp"
         android:inputType="textPassword"
@@ -60,7 +60,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
         android:paddingStart="16dp"
         android:inputType="textPassword"
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.8508892" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

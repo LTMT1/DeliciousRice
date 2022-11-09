@@ -48,4 +48,7 @@ public interface ApiProduct {
     @POST("checkFavorite.php")
     Call<String> checkFavorite(@Field("customer") int idcustomer, @Field("product") int idproduct);
 
+    @FormUrlEncoded
+    @POST("SeachProduct.php")
+    Call<List<Product>> SeachProduct(@Field("product_name") String product_name);
 }

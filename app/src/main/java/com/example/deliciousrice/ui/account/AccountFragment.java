@@ -35,7 +35,6 @@ import com.example.deliciousrice.ui.account.Activity.InformationActivity;
 import com.example.deliciousrice.ui.account.Activity.PolicyActivity;
 import com.example.deliciousrice.ui.account.Activity.ReceiptActivity;
 import com.example.deliciousrice.ui.account.Activity.SettingActivity;
-import com.example.deliciousrice.ui.explore.DashboardViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnSuccessListener;

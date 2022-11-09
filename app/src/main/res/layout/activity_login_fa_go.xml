@@ -129,28 +129,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/be_vietnam_medium"
         android:text="@string/kh_ng_c_t_i_kho_n"
         android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:fontFamily="@font/be_vietnam_medium"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/tvTextLoginDangky"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLoginDangNhap" />
 
     <TextView
         android:id="@+id/tvTextLoginDangky"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/be_vietnam_medium"
+        android:onClick="manDangKy"
         android:text="@string/ng_k"
         android:textColor="#B43838"
         android:textSize="16sp"
-        android:onClick="manDangKy"
-        android:fontFamily="@font/be_vietnam_medium"
         app:layout_constraintLeft_toRightOf="@id/tvKhongTK"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLoginDangNhap" />
 
     <androidx.constraintlayout.widget.Guideline
