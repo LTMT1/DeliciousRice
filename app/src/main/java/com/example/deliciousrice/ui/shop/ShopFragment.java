@@ -85,19 +85,6 @@ public class ShopFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rcyProductCombo);
         recyclerViewNew = view.findViewById(R.id.rcyProductNew);
         recyclerViewHot = view.findViewById(R.id.rcyProductHot);
-
-
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading Image. Wait a minute...... \n Vội ăn đấm 👊👊👊 đấy!!!");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog.dismiss();
-            }
-        }, 5000);
-
         CallApi_Combo();
         CallApi_New();
         CallApi_Hot();

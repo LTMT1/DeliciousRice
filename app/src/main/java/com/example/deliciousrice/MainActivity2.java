@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.deliciousrice.databinding.ActivityMain2Binding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity  {
 
     private ActivityMain2Binding binding;
     private String email = "", password = "";
@@ -76,7 +77,7 @@ public class MainActivity2 extends AppCompatActivity {
                 Customer customer = mangyeuthich.get(0);
                 id_customer = customer.getId_customer();
                 user_name = customer.getUser_name();
-                image = customer.getEmail();
+                image = customer.getImage();
                 birthday = customer.getBirthday();
                 phone_number = customer.getPhone_number();
                 address = customer.getAddress();
@@ -88,7 +89,9 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
     }
-
+    public void updateMain(){
+        getdataCustomer(email, password);
+    }
     public int getId_customer() {
         return id_customer;
     }

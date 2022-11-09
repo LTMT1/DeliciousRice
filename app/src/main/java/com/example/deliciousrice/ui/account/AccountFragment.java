@@ -10,14 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+import com.example.deliciousrice.Activity.ChangePassActivity;
 import com.example.deliciousrice.Activity.LoginActivity;
 import com.example.deliciousrice.Activity.LoginFaGoActivity;
 import com.example.deliciousrice.Activity.RegisterActivity;
@@ -36,9 +40,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.io.Serializable;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AccountFragment extends Fragment {
 
     private ConstraintLayout clThongtin;
+    private TextView tvname;
+    private CircleImageView cardView;
+    private ImageView imageView8;
     private LinearLayout llayReceipt;
     private LinearLayout llayAddress;
     private ConstraintLayout clContact;
@@ -51,68 +62,80 @@ public class AccountFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        binding = FragmentAccountBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        clThongtin = root.findViewById(R.id.cl_thongtin);
-        llayReceipt = root.findViewById(R.id.llay_receipt);
-        llayAddress = root.findViewById(R.id.llay_address);
-        clContact = root.findViewById(R.id.cl_contact);
-        clPolicy = root.findViewById(R.id.cl_policy);
-        clSetting = root.findViewById(R.id.cl_setting);
-        clDoipass = root.findViewById(R.id.cl_doipass);
+        View views = inflater.inflate(R.layout.fragment_account, container, false);
         main =(MainActivity2) getActivity();
-        tvDangXuat = root.findViewById(R.id.tvDangXuat);
-        tvDangXuat.setOnClickListener(view -> {
+        Anhxa(views);
+        setviewaccount();
+        main.updateMain();
+        return views;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        tvDangXuat.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             SharedPreferences.Editor editor = getContext().getSharedPreferences("user_file", MODE_PRIVATE).edit();
             editor.clear().commit();
             startActivity(intent);
-            main.finish();
         });
 
-        clThongtin.setOnClickListener(view -> {
+        clThongtin.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), InformationActivity.class);
+            intent.putExtra("name",main.getUser_name());
+            intent.putExtra("name1",main.getBirthday());
+            intent.putExtra("name2",main.getPhone_number());
+            intent.putExtra("name3",main.getImage());
             startActivity(intent);
-
         });
-        llayReceipt.setOnClickListener(view -> {
+        llayReceipt.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), ReceiptActivity.class);
             startActivity(intent);
 
         });
-        llayAddress.setOnClickListener(view -> {
+        llayAddress.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), AddressActivity.class);
             startActivity(intent);
 
         });
-        clContact.setOnClickListener(view -> {
+        clContact.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), ContactActivity.class);
             startActivity(intent);
 
         });
 
-        clPolicy.setOnClickListener(view -> {
+        clPolicy.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), PolicyActivity.class);
             startActivity(intent);
 
         });
 
-        clSetting.setOnClickListener(view -> {
+        clSetting.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SettingActivity.class);
             startActivity(intent);
 
         });
-
-        return root;
+        clDoipass.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), ChangePassActivity.class);
+            startActivity(intent);
+        });
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    private void Anhxa(@NonNull View view){
+        tvname = view.findViewById(R.id.tvname);
+        cardView = view.findViewById(R.id.cardView);
+        imageView8 = view.findViewById(R.id.imageView8);
+        clThongtin = view.findViewById(R.id.cl_thongtin);
+        llayReceipt = view.findViewById(R.id.llay_receipt);
+        llayAddress = view.findViewById(R.id.llay_address);
+        clContact = view.findViewById(R.id.cl_contact);
+        clPolicy = view.findViewById(R.id.cl_policy);
+        clSetting = view.findViewById(R.id.cl_setting);
+        clDoipass = view.findViewById(R.id.cl_doipass);
+        tvDangXuat = view.findViewById(R.id.tvDangXuat);
+    }
+    private void setviewaccount(){
+        tvname.setText(main.getUser_name());
+        Glide.with(getActivity()).load(main.getImage()).centerCrop().into(cardView);
     }
 }
