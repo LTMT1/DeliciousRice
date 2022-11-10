@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.shop.Activity.DetailActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -422,6 +423,7 @@
 
 
     </ScrollView>
+
     <Button
         android:id="@+id/btnaddcart"
         android:layout_width="match_parent"
@@ -429,16 +431,17 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/bg_btn"
+        android:fontFamily="@font/be_vietnam_bold"
         android:text="Thêm Giỏ Hàng"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:layout_constraintVertical_bias="1.0"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        app:layout_constraintVertical_bias="1.0" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
         android:layout_width="wrap_content"

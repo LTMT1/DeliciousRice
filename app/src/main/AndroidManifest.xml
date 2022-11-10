@@ -22,9 +22,15 @@
         android:theme="@style/Theme.DeliciousRice"
         tools:targetApi="31">
         <activity
-            android:name=".ui.shop.Activity.DetailActivity"
+            android:name=".ui.shop.Activity.InvoicedetailsActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
+        <activity
+            android:name=".ui.shop.Activity.DetailActivity"
+            android:exported="false"></activity>
         <activity
             android:name=".Activity.ConfirmOTPActivity"
             android:exported="false" /> <!-- <activity -->
@@ -33,7 +39,6 @@
         <activity
             android:name=".ui.account.Activity.EditAddressActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.account.Activity.ReceiptActivity"
             android:exported="false">

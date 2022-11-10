@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
+        style="@style/Text"
         android:background="@drawable/bg_borders_search"
         android:backgroundTint="#F2F3F2"
         app:iconifiedByDefault="false"
@@ -37,87 +38,7 @@
         app:queryBackground="@null"
         app:queryHint="Tên sản phẩm bạn cần tìm." />
 
-    <!--   <androidx.constraintlayout.widget.ConstraintLayout
-           android:layout_width="match_parent"
-           android:layout_height="130dp"
-           android:layout_marginTop="20dp"
-           android:layout_marginHorizontal="6dp"
-           android:background="@drawable/bg_borders_sp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.5"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/searchView">
 
-           <androidx.cardview.widget.CardView
-               android:id="@+id/cardView5"
-               android:layout_width="150dp"
-               android:layout_height="match_parent"
-               android:layout_margin="7dp"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent">
-
-               <ImageView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:scaleType="centerCrop"
-                   android:src="@drawable/img_sp" />
-
-           </androidx.cardview.widget.CardView>
-
-           <TextView
-               android:id="@+id/textView17"
-               android:layout_width="0dp"
-               android:layout_height="55dp"
-               android:layout_marginHorizontal="10dp"
-               android:layout_marginTop="10dp"
-               android:text="Cơm gà nướng mật ong"
-               android:textColor="#000000"
-               android:textSize="18sp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintHorizontal_bias="0.157"
-               app:layout_constraintStart_toEndOf="@+id/cardView5"
-               app:layout_constraintTop_toTopOf="parent" />
-
-           <TextView
-               android:id="@+id/textView18"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="16dp"
-               android:fontFamily="@font/be_vietnam_medium"
-               android:layout_marginTop="5dp"
-               android:text="2gam"
-               android:textColor="#7C7C7C"
-               android:textSize="14sp"
-               app:layout_constraintStart_toEndOf="@+id/cardView5"
-               app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="16dp"
-               android:layout_marginTop="5dp"
-               android:layout_marginBottom="10dp"
-               android:fontFamily="@font/be_vietnam_medium"
-               android:text="45.000 đ"
-               android:textColor="#000000"
-               android:textSize="15dp"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintStart_toEndOf="@+id/cardView5"
-               app:layout_constraintTop_toBottomOf="@+id/textView18"
-               app:layout_constraintVertical_bias="0.0" />
-
-           <ImageView
-               android:id="@+id/imageView9"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginEnd="15dp"
-               android:layout_marginBottom="15dp"
-               android:src="@drawable/add_item"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toEndOf="parent" />
-
-       </androidx.constraintlayout.widget.ConstraintLayout>-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcl_seachsp"
         android:layout_width="match_parent"

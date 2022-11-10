@@ -188,7 +188,7 @@
             android:id="@+id/imageView6"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_contact"
@@ -245,7 +245,7 @@
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_policy"
@@ -301,7 +301,7 @@
             android:id="@+id/imageView7"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toStartOf="parent"
@@ -358,7 +358,7 @@
             android:id="@+id/imageView9"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toStartOf="parent"
@@ -368,7 +368,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <TextView
         android:id="@+id/tvDangXuat"
         android:layout_width="0dp"
         android:layout_height="55dp"
