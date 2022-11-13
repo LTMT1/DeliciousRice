@@ -55,7 +55,7 @@ public class AccountFragment extends Fragment {
     private ConstraintLayout clPolicy;
     private ConstraintLayout clSetting;
     private ConstraintLayout clDoipass;
-    private Button tvDangXuat;
+    private TextView tvDangXuat;
     private MainActivity2 main;
     private FragmentAccountBinding binding;
 
@@ -94,6 +94,8 @@ public class AccountFragment extends Fragment {
         });
         llayAddress.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), AddressActivity.class);
+            intent.putExtra("Adrress",main.getId_customer());
+
             startActivity(intent);
 
         });

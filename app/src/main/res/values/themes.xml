@@ -24,4 +24,5 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/be_vietnam_medium</item>
     </style>
+
 </resources>

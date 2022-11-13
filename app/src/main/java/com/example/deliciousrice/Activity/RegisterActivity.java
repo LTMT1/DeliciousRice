@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
             progressDialog.setMessage("Please Wait..");
             progressDialog.setCancelable(false);
             progressDialog.show();
+
             String str_name = edtHoTen.getText().toString().trim();
             String str_email = edtEmailDangNhap.getText().toString().trim();
             String str_password = edtPassWordDangKy.getText().toString().trim();

@@ -1,5 +1,6 @@
 package com.example.deliciousrice.Api;
 
+import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
@@ -51,4 +52,14 @@ public interface ApiProduct {
     @FormUrlEncoded
     @POST("SeachProduct.php")
     Call<List<Product>> SeachProduct(@Field("product_name") String product_name);
+
+
+    /*Địa chỉ*/
+    @FormUrlEncoded
+    @POST("getaddress.php")
+    Call<List<Adderss>> getListAddresss(@Field("id_customer") int id_customer);
+
+    @FormUrlEncoded
+    @POST("")
+    Call<Adderss> addAdderss(@Field("id_customer") int id_customer,@Field("address_name") String address_name,@Field("address_specifically") String address_specifically);
 }
