@@ -1,17 +1,12 @@
 package com.example.deliciousrice.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,11 +34,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ForgotPassActivity extends AppCompatActivity {
+    ImageButton imgbtseach;
+    private EditText edtEmailQuenMK;
     RecyclerView rclTimKiem;
     ArrayList<Customer> CustomerArrayList;
     AdapterForgotPass adapterForgotPass;
-    private SearchView searchViewcustomer;
-    ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,23 +46,14 @@ public class ForgotPassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_pass);
         BarColor.setStatusBarColor(this);
 //        edtEmailQuenMK = findViewById(R.id.edtEmailQuenMK);
-        searchViewcustomer = findViewById(R.id.searchViewcustomer);
-        constraintLayout = findViewById(R.id.Seachtk);
-        rclTimKiem = findViewById(R.id.rclviewseach);
-        CustomerArrayList = new ArrayList<>();
-        adapterForgotPass = new AdapterForgotPass(getApplicationContext(), CustomerArrayList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-        rclTimKiem.setLayoutManager(linearLayoutManager);
-        rclTimKiem.setAdapter(adapterForgotPass);
-        Log.e("ahiahai", adapterForgotPass.getItemCount() + " ");
+        //edtEmailQuenMK = findViewById(R.id.edtEmailQuenMK);
 
     }
 
-    public void onCLickForgotPassword(View view) {
-        CustomerArrayList.clear();
-        String seach = searchViewcustomer.getQuery().toString().trim();
-        if (seach.equals("")) {
-            Toast.makeText(this, "Hãy nhập gmail của bạn.", Toast.LENGTH_SHORT).show();
+    public void onCLickForgotPassword(View view){
+        String seach = edtEmailQuenMK.getText().toString().trim();
+        if (!seach.equals("")) {
+            edtEmailQuenMK.setError("Hãy nhập gmail của bạn.");
             return;
         } else {
             String apiforgotpass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/FindAccount.php";
@@ -98,13 +84,9 @@ public class ForgotPassActivity extends AppCompatActivity {
                                         object.getString("password")
                                 ));
                                 adapterForgotPass.notifyDataSetChanged();
-                                constraintLayout.setVisibility(View.INVISIBLE);
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "Không tìm thấy tài khoản của bạn.", Toast.LENGTH_SHORT).show();
-                            constraintLayout.setVisibility(View.VISIBLE);
-                            adapterForgotPass.notifyDataSetChanged();
-                            CustomerArrayList.clear();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -127,5 +109,4 @@ public class ForgotPassActivity extends AppCompatActivity {
             requestQueue.add(stringRequest);
         }
     }
-
 }
