@@ -61,5 +61,15 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("")
-    Call<Adderss> addAdderss(@Field("id_customer") int id_customer,@Field("address_name") String address_name,@Field("address_specifically") String address_specifically);
+    Call<Adderss> addAdderss(@Field("id_customer") int id_customer,@Field("address_name")
+            String address_name,@Field("address_specifically") String address_specifically);
+
+    @FormUrlEncoded
+    @POST("")
+    Call<Adderss> deleteAdderss(@Field("id_address") int id_address,@Field("id_customer") int id_customer);
+
+    @FormUrlEncoded
+    @POST("")
+    Call<Adderss> updateAdderss(@Field("id_customer") int id_customer,@Field("address_name")
+            String address_name,@Field("address_specifically") String address_specifically);
 }

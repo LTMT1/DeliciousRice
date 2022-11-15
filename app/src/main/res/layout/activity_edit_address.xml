@@ -42,17 +42,7 @@
         app:srcCompat="@drawable/ic_vienduoi" />
 
 
-    <ImageView
-        android:id="@+id/imageView29"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText16"
-        app:srcCompat="@drawable/ic_vienduoi" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
@@ -65,15 +55,15 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
-        android:id="@+id/cl_contact3"
+        android:id="@+id/cl_detele_address"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FEFEFE"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_borders_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView29">
+        app:layout_constraintTop_toBottomOf="@+id/ed_edctAddress">
 
 
         <ImageView
@@ -104,7 +94,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tvSaveAddress"
+        android:id="@+id/tv_upAddress"
         android:layout_width="325dp"
         android:layout_height="55dp"
         android:layout_marginBottom="45dp"
@@ -120,7 +110,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText16"
+        android:id="@+id/ed_edctAddress"
         style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="45dp"
@@ -129,7 +119,9 @@
         android:drawableRight="@drawable/ic_map_search"
         android:hint="Trường Cao Đẳng FPT Polytechnic,Trịnh Văn Bô..."
         android:paddingRight="10dp"
-        android:textSize="12sp"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -155,8 +147,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
         android:hint="Nhà"
-        android:textColor="#B6ADAD"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />

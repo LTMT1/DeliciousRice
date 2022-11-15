@@ -45,7 +45,7 @@ public class AddressActivity extends AppCompatActivity {
 
         cl_insertAdsress = findViewById(R.id.cl_insertAdsress);
         cl_insertAdsress.setOnClickListener(view -> {
-            Intent intent=new Intent(AddressActivity.this, EditAddressActivity.class);
+            Intent intent=new Intent(AddressActivity.this, AddAddressActivity.class);
             startActivity(intent);
         });
 
@@ -67,10 +67,18 @@ public class AddressActivity extends AppCompatActivity {
                 addersses = (ArrayList<Adderss>) response.body();
                 rclAddress.setHasFixedSize(true);
                 rclAddress.setLayoutManager(new LinearLayoutManager(AddressActivity.this,RecyclerView.VERTICAL, false));
-                adapterAddress = new AdapterAddress(addersses, AddressActivity.this, productHot -> {
-                    Intent intent=new Intent(AddressActivity.this, DetailActivity.class);
+
+
+                adapterAddress = new AdapterAddress(addersses, AddressActivity.this, addressNew -> {
+
+                    Intent intent=new Intent(AddressActivity.this, EditAddressActivity.class);
+                    intent.putExtra("idcustomer",idadr);
+                    intent.putExtra("getdataAddress", addressNew);
                     startActivity(intent);
+
                 });
+
+
                 rclAddress.setAdapter(adapterAddress);
             }
 

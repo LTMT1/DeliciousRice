@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.deliciousrice.Api.ApiProduct;
@@ -21,6 +20,8 @@ import com.example.deliciousrice.R;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddAddressActivity extends AppCompatActivity {
     private ImageView imgBackAddAddress;
@@ -54,10 +55,21 @@ public class AddAddressActivity extends AppCompatActivity {
 
             adderss.setAddress_name(edAddNameAddress.getText().toString().trim());
             adderss.setAddress_specifically(edAddCtDiachi.getText().toString().trim());
-
-
             ApiProduct apiProduct= ApiService.getService();
             Call<Adderss> adAdderss = apiProduct.addAdderss(adderss.getId_customer(),adderss.getAddress_name(),adderss.getAddress_specifically());
+            adAdderss.enqueue(new Callback<Adderss>() {
+                @Override
+                public void onResponse(Call<Adderss> call, Response<Adderss> response) {
+                    Adderss adderss1=response.body();
+
+
+                }
+
+                @Override
+                public void onFailure(Call<Adderss> call, Throwable t) {
+
+                }
+            });
 
         }
 
@@ -65,8 +77,8 @@ public class AddAddressActivity extends AppCompatActivity {
     }
     public boolean checkhollow() {
         if (edAddNameAddress.getText().toString().trim().equals("")|edAddCtDiachi.getText().toString().trim().equals("")) {
-            edAddNameAddress.setError("Hãy nhập tên của bạn.");
-            edAddCtDiachi.setError("Hãy nhập tên của bạn.");
+            edAddNameAddress.setError("Hãy Nhập Tên.");
+            edAddCtDiachi.setError("Hãy nhập địa chỉ của bạn");
 
             return false;
         } else {

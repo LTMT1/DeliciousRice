@@ -22,7 +22,7 @@
         android:theme="@style/Theme.DeliciousRice"
         tools:targetApi="31">
         <activity
-            android:name=".AddAddressActivity"
+            android:name=".ui.account.Activity.AddAddressActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

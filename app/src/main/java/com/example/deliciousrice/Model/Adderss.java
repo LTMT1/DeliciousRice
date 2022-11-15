@@ -1,6 +1,8 @@
 package com.example.deliciousrice.Model;
 
-public class Adderss {
+import java.io.Serializable;
+
+public class Adderss implements Serializable {
     private int id_address;
     private int id_customer;
     private String address_name;
