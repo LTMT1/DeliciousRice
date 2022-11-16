@@ -29,6 +29,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.account.Activity.EmailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.shop.Activity.InvoicedetailsActivity"
             android:exported="false">
             <meta-data
