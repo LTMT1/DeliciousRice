@@ -106,6 +106,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
         android:hint="Nhà"
+
         style="@style/Text"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -22,6 +22,8 @@ public class AdapterSearchProduct extends  RecyclerView.Adapter<AdapterSearchPro
     private ArrayList<Product> list;
     private Context context;
 
+
+
     public AdapterSearchProduct(ArrayList<Product> list, Context context) {
         this.list = list;
         this.context = context;

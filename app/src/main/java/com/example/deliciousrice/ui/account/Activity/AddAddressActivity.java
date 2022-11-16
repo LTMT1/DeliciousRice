@@ -2,16 +2,20 @@ package com.example.deliciousrice.ui.account.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.deliciousrice.Activity.RegisterActivity;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Adderss;
@@ -34,6 +38,10 @@ public class AddAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address);
         imgBackAddAddress = findViewById(R.id.img_backAdd_Address);
+        imgBackAddAddress.setOnClickListener(v -> {
+            Intent intents = new Intent(AddAddressActivity.this, AddressActivity.class);
+            startActivity(intents);
+        });
 
 
         edAddCtDiachi = findViewById(R.id.ed_add_ctDiachi);
@@ -48,25 +56,28 @@ public class AddAddressActivity extends AppCompatActivity {
     }
 
     private void SaveAdderssNew() {
-        if (!checkhollow()){
+
+        if (!checkhollow()) {
             return;
-        }else {
-            Adderss adderss=new Adderss();
-
-            adderss.setAddress_name(edAddNameAddress.getText().toString().trim());
-            adderss.setAddress_specifically(edAddCtDiachi.getText().toString().trim());
-            ApiProduct apiProduct= ApiService.getService();
-            Call<Adderss> adAdderss = apiProduct.addAdderss(adderss.getId_customer(),adderss.getAddress_name(),adderss.getAddress_specifically());
-            adAdderss.enqueue(new Callback<Adderss>() {
+        } else {
+            Intent intent = getIntent();
+            int idc = intent.getIntExtra("iccome", 0);
+            String pos_name = edAddNameAddress.getText().toString().trim();
+            String pos_address = edAddCtDiachi.getText().toString().trim();
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> adAddegrss = apiProduct.addAdderss(idc, pos_name, pos_address);
+            adAddegrss.enqueue(new Callback<String>() {
                 @Override
-                public void onResponse(Call<Adderss> call, Response<Adderss> response) {
-                    Adderss adderss1=response.body();
-
-
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Intent intent=new Intent(AddAddressActivity.this,AddressActivity.class);
+                    intent.putExtra("Adrress",idc);
+                    startActivity( intent);
+                    Toast.makeText(AddAddressActivity.this, "Thêm địa chỉ thành công", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onFailure(Call<Adderss> call, Throwable t) {
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(AddAddressActivity.this, "Thêm địa chỉ không thành công", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -75,9 +86,10 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
     }
+
     public boolean checkhollow() {
-        if (edAddNameAddress.getText().toString().trim().equals("")|edAddCtDiachi.getText().toString().trim().equals("")) {
-            edAddNameAddress.setError("Hãy Nhập Tên.");
+        if (edAddNameAddress.getText().toString().trim().equals("") | edAddCtDiachi.getText().toString().trim().equals("")) {
+            edAddNameAddress.setError("Hãy nhập Tên.");
             edAddCtDiachi.setError("Hãy nhập địa chỉ của bạn");
 
             return false;

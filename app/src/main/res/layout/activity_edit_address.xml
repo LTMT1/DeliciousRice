@@ -8,7 +8,7 @@
     tools:context=".ui.account.Activity.EditAddressActivity">
 
     <ImageView
-        android:id="@+id/img_back_setting"
+        android:id="@+id/img_backEd_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
