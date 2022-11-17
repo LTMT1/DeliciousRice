@@ -1,9 +1,13 @@
 package com.example.deliciousrice;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.Model.Customer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +19,20 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.deliciousrice.databinding.ActivityMain2Binding;
 
-public class MainActivity2 extends AppCompatActivity {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity2 extends AppCompatActivity  {
 
     private ActivityMain2Binding binding;
+    private String email = "", password = "";
+    private String image, user_name, phone_number, address, birthday;
+    private int id_customer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +50,69 @@ public class MainActivity2 extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         navView.setItemIconTintList(null);
         setStatusBarColor();
+        getDatas();
+        getdataCustomer(email, password);
     }
 
-    private void setStatusBarColor(){
+    private void setStatusBarColor() {
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorTaskBar));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorTaskBar));
     }
 
+    private void getDatas() {
+        SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
+        email = preferences.getString("gmail", "");
+        password = preferences.getString("matkhau", "");
+    }
+
+    public void getdataCustomer(String emails, String pass) {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<List<Customer>> callback = apiProduct.getcustomer(emails, pass);
+        callback.enqueue(new Callback<List<Customer>>() {
+            @Override
+            public void onResponse(Call<List<Customer>> call, Response<List<Customer>> response) {
+                ArrayList<Customer> mangyeuthich = (ArrayList<Customer>) response.body();
+                Customer customer = mangyeuthich.get(0);
+                id_customer = customer.getId_customer();
+                user_name = customer.getUser_name();
+                image = customer.getImage();
+                birthday = customer.getBirthday();
+                phone_number = customer.getPhone_number();
+                address = customer.getAddress();
+            }
+
+            @Override
+            public void onFailure(Call<List<Customer>> call, Throwable t) {
+
+            }
+        });
+    }
+    public void updateMain(){
+        getdataCustomer(email, password);
+    }
+    public int getId_customer() {
+        return id_customer;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }

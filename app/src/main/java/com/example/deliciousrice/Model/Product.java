@@ -1,6 +1,8 @@
 package com.example.deliciousrice.Model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     private int id_product;
     private String product_name;

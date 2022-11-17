@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.Model.ProductHot;
 import com.example.deliciousrice.Model.ProductNew;
 import com.example.deliciousrice.R;
@@ -25,11 +26,11 @@ import java.util.ArrayList;
 
 public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.ProductHotViewHolder> {
 
-    private ArrayList<ProductHot> data;
+    private ArrayList<Product> data;
     private ShopFragment context;
     private ProductHotItemClick productHotItemClick;
 
-    public AdapterProductHot(ArrayList<ProductHot> data, ShopFragment context, ProductHotItemClick productHotItemClick) {
+    public AdapterProductHot(ArrayList<Product> data, ShopFragment context, ProductHotItemClick productHotItemClick) {
         this.data = data;
         this.context = context;
         this.productHotItemClick = productHotItemClick;
@@ -44,10 +45,10 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
 
     @Override
     public void onBindViewHolder(@NonNull AdapterProductHot.ProductHotViewHolder holder, int position) {
-        ProductHot productHot = data.get(position);
-        Glide.with(context).load(productHot.getImage_hot()).centerCrop().into(holder.imgProductHot);
-        holder.tvProductNameHot.setText(productHot.getProduct_name_hot());
-        holder.tvPriceProductHot.setText(productHot.getPrice_hot());
+        Product productHot = data.get(position);
+        Glide.with(context).load(productHot.getImage()).centerCrop().into(holder.imgProductHot);
+        holder.tvProductNameHot.setText(productHot.getProduct_name());
+        holder.tvPriceProductHot.setText(String.valueOf(productHot.getPrice()));
         holder.cstrItemProductHot.setOnClickListener(v -> {
             productHotItemClick.itemProductHotClick(productHot);
         });

@@ -1,7 +1,7 @@
 package com.example.deliciousrice.callback;
 
-import com.example.deliciousrice.Model.ProductHot;
+import com.example.deliciousrice.Model.Product;
 
 public interface ProductHotItemClick {
-    void itemProductHotClick(ProductHot productHot);
+    void itemProductHotClick(Product productHot);
 }

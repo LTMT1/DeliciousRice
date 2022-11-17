@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
-        android:onClick="BackToLogin"
+        android:onClick="Back"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +27,7 @@
         android:layout_height="89dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-
+        android:scaleType="centerCrop"
         android:src="@drawable/imghelloscreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
@@ -43,7 +43,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:hint="@string/nh_p_m_t_kh_u_m_i"
         android:paddingStart="16dp"
         android:inputType="textPassword"
@@ -60,7 +60,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:fontFamily="@font/be_vietnam_medium"
+        style="@style/Text"
         android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
         android:paddingStart="16dp"
         android:inputType="textPassword"
@@ -78,6 +78,7 @@
         android:layout_marginHorizontal="80dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/bg_btn"
+        android:fontFamily="@font/be_vietnam_bold"
         android:gravity="center"
         android:onClick="onCLickChangepass"
         android:text="@string/l_u"
@@ -96,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.8508892" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

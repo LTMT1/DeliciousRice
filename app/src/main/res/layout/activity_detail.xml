@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.shop.Activity.DetailActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -17,7 +18,7 @@
         android:id="@+id/roundedImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/img_sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +46,7 @@
 
 
             <TextView
-                android:id="@+id/textView36"
+                android:id="@+id/tvnamesp"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:layout_height="wrap_content"
@@ -53,31 +54,29 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="48dp"
-                android:fontFamily="@font/be_vietnam_medium"
+                style="@style/Text"
                 android:text="Cơm Gà Nướng Mật Ong "
-                android:textColor="@color/black"
                 android:textSize="25sp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView21"
+                app:layout_constraintEnd_toStartOf="@+id/imgtymsp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/tvtimesp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/be_vietnam_medium"
+                style="@style/Text"
                 android:text="15 - 20 phút "
-                android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView36" />
+                app:layout_constraintTop_toBottomOf="@+id/tvnamesp" />
 
             <TextView
-                android:id="@+id/textView39"
+                android:id="@+id/tvnumbersp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_margin="25dp"
@@ -89,16 +88,16 @@
                 android:text="1"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView23"
-                app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                app:layout_constraintStart_toEndOf="@+id/img_tru"
+                app:layout_constraintTop_toBottomOf="@+id/tvtimesp" />
 
             <ImageView
-                android:id="@+id/imageView21"
+                android:id="@+id/imgtymsp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="40dp"
-                android:src="@drawable/favorite_item_love"
+                android:src="@drawable/ic_baseline_favorite_border_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,31 +107,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:src="@drawable/ic_clock"
-                app:layout_constraintBottom_toBottomOf="@+id/textView35"
+                app:layout_constraintBottom_toBottomOf="@+id/tvtimesp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView35"
+                app:layout_constraintTop_toTopOf="@+id/tvtimesp"
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
-                android:id="@+id/imageView23"
+                android:id="@+id/img_tru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="55dp"
                 android:src="@drawable/ic_tru"
-                app:layout_constraintBottom_toBottomOf="@+id/textView39"
+                app:layout_constraintBottom_toBottomOf="@+id/tvnumbersp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView39"
+                app:layout_constraintTop_toTopOf="@+id/tvnumbersp"
                 app:layout_constraintVertical_bias="0.545" />
 
             <ImageView
-                android:id="@+id/imageView24"
+                android:id="@+id/img_cong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:src="@drawable/ic_cong"
-                app:layout_constraintBottom_toBottomOf="@+id/textView39"
-                app:layout_constraintStart_toEndOf="@+id/textView39"
-                app:layout_constraintTop_toTopOf="@+id/textView39"
+                app:layout_constraintBottom_toBottomOf="@+id/tvnumbersp"
+                app:layout_constraintStart_toEndOf="@+id/tvnumbersp"
+                app:layout_constraintTop_toTopOf="@+id/tvnumbersp"
                 app:layout_constraintVertical_bias="0.545" />
 
             <ImageView
@@ -144,7 +143,7 @@
                 android:src="@drawable/ic_vienduoi"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView39" />
+                app:layout_constraintTop_toBottomOf="@+id/tvnumbersp" />
 
             <ImageView
                 android:id="@+id/imageView26"
@@ -156,7 +155,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.473"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+                app:layout_constraintTop_toBottomOf="@+id/tvdetaisp" />
 
             <ImageView
                 android:id="@+id/imageView20"
@@ -171,19 +170,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
             <TextView
-                android:id="@+id/textView40"
+                android:id="@+id/tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/be_vietnam_medium"
+                style="@style/Text"
                 android:text="Chi Tiết Món Ăn "
-                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView25" />
 
             <ImageView
+                android:id="@+id/tvcuon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="20dp"
@@ -193,7 +192,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView25" />
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/tvdetaisp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
@@ -205,7 +204,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.105"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView40" />
+                app:layout_constraintTop_toBottomOf="@+id/tv" />
 
             <TextView
                 android:id="@+id/textView41"
@@ -408,39 +407,41 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView20" />
 
             <TextView
-                android:id="@+id/textView56"
+                android:id="@+id/tvpricesp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="75dp"
-                android:fontFamily="@font/be_vietnam_medium"
+                style="@style/Text"
                 android:text="45.000 đ"
-                android:textColor="@color/black"
                 android:textSize="23sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView36" />
+                app:layout_constraintTop_toBottomOf="@+id/tvnamesp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
+
     <Button
+        android:id="@+id/btnaddcart"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/bg_btn"
+        android:fontFamily="@font/be_vietnam_bold"
         android:text="Thêm Giỏ Hàng"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
-        app:layout_constraintVertical_bias="1.0"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        app:layout_constraintVertical_bias="1.0" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
         android:layout_width="wrap_content"

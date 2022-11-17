@@ -103,6 +103,10 @@ public class ChangePassActivity extends AppCompatActivity {
             requestQueue.add(stringRequest);
         }
     }
+    public void Back(View view) {
+        Intent intent = new Intent(this, ConfirmOTPActivity.class);
+        startActivity(intent);
+    }
 
     public boolean validatepass() {
         if (edtPassChange.getText().toString().trim().equals("")) {
