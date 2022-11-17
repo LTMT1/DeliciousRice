@@ -1,21 +1,16 @@
 package com.example.deliciousrice.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,23 +20,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.deliciousrice.Adapter.AdapterProduct;
-import com.example.deliciousrice.Api.ApiProduct;
-import com.example.deliciousrice.MainActivity;
 import com.example.deliciousrice.MainActivity2;
-import com.example.deliciousrice.Model.Customer;
-import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
-import com.example.deliciousrice.ui.shop.ShopFragment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HelloScreenActivity extends AppCompatActivity {
     private ImageView imghellosceen;
@@ -101,6 +84,9 @@ public class HelloScreenActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Email or password wrong", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
+                    SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
+                    editor.clear().commit();
                 }
             }
         }, new Response.ErrorListener() {
@@ -108,6 +94,9 @@ public class HelloScreenActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
+                SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
+                editor.clear().commit();
             }
         }) {
             @Override

@@ -18,7 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.deliciousrice.Activity.ChangePassActivity;
+import com.example.deliciousrice.ui.account.Activity.ChangePasActivity;
 import com.example.deliciousrice.Activity.LoginActivity;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.R;
@@ -70,6 +70,7 @@ public class AccountFragment extends Fragment {
 
         clThongtin.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), InformationActivity.class);
+            intent.putExtra("id",main.getId_customer());
             intent.putExtra("name",main.getUser_name());
             intent.putExtra("name1",main.getBirthday());
             intent.putExtra("name2",main.getPhone_number());
@@ -106,7 +107,9 @@ public class AccountFragment extends Fragment {
 
         });
         clDoipass.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getContext(), ChangePassActivity.class);
+            Intent intent = new Intent(getContext(), ChangePasActivity.class);
+            intent.putExtra("name",main.getPasss());
+            intent.putExtra("name1",main.getEmaill());
             startActivity(intent);
         });
     }

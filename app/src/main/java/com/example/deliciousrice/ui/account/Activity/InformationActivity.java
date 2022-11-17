@@ -1,6 +1,5 @@
 package com.example.deliciousrice.ui.account.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,15 +24,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.example.deliciousrice.MainActivity;
-import com.example.deliciousrice.MainActivity2;
-import com.example.deliciousrice.Model.Customer;
-import com.example.deliciousrice.Model.Product;
+import com.example.deliciousrice.Activity.ChangePassActivity;
+import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.R;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -41,6 +36,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class InformationActivity extends AppCompatActivity {
     private CircleImageView profileImage;
@@ -49,7 +46,10 @@ public class InformationActivity extends AppCompatActivity {
     private EditText editTextname;
     private TextView tvsave;
 
+
+    int click = 0;
     private static final int IMAGE_REQUEST = 1;
+    int id;
     private Uri imageUri;
     Bitmap bitmap;
     String encodedImage;
@@ -87,6 +87,29 @@ public class InformationActivity extends AppCompatActivity {
 
                 RequestQueue requestQueue = Volley.newRequestQueue(InformationActivity.this);
                 requestQueue.add(request);
+            }
+        });
+        tvsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (click != 0){
+                    editTextSDT.setEnabled(false);
+                    editTextdate.setEnabled(false);
+                    editTextname.setEnabled(false);
+                    tvsave.setText("Chỉnh sửa");
+                    String name=editTextname.getText().toString().trim();
+                    String sdt =editTextSDT.getText().toString().trim();
+                    String birthday =editTextdate.getText().toString().trim();
+                    updateCustomer(id,name,sdt,birthday);
+                    click++;
+                }else{
+                    editTextSDT.setEnabled(true);
+                    editTextdate.setEnabled(true);
+                    editTextname.setEnabled(true);
+                    tvsave.setText("Lưu");
+                    click--;
+                }
+
             }
         });
     }
@@ -130,6 +153,7 @@ public class InformationActivity extends AppCompatActivity {
     }
     private void setview(){
         Intent intent=getIntent();
+        id=intent.getIntExtra("id",0);
         String name=intent.getStringExtra("name");
         String name1=intent.getStringExtra("name1");
         String name2=intent.getStringExtra("name2");
@@ -139,5 +163,26 @@ public class InformationActivity extends AppCompatActivity {
         editTextdate.setText(name1);
         editTextSDT.setText(name2);
         Glide.with(getApplicationContext()).load(name3).centerCrop().into(profileImage);
+    }
+    private void updateCustomer(int ida, String name,String sdt,String birthday ){
+        final ProgressDialog progressDialog = new ProgressDialog(InformationActivity.this);
+        progressDialog.setMessage("Please Wait..");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.updatecustomer(ida,name,sdt,birthday);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                Toast.makeText(InformationActivity.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(InformationActivity.this, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
     }
 }

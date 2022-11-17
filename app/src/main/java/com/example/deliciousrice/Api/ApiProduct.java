@@ -34,6 +34,10 @@ public interface ApiProduct {
     Call<List<Customer>> getcustomer(@Field("email") String email, @Field("pass") String pass);
 
     @FormUrlEncoded
+    @POST("ChangePassword.php")
+    Call<String> changepass(@Field("email") String email, @Field("passnew") String pass);
+
+    @FormUrlEncoded
     @POST("getFavorite.php")
     Call<List<Favorite>> getListFavorite(@Field("customer") int customer);
 
@@ -53,7 +57,9 @@ public interface ApiProduct {
     @POST("SeachProduct.php")
     Call<List<Product>> SeachProduct(@Field("product_name") String product_name);
 
-
+    @FormUrlEncoded
+    @POST("updatecustomer.php")
+    Call<String> updatecustomer(@Field("customer") int idcustomer,@Field("user_name") String user_name, @Field("phone_number") String phone_number, @Field("birthday") String birthday);
     /*Địa chỉ*/
     @FormUrlEncoded
     @POST("getaddress.php")

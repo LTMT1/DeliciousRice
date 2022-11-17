@@ -73,7 +73,6 @@
         android:layout_marginTop="35dp"
         android:background="@drawable/bg_btn"
         android:fontFamily="@font/be_vietnam_bold"
-        android:onClick="onCLickCheckOtp"
         android:text="Tiếp Tục"
         android:textColor="#EFEEEE"
         android:textSize="20sp"

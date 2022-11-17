@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.R;
 
 import java.util.HashMap;
@@ -58,7 +59,6 @@ public class ChangePassActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String str_email = intent.getStringExtra("email");
         String str_passnew = edtPassChange.getText().toString().trim();
-        String str_repassnew = edtRePassChange.getText().toString().trim();
         String urlchangepass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/ChangePassword.php";
 
         if (!validatepass() || !validaterepass()) {
@@ -95,7 +95,6 @@ public class ChangePassActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("email", str_email);
                     params.put("passnew", str_passnew);
-                    params.put("repassnew", str_repassnew);
                     return params;
                 }
             };
@@ -104,7 +103,7 @@ public class ChangePassActivity extends AppCompatActivity {
         }
     }
     public void Back(View view) {
-        Intent intent = new Intent(this, ConfirmOTPActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
