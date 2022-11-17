@@ -91,6 +91,7 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
                     public void onClick(DialogInterface dialog, int which) {
                         mess = "Hello " + customer.getUser_name() + ", \n\nWe have received your password reset request. \n Your password recovery code below:" + otp + "\n\nDeliciousRice sincerely thank.";
                         buttonSendEmail(customer.getEmail());
+                        Log.e("asss",otp+"");
                         Intent intent = new Intent(v.getContext(), ConfirmOTPActivity.class);
                         intent.putExtra("otp", otp);
                         intent.putExtra("data", customer);

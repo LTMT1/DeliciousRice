@@ -31,7 +31,7 @@ public class MainActivity2 extends AppCompatActivity  {
 
     private ActivityMain2Binding binding;
     private String email = "", password = "";
-    private String image, user_name, phone_number, address, birthday;
+    private String image, user_name, phone_number, address, birthday,emaill,passs;
     private int id_customer;
 
     @Override
@@ -81,6 +81,8 @@ public class MainActivity2 extends AppCompatActivity  {
                 birthday = customer.getBirthday();
                 phone_number = customer.getPhone_number();
                 address = customer.getAddress();
+                emaill=customer.getEmail();
+                passs=customer.getPassword();
             }
 
             @Override
@@ -89,6 +91,14 @@ public class MainActivity2 extends AppCompatActivity  {
             }
         });
     }
+    public String getEmaill() {
+        return emaill;
+    }
+
+    public String getPasss() {
+        return passs;
+    }
+
     public void updateMain(){
         getdataCustomer(email, password);
     }

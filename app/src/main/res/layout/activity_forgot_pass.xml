@@ -36,7 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:queryBackground="@null"
-        android:onClick="onCLickForgotPassword"
         app:queryHint="Nhập email của bạn" />
 
     <androidx.constraintlayout.widget.Guideline

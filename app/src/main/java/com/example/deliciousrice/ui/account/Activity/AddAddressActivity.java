@@ -2,7 +2,6 @@ package com.example.deliciousrice.ui.account.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.deliciousrice.Activity.RegisterActivity;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Adderss;
@@ -38,10 +36,6 @@ public class AddAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address);
         imgBackAddAddress = findViewById(R.id.img_backAdd_Address);
-        imgBackAddAddress.setOnClickListener(v -> {
-            Intent intents = new Intent(AddAddressActivity.this, AddressActivity.class);
-            startActivity(intents);
-        });
 
 
         edAddCtDiachi = findViewById(R.id.ed_add_ctDiachi);
@@ -56,8 +50,7 @@ public class AddAddressActivity extends AppCompatActivity {
     }
 
     private void SaveAdderssNew() {
-
-        if (!checkhollow()) {
+        if (!checkhollow()){
             return;
         } else {
             Intent intent = getIntent();
@@ -86,10 +79,9 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
     }
-
     public boolean checkhollow() {
-        if (edAddNameAddress.getText().toString().trim().equals("") | edAddCtDiachi.getText().toString().trim().equals("")) {
-            edAddNameAddress.setError("Hãy nhập Tên.");
+        if (edAddNameAddress.getText().toString().trim().equals("")|edAddCtDiachi.getText().toString().trim().equals("")) {
+            edAddNameAddress.setError("Hãy Nhập Tên.");
             edAddCtDiachi.setError("Hãy nhập địa chỉ của bạn");
 
             return false;

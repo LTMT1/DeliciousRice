@@ -26,6 +26,7 @@ import com.example.deliciousrice.Adapter.AdapterProductNew;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
+import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.Model.ProductHot;
 import com.example.deliciousrice.Model.ProductNew;
@@ -55,17 +56,14 @@ public class ShopFragment extends Fragment {
     AdapterProductHot adapterProductHot;
     MainActivity2 main;
 
+    public static ArrayList<Cart> Cartlist;
     private FragmentShopBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        View view = inflater.inflate(R.layout.fragment_shop, container, false);
 
-        binding = FragmentShopBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        return root;
+        return view;
     }
 
     @Override
@@ -88,6 +86,11 @@ public class ShopFragment extends Fragment {
         CallApi_Combo();
         CallApi_New();
         CallApi_Hot();
+        if (Cartlist != null) {
+
+        } else {
+            Cartlist = new ArrayList<>();
+        }
     }
 
     @Override

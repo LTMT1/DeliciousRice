@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +24,7 @@ public class ConfirmOTPActivity extends AppCompatActivity {
     private EditText editTextCheckOTP;
     Customer customer;
     TextView resend;
-    private long backPressTime;
-    private Toast mToast;
+    Button button;
     CountDownTimer countDownTimer = null;
 
     @Override
@@ -30,8 +32,25 @@ public class ConfirmOTPActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_otpactivity);
         editTextCheckOTP = findViewById(R.id.editTextCheckOTP);
+        button = findViewById(R.id.btnContinue);
         resend = findViewById(R.id.tvguilaima);
         customer = (Customer) getIntent().getSerializableExtra("data");
+
+        button.setOnClickListener(view -> {
+            onCLickCheckOtp();
+        });
+
+        editTextCheckOTP.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    onCLickCheckOtp();
+                }
+                return false;
+            }
+        });
+
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,13 +85,13 @@ public class ConfirmOTPActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onCLickCheckOtp(View view) {
+    private void onCLickCheckOtp() {
         Intent intents = getIntent();
         int Chechotp = intents.getIntExtra("otp", 0);
+        Log.e("asss",Chechotp+"");
         String str_otp = editTextCheckOTP.getText().toString().trim();
         if (str_otp.equalsIgnoreCase(String.valueOf(Chechotp))) {
             intents.removeExtra("otp");
-//            otp = otp;
             editTextCheckOTP.setText("");
             Intent intent = new Intent(this, ChangePassActivity.class);
             intent.putExtra("email", customer.getEmail());
@@ -83,35 +102,4 @@ public class ConfirmOTPActivity extends AppCompatActivity {
             Toast.makeText(this, "otp code is not correct.", Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public void onCLickSendOtp(View view) {
-//        String apiForgotPass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/ForgotPassword.php";
-//        final ProgressDialog progressDialog = new ProgressDialog(ConfirmOTPActivity.this);
-//        progressDialog.setMessage("Please Wait..");
-//        progressDialog.show();
-//        StringRequest request = new StringRequest(Request.Method.POST, apiForgotPass, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                progressDialog.dismiss();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                progressDialog.dismiss();
-//                Toast.makeText(ConfirmOTPActivity.this, "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("otp", String.valueOf(otp));
-//                params.put("email", customer.getEmail());
-//                return params;
-//
-//            }
-//        };
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmOTPActivity.this);
-//        requestQueue.add(request);
-//    }
 }

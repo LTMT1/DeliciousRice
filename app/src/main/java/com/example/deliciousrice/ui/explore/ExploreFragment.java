@@ -1,5 +1,6 @@
 package com.example.deliciousrice.ui.explore;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.deliciousrice.Activity.ForgotPassActivity;
 import com.example.deliciousrice.Adapter.AdapterSearchProduct;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
@@ -41,44 +43,49 @@ public class ExploreFragment extends Fragment {
         searchViewProduct = view.findViewById(R.id.searchView_Product);
         rclSeachsp = view.findViewById(R.id.rcl_seachsp);
         mangyeuthich=new ArrayList<>();
+        searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Seachsp();
+                return false;
+            }
 
-        searchViewProduct.setOnClickListener(v->{
-            String seach = searchViewProduct.getQuery().toString().trim();
-            if (seach.equals("")) {
-                Toast.makeText(getActivity(), "Hãy nhập gmail của bạn.", Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-                mangyeuthich.clear();
-                Seachsp(seach);
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
-
         return view;
     }
 
-    private void Seachsp(String searchViewProduct){
+    private void Seachsp(){
+        String seach = searchViewProduct.getQuery().toString().trim();
+            mangyeuthich.clear();
+            final ProgressDialog progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Please Wait..");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            ApiProduct apiProduct = ApiService.getService();
+            Call<List<Product>> callback = apiProduct.SeachProduct(seach);
+            callback.enqueue(new Callback<List<Product>>() {
+                @Override
+                public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                    progressDialog.dismiss();
+                    mangyeuthich = (ArrayList<Product>) response.body();
 
-        ApiProduct apiProduct = ApiService.getService();
-        Call<List<Product>> callback = apiProduct.SeachProduct(searchViewProduct);
-        callback.enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                    adapterSearch = new AdapterSearchProduct(mangyeuthich, getContext());
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                    linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    rclSeachsp.setLayoutManager(linearLayoutManager);
+                    rclSeachsp.setAdapter(adapterSearch);
 
-                mangyeuthich = (ArrayList<Product>) response.body();
+                }
 
-                adapterSearch = new AdapterSearchProduct(mangyeuthich, getContext());
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                rclSeachsp.setLayoutManager(linearLayoutManager);
-                rclSeachsp.setAdapter(adapterSearch);
+                @Override
+                public void onFailure(Call<List<Product>> call, Throwable t) {
 
-            }
-
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-
-            }
-        });
-    }
+                }
+            });
+        }
 
 }
