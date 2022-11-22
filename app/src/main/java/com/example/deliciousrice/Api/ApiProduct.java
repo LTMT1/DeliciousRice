@@ -1,6 +1,7 @@
 package com.example.deliciousrice.Api;
 
 import com.example.deliciousrice.Model.Adderss;
+import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
@@ -66,7 +67,7 @@ public interface ApiProduct {
     Call<List<Adderss>> getListAddresss(@Field("id_customer") int id_customer);
 
     @FormUrlEncoded
-    @POST("insentaddress.php")
+    @POST("insertaddress.php")
     Call<String> addAdderss(@Field("id_customer") int id_customer,@Field("address_name")
             String address_name,@Field("address_specifically") String address_specifically);
 
@@ -78,4 +79,10 @@ public interface ApiProduct {
     @POST("upAddress.php")
     Call<String> updateAdderss(@Field("id_address") int id_address,@Field("id_customer") int id_customer,@Field("address_name")
             String address_name,@Field("address_specifically") String address_specifically);
+    @FormUrlEncoded
+    @POST("GetBill.php")
+    Call<List<Bill>> getListbill(@Field("id_customer") int id_customer);
+    @FormUrlEncoded
+    @POST("imgUpload.php")
+    Call<String> imgUpload(@Field("id_customer") int id_customer, @Field("image_tag") String name, @Field("image_data") String image);
 }

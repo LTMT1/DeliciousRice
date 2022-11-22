@@ -79,6 +79,7 @@ public class AccountFragment extends Fragment {
         });
         llayReceipt.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), ReceiptActivity.class);
+            intent.putExtra("id_cus",main.getId_customer());
             startActivity(intent);
 
         });

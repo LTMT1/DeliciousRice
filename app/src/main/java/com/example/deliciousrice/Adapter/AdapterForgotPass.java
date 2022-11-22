@@ -132,7 +132,7 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
 
         try {
             String stringSenderEmail = "deliciousrices@gmail.com";
-            String stringPasswordSenderEmail = "jwlxixccomlfvlvi";
+            String stringPasswordSenderEmail = "HUUphuc672002";
 
             String stringHost = "smtp.gmail.com";
 

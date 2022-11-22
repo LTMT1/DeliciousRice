@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bg_borders_sp"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:background="@drawable/bg_borders_sp">
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/tvbill"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,54 +20,54 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/tvdate"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="24dp"
         android:text="30 th 9 2022"
         android:textSize="16sp"
-        style="@style/Text"
-        app:layout_constraintStart_toEndOf="@+id/textView27"
+        app:layout_constraintStart_toEndOf="@+id/tvbill"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/tvmoney"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="24dp"
         android:text="  Thanh tiền : 180.000đ"
-        style="@style/Text"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/tvbill" />
 
     <TextView
         android:id="@+id/textView35"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="15dp"
         android:text="Đã hủy"
-        style="@style/Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView24"
-        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        app:layout_constraintTop_toBottomOf="@+id/tvmoney"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView36"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="24dp"
         android:text=" 19:56"
         android:textSize="16sp"
-        style="@style/Text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView31"
+        app:layout_constraintStart_toEndOf="@+id/tvdate"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

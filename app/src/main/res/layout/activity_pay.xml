@@ -79,7 +79,7 @@
                 app:layout_constraintVertical_bias="0.55" />
 
             <TextView
-                android:id="@+id/textView46"
+                android:id="@+id/tvselectaddress"
                 style="@style/Text"
                 android:layout_width="150dp"
                 android:layout_height="35dp"
@@ -107,7 +107,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView32" />
 
             <TextView
-                android:id="@+id/textView56"
+                android:id="@+id/tvsetaddress"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView46" />
+                app:layout_constraintTop_toBottomOf="@+id/tvselectaddress" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout5"
@@ -262,7 +262,7 @@
                 android:text="Đơn hàng của bạn"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView56" />
+                app:layout_constraintTop_toBottomOf="@+id/tvsetaddress" />
 
             <TextView
                 android:id="@+id/textView58"
@@ -287,21 +287,6 @@
                 app:layout_constraintStart_toStartOf="@+id/textView58"
                 app:layout_constraintTop_toBottomOf="@+id/textView58" />
 
-            <TextView
-                android:id="@+id/textView60"
-                style="@style/Text"
-                android:layout_width="95dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/bg_btn_repurchase"
-                android:gravity="center"
-                android:text="Thêm món"
-                android:textSize="14sp"
-                android:textColor="#ED5656"
-                app:layout_constraintBottom_toBottomOf="@+id/textView59"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView58"
-                app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
                 android:id="@+id/imageView32"
@@ -322,7 +307,7 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView61"
+                app:layout_constraintTop_toBottomOf="@+id/rclview"
                 app:srcCompat="@drawable/ic_vienduoi" />
 
             <ImageView
@@ -347,39 +332,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
                 app:srcCompat="@drawable/ic_vienduoi" />
 
-            <TextView
-                android:id="@+id/textView61"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rclview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:layout_marginTop="10dp"
-                style="@style/Text"
                 android:text="Cơm gà nướng mật ong "
-                app:layout_constraintEnd_toStartOf="@+id/textView62"
-                app:layout_constraintHorizontal_bias="0.082"
-                app:layout_constraintStart_toEndOf="@+id/textView63"
-                app:layout_constraintTop_toBottomOf="@+id/textView57" />
-
-            <TextView
-                android:id="@+id/textView62"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="25dp"
-                android:text="90.00 đ"
-                style="@style/Text"
-                app:layout_constraintBottom_toBottomOf="@+id/textView61"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/textView63"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="2x"
-                style="@style/Text"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView61"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView57"
+                tools:ignore="MissingConstraints" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName"

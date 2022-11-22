@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.deliciousrice.Adapter.AdapterFavorite;
+import com.example.deliciousrice.Adapter.AdapterHistoryBill;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.R;
 
@@ -21,7 +24,7 @@ import retrofit2.Response;
 
 public class ReceiptActivity extends AppCompatActivity {
     private RecyclerView rclview;
-
+    AdapterHistoryBill adapterHistoryBill;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,23 +33,25 @@ public class ReceiptActivity extends AppCompatActivity {
         getreceipt();
     }
     private void getreceipt(){
-//        ApiProduct apiProduct = ApiService.getService();
-//        Call<List<Favorite>> callback = apiProduct.);
-//        callback.enqueue(new Callback<List<Favorite>>() {
-//            @Override
-//            public void onResponse(Call<List<Favorite>> call, Response<List<Favorite>> response) {
-//                ArrayList<Favorite> mangyeuthich = (ArrayList<Favorite>) response.body();
-//                adapterFavorite = new AdapterFavorite(mangyeuthich, getApplicationContext());
-//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                rclviewfavorite.setLayoutManager(linearLayoutManager);
-//                rclviewfavorite.setAdapter(adapterFavorite);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Favorite>> call, Throwable t) {
-//
-//            }
-//        });
+        Intent intent=getIntent();
+        int idcustm =intent.getIntExtra("id_cus",0);
+        ApiProduct apiProduct = ApiService.getService();
+        Call<List<Bill>> callback = apiProduct.getListbill(idcustm);
+        callback.enqueue(new Callback<List<Bill>>() {
+            @Override
+            public void onResponse(Call<List<Bill>> call, Response<List<Bill>> response) {
+                ArrayList<Bill> bills = (ArrayList<Bill>) response.body();
+                adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ReceiptActivity.this);
+                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                rclview.setLayoutManager(linearLayoutManager);
+                rclview.setAdapter(adapterHistoryBill);
+            }
+
+            @Override
+            public void onFailure(Call<List<Bill>> call, Throwable t) {
+
+            }
+        });
     }
 }
