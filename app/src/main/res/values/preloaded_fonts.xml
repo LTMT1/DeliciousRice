@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
         <item>@font/be_vietnam_bold</item>
+        <item>@font/be_vietnam_extrabold</item>
         <item>@font/be_vietnam_medium</item>
         <item>@font/inknut_antiqua_bold</item>
     </array>
