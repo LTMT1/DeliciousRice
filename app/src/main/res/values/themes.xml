@@ -24,5 +24,9 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/be_vietnam_medium</item>
     </style>
-
+    <style name="Text_btn">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/be_vietnam_extrabold</item>
+    </style>
 </resources>
