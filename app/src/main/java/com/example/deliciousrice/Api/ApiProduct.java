@@ -60,7 +60,8 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("updatecustomer.php")
-    Call<String> updatecustomer(@Field("customer") int idcustomer,@Field("user_name") String user_name, @Field("phone_number") String phone_number, @Field("birthday") String birthday);
+    Call<String> updatecustomer(@Field("customer") int idcustomer, @Field("user_name") String user_name, @Field("phone_number") String phone_number, @Field("birthday") String birthday);
+
     /*Địa chỉ*/
     @FormUrlEncoded
     @POST("getaddress.php")
@@ -68,21 +69,33 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("insertaddress.php")
-    Call<String> addAdderss(@Field("id_customer") int id_customer,@Field("address_name")
-            String address_name,@Field("address_specifically") String address_specifically);
+    Call<String> addAdderss(@Field("id_customer") int id_customer, @Field("address_name")
+            String address_name, @Field("address_specifically") String address_specifically);
 
     @FormUrlEncoded
     @POST("deleteAddress.php")
-    Call<String> deleteAdderss(@Field("id_address") int id_address,@Field("id_customer") int id_customer);
+    Call<String> deleteAdderss(@Field("id_address") int id_address, @Field("id_customer") int id_customer);
 
     @FormUrlEncoded
     @POST("upAddress.php")
-    Call<String> updateAdderss(@Field("id_address") int id_address,@Field("id_customer") int id_customer,@Field("address_name")
-            String address_name,@Field("address_specifically") String address_specifically);
+    Call<String> updateAdderss(@Field("id_address") int id_address, @Field("id_customer") int id_customer, @Field("address_name")
+            String address_name, @Field("address_specifically") String address_specifically);
+
     @FormUrlEncoded
     @POST("GetBill.php")
     Call<List<Bill>> getListbill(@Field("id_customer") int id_customer);
+
     @FormUrlEncoded
     @POST("imgUpload.php")
     Call<String> imgUpload(@Field("id_customer") int id_customer, @Field("image_tag") String name, @Field("image_data") String image);
+
+    @FormUrlEncoded
+    @POST("insertBill.php")
+    Call<String> addbill(@Field("Bill") String bill,@Field("customer") int id_customer, @Field("Date")
+            String Date, @Field("status") String status,@Field("money") int money);
+
+    @FormUrlEncoded
+    @POST("insertDetailBill.php")
+    Call<String> adddetailbill(@Field("Bill") String bill, @Field("idproduct")
+            int idproduct, @Field("amount") int amount, @Field("totalmoney") int totalmoney);
 }

@@ -18,18 +18,18 @@
         app:srcCompat="@drawable/ic_vienduoi" />
 
     <TextView
-        android:id="@+id/textView73"
+        android:id="@+id/tvsl"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="1x"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView80"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvprice"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView80"
+        android:id="@+id/tvname"
         style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -39,21 +39,21 @@
         android:text="Cơm bò suốt tiêu xanh"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView29"
-        app:layout_constraintEnd_toStartOf="@+id/textView81"
+        app:layout_constraintEnd_toStartOf="@+id/tvprice"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView73"
+        app:layout_constraintStart_toEndOf="@+id/tvsl"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView81"
+        android:id="@+id/tvprice"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:text="  35.000 đ"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView80"
+        app:layout_constraintBottom_toBottomOf="@+id/tvname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView80" />
+        app:layout_constraintTop_toTopOf="@+id/tvname" />
 </androidx.constraintlayout.widget.ConstraintLayout>

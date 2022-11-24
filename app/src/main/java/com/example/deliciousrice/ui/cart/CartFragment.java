@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliciousrice.Adapter.AdapterCart;
+import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.shop.Activity.PayActivity;
 import com.example.deliciousrice.ui.shop.ShopFragment;
@@ -22,12 +23,12 @@ import java.text.DecimalFormat;
 
 public class CartFragment extends Fragment {
 
-     static TextView textviewthongbao;
+     public static TextView textviewthongbao;
      static RecyclerView RClViewgiohang;
      static TextView tvtongtien;
      private ConstraintLayout thanhtoan;
-
-     static AdapterCart adapterCart;
+    private MainActivity2 main;
+    public static AdapterCart adapterCart;
     public static int total_money = 0;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class CartFragment extends Fragment {
         RClViewgiohang.setAdapter(adapterCart);
         CheckData();
         UpdateTongTien();
+        main =(MainActivity2) getActivity();
         return view;
     }
 
@@ -70,7 +72,9 @@ public class CartFragment extends Fragment {
         thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), PayActivity.class));
+                Intent intent=new Intent(getContext(), PayActivity.class);
+                intent.putExtra("id_customer",main.getId_customer());
+                startActivity(intent);
             }
         });
     }

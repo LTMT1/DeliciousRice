@@ -1,14 +1,14 @@
 package com.example.deliciousrice.Model;
 
 public class Bill {
-    private int id_bill;
+    private String id_bill;
     private int id_customer;
     private int id_staff;
     private String date;
     private String status;
     private int money;
 
-    public Bill(int id_bill, int id_customer, int id_staff, String date, String status, int money) {
+    public Bill(String id_bill, int id_customer, int id_staff, String date, String status, int money) {
         this.id_bill = id_bill;
         this.id_customer = id_customer;
         this.id_staff = id_staff;
@@ -17,11 +17,11 @@ public class Bill {
         this.money = money;
     }
 
-    public int getId_bill() {
+    public String getId_bill() {
         return id_bill;
     }
 
-    public void setId_bill(int id_bill) {
+    public void setId_bill(String id_bill) {
         this.id_bill = id_bill;
     }
 
