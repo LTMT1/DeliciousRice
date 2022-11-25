@@ -132,9 +132,10 @@
                 android:background="@drawable/bg_borders_sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.473"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView36"
-                app:layout_constraintVertical_bias="0.061">
+                app:layout_constraintVertical_bias="1.0">
 
                 <TextView
                     android:id="@+id/textView64"
@@ -168,12 +169,12 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="5dp"
                     android:text="Giá tiền"
-                    app:layout_constraintEnd_toStartOf="@+id/textView66"
+                    app:layout_constraintEnd_toStartOf="@+id/tvmoney"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView64" />
 
                 <TextView
-                    android:id="@+id/textView66"
+                    android:id="@+id/tvmoney"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -190,12 +191,12 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="5dp"
                     android:text="Phí giao hàng"
-                    app:layout_constraintEnd_toStartOf="@+id/textView68"
+                    app:layout_constraintEnd_toStartOf="@+id/tvgiaohang"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView65" />
 
                 <TextView
-                    android:id="@+id/textView68"
+                    android:id="@+id/tvgiaohang"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -228,30 +229,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textView69"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView71"
-                    style="@style/Text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="Tông thanh toán"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView72"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView33" />
-
-                <TextView
-                    android:id="@+id/textView72"
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="  130.000 đ"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView71"
-                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -331,12 +308,12 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/edtstatus"
                 app:srcCompat="@drawable/ic_vienduoi" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rclview"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Cơm gà nướng mật ong "
@@ -346,7 +323,7 @@
                 tools:ignore="MissingConstraints" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/edtstatus"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
@@ -367,9 +344,9 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="25dp"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+                app:layout_constraintBottom_toBottomOf="@+id/edtstatus"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+                app:layout_constraintTop_toTopOf="@+id/edtstatus"
                 app:srcCompat="@drawable/ic_document" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -404,12 +381,12 @@
             android:text="130.000 đ"
             style="@style/Text"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView87"
+            app:layout_constraintEnd_toStartOf="@+id/btnpay"
             app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
-            android:id="@+id/textView87"
+            android:id="@+id/btnpay"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginRight="20dp"

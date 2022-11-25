@@ -82,7 +82,7 @@
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_login_fa_go.xml" value="0.16" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_main.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_main2.xml" value="0.11145833333333334" />
-        <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_pay.xml" value="0.2" />
+        <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_pay.xml" value="0.264" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_policy.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_receipt.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/activity_register.xml" value="0.264" />
@@ -94,6 +94,8 @@
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_cart_products.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_favorite.xml" value="0.4" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_hot_products.xml" value="0.21240942028985507" />
+        <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_product_buy.xml" value="0.264" />
+        <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_productbill.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_receipt.xml" value="0.264" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_search_products.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/thinh/OneDrive/Documents/GitHub/DeliciousRice/app/src/main/res/layout/item_tai_khoan.xml" value="0.1634963768115942" />
