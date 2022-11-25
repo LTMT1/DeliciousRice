@@ -96,6 +96,6 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("insertDetailBill.php")
-    Call<String> adddetailbill(@Field("Bill") String bill, @Field("idproduct")
+    Call<String> adddetailbill(@Field("bill") String bill, @Field("idproduct")
             int idproduct, @Field("amount") int amount, @Field("totalmoney") int totalmoney);
 }

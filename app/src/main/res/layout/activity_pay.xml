@@ -229,30 +229,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textView69"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView71"
-                    style="@style/Text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="Tông thanh toán"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvtotalmoney"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView33" />
-
-                <TextView
-                    android:id="@+id/tvtotalmoney"
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="  130.000 đ"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView71"
-                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView

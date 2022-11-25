@@ -26,7 +26,10 @@ import com.example.deliciousrice.ui.cart.CartFragment;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 
@@ -43,27 +46,29 @@ public class PayActivity extends AppCompatActivity {
     private RecyclerView rclview;
     private EditText edtstatus;
     AdapterProductBill adapterProductBill;
-    String id_bill,date_create,edstatus;
+    String id_bill;
     int totalmoney;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
         Anhxa();
         ListProductBuy();
+        Pay();
     }
 
     private void Anhxa() {
         tvselectaddress = findViewById(R.id.tvselectaddress);
         tvmoney = findViewById(R.id.tvmoney);
         tvgiaohang = findViewById(R.id.tvgiaohang);
-        tvtotalmoney = findViewById(R.id.tvtotalmoney);
+        tvtotalmoney = findViewById(R.id.textView166666);
         rclview = findViewById(R.id.rclview);
-        btnpay=findViewById(R.id.btnpay);
-        edtstatus=findViewById(R.id.edtstatus);
+        btnpay = findViewById(R.id.btnpay);
+        edtstatus = findViewById(R.id.edtstatus);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        tvmoney.setText(decimalFormat.format(CartFragment.total_money) +"đ");
-        totalmoney=CartFragment.total_money;
+        tvmoney.setText(decimalFormat.format(CartFragment.total_money) + "đ");
+        totalmoney = CartFragment.total_money;
         tvtotalmoney.setText(decimalFormat.format(totalmoney) + "đ");
     }
 
@@ -79,17 +84,23 @@ public class PayActivity extends AppCompatActivity {
         rclview.setLayoutManager(linearLayoutManager);
         rclview.setAdapter(adapterProductBill);
     }
-    private void Pay(){
-        Intent intent=getIntent();
-        int id_customer=intent.getIntExtra("id",0);
-        edstatus=edtstatus.getText().toString().trim();
+
+    private void Pay() {
+        Intent intent = getIntent();
+        int id_customer = intent.getIntExtra("id_customer", 0);
         btnpay.setOnClickListener(view -> {
             Random random = new Random();
             int number = random.nextInt(10000000);
-            id_bill ="DCR"+id_customer+"-"+ number;
+
+            id_bill = "DCR" + id_customer + "-" + number;
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            String currentDateandTime = sdf.format(new Date());
+
+            String edstatus = edtstatus.getText().toString().trim();
 
             if (ShopFragment.Cartlist.size() > 0) {
-                addBill(id_bill,id_customer,date_create,edstatus,totalmoney);
+                addBill(id_bill, id_customer, currentDateandTime, edstatus, totalmoney);
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -122,14 +133,16 @@ public class PayActivity extends AppCompatActivity {
 
     private void addBill(String bill, int idcus, String date, String status, int money) {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.addbill(bill,idcus,date,status,money);
+        Call<String> callback = apiProduct.addbill(bill, idcus, date, status, money);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                Log.e("thanh cong", response.body() + "");
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                Log.e("that bai ", "");
             }
         });
     }
@@ -137,14 +150,16 @@ public class PayActivity extends AppCompatActivity {
     private void addDetailBill(int i) {
         Cart cart = ShopFragment.Cartlist.get(i);
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.adddetailbill(id_bill,cart.getId_product(),cart.getAmount(),cart.getPrice() );
+        Call<String> callback = apiProduct.adddetailbill(id_bill, cart.getId_product(), cart.getAmount(), cart.getPrice());
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                Log.e("thanh cong cc", response.body() + "");
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                Log.e("that bai cc", "");
             }
         });
     }
