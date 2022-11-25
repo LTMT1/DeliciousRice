@@ -5,8 +5,6 @@ import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
-import com.example.deliciousrice.Model.ProductHot;
-import com.example.deliciousrice.Model.ProductNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +80,12 @@ public interface ApiProduct {
     @FormUrlEncoded
     @POST("GetBill.php")
     Call<List<Bill>> getListbill(@Field("id_customer") int id_customer);
+
     @FormUrlEncoded
     @POST("imgUpload.php")
     Call<String> imgUpload(@Field("id_customer") int id_customer, @Field("image_tag") String name, @Field("image_data") String image);
+
+    @FormUrlEncoded
+    @POST("LoginRestApi.php")
+    Call<String> login(@Field("email") String email, @Field("password") String password);
 }
