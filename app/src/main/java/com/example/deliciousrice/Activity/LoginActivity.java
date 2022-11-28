@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +17,7 @@ import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.ResponseApi;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.dialog.LoadingDialog;
-import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtEmailDangNhap;
     private EditText edtPassWordDangNhap;
-    private ProgressBar prgLoadingLogin;
     private TextView tvResultLogin;
     private LoadingDialog loadingDialog;
 
@@ -37,13 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         BarColor.setStatusBarColor(this);
         edtEmailDangNhap = findViewById(R.id.edtEmailDangNhap);
-        edtPassWordDangNhap = findViewById(R.id.edtPassWordDangNhap);
-        prgLoadingLogin = findViewById(R.id.prgLoadingLogin);
+        edtPassWordDangNhap = findViewById(R.id.editPasswordDangNhap);
         TextView tvLogin = findViewById(R.id.tvDangNhap);
-        tvResultLogin = findViewById(R.id.tvResultLogin);
 
-
-        prgLoadingLogin.setIndeterminateDrawable(new ThreeBounce());
         loadingDialog = new LoadingDialog(this);
 
         tvLogin.setOnClickListener(v -> {
@@ -55,10 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void login() {
 
-        if (validateEmail() && validateEmail()) {
+        if (validateEmail() && validatepass()) {
             loadingDialog = new LoadingDialog(this);
             loadingDialog.startLoadingDialog("Xin vui lòng chờ...");
-            tvResultLogin.setText("Loading ...");
 
 
             String strname = edtEmailDangNhap.getText().toString().trim();
@@ -74,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(getApplicationContext(), "Tài khoản hoặc mật khẩu bị sai!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Tài khoản hoặc mật khẩu bị sai!", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -102,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public boolean validateEmail() {
+    public boolean validatepass() {
         if (edtPassWordDangNhap.getText().toString().equals("")) {
             edtPassWordDangNhap.setError("Nhập mật khẩu của bạn");
             return false;
