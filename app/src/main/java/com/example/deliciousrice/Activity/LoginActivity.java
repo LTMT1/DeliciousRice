@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtEmailDangNhap;
     private EditText edtPassWordDangNhap;
-    private TextView tvResultLogin;
     private LoadingDialog loadingDialog;
 
     @Override
@@ -39,12 +38,10 @@ public class LoginActivity extends AppCompatActivity {
 
         loadingDialog = new LoadingDialog(this);
 
-        tvLogin.setOnClickListener(v -> {
-            login();
-        });
+        tvLogin.setOnClickListener(v -> login());
         getPreferences();
     }
-    
+
     @SuppressLint("SetTextI18n")
     private void login() {
 

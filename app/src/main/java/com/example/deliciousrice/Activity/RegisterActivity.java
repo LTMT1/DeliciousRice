@@ -1,6 +1,5 @@
 package com.example.deliciousrice.Activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,20 +10,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.deliciousrice.Api.ApiNetWorking;
 import com.example.deliciousrice.Model.ResponseApi;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.dialog.LoadingDialog;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +25,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edtPassWordDangKy;
     private EditText edtRePassWordDangKy;
     private LoadingDialog loadingDialog;
-    private TextView tvDangKy;
 
 
     @Override
@@ -48,13 +36,11 @@ public class RegisterActivity extends AppCompatActivity {
         edtEmailDangNhap = findViewById(R.id.edtEmailDangNhap);
         edtPassWordDangKy = findViewById(R.id.editPasswordDangKy);
         edtRePassWordDangKy = findViewById(R.id.editRePasswordDangky);
-        tvDangKy = findViewById(R.id.tvDangKy);
+        TextView tvDangKy = findViewById(R.id.tvDangKy);
 
         loadingDialog = new LoadingDialog(this);
 
-        tvDangKy.setOnClickListener(v -> {
-            register();
-        });
+        tvDangKy.setOnClickListener(v -> register());
     }
 
     public void BackToLogin(View view) {
@@ -62,58 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickRegister(View view) {
-
-        if (!validateName() | !validateRePass() | !validatePass() | !validateEmail()) {
-            return;
-        } else {
-            final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
-            progressDialog.setMessage("Please Wait..");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-
-            String str_name = edtHoTen.getText().toString().trim();
-            String str_email = edtEmailDangNhap.getText().toString().trim();
-            String str_password = edtPassWordDangKy.getText().toString().trim();
-            StringRequest request = new StringRequest(Request.Method.POST, "https://appsellrice.000webhostapp.com/Deliciousrice/API/Register.php", new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    progressDialog.dismiss();
-                    if (response.equalsIgnoreCase("Đăng kí Thành Công")) {
-                        edtHoTen.setText("");
-                        edtEmailDangNhap.setText("");
-                        edtPassWordDangKy.setText("");
-                        edtRePassWordDangKy.setText("");
-                        Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getApplication(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("username", str_name);
-                    params.put("email", str_email);
-                    params.put("password", str_password);
-                    return params;
-
-                }
-            };
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
-            requestQueue.add(request);
-        }
-
-    }
-
-    private void register(){
+    private void register() {
         if (validateName() && validateEmail() && validatePass() && validateRePass()) {
             loadingDialog = new LoadingDialog(this);
             loadingDialog.startLoadingDialog("Xin vui lòng chờ...");
