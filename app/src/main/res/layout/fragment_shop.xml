@@ -100,6 +100,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/prgLoadingPrCombo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:SpinKit_Color="@color/colorTaskBar"
+                app:layout_constraintTop_toTopOf="@id/rcyProductCombo"
+                app:layout_constraintBottom_toBottomOf="@id/rcyProductCombo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
 
             <TextView
                 android:id="@+id/textView8"
@@ -136,6 +146,16 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rcyProductCombo" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/prgLoadingPrNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:SpinKit_Color="@color/colorTaskBar"
+                app:layout_constraintTop_toTopOf="@id/rcyProductNew"
+                app:layout_constraintBottom_toBottomOf="@id/rcyProductNew"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
 
@@ -175,6 +195,16 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rcyProductNew" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/prgLoadingPrHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:SpinKit_Color="@color/colorTaskBar"
+                app:layout_constraintTop_toTopOf="@id/rcyProductHot"
+                app:layout_constraintBottom_toBottomOf="@id/rcyProductHot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
 
