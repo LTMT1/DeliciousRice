@@ -5,6 +5,7 @@ import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
+import com.example.deliciousrice.Model.ResponseApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,10 +88,12 @@ public interface ApiProduct {
     @POST("imgUpload.php")
     Call<String> imgUpload(@Field("id_customer") int id_customer, @Field("image_tag") String name, @Field("image_data") String image);
 
+    //Login with rest api
     @FormUrlEncoded
-
     @POST("LoginRestApi.php")
-    Call<String> login(@Field("email") String email, @Field("password") String password);
+    Call<ResponseApi> login(@Field("email") String email, @Field("password") String password);
+
+    //Register with rest api
 
     @POST("insertBill.php")
     Call<String> addbill(@Field("Bill") String bill,@Field("customer") int id_customer, @Field("Date")

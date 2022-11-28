@@ -1,25 +1,27 @@
 package com.example.deliciousrice.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.deliciousrice.Api.ApiNetWorking;
 import com.example.deliciousrice.MainActivity2;
+import com.example.deliciousrice.Model.ResponseApi;
 import com.example.deliciousrice.R;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtEmailDangNhap;
     private EditText edtPassWordDangNhap;
+    private ProgressBar prgLoadingLogin;
+    private TextView tvResultLogin;
+    private boolean isLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,15 @@ public class LoginActivity extends AppCompatActivity {
         BarColor.setStatusBarColor(this);
         edtEmailDangNhap = findViewById(R.id.edtEmailDangNhap);
         edtPassWordDangNhap = findViewById(R.id.edtPassWordDangNhap);
+        prgLoadingLogin = findViewById(R.id.prgLoadingLogin);
+        prgLoadingLogin.setIndeterminateDrawable(new ThreeBounce());
+        TextView tvLogin = findViewById(R.id.tvDangNhap);
+        tvResultLogin = findViewById(R.id.tvResultLogin);
+        tvLogin.setOnClickListener(v -> {
+            if (!isLoading){
+                login();
+            }
+        });
         getPreferences();
     }
 
@@ -54,28 +68,22 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.show();
             String strname = edtEmailDangNhap.getText().toString().trim();
             String strpass = edtPassWordDangNhap.getText().toString().trim();
-            StringRequest request = new StringRequest(Request.Method.POST, apilogin, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    progressDialog.dismiss();
-                    if (response.equalsIgnoreCase("Đăng Nhập Thành Công")) {
-                        remember(strname, strpass);
-                        Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Email or password wrong", Toast.LENGTH_SHORT).show();
-                    }
+            StringRequest request = new StringRequest(Request.Method.POST, apilogin, response -> {
+                progressDialog.dismiss();
+                if (response.equalsIgnoreCase("Đăng Nhập Thành Công")) {
+                    remember(strname, strpass);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Email or password wrong", Toast.LENGTH_SHORT).show();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
-                }
+            }, error -> {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
             }) {
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
                     params.put("email", strname);
                     params.put("password", strpass);
                     return params;
@@ -85,6 +93,43 @@ public class LoginActivity extends AppCompatActivity {
 
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             requestQueue.add(request);
+        }
+    }
+
+    private void login() {
+
+        if (validateemail() && validatepass()) {
+
+            prgLoadingLogin.setVisibility(View.VISIBLE);
+            tvResultLogin.setText("Loading ...");
+            isLoading = true;
+
+
+            String strname = edtEmailDangNhap.getText().toString().trim();
+            String strpass = edtPassWordDangNhap.getText().toString().trim();
+
+            ApiNetWorking.apiNetWorking.login(strname, strpass).enqueue(new Callback<ResponseApi>() {
+                @Override
+                public void onResponse(@NonNull Call<ResponseApi> call, @NonNull retrofit2.Response<ResponseApi> response) {
+                    prgLoadingLogin.setVisibility(View.GONE);
+                    if (response.body() != null) {
+                        if (response.body().isStatus()) {
+                            remember(strname, strpass);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Tài khoản hoặc mật khẩu bị sai!", Toast.LENGTH_SHORT).show();
+                        }
+                        isLoading = false;
+                    }
+
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ResponseApi> call, @NonNull Throwable t) {
+                    isLoading = false;
+                }
+            });
         }
     }
 
@@ -106,7 +151,11 @@ public class LoginActivity extends AppCompatActivity {
         if (edtPassWordDangNhap.getText().toString().equals("")) {
             edtPassWordDangNhap.setError("Nhập mật khẩu của bạn");
             return false;
-        } else {
+        }else if(edtPassWordDangNhap.getText().toString().length() < 6){
+            edtPassWordDangNhap.setError("Mật khẩu của bạn phải lớn hơn 6");
+            return false;
+        }
+        else {
             edtPassWordDangNhap.setError(null);
             return true;
         }
@@ -121,27 +170,33 @@ public class LoginActivity extends AppCompatActivity {
     private void remember(String strname, String strpass) {
         SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("gmail", strname);
-            editor.putString("matkhau", strpass);
-        editor.commit();
+        editor.putString("gmail", strname);
+        editor.putString("matkhau", strpass);
+        editor.apply();
     }
 
     //register
     public void onClickRegisteraccount(View view) {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(intent);
+        if (!isLoading) {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
     }
 
     //forgotpassword
     public void onClickForgotPassword(View view) {
-        Intent intent = new Intent(LoginActivity.this, ForgotPassActivity.class);
-        startActivity(intent);
+        if (!isLoading) {
+            Intent intent = new Intent(LoginActivity.this, ForgotPassActivity.class);
+            startActivity(intent);
+        }
     }
 
     //backsceen
     public void onClickBackSceen(View view) {
-        Intent intent = new Intent(LoginActivity.this, LoginFaGoActivity.class);
-        startActivity(intent);
+        if (!isLoading) {
+            Intent intent = new Intent(LoginActivity.this, LoginFaGoActivity.class);
+            startActivity(intent);
+        }
     }
 
 }
