@@ -62,6 +62,7 @@
         android:drawableStart="@drawable/ic_mess"
         style="@style/Text"
         android:drawablePadding="12dp"
+        android:paddingEnd="10dp"
         android:hint="@string/h_v_t_n"
         android:paddingStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +78,7 @@
         android:background="@drawable/bg_edit_text"
         android:drawableStart="@drawable/ic_mess"
         android:drawablePadding="12dp"
+        android:paddingEnd="10dp"
         android:hint="@string/email"
         style="@style/Text"
         android:paddingStart="16dp"
@@ -84,42 +86,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edtHoTen" />
 
-    <EditText
+<!--    <EditText-->
+<!--        android:id="@+id/edtPassWordDangKy"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginHorizontal="30dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/bg_edit_text"-->
+<!--        android:drawableStart="@drawable/ic_lock"-->
+<!--        android:drawablePadding="12dp"-->
+<!--        android:hint="@string/nh_p_m_t_kh_u"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:paddingStart="16dp"-->
+<!--        style="@style/Text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.516"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/edtEmailDangNhap" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edtPassWordDangKy"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        app:passwordToggleEnabled="true"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/bg_edit_text"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        android:hint="@string/nh_p_m_t_kh_u"
-        android:inputType="textPassword"
-        android:paddingStart="16dp"
-        style="@style/Text"
+        android:layout_marginTop="25dp"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtEmailDangNhap" />
+        app:layout_constraintTop_toBottomOf="@id/edtEmailDangNhap">
 
-    <EditText
+        <EditText
+            android:id="@+id/editPasswordDangKy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edit_text"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            style="@style/Text"
+            android:hint="@string/nh_p_password"
+            android:paddingEnd="40dp"
+            android:paddingStart="16dp"
+            app:passwordToggleEnabled="true"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <EditText-->
+<!--        android:id="@+id/edtRePassWordDangKy"-->
+<!--        style="@style/Text"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginHorizontal="30dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/bg_edit_text"-->
+<!--        android:drawableStart="@drawable/ic_lock"-->
+<!--        android:drawablePadding="12dp"-->
+<!--        android:hint="@string/nh_p_l_i_m_t_kh_u"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:paddingStart="16dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline5"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/edtPassWordDangKy"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edtRePassWordDangKy"
-        style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        app:passwordToggleEnabled="true"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/bg_edit_text"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        android:hint="@string/nh_p_l_i_m_t_kh_u"
-        android:inputType="textPassword"
-        android:paddingStart="16dp"
+        android:layout_marginTop="25dp"
+        app:hintEnabled="false"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPassWordDangKy"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <EditText
+            android:id="@+id/editRePasswordDangky"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edit_text"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            style="@style/Text"
+            android:hint="@string/nh_p_password"
+            android:paddingEnd="40dp"
+            android:paddingStart="16dp"
+            app:passwordToggleEnabled="true"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/tvDangKy"

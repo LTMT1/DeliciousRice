@@ -17,7 +17,6 @@ import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.ResponseApi;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.dialog.LoadingDialog;
-import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.body() != null) {
                         if (response.body().isStatus()) {
                             remember(strname, strpass);
+                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                             startActivity(intent);
                         } else {

@@ -21,4 +21,8 @@ public interface ApiNetWorking {
     @POST("LoginRestApi.php")
     Call<ResponseApi> login(@Field("email") String email, @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("RegisterRestApi.php")
+    Call<ResponseApi> register(@Field("username") String username, @Field("email") String email, @Field("password") String password);
+
 }
