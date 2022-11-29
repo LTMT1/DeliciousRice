@@ -5,6 +5,7 @@ import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
+import com.example.deliciousrice.Model.ResponseApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +44,6 @@ public interface ApiProduct {
     @FormUrlEncoded
     @POST("insertFavorite.php")
     Call<String> insertfavorite(@Field("customer") int idcustomer, @Field("product") int idproduct);
-
-    @FormUrlEncoded
-    @POST("Register.php")
-    Call<String> registerfree(@Field("username") String username, @Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("RegisterFacebook.php")
@@ -100,8 +97,12 @@ public interface ApiProduct {
     Call<String> imgUpload(@Field("id_customer") int id_customer, @Field("image_tag") String name, @Field("image_data") String image);
 
     @FormUrlEncoded
-    @POST("Login.php")
-    Call<String> login(@Field("email") String email, @Field("password") String password);
+    @POST("LoginRestApi.php")
+    Call<ResponseApi> login(@Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("RegisterRestApi.php")
+    Call<ResponseApi> register(@Field("username") String username, @Field("email") String email, @Field("password") String password);
 
     @POST("insertBill.php")
     Call<String> addbill(@Field("Bill") String bill, @Field("customer") int id_customer, @Field("Date")
