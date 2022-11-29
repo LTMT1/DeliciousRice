@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "345717096154",
+    "project_id": "deliciousrice-e265c",
+    "storage_bucket": "deliciousrice-e265c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345717096154:android:68c87cb1fcedfa774a2fe3",
+        "android_client_info": {
+          "package_name": "com.example.deliciousrice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345717096154-k5fclf8okuf7n9kk6a7d6a26peeclf4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXzuw3D_l4GxmE5bo1xP87LO3wrR_NnO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345717096154-k5fclf8okuf7n9kk6a7d6a26peeclf4c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
