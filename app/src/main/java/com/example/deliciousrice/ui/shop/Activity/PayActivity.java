@@ -94,7 +94,7 @@ public class PayActivity extends AppCompatActivity {
 
             id_bill = "DCR" + id_customer + "-" + number;
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String currentDateandTime = sdf.format(new Date());
 
             String edstatus = edtstatus.getText().toString().trim();

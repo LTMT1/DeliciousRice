@@ -45,6 +45,18 @@ public interface ApiProduct {
     Call<String> insertfavorite(@Field("customer") int idcustomer, @Field("product") int idproduct);
 
     @FormUrlEncoded
+    @POST("Register.php")
+    Call<String> registerfree(@Field("username") String username, @Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("RegisterFacebook.php")
+    Call<String> registerfacebook(@Field("id") String idfacebook, @Field("image") String image, @Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("RegisterGoogle.php")
+    Call<String> registergoogle(@Field("id") String idgoogle, @Field("username") String username,@Field("image") String image,@Field("email") String email);
+
+    @FormUrlEncoded
     @POST("DeleteFavorite.php")
     Call<Favorite> deletefavorite(@Field("customer") int idcustomer, @Field("product") int idproduct);
 
@@ -88,13 +100,12 @@ public interface ApiProduct {
     Call<String> imgUpload(@Field("id_customer") int id_customer, @Field("image_tag") String name, @Field("image_data") String image);
 
     @FormUrlEncoded
-
-    @POST("LoginRestApi.php")
+    @POST("Login.php")
     Call<String> login(@Field("email") String email, @Field("password") String password);
 
     @POST("insertBill.php")
-    Call<String> addbill(@Field("Bill") String bill,@Field("customer") int id_customer, @Field("Date")
-            String Date, @Field("status") String status,@Field("money") int money);
+    Call<String> addbill(@Field("Bill") String bill, @Field("customer") int id_customer, @Field("Date")
+            String Date, @Field("status") String status, @Field("money") int money);
 
     @FormUrlEncoded
     @POST("insertDetailBill.php")

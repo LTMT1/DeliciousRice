@@ -74,7 +74,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     public void onCLickForgotPassword() {
         CustomerArrayList.clear();
         String seach = searchViewcustomer.getQuery().toString().trim();
-            String apiforgotpass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/FindAccount.php";
+            String apiforgotpass = "http://chucdong.com/Deliciousrice/API/FindAccount.php";
             final ProgressDialog progressDialog = new ProgressDialog(ForgotPassActivity.this);
             progressDialog.setMessage("Please Wait..");
             progressDialog.setCancelable(false);

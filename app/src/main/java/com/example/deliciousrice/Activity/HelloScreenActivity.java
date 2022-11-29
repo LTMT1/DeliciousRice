@@ -13,18 +13,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.R;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class HelloScreenActivity extends AppCompatActivity {
     private ImageView imghellosceen;
@@ -70,46 +68,27 @@ public class HelloScreenActivity extends AppCompatActivity {
     }
 
     private void login() {
-        String apilogin = "https://appsellrice.000webhostapp.com/Deliciousrice/API/Login.php";
-        final ProgressDialog progressDialog = new ProgressDialog(HelloScreenActivity.this);
-        progressDialog.setMessage("Please Wait..");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, apilogin, new com.android.volley.Response.Listener<String>() {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.login(email, password);
+        callback.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
-                if (response.equalsIgnoreCase("Đăng Nhập Thành Công")) {
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                if (response.body().equals("true")) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Email or password wrong", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
                     SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
                     editor.clear().commit();
                 }
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<String> call, Throwable t) {
                 startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
                 SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
                 editor.clear().commit();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", password);
-                return params;
-
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(request);
+        });
     }
     }

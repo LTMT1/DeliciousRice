@@ -23,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.R;
 import com.facebook.AccessToken;
@@ -51,6 +53,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class LoginFaGoActivity extends AppCompatActivity {
     private CardView cvLoginGoogle;
@@ -153,38 +158,23 @@ public class LoginFaGoActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, "https://appsellrice.000webhostapp.com/Deliciousrice/API/RegisterGoogle.php", new Response.Listener<String>() {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.registergoogle(idg,nameg ,String.valueOf(picture),Emailg);
+        callback.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(String response) {
-                if (response.equalsIgnoreCase("Đăng kí Thành Công")) {
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                progressDialog.dismiss();
+                if (response.body().equalsIgnoreCase("Success")) {
                     startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
-                    progressDialog.dismiss();
-                    Toast.makeText(LoginFaGoActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplication(), "Trước đây tài khoản gmail này đã đăng kí rồi, vui lòng nhập gmail khác.", Toast.LENGTH_SHORT).show();
                 }
             }
-        }, new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onFailure(Call<String> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplication(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Lỗi kết nối tới sever!", Toast.LENGTH_SHORT).show();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("id", idg);
-                params.put("email", Emailg);
-                params.put("image",String.valueOf(picture));
-                params.put("username", nameg);
-                return params;
-
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
-        requestQueue.add(request);
+        });
     }
 
     @Override
@@ -245,8 +235,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
                     firstname = jsonObject.getString("first_name");
                     id = jsonObject.getInt("id");
                     picture = jsonObject.getJSONObject("picture").getJSONObject("data").getString("url");
-                    Log.e("", "" + name + firstname + picture + id);
-                    InsertAccface(id, picture, name);
+                    InsertAccface(String.valueOf(id), picture, name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -266,36 +255,21 @@ public class LoginFaGoActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    private void InsertAccface(int idf, String picturef, String namef) {
-        StringRequest request = new StringRequest(Request.Method.POST, "https://appsellrice.000webhostapp.com/Deliciousrice/API/RegisterFacebook.php", new Response.Listener<String>() {
+    private void InsertAccface(String idf, String picturef, String namef) {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.registerfacebook(idf, picturef,namef);
+        callback.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(String response) {
-                if (response.equalsIgnoreCase("Đăng kí Thành Công")) {
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                if (response.body().equalsIgnoreCase("Success")) {
                     startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
-                    Toast.makeText(LoginFaGoActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplication(), "", Toast.LENGTH_SHORT).show();
                 }
-            }
-        }, new Response.ErrorListener() {
+        }
 
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplication(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<String> call, Throwable t) {
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("image", picturef);
-                params.put("id", String.valueOf(idf));
-                params.put("username", namef);
-                return params;
-
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
-        requestQueue.add(request);
+        });
     }
 
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,11 +17,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.ui.account.Activity.ChangePasActivity;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class ChangePassActivity extends AppCompatActivity {
     private EditText edtPassChange;
@@ -59,8 +66,6 @@ public class ChangePassActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String str_email = intent.getStringExtra("email");
         String str_passnew = edtPassChange.getText().toString().trim();
-        String urlchangepass = "https://appsellrice.000webhostapp.com/Deliciousrice/API/ChangePassword.php";
-
         if (!validatepass() || !validaterepass()) {
             return;
         } else {
@@ -68,38 +73,33 @@ public class ChangePassActivity extends AppCompatActivity {
             progressDialog.setMessage("Please Wait..");
             progressDialog.setCancelable(false);
             progressDialog.show();
-            RequestQueue requestQueue = Volley.newRequestQueue(ChangePassActivity.this);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlchangepass, new Response.Listener<String>() {
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> callback = apiProduct.changepass(str_email, str_passnew);
+            callback.enqueue(new Callback<String>() {
                 @Override
-                public void onResponse(String response) {
+                public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                     progressDialog.dismiss();
-                    if (response.equalsIgnoreCase("Thay đổi mật khẩu thành công")) {
-                        Toast.makeText(ChangePassActivity.this, response, Toast.LENGTH_SHORT).show();
+                    if(response.body().equals("success")) {
+                        SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("matkhau", str_passnew);
+                        editor.commit();
                         edtPassChange.setText("");
                         edtRePassChange.setText("");
                         Intent intent1 = new Intent(ChangePassActivity.this, LoginActivity.class);
                         startActivity(intent1);
-                    } else {
-                        Toast.makeText(ChangePassActivity.this, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePassActivity.this, "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        Toast.makeText(ChangePassActivity.this, "Thay đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Toast.makeText(ChangePassActivity.this, "Xảy ra lỗi", Toast.LENGTH_SHORT).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("email", str_email);
-                    params.put("passnew", str_passnew);
-                    return params;
-                }
-            };
 
-            requestQueue.add(stringRequest);
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(ChangePassActivity.this, "Lỗi kết nối tới sever!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
     public void Back(View view) {
