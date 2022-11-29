@@ -1,15 +1,20 @@
 package com.example.deliciousrice.ui.shop;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,26 +29,37 @@ import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Product;
+import com.example.deliciousrice.Model.ProductHot;
+import com.example.deliciousrice.Model.ProductNew;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.databinding.FragmentShopBinding;
 import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
-import com.github.ybq.android.spinkit.style.Wave;
+import com.example.deliciousrice.ui.shop.Activity.ViewAllCboActivity;
+import com.example.deliciousrice.ui.shop.Activity.ViewAllHotActivity;
+import com.example.deliciousrice.ui.shop.Activity.ViewAllNewActivity;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShopFragment extends Fragment {
     private ImageSlider imgSilde;
 
     RecyclerView recyclerView,recyclerViewNew, recyclerViewHot;
+    TextView tvViewAllCbo,tvViewAllNew,tvViewAllHot;
     AdapterProduct adapterProduct;
     AdapterProductNew adapterProductNew;
     AdapterProductHot adapterProductHot;
     MainActivity2 main;
-    private ProgressBar prb1, prb2, prb3;
 
     public static ArrayList<Cart> Cartlist;
     private FragmentShopBinding binding;
@@ -72,13 +88,24 @@ public class ShopFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rcyProductCombo);
         recyclerViewNew = view.findViewById(R.id.rcyProductNew);
         recyclerViewHot = view.findViewById(R.id.rcyProductHot);
-        prb1 = view.findViewById(R.id.prgLoadingPrCombo);
-        prb2 = view.findViewById(R.id.prgLoadingPrNew);
-        prb3 = view.findViewById(R.id.prgLoadingPrHot);
+        tvViewAllCbo = view.findViewById(R.id.tvViewAllCbo);
+        tvViewAllNew = view.findViewById(R.id.tvViewAllNew);
+        tvViewAllHot = view.findViewById(R.id.tvViewAllHot);
 
-        prb1.setIndeterminateDrawable(new Wave());
-        prb2.setIndeterminateDrawable(new Wave());
-        prb3.setIndeterminateDrawable(new Wave());
+        tvViewAllCbo.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), ViewAllCboActivity.class);
+            startActivity(intent);
+        });
+
+        tvViewAllNew.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), ViewAllNewActivity.class);
+            startActivity(intent);
+        });
+
+        tvViewAllHot.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), ViewAllHotActivity.class);
+            startActivity(intent);
+        });
         CallApi_Combo();
         CallApi_New();
         CallApi_Hot();
@@ -101,7 +128,6 @@ public class ShopFragment extends Fragment {
         listCallProduct.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                prb1.setVisibility(View.GONE);
                 ArrayList<Product> productList = new ArrayList<>();
                 productList = response.body();
                 recyclerView.setHasFixedSize(true);
@@ -129,7 +155,6 @@ public class ShopFragment extends Fragment {
         listCallProductNew.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                prb2.setVisibility(View.GONE);
                 ArrayList<Product>  productNews = new ArrayList<>();
                 productNews = response.body();
                 recyclerViewNew.setHasFixedSize(true);
@@ -158,7 +183,6 @@ public class ShopFragment extends Fragment {
         listCallProductHot.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                prb3.setVisibility(View.GONE);
                 ArrayList<Product> productHots = new ArrayList<>();
                 productHots = response.body();
                 recyclerViewHot.setHasFixedSize(true);

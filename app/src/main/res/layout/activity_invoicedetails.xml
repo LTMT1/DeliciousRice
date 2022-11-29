@@ -138,7 +138,7 @@
                     android:text="Nhân viên "
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView78" />
+                    app:layout_constraintTop_toTopOf="@+id/tvNameNV" />
 
                 <TextView
                     android:id="@+id/textView62"
@@ -152,7 +152,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
                 <TextView
-                    android:id="@+id/textView74"
+                    android:id="@+id/tvMaDonHang"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView75"
+                    android:id="@+id/tvNameKH"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -177,11 +177,11 @@
                     android:textColor="#565656"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView74"
-                    app:layout_constraintTop_toBottomOf="@+id/textView74" />
+                    app:layout_constraintStart_toStartOf="@+id/tvMaDonHang"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMaDonHang" />
 
                 <TextView
-                    android:id="@+id/textView76"
+                    android:id="@+id/tvPhoneKH"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -191,11 +191,11 @@
                     android:textColor="#565656"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView75"
-                    app:layout_constraintTop_toBottomOf="@+id/textView75" />
+                    app:layout_constraintStart_toStartOf="@+id/tvNameKH"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNameKH" />
 
                 <TextView
-                    android:id="@+id/textView77"
+                    android:id="@+id/tvDiaChi"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -205,11 +205,11 @@
                     android:textColor="#565656"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView76"
-                    app:layout_constraintTop_toBottomOf="@+id/textView76" />
+                    app:layout_constraintStart_toStartOf="@+id/tvPhoneKH"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPhoneKH" />
 
                 <TextView
-                    android:id="@+id/textView78"
+                    android:id="@+id/tvNameNV"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -219,11 +219,11 @@
                     android:textColor="#565656"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView76"
-                    app:layout_constraintTop_toBottomOf="@+id/textView77" />
+                    app:layout_constraintStart_toStartOf="@+id/tvPhoneKH"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDiaChi" />
 
                 <TextView
-                    android:id="@+id/textView79"
+                    android:id="@+id/tvDateDat"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -231,18 +231,17 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="TextView"
-
                     android:textColor="#565656"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView78"
-                    app:layout_constraintTop_toBottomOf="@+id/textView78" />
+                    app:layout_constraintStart_toStartOf="@+id/tvNameNV"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNameNV" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/rcyViewChiTietDH"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -260,7 +259,7 @@
                 android:textSize="13sp"
                 app:layout_constraintEnd_toStartOf="@+id/textView82"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/rcyViewChiTietDH" />
 
             <TextView
                 android:id="@+id/textView31"

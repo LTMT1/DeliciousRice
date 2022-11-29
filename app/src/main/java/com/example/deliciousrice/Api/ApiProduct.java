@@ -5,6 +5,7 @@ import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
+import com.example.deliciousrice.Model.ProductBill;
 import com.example.deliciousrice.Model.ResponseApi;
 
 import java.util.ArrayList;
@@ -28,6 +29,10 @@ public interface ApiProduct {
 
     @GET("productHot.php")
     Call<ArrayList<Product>> getListProductHot();
+
+    @GET("DetailBill.php")
+    Call<ArrayList<ProductBill>> getListProductBill();
+
 
     @FormUrlEncoded
     @POST("getdataCustomer.php")

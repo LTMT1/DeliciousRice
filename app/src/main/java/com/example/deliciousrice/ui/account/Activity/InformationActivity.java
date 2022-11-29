@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,8 +20,10 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -34,6 +38,7 @@ import com.example.deliciousrice.Activity.ChangePassActivity;
 import com.example.deliciousrice.Adapter.AdapterSearchProduct;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.karumi.dexter.Dexter;
@@ -48,6 +53,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -82,6 +88,7 @@ public class InformationActivity extends AppCompatActivity {
         Anhxa();
         requestPermissions();
         setview();
+        calenderDate();
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -273,6 +280,25 @@ public class InformationActivity extends AppCompatActivity {
                 Toast.makeText(InformationActivity.this, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
+        });
+    }
+
+    private void calenderDate(){
+        editTextdate.setOnClickListener(view -> {
+            Calendar calendar = Calendar.getInstance();
+            DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                    calendar.set(Calendar.YEAR,year);
+                    calendar.set(Calendar.MONTH,month);
+                    calendar.set(Calendar.DAY_OF_MONTH,day);
+
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy ");
+                    editTextdate.setText(simpleDateFormat.format(calendar.getTime()));
+                }
+            };
+            new DatePickerDialog(InformationActivity.this,onDateSetListener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+
         });
     }
 }

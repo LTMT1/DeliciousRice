@@ -1,6 +1,8 @@
 package com.example.deliciousrice.Model;
 
-public class Bill {
+import java.io.Serializable;
+
+public class Bill implements Serializable {
     private String id_bill;
     private int id_customer;
     private int id_staff;

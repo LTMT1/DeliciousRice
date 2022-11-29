@@ -44,15 +44,11 @@ public class AdapterProductBill extends RecyclerView.Adapter<AdapterProductBill.
         ProductBill bill = list.get(position);
         holder.tvname.setText(bill.getProduct_name());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvprice.setText(decimalFormat.format(bill.getMoney())+"đ");
+        holder.tvprice.setText(decimalFormat.format(bill.getTotal_money())+"đ");
         holder.tvsl.setText(bill.getAmount()+"x");
     }
 
-    /**
-     * Returns the total number of items in the data set held by the adapter.
-     *
-     * @return The total number of items in this adapter.
-     */
+
     @Override
     public int getItemCount() {
         return list.size();

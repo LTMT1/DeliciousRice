@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.callback.ReceiptItemClick;
 
 import java.util.ArrayList;
 
@@ -18,10 +20,12 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
 
     private ArrayList<Bill> list;
     private Context context;
+    ReceiptItemClick receiptItemClick;
 
-    public AdapterHistoryBill(ArrayList<Bill> list, Context context) {
+    public AdapterHistoryBill(ArrayList<Bill> list, Context context, ReceiptItemClick receiptItemClick) {
         this.list = list;
         this.context = context;
+        this.receiptItemClick = receiptItemClick;
     }
 
     @NonNull
@@ -38,7 +42,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         holder.tvdate.setText(bill.getDate());
         holder.tvmoney.setText(bill.getMoney()+"");
         holder.itemView.setOnClickListener(view -> {
-
+            receiptItemClick.itemReceiptClick(bill);
         });
     }
 
@@ -52,12 +56,14 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         private TextView tvbill;
         private TextView tvdate;
         private TextView tvmoney;
+        private ConstraintLayout ctrLayoutReceipt;
 
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvbill = itemView.findViewById(R.id.tvbill);
             tvdate = itemView.findViewById(R.id.tvdate);
             tvmoney = itemView.findViewById(R.id.tvmoney);
+            ctrLayoutReceipt = itemView.findViewById(R.id.ctrLayoutReceipt);
         }
     }
 }

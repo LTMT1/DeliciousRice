@@ -3,15 +3,15 @@ package com.example.deliciousrice.Model;
 public class ProductBill {
     private String product_name;
     private int amount;
-    private int money;
+    private int total_money;
 
     public ProductBill() {
     }
 
-    public ProductBill( String product_name, int amount, int money) {
+    public ProductBill( String product_name, int amount, int total_money) {
         this.product_name = product_name;
         this.amount = amount;
-        this.money = money;
+        this.total_money = total_money;
     }
 
 
@@ -31,11 +31,11 @@ public class ProductBill {
         this.amount = amount;
     }
 
-    public int getMoney() {
-        return money;
+    public int getTotal_money() {
+        return total_money;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setMoney(int total_money) {
+        this.total_money = total_money;
     }
 }

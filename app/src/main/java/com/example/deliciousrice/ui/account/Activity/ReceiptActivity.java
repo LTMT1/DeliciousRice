@@ -14,6 +14,7 @@ import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.ui.shop.Activity.InvoicedetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,12 @@ public class ReceiptActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Bill>> call, Response<List<Bill>> response) {
                 ArrayList<Bill> bills = (ArrayList<Bill>) response.body();
-                adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext());
+                adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext(), bill -> {
+                    Intent intent = new Intent(getApplicationContext(), InvoicedetailsActivity.class);
+                    intent.putExtra("id_bill",bill.getId_bill());
+                    intent.putExtra("getData",bill);
+                    startActivity(intent);
+                });
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ReceiptActivity.this);
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 rclview.setLayoutManager(linearLayoutManager);
