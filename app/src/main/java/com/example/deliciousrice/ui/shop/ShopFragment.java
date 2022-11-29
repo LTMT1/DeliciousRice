@@ -134,6 +134,7 @@ public class ShopFragment extends Fragment {
                 productNews = response.body();
                 recyclerViewNew.setHasFixedSize(true);
                 recyclerViewNew.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL, false));
+
                 adapterProductNew = new AdapterProductNew(productNews, ShopFragment.this, productNew -> {
                     Intent intent=new Intent(getContext(), DetailActivity.class);
                     intent.putExtra("idcustomer",main.getId_customer());
@@ -141,6 +142,7 @@ public class ShopFragment extends Fragment {
                     startActivity(intent);
                 });
                 recyclerViewNew.setAdapter(adapterProductNew);
+
             }
 
             @Override

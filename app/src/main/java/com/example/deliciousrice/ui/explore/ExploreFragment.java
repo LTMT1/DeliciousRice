@@ -1,5 +1,6 @@
 package com.example.deliciousrice.ui.explore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.deliciousrice.Adapter.AdapterSearchProduct;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
 import com.github.ybq.android.spinkit.style.Circle;
 
 import java.util.ArrayList;
@@ -30,9 +33,9 @@ public class ExploreFragment extends Fragment {
     private SearchView searchViewProduct;
     private RecyclerView rclSeachsp;
     AdapterSearchProduct adapterSearch;
-    ArrayList<Product> mangyeuthich;
+    ArrayList<Product> searchPro;
     private ProgressBar prgLoadingSearch;
-
+    MainActivity2 main;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,8 +43,10 @@ public class ExploreFragment extends Fragment {
         searchViewProduct = view.findViewById(R.id.searchView_Product);
         rclSeachsp = view.findViewById(R.id.rcl_seachsp);
         prgLoadingSearch = view.findViewById(R.id.prgLoadingSearch);
+        main = (MainActivity2) getActivity();
         prgLoadingSearch.setIndeterminateDrawable(new Circle());
-        mangyeuthich = new ArrayList<>();
+        searchPro = new ArrayList<>();
+
         searchViewProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -55,12 +60,13 @@ public class ExploreFragment extends Fragment {
                 return false;
             }
         });
+
         return view;
     }
 
     private void searchSP(String search) {
         String seach = search;
-        mangyeuthich.clear();
+        searchPro.clear();
         prgLoadingSearch.setVisibility(View.VISIBLE);
         ApiProduct apiProduct = ApiService.getService();
         Call<List<Product>> callback = apiProduct.SeachProduct(seach);
@@ -68,12 +74,16 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 prgLoadingSearch.setVisibility(View.GONE);
-                mangyeuthich = (ArrayList<Product>) response.body();
-
-                adapterSearch = new AdapterSearchProduct(mangyeuthich, getContext());
+                searchPro = (ArrayList<Product>) response.body();
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 rclSeachsp.setLayoutManager(linearLayoutManager);
+                adapterSearch = new AdapterSearchProduct(searchPro, getContext(),productSearch ->{
+                    Intent intent=new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra("idcustomer",main.getId_customer());
+                    intent.putExtra("getdataproduct",productSearch);
+                    startActivity(intent);
+                });
                 rclSeachsp.setAdapter(adapterSearch);
 
             }

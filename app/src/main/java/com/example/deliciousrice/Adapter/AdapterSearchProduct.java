@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.callback.SearchProductItemClink;
 
 import java.util.ArrayList;
 
@@ -21,12 +22,13 @@ public class AdapterSearchProduct extends  RecyclerView.Adapter<AdapterSearchPro
 
     private ArrayList<Product> list;
     private Context context;
+    private SearchProductItemClink searchProductItemClink;
 
 
-
-    public AdapterSearchProduct(ArrayList<Product> list, Context context) {
+    public AdapterSearchProduct(ArrayList<Product> list, Context context, SearchProductItemClink searchProductItemClink) {
         this.list = list;
         this.context = context;
+        this.searchProductItemClink = searchProductItemClink;
     }
 
     @NonNull
@@ -43,6 +45,9 @@ public class AdapterSearchProduct extends  RecyclerView.Adapter<AdapterSearchPro
         Glide.with(context).load(product.getImage()).centerCrop().into(holder.imgSeImgsp);
         holder.tvSeTiem.setText(product.getProcessing_time());
         holder.tvSeGia.setText(String.valueOf(product.getPrice())+" đ");
+        holder.layoutSeach.setOnClickListener(v->{
+            searchProductItemClink.itemSearchProduct(product);
+        });
 
 
 

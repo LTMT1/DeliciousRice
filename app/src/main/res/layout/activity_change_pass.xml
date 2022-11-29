@@ -34,58 +34,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edtPassChange"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="120dp"
-        android:background="@drawable/bg_edit_text"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        style="@style/Text"
-        android:hint="@string/nh_p_m_t_kh_u_m_i"
-        android:paddingStart="16dp"
-        android:inputType="textPassword"
+        android:layout_marginHorizontal="30dp"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        app:passwordToggleEnabled="true">
+        <EditText
+            android:id="@+id/edtPassChange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edit_text"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            style="@style/Text"
+            android:hint="@string/nh_p_m_t_kh_u_m_i"
+            android:paddingStart="16dp"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/edtRePassChange"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/bg_edit_text"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        style="@style/Text"
-        android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
-        android:paddingStart="16dp"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtPassChange"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:passwordToggleEnabled="true">
+        <EditText
+            android:id="@+id/edtRePassChange"
+            style="@style/Text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edit_text"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            android:hint="@string/nh_p_l_i_m_t_kh_u_m_i"
+            android:inputType="textPassword"
+            android:paddingStart="16dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/btnLuu"
+        style="@style/Text_btn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="80dp"
-        android:layout_marginTop="30dp"
         android:background="@drawable/bg_btn"
         android:gravity="center"
         android:onClick="onCLickChangepass"
         android:text="@string/l_u"
-        style="@style/Text_btn"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtRePassChange"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
         app:layout_constraintVertical_bias="0.214"
         tools:ignore="OnClick" />
 
