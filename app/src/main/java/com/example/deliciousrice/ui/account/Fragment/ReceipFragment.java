@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,14 +56,19 @@ public class ReceipFragment extends Fragment {
 
         imgBackReceipt = view.findViewById(R.id.img_back_Receipt);
         imgBackReceipt.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_accountFragment);
-            FragmentTransaction transection=getFragmentManager().beginTransaction();
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
             AccountFragment fragment = new AccountFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("id_cus", String.valueOf(0));
+            bundle.putInt("id_cus", 0);
             fragment.setArguments(bundle);
-            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
-            transection.commit();
+
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
+
+
         });
 
         rclview = view.findViewById(R.id.rclview);
@@ -74,7 +80,7 @@ public class ReceipFragment extends Fragment {
 
 
     private void getreceipt(){
-        Bundle bundle=new Bundle();
+        Bundle bundle=getArguments();
         int idcustm =bundle.getInt("id_cus",0);
 
         ApiProduct apiProduct = ApiService.getService();

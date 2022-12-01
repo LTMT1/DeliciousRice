@@ -18,6 +18,7 @@ import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 
 import java.util.List;
 
@@ -55,9 +56,6 @@ public class AddAddressActivity extends AppCompatActivity {
         } else {
             Intent intent = getIntent();
             int idc = intent.getIntExtra("iccome", 0);
-
-
-
             String pos_name = edAddNameAddress.getText().toString().trim();
             String pos_address = edAddCtDiachi.getText().toString().trim();
             ApiProduct apiProduct = ApiService.getService();
@@ -65,7 +63,7 @@ public class AddAddressActivity extends AppCompatActivity {
             adAddegrss.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    Intent intent=new Intent(AddAddressActivity.this,AddressActivity.class);
+                    Intent intent=new Intent(AddAddressActivity.this, AddressFragment.class);
                     intent.putExtra("Adrress",idc);
                     startActivity( intent);
                     Toast.makeText(AddAddressActivity.this, "Thêm địa chỉ thành công", Toast.LENGTH_SHORT).show();

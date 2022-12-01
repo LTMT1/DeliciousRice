@@ -187,6 +187,7 @@ public class ShopFragment extends Fragment {
                 productHots = response.body();
                 recyclerViewHot.setHasFixedSize(true);
                 recyclerViewHot.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
+
                 adapterProductHot = new AdapterProductHot(productHots, ShopFragment.this, productHot -> {
                     Intent intent=new Intent(getContext(), DetailActivity.class);
                     intent.putExtra("idcustomer",main.getId_customer());

@@ -69,11 +69,11 @@ public class AddressActivity extends AppCompatActivity {
         });
 
         rclAddress = findViewById(R.id.rcl_address);
-        ShowAddress();
+   /*     ShowAddress();*/
 
     }
 
-    private void ShowAddress() {
+   /* private void ShowAddress() {
         final ProgressDialog progressDialog = new ProgressDialog(AddressActivity.this);
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
@@ -110,5 +110,5 @@ public class AddressActivity extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 }

@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
@@ -75,63 +76,80 @@ public class AccountFragment extends Fragment {
 
 
         clThongtin.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_informationFragment);
-            Bundle bundle  = new Bundle();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
             InformationFragment informationFragment=new InformationFragment();
-            bundle.putString("id", String.valueOf(main.getId_customer()));
+            Bundle bundle  = new Bundle();
+            bundle.putInt("id", main.getId_customer());
             bundle.putString("name", main.getUser_name());
             bundle.putString("name1", main.getBirthday());
             bundle.putString("name2", main.getPhone_number());
             bundle.putString("name3", main.getImage());
             informationFragment.setArguments(bundle);
-            transection.replace(R.id.nav_host_fragment_activity_main2, informationFragment);
-            transection.commit();
 
+            ft.replace(R.id.nav_host_fragment_activity_main2, informationFragment);
+            ft.commit();
         });
-
         llayReceipt.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_settingFragment);
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
             ReceipFragment fragment = new ReceipFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("id_cus", String.valueOf(main.getId_customer()));
+            bundle.putInt("id_cus", main.getId_customer());
             fragment.setArguments(bundle);
-            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
-            transection.commit();
+
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
+
 
         });
 
-        /// địa chỉ
         llayAddress.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_addressFragment);
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
             AddressFragment addfragment=new AddressFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("Adrress", String.valueOf(main.getId_customer()));
+
+             Bundle bundle = new Bundle();
+            bundle.putInt("Adrress", main.getId_customer());
             addfragment.setArguments(bundle);
-            transection.replace(R.id.nav_host_fragment_activity_main2, addfragment);
-            transection.commit();
+
+            ft.replace(R.id.nav_host_fragment_activity_main2, addfragment);
+            ft.commit();
 
         });
+
         clContact.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_contactFragment);
         });
+
         clPolicy.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_policFragment);
 
         });
+
         clSetting.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_settingFragment);
         });
 
 
         clDoipass.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_changePasFragment);
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
             ChangePasFragment  fragment=new ChangePasFragment();
             Bundle bundle = new Bundle();
             bundle.putString("name", main.getPasss());
             bundle.putString("name1", main.getEmaill());
             fragment.setArguments(bundle);
-            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
-            transection.commit();
+
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
+
+
 
         });
     }

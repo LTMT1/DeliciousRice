@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
@@ -57,15 +58,19 @@ public class ChangePasFragment extends Fragment {
         imgBackChangei = view.findViewById(R.id.img_back_Changei);
 
         imgBackChangei.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_changePasFragment_to_accountFragment);
-            FragmentTransaction transection=getFragmentManager().beginTransaction();
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
+
             AccountFragment fragment=new AccountFragment();
             Bundle bundle = new Bundle();
             bundle.putString("name", pass);
             bundle.putString("name1", str_email);
             fragment.setArguments(bundle);
-            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
-            transection.commit();
+
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
 
         });
 
@@ -77,7 +82,7 @@ public class ChangePasFragment extends Fragment {
 
     }
     public void onCLickChangepasss(View view) {
-        Bundle bundle=new Bundle();
+        Bundle bundle=getArguments();
         pass = bundle.getString("name");
         str_email = bundle.getString("name1");
         str_passnew = edtPassChange.getText().toString().trim();

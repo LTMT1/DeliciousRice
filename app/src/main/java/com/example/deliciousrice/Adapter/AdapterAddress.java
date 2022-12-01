@@ -14,18 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.AddressItemClick;
+import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 
 import java.util.ArrayList;
 
 public class AdapterAddress extends RecyclerView.Adapter<AdapterAddress.AddressViewHoldel>{
     private ArrayList<Adderss> list;
-    private Context context;
+    private AddressFragment fragment;
     private AddressItemClick  addressItemClick;
 
 
-    public AdapterAddress(ArrayList<Adderss> list, Context context, AddressItemClick addressItemClick) {
+    public AdapterAddress(ArrayList<Adderss> list, AddressFragment fragment, AddressItemClick addressItemClick) {
         this.list = list;
-        this.context = context;
+        this.fragment = fragment;
         this.addressItemClick = addressItemClick;
     }
 

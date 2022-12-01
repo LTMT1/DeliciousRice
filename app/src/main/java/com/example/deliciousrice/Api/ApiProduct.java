@@ -77,7 +77,7 @@ public interface ApiProduct {
     /*Địa chỉ*/
     @FormUrlEncoded
     @POST("getaddress.php")
-    Call<List<Adderss>> getListAddresss(@Field("id_customer") int id_customer);
+    Call<ArrayList<Adderss>> getListAddresss(@Field("id_customer") int id_customer);
 
     @FormUrlEncoded
     @POST("insertaddress.php")

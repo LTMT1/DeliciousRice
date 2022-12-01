@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,6 @@ public class AddressFragment extends Fragment {
     private ImageView imgBackAddress;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,37 +55,33 @@ public class AddressFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imgBackAddress = view.findViewById(R.id.img_back_Address);
-        imgBackAddress.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_addressFragment_to_accountFragment);
-        });
+
         cl_insertAdsress = view.findViewById(R.id.cl_insertAdsress);
+        rclAddress = view.findViewById(R.id.rcl_address);
+        imgBackAddress = view.findViewById(R.id.img_back_Address);
+        /*imgBackAddress.setOnClickListener(v->{
+            Navigation.findNavController(view).navigate(R.id.action_addressFragment_to_accountFragment);
+        });*/
 
-        Bundle bundle=new Bundle();
-        idadr =bundle.getInt("Adrress",0);
 
-        imgBackAddress.setOnClickListener(v->{
-            Fragment fragment=new AccountFragment();
-            FragmentTransaction fragmentTransaction=getChildFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.Address,fragment).commit();
 
-        });
+
+
+        Bundle bundle=getArguments();
+        idadr =bundle.getInt("Adrress", 0);
+        Log.e("alo id", String.valueOf(idadr));
+
+
+        // btn add
         cl_insertAdsress.setOnClickListener(v -> {
-
-            Navigation.findNavController(view).navigate(R.id.action_addressFragment_to_addAddressFragment);
 
             Intent i=new Intent(getContext(), AddAddressActivity.class);
             i.putExtra("iccome",idadr);
             startActivity(i);
 
-
-
         });
-
-
-
-        rclAddress = view.findViewById(R.id.rcl_address);
         ShowAddress();
+
 
     }
     private void ShowAddress() {
@@ -96,33 +92,31 @@ public class AddressFragment extends Fragment {
 
 
         ApiProduct apiProduct= ApiService.getService();
-        Call<List<Adderss>> listAddre = apiProduct.getListAddresss(idadr);
-        listAddre.enqueue(new Callback<List<Adderss>>() {
+        Call<ArrayList<Adderss>> listAddre = apiProduct.getListAddresss(idadr);
+        listAddre.enqueue(new Callback<ArrayList<Adderss>>() {
             @Override
-            public void onResponse(Call<List<Adderss>> call, Response<List<Adderss>> response) {
+            public void onResponse(Call<ArrayList<Adderss>> call, Response<ArrayList<Adderss>> response) {
                 ArrayList<Adderss> addersses = new ArrayList<>();
                 progressDialog.dismiss();
-                addersses = (ArrayList<Adderss>) response.body();
+                addersses =  response.body();
                 rclAddress.setHasFixedSize(true);
                 rclAddress.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
-                adapterAddress = new AdapterAddress(addersses, getContext(), addressNew -> {
 
+
+                adapterAddress = new AdapterAddress(addersses, AddressFragment.this, addressNew -> {
 
                     Intent intent=new Intent(getContext(), EditAddressActivity.class);
                     intent.putExtra("idcustomer",idadr);
                     intent.putExtra("getdataAddress", addressNew);
                     startActivity(intent);
 
-
-
-
                 });
                 rclAddress.setAdapter(adapterAddress);
-                adapterAddress.notifyDataSetChanged();
+
             }
 
             @Override
-            public void onFailure(Call<List<Adderss>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Adderss>> call, Throwable t) {
 
             }
         });

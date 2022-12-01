@@ -14,6 +14,7 @@ import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +38,7 @@ public class EditAddressActivity extends AppCompatActivity {
 
         ImgBack=findViewById(R.id.img_backEd_setting);
         ImgBack.setOnClickListener(v->{
-            Intent intents = new Intent(EditAddressActivity.this, AddressActivity.class);
+            Intent intents = new Intent(EditAddressActivity.this, AddressFragment.class);
             startActivity(intents);
         });
 
@@ -107,7 +108,7 @@ public class EditAddressActivity extends AppCompatActivity {
               @Override
               public void onResponse(Call<String> call, Response<String> response) {
 
-                  Intent intent=new Intent(EditAddressActivity.this,AddressActivity.class);
+                  Intent intent=new Intent(EditAddressActivity.this,AddressFragment.class);
                   intent.putExtra("Adrress",anInt);
                   startActivity( intent);
 

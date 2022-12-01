@@ -15,6 +15,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
@@ -92,18 +93,21 @@ public class InformationFragment extends Fragment {
         setview();
         calenderDate();
         imgBackInformation.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_informationFragment_to_accountFragment);
-            FragmentTransaction transection=getFragmentManager().beginTransaction();
-            AccountFragment fragment=new AccountFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("id", String.valueOf(0));
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            AccountFragment informationFragment=new AccountFragment();
+
+            Bundle bundle  = new Bundle();
+            bundle.putInt("id", id);
             bundle.putString("name", name);
-            bundle.putString("name1",name1);
+            bundle.putString("name1", name1);
             bundle.putString("name2", name2);
             bundle.putString("name3", name3);
-            fragment.setArguments(bundle);
-            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
-            transection.commit();
+            informationFragment.setArguments(bundle);
+
+            ft.replace(R.id.nav_host_fragment_activity_main2, informationFragment);
+            ft.commit();
         });
 
         profileImage.setOnClickListener(new View.OnClickListener() {
@@ -268,7 +272,7 @@ public class InformationFragment extends Fragment {
         imgBackInformation = view.findViewById(R.id.img_back_Information);
     }
     private void setview(){
-        Bundle bundle=new Bundle();
+        Bundle bundle=getArguments();
         id =bundle.getInt("id",0);
         String name=bundle.getString("name");
         String name1=bundle.getString("name1");
