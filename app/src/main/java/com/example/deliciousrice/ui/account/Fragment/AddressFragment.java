@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,9 +60,20 @@ public class AddressFragment extends Fragment {
         cl_insertAdsress = view.findViewById(R.id.cl_insertAdsress);
         rclAddress = view.findViewById(R.id.rcl_address);
         imgBackAddress = view.findViewById(R.id.img_back_Address);
-        /*imgBackAddress.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_addressFragment_to_accountFragment);
-        });*/
+        imgBackAddress.setOnClickListener(v->{
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
+
+            AccountFragment fragment=new AccountFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("Adrress",idadr);
+            fragment.setArguments(bundle);
+
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
+        });
 
 
 

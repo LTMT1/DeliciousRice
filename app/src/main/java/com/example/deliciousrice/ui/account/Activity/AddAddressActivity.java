@@ -37,6 +37,11 @@ public class AddAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_address);
         imgBackAddAddress = findViewById(R.id.img_backAdd_Address);
+        imgBackAddAddress.setOnClickListener(v -> {
+            Intent intents = new Intent(AddAddressActivity.this, AddressFragment.class);
+            startActivity(intents);
+
+        });
 
 
         edAddCtDiachi = findViewById(R.id.ed_add_ctDiachi);
@@ -51,7 +56,7 @@ public class AddAddressActivity extends AppCompatActivity {
     }
 
     private void SaveAdderssNew() {
-        if (!checkhollow()){
+        if (!checkhollow()) {
             return;
         } else {
             Intent intent = getIntent();
@@ -63,9 +68,9 @@ public class AddAddressActivity extends AppCompatActivity {
             adAddegrss.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    Intent intent=new Intent(AddAddressActivity.this, AddressFragment.class);
-                    intent.putExtra("Adrress",idc);
-                    startActivity( intent);
+                    Intent intent = new Intent(AddAddressActivity.this, AddressFragment.class);
+                    intent.putExtra("Adrress", idc);
+                    startActivity(intent);
                     Toast.makeText(AddAddressActivity.this, "Thêm địa chỉ thành công", Toast.LENGTH_SHORT).show();
                 }
 
@@ -80,8 +85,9 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
     }
+
     public boolean checkhollow() {
-        if (edAddNameAddress.getText().toString().trim().equals("")|edAddCtDiachi.getText().toString().trim().equals("")) {
+        if (edAddNameAddress.getText().toString().trim().equals("") | edAddCtDiachi.getText().toString().trim().equals("")) {
             edAddNameAddress.setError("Hãy Nhập Tên.");
             edAddCtDiachi.setError("Hãy nhập địa chỉ của bạn");
 

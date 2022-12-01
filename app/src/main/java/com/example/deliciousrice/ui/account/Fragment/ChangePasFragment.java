@@ -62,7 +62,6 @@ public class ChangePasFragment extends Fragment {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
 
-
             AccountFragment fragment=new AccountFragment();
             Bundle bundle = new Bundle();
             bundle.putString("name", pass);
