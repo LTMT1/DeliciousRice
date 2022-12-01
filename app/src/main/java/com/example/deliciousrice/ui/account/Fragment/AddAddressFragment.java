@@ -1,61 +1,62 @@
-package com.example.deliciousrice.ui.account.Activity;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.deliciousrice.ui.account.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
-import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.R;
-
-import java.util.List;
+import com.example.deliciousrice.ui.account.Activity.AddAddressActivity;
+import com.example.deliciousrice.ui.account.Activity.AddressActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddAddressActivity extends AppCompatActivity {
+
+public class AddAddressFragment extends Fragment {
     private ImageView imgBackAddAddress;
     private TextView tvAddAddress;
     private EditText edAddCtDiachi;
     private EditText edAddNameAddress;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_add_address, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_address);
-        imgBackAddAddress = findViewById(R.id.img_backAdd_Address);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        imgBackAddAddress = view.findViewById(R.id.img_backAdd_Address);
 
 
-        edAddCtDiachi = findViewById(R.id.ed_add_ctDiachi);
-        edAddNameAddress = findViewById(R.id.ed_add_nameAddress);
-
-        tvAddAddress = findViewById(R.id.tv_add_Address);
+        edAddCtDiachi = view.findViewById(R.id.ed_add_ctDiachi);
+        edAddNameAddress = view.findViewById(R.id.ed_add_nameAddress);
+        tvAddAddress = view.findViewById(R.id.tv_add_Address);
         tvAddAddress.setOnClickListener(v -> {
                     SaveAdderssNew();
                 }
         );
-
     }
-
     private void SaveAdderssNew() {
         if (!checkhollow()){
             return;
         } else {
-            Intent intent = getIntent();
-            int idc = intent.getIntExtra("iccome", 0);
-
+            Bundle  bundle = new Bundle();
+            int idc = bundle.getInt("iccome", 0);
 
 
             String pos_name = edAddNameAddress.getText().toString().trim();
@@ -65,15 +66,17 @@ public class AddAddressActivity extends AppCompatActivity {
             adAddegrss.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    Intent intent=new Intent(AddAddressActivity.this,AddressActivity.class);
+                     /// Chỉnh Lai
+
+                    Intent intent=new Intent(getContext(), AddressActivity.class);
                     intent.putExtra("Adrress",idc);
                     startActivity( intent);
-                    Toast.makeText(AddAddressActivity.this, "Thêm địa chỉ thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Thêm địa chỉ thành công", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(AddAddressActivity.this, "Thêm địa chỉ không thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Thêm địa chỉ không thành công", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -94,5 +97,4 @@ public class AddAddressActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }

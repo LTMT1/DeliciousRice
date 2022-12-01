@@ -9,6 +9,103 @@
         android:id="@+id/accountFragment"
         android:name="com.example.deliciousrice.ui.account.AccountFragment"
         android:label="AccountFragment"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_receipFragment"
+            app:destination="@id/receipFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_policFragment"
+            app:destination="@id/policFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_changePasFragment"
+            app:destination="@id/changePasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/receipFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.ReceipFragment"
+        android:label="fragment_receip"
+        tools:layout="@layout/fragment_receip" >
+        <action
+            android:id="@+id/action_receipFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/policFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.Policyragment"
+        android:label="fragment_polic"
+        tools:layout="@layout/fragment_polic" >
+        <action
+            android:id="@+id/action_policFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.ContactFragment"
+        android:label="fragment_contact"
+        tools:layout="@layout/fragment_contact" >
+        <action
+            android:id="@+id/action_contactFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" >
+        <action
+            android:id="@+id/action_informationFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" >
+        <action
+            android:id="@+id/action_addressFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_addressFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.ChangePasFragment"
+        android:label="fragment_change_pas"
+        tools:layout="@layout/fragment_change_pas" >
+        <action
+            android:id="@+id/action_changePasFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.example.deliciousrice.ui.account.Fragment.AddAddressFragment"
+        android:label="fragment_add_address"
+        tools:layout="@layout/fragment_add_address" >
+        <action
+            android:id="@+id/action_addAddressFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
 
 </navigation>

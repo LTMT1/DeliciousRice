@@ -19,7 +19,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.deliciousrice.databinding.ActivityMain2Binding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

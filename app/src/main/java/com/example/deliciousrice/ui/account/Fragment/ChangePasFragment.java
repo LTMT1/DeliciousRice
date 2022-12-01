@@ -1,69 +1,92 @@
-package com.example.deliciousrice.ui.account.Activity;
+package com.example.deliciousrice.ui.account.Fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import static android.content.Context.MODE_PRIVATE;
 
-import android.accounts.Account;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.deliciousrice.Activity.LoginActivity;
-import com.example.deliciousrice.Adapter.AdapterFavorite;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
-import com.example.deliciousrice.Model.Customer;
-import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.account.AccountFragment;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChangePasActivity extends AppCompatActivity {
-
+public class ChangePasFragment extends Fragment {
     private EditText edtPassChange;
     private EditText edtRePassChange;
     private EditText edtPass;
-    String pass, str_pass, str_passnew, str_repassnew;
+    String pass, str_pass, str_passnew, str_repassnew,str_email;
+    private Button btnLuupass;
+
+    private ImageView imgBackChangei;
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_pass2);
-        edtPassChange = findViewById(R.id.edtPassChange);
-        edtRePassChange = findViewById(R.id.edtRePassChange);
-        edtPass = findViewById(R.id.edtPass);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.fragment_change_pas, container, false);
     }
 
-    public void onCLickChangepass(View view) {
-        Intent intent = getIntent();
-        pass = intent.getStringExtra("name");
-        String str_email = intent.getStringExtra("name1");
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        edtPassChange = view.findViewById(R.id.edtPassChange);
+        edtRePassChange = view.findViewById(R.id.edtRePassChange);
+        edtPass = view.findViewById(R.id.edtPass);
+        btnLuupass = view.findViewById(R.id.btnLuupass);
+        imgBackChangei = view.findViewById(R.id.img_back_Changei);
+
+        imgBackChangei.setOnClickListener(v->{
+            Navigation.findNavController(view).navigate(R.id.action_changePasFragment_to_accountFragment);
+            FragmentTransaction transection=getFragmentManager().beginTransaction();
+            AccountFragment fragment=new AccountFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("name", pass);
+            bundle.putString("name1", str_email);
+            fragment.setArguments(bundle);
+            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            transection.commit();
+
+        });
+
+        btnLuupass.setOnClickListener(v->{
+            onCLickChangepasss(v);
+        });
+
+
+
+    }
+    public void onCLickChangepasss(View view) {
+        Bundle bundle=new Bundle();
+        pass = bundle.getString("name");
+        str_email = bundle.getString("name1");
         str_passnew = edtPassChange.getText().toString().trim();
         str_repassnew = edtRePassChange.getText().toString().trim();
         str_pass = edtPass.getText().toString().trim();
         if (!validatepass() || !validaterepass()) {
             return;
         } else {
-            final ProgressDialog progressDialog = new ProgressDialog(ChangePasActivity.this);
+            final ProgressDialog progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage("Please Wait..");
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -72,21 +95,21 @@ public class ChangePasActivity extends AppCompatActivity {
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
+                    SharedPreferences preferences = getContext().getSharedPreferences("user_file", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("matkhau", str_passnew);
                     editor.commit();
                     edtPassChange.setText("");
                     edtRePassChange.setText("");
                     edtPass.setText("");
-                    Toast.makeText(ChangePasActivity.this, "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
 
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(ChangePasActivity.this, "Thay đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Thay đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
                 }
             });
         }

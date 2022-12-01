@@ -16,19 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
-import com.example.deliciousrice.ui.account.Activity.ChangePasActivity;
+import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Activity.LoginActivity;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.R;
-import com.example.deliciousrice.databinding.FragmentAccountBinding;
-import com.example.deliciousrice.ui.account.Activity.AddressActivity;
-import com.example.deliciousrice.ui.account.Activity.ContactActivity;
-import com.example.deliciousrice.ui.account.Activity.InformationActivity;
-import com.example.deliciousrice.ui.account.Activity.PolicyActivity;
-import com.example.deliciousrice.ui.account.Activity.ReceiptActivity;
-import com.example.deliciousrice.ui.account.Activity.SettingActivity;
+import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
+import com.example.deliciousrice.ui.account.Fragment.ChangePasFragment;
+import com.example.deliciousrice.ui.account.Fragment.InformationFragment;
+import com.example.deliciousrice.ui.account.Fragment.ReceipFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,12 +45,14 @@ public class AccountFragment extends Fragment {
     private ConstraintLayout clDoipass;
     private TextView tvDangXuat;
     private MainActivity2 main;
-    private FragmentAccountBinding binding;
+    Customer customer;
+    FragmentTransaction transection;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View views = inflater.inflate(R.layout.fragment_account, container, false);
-        main =(MainActivity2) getActivity();
+        main = (MainActivity2) getActivity();
         Anhxa(views);
         setviewaccount();
         main.updateMain();
@@ -61,6 +62,10 @@ public class AccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        customer = new Customer();
+        transection = getFragmentManager().beginTransaction();
+
+
         tvDangXuat.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             SharedPreferences.Editor editor = getContext().getSharedPreferences("user_file", MODE_PRIVATE).edit();
@@ -68,54 +73,69 @@ public class AccountFragment extends Fragment {
             startActivity(intent);
         });
 
+
         clThongtin.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), InformationActivity.class);
-            intent.putExtra("id",main.getId_customer());
-            intent.putExtra("name",main.getUser_name());
-            intent.putExtra("name1",main.getBirthday());
-            intent.putExtra("name2",main.getPhone_number());
-            intent.putExtra("name3",main.getImage());
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_informationFragment);
+            Bundle bundle  = new Bundle();
+            InformationFragment informationFragment=new InformationFragment();
+            bundle.putString("id", String.valueOf(main.getId_customer()));
+            bundle.putString("name", main.getUser_name());
+            bundle.putString("name1", main.getBirthday());
+            bundle.putString("name2", main.getPhone_number());
+            bundle.putString("name3", main.getImage());
+            informationFragment.setArguments(bundle);
+            transection.replace(R.id.nav_host_fragment_activity_main2, informationFragment);
+            transection.commit();
+
         });
+
         llayReceipt.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ReceiptActivity.class);
-            intent.putExtra("id_cus",main.getId_customer());
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_settingFragment);
+            ReceipFragment fragment = new ReceipFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("id_cus", String.valueOf(main.getId_customer()));
+            fragment.setArguments(bundle);
+            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            transection.commit();
 
         });
-        llayAddress.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), AddressActivity.class);
-            intent.putExtra("Adrress",main.getId_customer());
 
-            startActivity(intent);
+        /// địa chỉ
+        llayAddress.setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_addressFragment);
+            AddressFragment addfragment=new AddressFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("Adrress", String.valueOf(main.getId_customer()));
+            addfragment.setArguments(bundle);
+            transection.replace(R.id.nav_host_fragment_activity_main2, addfragment);
+            transection.commit();
 
         });
         clContact.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ContactActivity.class);
-            startActivity(intent);
-
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_contactFragment);
         });
-
         clPolicy.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), PolicyActivity.class);
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_policFragment);
 
         });
-
         clSetting.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), SettingActivity.class);
-            startActivity(intent);
-
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_settingFragment);
         });
+
+
         clDoipass.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getContext(), ChangePasActivity.class);
-            intent.putExtra("name",main.getPasss());
-            intent.putExtra("name1",main.getEmaill());
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_changePasFragment);
+            ChangePasFragment  fragment=new ChangePasFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("name", main.getPasss());
+            bundle.putString("name1", main.getEmaill());
+            fragment.setArguments(bundle);
+            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            transection.commit();
+
         });
     }
-
-    private void Anhxa(@NonNull View view){
+    private void Anhxa(@NonNull View view) {
         tvname = view.findViewById(R.id.tvname);
         cardView = view.findViewById(R.id.cardView);
         imageView8 = view.findViewById(R.id.imageView8);
@@ -128,7 +148,8 @@ public class AccountFragment extends Fragment {
         clDoipass = view.findViewById(R.id.cl_doipass);
         tvDangXuat = view.findViewById(R.id.tvDangXuat);
     }
-    private void setviewaccount(){
+
+    private void setviewaccount() {
         tvname.setText(main.getUser_name());
         Glide.with(getActivity()).load(main.getImage()).centerCrop().into(cardView);
     }

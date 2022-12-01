@@ -1,46 +1,39 @@
-package com.example.deliciousrice.ui.account.Activity;
+package com.example.deliciousrice.ui.account.Fragment;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
+
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.example.deliciousrice.Activity.ChangePassActivity;
-import com.example.deliciousrice.Adapter.AdapterSearchProduct;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
-import com.example.deliciousrice.MainActivity2;
-import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.ui.account.AccountFragment;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -50,27 +43,26 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Retrofit;
 
-public class InformationActivity extends AppCompatActivity {
+
+public class InformationFragment extends Fragment {
+    
     private CircleImageView profileImage;
     private EditText editTextSDT;
     private EditText editTextdate;
     private EditText editTextname;
     private TextView tvsave;
+    private ImageView imgBackInformation;
+
+
 
 
     int click = 0;
@@ -80,15 +72,40 @@ public class InformationActivity extends AppCompatActivity {
     int id;
     private Uri imageUri;
     Bitmap bitmap;
-    String encodedImage;
+    String encodedImage,name,name1,name2,name3;
+    private int RESULT_CANCELED;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information);
-        Anhxa();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.fragment_information, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        Anhxa(view);
         requestPermissions();
         setview();
         calenderDate();
+        imgBackInformation.setOnClickListener(v->{
+            Navigation.findNavController(view).navigate(R.id.action_informationFragment_to_accountFragment);
+            FragmentTransaction transection=getFragmentManager().beginTransaction();
+            AccountFragment fragment=new AccountFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("id", String.valueOf(0));
+            bundle.putString("name", name);
+            bundle.putString("name1",name1);
+            bundle.putString("name2", name2);
+            bundle.putString("name3", name3);
+            fragment.setArguments(bundle);
+            transection.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            transection.commit();
+        });
+
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,26 +138,26 @@ public class InformationActivity extends AppCompatActivity {
         });
     }
     private void openImage() {
-            AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
-            pictureDialog.setTitle("Select Action");
-            String[] pictureDialogItems = {
-                    "Photo Gallery",
-                    "Camera" };
-            pictureDialog.setItems(pictureDialogItems,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-                                case 0:
-                                    choosePhotoFromGallary();
-                                    break;
-                                case 1:
-                                    takePhotoFromCamera();
-                                    break;
-                            }
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getContext());
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Photo Gallery",
+                "Camera" };
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                choosePhotoFromGallary();
+                                break;
+                            case 1:
+                                takePhotoFromCamera();
+                                break;
                         }
-                    });
-            pictureDialog.show();
+                    }
+                });
+        pictureDialog.show();
     }
     public void choosePhotoFromGallary() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
@@ -160,12 +177,13 @@ public class InformationActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == this.RESULT_CANCELED) {
             return;
+            ////getContentResolver()
         }
         if (requestCode == GALLERY) {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
-                    FixBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    FixBitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), contentURI);
                     // String path = saveImage(bitmap);
                     //Toast.makeText(MainActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                     profileImage.setImageBitmap(FixBitmap);
@@ -173,7 +191,7 @@ public class InformationActivity extends AppCompatActivity {
                     uploadImage(FixBitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(InformationActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -208,7 +226,7 @@ public class InformationActivity extends AppCompatActivity {
         });
     }
     private void  requestPermissions(){
-        Dexter.withActivity(this)
+        Dexter.withActivity(getActivity())
                 .withPermissions(
 
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -241,20 +259,21 @@ public class InformationActivity extends AppCompatActivity {
                 .check();
     }
 
-    private void Anhxa() {
-        profileImage = findViewById(R.id.profile_image);
-        editTextSDT = findViewById(R.id.editTextSDT);
-        editTextdate = findViewById(R.id.editTextdate);
-        editTextname = findViewById(R.id.editTextname);
-        tvsave = findViewById(R.id.tvsave);
+    private void Anhxa( View view) {
+        profileImage = view.findViewById(R.id.profile_image);
+        editTextSDT = view.findViewById(R.id.editTextSDT);
+        editTextdate = view.findViewById(R.id.editTextdate);
+        editTextname = view.findViewById(R.id.editTextname);
+        tvsave = view.findViewById(R.id.tvsave);
+        imgBackInformation = view.findViewById(R.id.img_back_Information);
     }
     private void setview(){
-        Intent intent=getIntent();
-        id=intent.getIntExtra("id",0);
-        String name=intent.getStringExtra("name");
-        String name1=intent.getStringExtra("name1");
-        String name2=intent.getStringExtra("name2");
-        String name3=intent.getStringExtra("name3");
+        Bundle bundle=new Bundle();
+        id =bundle.getInt("id",0);
+        String name=bundle.getString("name");
+        String name1=bundle.getString("name1");
+        String name2=bundle.getString("name2");
+        String name3=bundle.getString("name3");
 
         editTextname.setText(name);
         editTextdate.setText(name1);
@@ -262,7 +281,7 @@ public class InformationActivity extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(name3).centerCrop().into(profileImage);
     }
     private void updateCustomer(int ida, String name,String sdt,String birthday ){
-        final ProgressDialog progressDialog = new ProgressDialog(InformationActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -271,13 +290,13 @@ public class InformationActivity extends AppCompatActivity {
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                Toast.makeText(InformationActivity.this, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(InformationActivity.this, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         });
@@ -297,7 +316,7 @@ public class InformationActivity extends AppCompatActivity {
                     editTextdate.setText(simpleDateFormat.format(calendar.getTime()));
                 }
             };
-            new DatePickerDialog(InformationActivity.this,onDateSetListener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+            new DatePickerDialog(getContext(),onDateSetListener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
 
         });
     }

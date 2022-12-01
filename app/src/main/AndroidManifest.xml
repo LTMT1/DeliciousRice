@@ -36,9 +36,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.account.Activity.ChangePasActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.shop.Activity.PayActivity"
             android:exported="false" />
         <activity
@@ -74,42 +71,7 @@
             android:name=".ui.account.Activity.EditAddressActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.account.Activity.ReceiptActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.account.Activity.ContactActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ui.account.Activity.AddressActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.account.Activity.PolicyActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.account.Activity.InformationActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.account.Activity.SettingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

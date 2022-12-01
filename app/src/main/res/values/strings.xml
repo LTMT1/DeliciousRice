@@ -79,4 +79,6 @@
     <string name="fb_login_protocol_scheme">fb1125742061638886</string>
     <string name="facebook_client_token">91d0141051fbfdc3451686e064c72b5e</string>
     <string name="server_client_id">988916052190-132lhj8c3hm32inelh1n7u7u4ktfhtqn.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
