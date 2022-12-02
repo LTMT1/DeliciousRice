@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
@@ -125,6 +126,7 @@ public class DetailActivity extends AppCompatActivity {
                     //them vao mang gio hang
                     ShopFragment.Cartlist.add(new Cart(id_product, product.getProduct_name(), Tien2, product.getImage(), sl1));
                     Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
+                    MainActivity2.setBugdeNumber();
                 }
             } else //gio hang rong
             {

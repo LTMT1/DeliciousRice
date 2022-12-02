@@ -53,8 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
         if (validateName() && validateEmail() && validatePass() && validateRePass()) {
             loadingDialog = new LoadingDialog(this);
             loadingDialog.startLoadingDialog("Xin vui lòng chờ...");
-
-
             String str_name = edtHoTen.getText().toString().trim();
             String str_email = edtEmailDangNhap.getText().toString().trim();
             String str_password = edtPassWordDangKy.getText().toString().trim();

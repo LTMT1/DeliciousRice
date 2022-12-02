@@ -81,4 +81,5 @@
     <string name="server_client_id">988916052190-132lhj8c3hm32inelh1n7u7u4ktfhtqn.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_notification_channel_id" />
 </resources>

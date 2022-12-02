@@ -108,14 +108,21 @@ public interface ApiProduct {
     @FormUrlEncoded
     @POST("RegisterRestApi.php")
     Call<ResponseApi> register(@Field("username") String username, @Field("email") String email, @Field("password") String password);
-
+    @FormUrlEncoded
     @POST("insertBill.php")
-    Call<String> addbill(@Field("Bill") String bill, @Field("customer") int id_customer, @Field("Date")
-            String Date, @Field("status") String status, @Field("money") int money);
+    Call<String> addbill(@Field("Bill") String bill, @Field("customer") int id_customerl, @Field("adress") String adreess, @Field("Date")
+            String Date, @Field("note") String note, @Field("money") int money);
 
     @FormUrlEncoded
     @POST("insertDetailBill.php")
     Call<String> adddetailbill(@Field("bill") String bill, @Field("idproduct")
             int idproduct, @Field("amount") int amount, @Field("totalmoney") int totalmoney);
+    @FormUrlEncoded
+    @POST("notificationToken.php")
+    Call<String> token(@Field("Token") String token);
+
+    @GET("getNotification.php")
+    Call<String> pushNotification();
+
 
 }

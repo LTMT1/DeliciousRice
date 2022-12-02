@@ -96,11 +96,10 @@ public class PayActivity extends AppCompatActivity {
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String currentDateandTime = sdf.format(new Date());
-
-            String edstatus = edtstatus.getText().toString().trim();
+            String ednote = edtstatus.getText().toString().trim();
 
             if (ShopFragment.Cartlist.size() > 0) {
-                addBill(id_bill, id_customer, currentDateandTime, edstatus, totalmoney);
+                addBill(id_bill, id_customer,"Hà Nội", currentDateandTime, ednote, totalmoney);
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -122,6 +121,7 @@ public class PayActivity extends AppCompatActivity {
                         CartFragment.UpdateTongTien();
                         CartFragment.adapterCart.notifyDataSetChanged();
                         Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
+                        PushNotification();
                     }
                 }, 7000);
 
@@ -131,18 +131,17 @@ public class PayActivity extends AppCompatActivity {
         });
     }
 
-    private void addBill(String bill, int idcus, String date, String status, int money) {
+    private void addBill(String bill, int idcus, String adreess, String date, String note, int money) {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.addbill(bill, idcus, date, status, money);
+        Call<String> callback = apiProduct.addbill(bill, idcus,adreess, date, note, money);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.e("thanh cong", response.body() + "");
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.e("that bai ", "");
+
             }
         });
     }
@@ -154,7 +153,20 @@ public class PayActivity extends AppCompatActivity {
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.e("thanh cong cc", response.body() + "");
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+    private void PushNotification(){
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.pushNotification();
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
             }
 
             @Override
