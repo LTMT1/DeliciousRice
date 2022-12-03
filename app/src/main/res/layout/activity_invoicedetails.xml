@@ -249,7 +249,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/tvSoMon"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Tạm tính (4 món)"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView82"
+                app:layout_constraintEnd_toStartOf="@+id/tvTongTien"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rcyViewChiTietDH" />
 
@@ -271,8 +271,8 @@
                 android:text="Phí áp dụng: 5.5km"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toStartOf="@+id/textView83"
-                app:layout_constraintStart_toStartOf="@+id/textView27"
-                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                app:layout_constraintStart_toStartOf="@+id/tvSoMon"
+                app:layout_constraintTop_toBottomOf="@+id/tvSoMon" />
 
             <TextView
                 android:id="@+id/textView63"
@@ -289,7 +289,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
             <TextView
-                android:id="@+id/textView82"
+                android:id="@+id/tvTongTien"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -297,9 +297,9 @@
                 android:layout_marginEnd="15dp"
                 android:text="  165.000 đ"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView27"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSoMon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView27" />
+                app:layout_constraintStart_toEndOf="@+id/tvSoMon" />
 
             <TextView
                 android:id="@+id/textView83"
@@ -309,7 +309,7 @@
                 android:text="  35.000 đ"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView31"
-                app:layout_constraintEnd_toEndOf="@+id/textView82" />
+                app:layout_constraintEnd_toEndOf="@+id/tvTongTien" />
 
             <TextView
                 android:id="@+id/textView84"
@@ -371,7 +371,7 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/textView87"
+        android:id="@+id/tvDatlai"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="45dp"

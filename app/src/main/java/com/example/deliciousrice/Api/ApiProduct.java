@@ -3,6 +3,7 @@ package com.example.deliciousrice.Api;
 import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Customer;
+import com.example.deliciousrice.Model.Detailbill;
 import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.Model.ProductBill;
@@ -29,10 +30,6 @@ public interface ApiProduct {
 
     @GET("productHot.php")
     Call<ArrayList<Product>> getListProductHot();
-
-    @GET("DetailBill.php")
-    Call<ArrayList<ProductBill>> getListProductBill();
-
 
     @FormUrlEncoded
     @POST("getdataCustomer.php")
@@ -108,6 +105,7 @@ public interface ApiProduct {
     @FormUrlEncoded
     @POST("RegisterRestApi.php")
     Call<ResponseApi> register(@Field("username") String username, @Field("email") String email, @Field("password") String password);
+
     @FormUrlEncoded
     @POST("insertBill.php")
     Call<String> addbill(@Field("Bill") String bill, @Field("customer") int id_customerl, @Field("adress") String adreess, @Field("Date")
@@ -117,6 +115,12 @@ public interface ApiProduct {
     @POST("insertDetailBill.php")
     Call<String> adddetailbill(@Field("bill") String bill, @Field("idproduct")
             int idproduct, @Field("amount") int amount, @Field("totalmoney") int totalmoney);
+
+
+    @FormUrlEncoded
+    @POST("DetailBill.php")
+    Call<List<Detailbill>> getProductBill(@Field("customer") int id_customer, @Field("bill") String id_bill);
+
     @FormUrlEncoded
     @POST("notificationToken.php")
     Call<String> token(@Field("Token") String token);

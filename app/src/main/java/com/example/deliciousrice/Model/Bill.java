@@ -6,15 +6,15 @@ public class Bill implements Serializable {
     private String id_bill;
     private int id_customer;
     private int id_staff;
-    private String date;
+    private String date_created;
     private String status;
     private int money;
 
-    public Bill(String id_bill, int id_customer, int id_staff, String date, String status, int money) {
+    public Bill(String id_bill, int id_customer, int id_staff, String date_created, String status, int money) {
         this.id_bill = id_bill;
         this.id_customer = id_customer;
         this.id_staff = id_staff;
-        this.date = date;
+        this.date_created = date_created;
         this.status = status;
         this.money = money;
     }
@@ -44,11 +44,11 @@ public class Bill implements Serializable {
     }
 
     public String getDate() {
-        return date;
+        return date_created;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate(String date_created) {
+        this.date_created = date_created;
     }
 
     public String getStatus() {
