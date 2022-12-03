@@ -14,6 +14,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.deliciousrice.Activity.BarColor;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Adderss;
@@ -35,6 +36,7 @@ public class AddAddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BarColor.setStatusBarColor(this);
         setContentView(R.layout.activity_add_address);
         imgBackAddAddress = findViewById(R.id.img_backAdd_Address);
         imgBackAddAddress.setOnClickListener(v -> {

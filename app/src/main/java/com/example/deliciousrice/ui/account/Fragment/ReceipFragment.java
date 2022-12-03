@@ -67,16 +67,11 @@ public class ReceipFragment extends Fragment {
 
             ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
             ft.commit();
-
-
         });
 
         rclview = view.findViewById(R.id.rclview);
         getreceipt();
-
-
     }
-
 
 
     private void getreceipt(){

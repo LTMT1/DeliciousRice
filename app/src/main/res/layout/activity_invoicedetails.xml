@@ -8,7 +8,7 @@
     tools:context=".ui.shop.Activity.InvoicedetailsActivity">
 
     <ImageView
-        android:id="@+id/imageView27"
+        android:id="@+id/img_back_Invoicedetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -36,7 +36,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.397"
-        app:layout_constraintStart_toEndOf="@+id/imageView27"
+        app:layout_constraintStart_toEndOf="@+id/img_back_Invoicedetails"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView

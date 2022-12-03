@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.deliciousrice.Activity.BarColor;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Adderss;
@@ -35,7 +36,7 @@ public class EditAddressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_address);
-
+        BarColor.setStatusBarColor(this);
         ImgBack=findViewById(R.id.img_backEd_setting);
         ImgBack.setOnClickListener(v->{
             Intent intents = new Intent(EditAddressActivity.this, AddressFragment.class);

@@ -61,11 +61,8 @@ public class AddressFragment extends Fragment {
         rclAddress = view.findViewById(R.id.rcl_address);
         imgBackAddress = view.findViewById(R.id.img_back_Address);
         imgBackAddress.setOnClickListener(v->{
-
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-
-
             AccountFragment fragment=new AccountFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("Adrress",idadr);
@@ -76,17 +73,11 @@ public class AddressFragment extends Fragment {
         });
 
 
-
-
-
         Bundle bundle=getArguments();
         idadr =bundle.getInt("Adrress", 0);
         Log.e("alo id", String.valueOf(idadr));
 
-
-        // btn add
         cl_insertAdsress.setOnClickListener(v -> {
-
             Intent i=new Intent(getContext(), AddAddressActivity.class);
             i.putExtra("iccome",idadr);
             startActivity(i);

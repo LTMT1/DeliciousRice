@@ -6,22 +6,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
-import com.example.deliciousrice.Adapter.AdapterDetailBill;
 import com.example.deliciousrice.Adapter.AdapterHistoryBill;
 import com.example.deliciousrice.Adapter.AdapterProductBill;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Bill;
-import com.example.deliciousrice.Model.Detailbill;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.Model.ProductBill;
 import com.example.deliciousrice.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,14 +25,12 @@ import retrofit2.Response;
 
 public class InvoicedetailsActivity extends AppCompatActivity {
 
-    private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat,tvTongTien,tvSoMon,tvDatLai;
+    private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat;
     private RecyclerView rcyViewDetailReceipt;
 
-    AdapterDetailBill adapterDetailBill;
+    AdapterProductBill adapterProductBill;
     String id_billl;
-    int id_customer;
     Bill bill;
-    Detailbill detailbill;
 
 
     @Override
@@ -51,7 +45,6 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         Anhxa();
         setData();
         getDataDetailBill();
-        datLaiOnClick();
     }
 
     private void Anhxa() {
@@ -61,50 +54,32 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         tvNameNV = findViewById(R.id.tvNameNV);
         tvDiaChi = findViewById(R.id.tvDiaChi);
         tvDateDat = findViewById(R.id.tvDateDat);
-        tvTongTien = findViewById(R.id.tvTongTien);
-        tvSoMon = findViewById(R.id.tvSoMon);
-        tvDatLai = findViewById(R.id.tvDatlai);
         rcyViewDetailReceipt = findViewById(R.id.rcyViewChiTietDH);
     }
 
     private void setData(){
         tvMaBill.setText(bill.getId_bill());
-        tvDateDat.setText(bill.getDate()+"");
-        tvTongTien.setText(String.valueOf(bill.getMoney()));
+        tvDateDat.setText(bill.getDate());
     }
 
     private void getDataDetailBill(){
         ApiProduct apiProduct = ApiService.getService();
-        Call<List<Detailbill>> listCallProductBill = apiProduct.getProductBill(bill.getId_customer(), id_billl);
-        listCallProductBill.enqueue(new Callback<List<Detailbill>>() {
+        Call<ArrayList<ProductBill>> listCallProductBill = apiProduct.getListProductBill();
+        listCallProductBill.enqueue(new Callback<ArrayList<ProductBill>>() {
             @Override
-            public void onResponse(Call<List<Detailbill>> call, Response<List<Detailbill>> response) {
-                List<Detailbill> detailbillArrayList = new ArrayList<>();
-                detailbillArrayList = response.body();
-
-                detailbill = response.body().get(0);
-                tvDiaChi.setText(detailbill.getAddress());
-                tvNameNV.setText(detailbill.getUser_name());
-                tvSoMon.setText("Tạm tính ("+detailbill.getAmount()+" mon)");
-
+            public void onResponse(Call<ArrayList<ProductBill>> call, Response<ArrayList<ProductBill>> response) {
+                ArrayList<ProductBill> productBillArrayList = new ArrayList<>();
+                productBillArrayList = response.body();
                 rcyViewDetailReceipt.setHasFixedSize(true);
                 rcyViewDetailReceipt.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false));
-                adapterDetailBill = new AdapterDetailBill(detailbillArrayList, getApplicationContext());
-                rcyViewDetailReceipt.setAdapter(adapterDetailBill);
-
-
+                adapterProductBill = new AdapterProductBill(productBillArrayList, getApplicationContext());
+                rcyViewDetailReceipt.setAdapter(adapterProductBill);
             }
 
             @Override
-            public void onFailure(Call<List<Detailbill>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<ProductBill>> call, Throwable t) {
 
             }
-        });
-    }
-
-    private void datLaiOnClick(){
-        tvDatLai.setOnClickListener(view -> {
-
         });
     }
 

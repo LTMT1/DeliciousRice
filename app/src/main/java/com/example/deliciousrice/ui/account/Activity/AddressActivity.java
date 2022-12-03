@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.example.deliciousrice.Activity.BarColor;
 import com.example.deliciousrice.Adapter.AdapterAddress;
 import com.example.deliciousrice.Adapter.AdapterProductHot;
 import com.example.deliciousrice.Api.ApiProduct;
@@ -46,6 +47,7 @@ public class AddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BarColor.setStatusBarColor(this);
         setContentView(R.layout.activity_address);
         imgBackAddress = findViewById(R.id.img_back_Address);
         imgBackAddress.setOnClickListener(v->{
