@@ -60,12 +60,12 @@ public class AddressFragment extends Fragment {
         cl_insertAdsress = view.findViewById(R.id.cl_insertAdsress);
         rclAddress = view.findViewById(R.id.rcl_address);
         imgBackAddress = view.findViewById(R.id.img_back_Address);
-        imgBackAddress.setOnClickListener(v->{
+        imgBackAddress.setOnClickListener(v -> {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            AccountFragment fragment=new AccountFragment();
+            AccountFragment fragment = new AccountFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt("Adrress",idadr);
+            bundle.putInt("Adrress", idadr);
             fragment.setArguments(bundle);
 
             ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
@@ -73,13 +73,13 @@ public class AddressFragment extends Fragment {
         });
 
 
-        Bundle bundle=getArguments();
-        idadr =bundle.getInt("Adrress", 0);
+        Bundle bundle = getArguments();
+        idadr = bundle.getInt("Adrress", 0);
         Log.e("alo id", String.valueOf(idadr));
 
         cl_insertAdsress.setOnClickListener(v -> {
-            Intent i=new Intent(getContext(), AddAddressActivity.class);
-            i.putExtra("iccome",idadr);
+            Intent i = new Intent(getContext(), AddAddressActivity.class);
+            i.putExtra("iccome", idadr);
             startActivity(i);
 
         });
@@ -87,6 +87,7 @@ public class AddressFragment extends Fragment {
 
 
     }
+
     private void ShowAddress() {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please Wait..");
@@ -94,22 +95,22 @@ public class AddressFragment extends Fragment {
         progressDialog.show();
 
 
-        ApiProduct apiProduct= ApiService.getService();
+        ApiProduct apiProduct = ApiService.getService();
         Call<ArrayList<Adderss>> listAddre = apiProduct.getListAddresss(idadr);
         listAddre.enqueue(new Callback<ArrayList<Adderss>>() {
             @Override
             public void onResponse(Call<ArrayList<Adderss>> call, Response<ArrayList<Adderss>> response) {
                 ArrayList<Adderss> addersses = new ArrayList<>();
                 progressDialog.dismiss();
-                addersses =  response.body();
+                addersses = response.body();
                 rclAddress.setHasFixedSize(true);
-                rclAddress.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
+                rclAddress.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
 
 
                 adapterAddress = new AdapterAddress(addersses, AddressFragment.this, addressNew -> {
 
-                    Intent intent=new Intent(getContext(), EditAddressActivity.class);
-                    intent.putExtra("idcustomer",idadr);
+                    Intent intent = new Intent(getContext(), EditAddressActivity.class);
+                    intent.putExtra("idcustomer", idadr);
                     intent.putExtra("getdataAddress", addressNew);
                     startActivity(intent);
 

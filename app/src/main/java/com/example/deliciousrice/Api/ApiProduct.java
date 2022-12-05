@@ -4,9 +4,7 @@ import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Model.Detailbill;
-import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
-import com.example.deliciousrice.Model.ProductBill;
 import com.example.deliciousrice.Model.ResponseApi;
 
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("getdataCustomer.php")
-    Call<List<Customer>> getcustomer(@Field("email") String email, @Field("pass") String pass);
+    Call<List<Customer>> getcustomer(@Field("email") String email);
 
     @FormUrlEncoded
     @POST("ChangePassword.php")
@@ -41,7 +39,7 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("getFavorite.php")
-    Call<List<Favorite>> getListFavorite(@Field("customer") int customer);
+    Call<List<Product>> getListFavorite(@Field("customer") int customer);
 
     @FormUrlEncoded
     @POST("insertFavorite.php")
@@ -53,11 +51,11 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("RegisterGoogle.php")
-    Call<String> registergoogle(@Field("id") String idgoogle, @Field("username") String username,@Field("image") String image,@Field("email") String email);
+    Call<String> registergoogle(@Field("id") String idgoogle, @Field("username") String username, @Field("image") String image, @Field("email") String email);
 
     @FormUrlEncoded
     @POST("DeleteFavorite.php")
-    Call<Favorite> deletefavorite(@Field("customer") int idcustomer, @Field("product") int idproduct);
+    Call<Product> deletefavorite(@Field("customer") int idcustomer, @Field("product") int idproduct);
 
     @FormUrlEncoded
     @POST("checkFavorite.php")
@@ -68,8 +66,16 @@ public interface ApiProduct {
     Call<List<Product>> SeachProduct(@Field("product_name") String product_name);
 
     @FormUrlEncoded
-    @POST("updatecustomer.php")
-    Call<String> updatecustomer(@Field("customer") int idcustomer, @Field("user_name") String user_name, @Field("phone_number") String phone_number, @Field("birthday") String birthday);
+    @POST("updateBirthdProfile.php")
+    Call<String> updatebirthday(@Field("customer") int idcustomer, @Field("birthday") String birthday);
+
+    @FormUrlEncoded
+    @POST("updateNameProfile.php")
+    Call<String> updatename(@Field("customer") int idcustomer, @Field("user_name") String user_name);
+
+    @FormUrlEncoded
+    @POST("updateSdtProfile.php")
+    Call<String> updatesdt(@Field("customer") int idcustomer,@Field("phone_number") String phone_number);
 
     /*Địa chỉ*/
     @FormUrlEncoded

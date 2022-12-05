@@ -14,13 +14,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,25 +58,21 @@ import retrofit2.Callback;
 
 
 public class InformationFragment extends Fragment {
-    
+
     private CircleImageView profileImage;
     private EditText editTextSDT;
     private EditText editTextdate;
     private EditText editTextname;
-    private TextView tvsave;
     private ImageView imgBackInformation;
+    private ImageView iconeditsdt;
+    private ImageView iconeditdate;
+    private ImageView iconeditname;
 
-
-
-
-    int click = 0;
     private static final int GALLERY = 1, CAMERA = 2;
     Bitmap FixBitmap;
 
     int id;
-    private Uri imageUri;
-    Bitmap bitmap;
-    String encodedImage,name,name1,name2,name3;
+    String  name, name1, name2, name3;
     private int RESULT_CANCELED;
 
     @Override
@@ -86,19 +85,17 @@ public class InformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         Anhxa(view);
         requestPermissions();
         setview();
         calenderDate();
-        imgBackInformation.setOnClickListener(v->{
-
+        UpdateCustomer();
+        imgBackInformation.setOnClickListener(v -> {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            AccountFragment informationFragment=new AccountFragment();
+            AccountFragment informationFragment = new AccountFragment();
 
-            Bundle bundle  = new Bundle();
+            Bundle bundle = new Bundle();
             bundle.putInt("id", id);
             bundle.putString("name", name);
             bundle.putString("name1", name1);
@@ -117,36 +114,15 @@ public class InformationFragment extends Fragment {
 
             }
         });
-        tvsave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (click != 0){
-                    editTextSDT.setEnabled(false);
-                    editTextdate.setEnabled(false);
-                    editTextname.setEnabled(false);
-                    tvsave.setText("Chỉnh sửa");
-                    String name=editTextname.getText().toString().trim();
-                    String sdt =editTextSDT.getText().toString().trim();
-                    String birthday =editTextdate.getText().toString().trim();
-                    updateCustomer(id,name,sdt,birthday);
-                    click++;
-                }else{
-                    editTextSDT.setEnabled(true);
-                    editTextdate.setEnabled(true);
-                    editTextname.setEnabled(true);
-                    tvsave.setText("Lưu");
-                    click--;
-                }
 
-            }
-        });
     }
+
     private void openImage() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getContext());
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
                 "Photo Gallery",
-                "Camera" };
+                "Camera"};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -163,6 +139,7 @@ public class InformationFragment extends Fragment {
                 });
         pictureDialog.show();
     }
+
     public void choosePhotoFromGallary() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -181,17 +158,13 @@ public class InformationFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == this.RESULT_CANCELED) {
             return;
-            ////getContentResolver()
         }
         if (requestCode == GALLERY) {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
                     FixBitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), contentURI);
-                    // String path = saveImage(bitmap);
-                    //Toast.makeText(MainActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                     profileImage.setImageBitmap(FixBitmap);
-//                    UploadImageOnServerButton.setVisibility(View.VISIBLE);
                     uploadImage(FixBitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -203,12 +176,11 @@ public class InformationFragment extends Fragment {
             FixBitmap = (Bitmap) data.getExtras().get("data");
             profileImage.setImageBitmap(FixBitmap);
             uploadImage(FixBitmap);
-//            UploadImageOnServerButton.setVisibility(View.VISIBLE);
-            //  saveImage(thumbnail);
-            //Toast.makeText(ShadiRegistrationPart5.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }
-    private void uploadImage(Bitmap bitmap){
+
+    private void uploadImage(Bitmap bitmap) {
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -216,23 +188,23 @@ public class InformationFragment extends Fragment {
         String imgname = String.valueOf(Calendar.getInstance().getTimeInMillis());
 
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.imgUpload(id,imgname,encodedImage);
+        Call<String> callback = apiProduct.imgUpload(id, imgname, encodedImage);
         callback.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call,retrofit2.Response<String> response) {
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
 
             }
 
             @Override
-            public void onFailure(Call<String>  call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
 
             }
         });
     }
-    private void  requestPermissions(){
+
+    private void requestPermissions() {
         Dexter.withActivity(getActivity())
                 .withPermissions(
-
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
@@ -263,34 +235,38 @@ public class InformationFragment extends Fragment {
                 .check();
     }
 
-    private void Anhxa( View view) {
+    private void Anhxa(View view) {
         profileImage = view.findViewById(R.id.profile_image);
         editTextSDT = view.findViewById(R.id.editTextSDT);
         editTextdate = view.findViewById(R.id.editTextdate);
         editTextname = view.findViewById(R.id.editTextname);
-        tvsave = view.findViewById(R.id.tvsave);
         imgBackInformation = view.findViewById(R.id.img_back_Information);
+        iconeditsdt = view.findViewById(R.id.iconeditsdt);
+        iconeditdate = view.findViewById(R.id.iconeditdate);
+        iconeditname = view.findViewById(R.id.iconeditname);
     }
-    private void setview(){
-        Bundle bundle=getArguments();
-        id =bundle.getInt("id",0);
-        String name=bundle.getString("name");
-        String name1=bundle.getString("name1");
-        String name2=bundle.getString("name2");
-        String name3=bundle.getString("name3");
+
+    private void setview() {
+        Bundle bundle = getArguments();
+        id = bundle.getInt("id", 0);
+        String name = bundle.getString("name");
+        String name1 = bundle.getString("name1");
+        String name2 = bundle.getString("name2");
+        String name3 = bundle.getString("name3");
 
         editTextname.setText(name);
         editTextdate.setText(name1);
         editTextSDT.setText(name2);
         Glide.with(getApplicationContext()).load(name3).centerCrop().into(profileImage);
     }
-    private void updateCustomer(int ida, String name,String sdt,String birthday ){
+
+    private void updateBirthday(int ida, String birthday) {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
         progressDialog.show();
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.updatecustomer(ida,name,sdt,birthday);
+        Call<String> callback = apiProduct.updatebirthday(ida, birthday);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
@@ -306,22 +282,122 @@ public class InformationFragment extends Fragment {
         });
     }
 
-    private void calenderDate(){
+    private void updateName(int ida, String name) {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Please Wait..");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.updatename(ida, name);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+
+    private void updateSDT(int ida, String sdt) {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Please Wait..");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.updatesdt(ida, sdt);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+
+    private void calenderDate() {
         editTextdate.setOnClickListener(view -> {
             Calendar calendar = Calendar.getInstance();
             DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                    calendar.set(Calendar.YEAR,year);
-                    calendar.set(Calendar.MONTH,month);
-                    calendar.set(Calendar.DAY_OF_MONTH,day);
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, day);
 
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy ");
                     editTextdate.setText(simpleDateFormat.format(calendar.getTime()));
                 }
             };
-            new DatePickerDialog(getContext(),onDateSetListener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+            new DatePickerDialog(getContext(), onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
+        });
+    }
+    private void UpdateCustomer(){
+        iconeditsdt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextSDT.setEnabled(true);
+                editTextSDT.setOnKeyListener(new View.OnKeyListener() {
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            String sdt = editTextSDT.getText().toString().trim();
+                            updateSDT(id, sdt);
+                            editTextSDT.setEnabled(false);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
+        iconeditname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextname.setEnabled(true);
+                editTextname.setOnKeyListener(new View.OnKeyListener() {
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            String name = editTextname.getText().toString().trim();
+                            updateName(id, name);
+                            editTextname.setEnabled(false);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
+        iconeditdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextdate.setEnabled(true);
+                editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
+                editTextdate.setOnKeyListener(new View.OnKeyListener() {
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            String birthday = editTextdate.getText().toString().trim();
+                            updateBirthday(id, birthday);
+                            editTextdate.setEnabled(false);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            }
         });
     }
 }

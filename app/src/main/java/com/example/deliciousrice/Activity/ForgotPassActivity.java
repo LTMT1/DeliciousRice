@@ -44,6 +44,8 @@ public class ForgotPassActivity extends AppCompatActivity {
     AdapterForgotPass adapterForgotPass;
     private SearchView searchViewcustomer;
     ConstraintLayout constraintLayout;
+    private ImageView ivBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,9 @@ public class ForgotPassActivity extends AppCompatActivity {
         searchViewcustomer = findViewById(R.id.searchViewcustomer);
         constraintLayout = findViewById(R.id.Seachtk);
         rclTimKiem = findViewById(R.id.rclviewseach);
+        ivBack = findViewById(R.id.ivBack);
+        BackToLogin();
+
         searchViewcustomer.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -71,63 +76,71 @@ public class ForgotPassActivity extends AppCompatActivity {
         rclTimKiem.setAdapter(adapterForgotPass);
     }
 
+    public void BackToLogin() {
+        ivBack.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        });
+
+    }
+
     public void onCLickForgotPassword() {
         CustomerArrayList.clear();
         String seach = searchViewcustomer.getQuery().toString().trim();
-            String apiforgotpass = "http://chucdong.com/Deliciousrice/API/FindAccount.php";
-            final ProgressDialog progressDialog = new ProgressDialog(ForgotPassActivity.this);
-            progressDialog.setMessage("Please Wait..");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, apiforgotpass, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        progressDialog.dismiss();
-                        JSONObject jsonObject = new JSONObject(response);
-                        String result = jsonObject.getString("status");
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        if (result.equals("thanh cong")) {
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject object = jsonArray.getJSONObject(i);
-                                CustomerArrayList.add(new Customer(
-                                        object.getInt("id_customer"),
-                                        object.getString("user_name"),
-                                        object.getString("image"),
-                                        object.getString("birthday"),
-                                        object.getString("phone_number"),
-                                        object.getString("address"),
-                                        object.getString("email"),
-                                        object.getString("password")
-                                ));
-                                adapterForgotPass.notifyDataSetChanged();
-                                constraintLayout.setVisibility(View.INVISIBLE);
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Không tìm thấy tài khoản của bạn.", Toast.LENGTH_SHORT).show();
-                            constraintLayout.setVisibility(View.VISIBLE);
-                            adapterForgotPass.notifyDataSetChanged();
-                            CustomerArrayList.clear();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+        String apiforgotpass = "http://chucdong.com/Deliciousrice/API/FindAccount.php";
+        final ProgressDialog progressDialog = new ProgressDialog(ForgotPassActivity.this);
+        progressDialog.setMessage("Please Wait..");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiforgotpass, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+                    JSONObject jsonObject = new JSONObject(response);
+                    String result = jsonObject.getString("status");
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    if (result.equals("thanh cong")) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            CustomerArrayList.add(new Customer(
+                                    object.getInt("id_customer"),
+                                    object.getString("user_name"),
+                                    object.getString("image"),
+                                    object.getString("birthday"),
+                                    object.getString("phone_number"),
+                                    object.getString("address"),
+                                    object.getString("email"),
+                                    object.getString("password")
+                            ));
+                            adapterForgotPass.notifyDataSetChanged();
+                            constraintLayout.setVisibility(View.INVISIBLE);
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Không tìm thấy tài khoản của bạn.", Toast.LENGTH_SHORT).show();
+                        constraintLayout.setVisibility(View.VISIBLE);
+                        adapterForgotPass.notifyDataSetChanged();
+                        CustomerArrayList.clear();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("email", seach);
-                    return params;
-                }
-            };
-            requestQueue.add(stringRequest);
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", seach);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 }

@@ -13,13 +13,11 @@ public class LoadingDialog {
     private Context context;
     private Dialog dialog;
 
-    public LoadingDialog(Context context)
-    {
+    public LoadingDialog(Context context) {
         this.context = context;
     }
 
-    public void startLoadingDialog(String title)
-    {
+    public void startLoadingDialog(String title) {
         dialog = new Dialog(context);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(R.layout.dialog_loading);
@@ -32,8 +30,7 @@ public class LoadingDialog {
     }
 
 
-    public void dismisDialog()
-    {
+    public void dismisDialog() {
         dialog.dismiss();
     }
 }

@@ -18,10 +18,10 @@ import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 
 import java.util.ArrayList;
 
-public class AdapterAddress extends RecyclerView.Adapter<AdapterAddress.AddressViewHoldel>{
+public class AdapterAddress extends RecyclerView.Adapter<AdapterAddress.AddressViewHoldel> {
     private ArrayList<Adderss> list;
     private AddressFragment fragment;
-    private AddressItemClick  addressItemClick;
+    private AddressItemClick addressItemClick;
 
 
     public AdapterAddress(ArrayList<Adderss> list, AddressFragment fragment, AddressItemClick addressItemClick) {
@@ -33,16 +33,16 @@ public class AdapterAddress extends RecyclerView.Adapter<AdapterAddress.AddressV
     @NonNull
     @Override
     public AddressViewHoldel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_address,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_address, parent, false);
         return new AdapterAddress.AddressViewHoldel(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AddressViewHoldel holder, int position) {
-        Adderss adderss=list.get(position);
+        Adderss adderss = list.get(position);
         holder.tvNameAddress.setText(adderss.getAddress_name());
         holder.tvAddress.setText(adderss.getAddress_specifically());
-        holder.itemAddress.setOnClickListener(v->{
+        holder.itemAddress.setOnClickListener(v -> {
             addressItemClick.itemAddressItemClick(adderss);
 
         });
@@ -54,10 +54,11 @@ public class AdapterAddress extends RecyclerView.Adapter<AdapterAddress.AddressV
         return list.size();
     }
 
-    public  class AddressViewHoldel extends RecyclerView.ViewHolder {
+    public class AddressViewHoldel extends RecyclerView.ViewHolder {
         private ConstraintLayout itemAddress;
         private TextView tvNameAddress;
         private TextView tvAddress;
+
         public AddressViewHoldel(@NonNull View itemView) {
             super(itemView);
             itemAddress = itemView.findViewById(R.id.item_address);

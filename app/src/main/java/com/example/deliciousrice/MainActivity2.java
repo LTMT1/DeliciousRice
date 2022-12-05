@@ -1,6 +1,10 @@
 package com.example.deliciousrice;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -9,7 +13,9 @@ import android.view.WindowManager;
 
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Customer;
+import com.example.deliciousrice.ui.cart.CartFragment;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +36,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +54,6 @@ public class MainActivity2 extends AppCompatActivity {
     private String email = "", password = "";
     private String image, user_name, phone_number, address, birthday, emaill, passs;
     private int id_customer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +67,6 @@ public class MainActivity2 extends AppCompatActivity {
                     return;
                 }
                 String token = task.getResult().getToken();
-                Log.e("sssssssssss", token);
                 registerToken(token);
             }
         });
@@ -77,7 +82,7 @@ public class MainActivity2 extends AppCompatActivity {
         binding.navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.shop:
                         navController.navigate(R.id.shop);
                         break;
@@ -97,12 +102,9 @@ public class MainActivity2 extends AppCompatActivity {
                 return true;
             }
         });
-
-
-
         setStatusBarColor();
         getDatas();
-        getdataCustomer(email, password);
+        getdataCustomer(email);
     }
 
     private void setStatusBarColor() {
@@ -118,9 +120,9 @@ public class MainActivity2 extends AppCompatActivity {
         password = preferences.getString("matkhau", "");
     }
 
-    public void getdataCustomer(String emails, String pass) {
+    public void getdataCustomer(String emails) {
         ApiProduct apiProduct = ApiService.getService();
-        Call<List<Customer>> callback = apiProduct.getcustomer(emails, pass);
+        Call<List<Customer>> callback = apiProduct.getcustomer(emails);
         callback.enqueue(new Callback<List<Customer>>() {
             @Override
             public void onResponse(Call<List<Customer>> call, Response<List<Customer>> response) {
@@ -152,7 +154,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     public void updateMain() {
-        getdataCustomer(email, password);
+        getdataCustomer(email);
     }
 
     public int getId_customer() {
@@ -198,15 +200,16 @@ public class MainActivity2 extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        binding=null;
+        binding = null;
     }
+
     public static void setBugdeNumber() {
         int number = ShopFragment.Cartlist.size();
-        if (number > 0){
+        if (number > 0) {
             BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.cart);
-        badgeDrawable.setMaxCharacterCount(3);
-        badgeDrawable.setNumber(number);
-        badgeDrawable.setVisible(true);
-    }
+            badgeDrawable.setMaxCharacterCount(3);
+            badgeDrawable.setNumber(number);
+            badgeDrawable.setVisible(true);
+        }
     }
 }

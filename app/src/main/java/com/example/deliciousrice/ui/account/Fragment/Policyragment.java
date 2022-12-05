@@ -19,7 +19,6 @@ public class Policyragment extends Fragment {
     private ImageView imgBackPolicy;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class Policyragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         imgBackPolicy = view.findViewById(R.id.img_back_policy);
-        imgBackPolicy.setOnClickListener(v->{
+        imgBackPolicy.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_policFragment_to_accountFragment);
         });
     }

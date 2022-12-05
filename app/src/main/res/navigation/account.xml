@@ -85,9 +85,6 @@
         <action
             android:id="@+id/action_addressFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
-        <action
-            android:id="@+id/action_addressFragment_to_addAddressFragment"
-            app:destination="@id/addAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePasFragment"
@@ -97,15 +94,6 @@
         <action
             android:id="@+id/action_changePasFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/addAddressFragment"
-        android:name="com.example.deliciousrice.ui.account.Fragment.AddAddressFragment"
-        android:label="fragment_add_address"
-        tools:layout="@layout/fragment_add_address" >
-        <action
-            android:id="@+id/action_addAddressFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
     </fragment>
 
 </navigation>

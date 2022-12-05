@@ -88,7 +88,6 @@ public class ConfirmOTPActivity extends AppCompatActivity {
     private void onCLickCheckOtp() {
         Intent intents = getIntent();
         int Chechotp = intents.getIntExtra("otp", 0);
-        Log.e("asss",Chechotp+"");
         String str_otp = editTextCheckOTP.getText().toString().trim();
         if (str_otp.equalsIgnoreCase(String.valueOf(Chechotp))) {
             intents.removeExtra("otp");
@@ -96,8 +95,6 @@ public class ConfirmOTPActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ChangePassActivity.class);
             intent.putExtra("email", customer.getEmail());
             startActivity(intent);
-            //
-            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "otp code is not correct.", Toast.LENGTH_SHORT).show();
         }

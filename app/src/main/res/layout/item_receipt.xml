@@ -25,27 +25,31 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="20dp"
         android:text="30 th 9 2022"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView39"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.229"
         app:layout_constraintStart_toEndOf="@+id/tvbill"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvmoney"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:text="  Thanh tiền : 180.000đ"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvbill" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/tvstatus"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,23 +57,9 @@
         android:layout_marginBottom="15dp"
         android:text="Đã hủy"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView24"
+        app:layout_constraintStart_toEndOf="@+id/imgstatus"
         app:layout_constraintTop_toBottomOf="@+id/tvmoney"
         app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView36"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="24dp"
-        android:text=" 19:56"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvdate"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView39"
@@ -87,14 +77,26 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView24"
+        android:id="@+id/imgstatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView35"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvstatus"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView35"
+        app:layout_constraintTop_toTopOf="@+id/tvstatus"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_cancel" />
 
+    <ImageView
+        android:id="@+id/imgstatus1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="25dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvstatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvstatus"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/icon_done" />
 </androidx.constraintlayout.widget.ConstraintLayout>

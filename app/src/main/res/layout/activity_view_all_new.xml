@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.shop.Activity.ViewAllCboActivity">
     <ImageView
-        android:id="@+id/imageView27"
+        android:id="@+id/img_back_ViewAllnew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -34,7 +34,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.397"
-        app:layout_constraintStart_toEndOf="@+id/imageView27"
+        app:layout_constraintStart_toEndOf="@+id/img_back_ViewAllnew"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -45,4 +45,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView28"
         app:layout_constraintVertical_bias="0.0" />
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/prgLoadingSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="342dp"
+        android:visibility="visible"
+        app:SpinKit_Color="@color/colorTaskBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

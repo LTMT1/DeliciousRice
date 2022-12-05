@@ -18,7 +18,6 @@ public class ContactFragment extends Fragment {
     private ImageView imgBackContact;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class ContactFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         imgBackContact = view.findViewById(R.id.img_back_Contact);
-        imgBackContact.setOnClickListener(v->{
+        imgBackContact.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_contactFragment_to_accountFragment);
         });
     }

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,9 +33,10 @@ public class ChangePassActivity extends AppCompatActivity {
         edtRePassChange = findViewById(R.id.edtRePassChange);
 
     }
+
     @Override
     public void onBackPressed() {
-        if (backPressTime + 2000 > System.currentTimeMillis()){
+        if (backPressTime + 2000 > System.currentTimeMillis()) {
             mToast.cancel();
 
             Intent intent = new Intent(getApplicationContext(), HelloScreenActivity.class);
@@ -44,12 +46,13 @@ public class ChangePassActivity extends AppCompatActivity {
             finish();
             System.exit(0);
 
-        }else {
+        } else {
             mToast = Toast.makeText(ChangePassActivity.this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT);
             mToast.show();
         }
         backPressTime = System.currentTimeMillis();
     }
+
     public void onCLickChangepass(View view) {
         Intent intent = getIntent();
         String str_email = intent.getStringExtra("email");
@@ -67,18 +70,14 @@ public class ChangePassActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                     progressDialog.dismiss();
-                    if(response.body().equals("success")) {
-                        SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("matkhau", str_passnew);
-                        editor.commit();
+                    if (response.body().equals("success")) {
                         edtPassChange.setText("");
                         edtRePassChange.setText("");
                         Intent intent1 = new Intent(ChangePassActivity.this, LoginActivity.class);
                         startActivity(intent1);
                         Toast.makeText(ChangePassActivity.this, "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
 
-                    }else{
+                    } else {
                         Toast.makeText(ChangePassActivity.this, "Thay đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -90,6 +89,7 @@ public class ChangePassActivity extends AppCompatActivity {
             });
         }
     }
+
     public void Back(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

@@ -42,36 +42,32 @@ public class AddressActivity extends AppCompatActivity {
     private ImageView imgBackAddress;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarColor.setStatusBarColor(this);
         setContentView(R.layout.activity_address);
         imgBackAddress = findViewById(R.id.img_back_Address);
-        imgBackAddress.setOnClickListener(v->{
-            Fragment fragment=new AccountFragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.Address,fragment).commit();
+        imgBackAddress.setOnClickListener(v -> {
+            Fragment fragment = new AccountFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.Address, fragment).commit();
         });
 
 
-
-        Intent intent=getIntent();
-        idadr =intent.getIntExtra("Adrress",0);
-
+        Intent intent = getIntent();
+        idadr = intent.getIntExtra("Adrress", 0);
 
 
         cl_insertAdsress = findViewById(R.id.cl_insertAdsress);
         cl_insertAdsress.setOnClickListener(view -> {
-            Intent i=new Intent(AddressActivity.this, AddAddressActivity.class);
-            i.putExtra("iccome",idadr);
+            Intent i = new Intent(AddressActivity.this, AddAddressActivity.class);
+            i.putExtra("iccome", idadr);
             startActivity(i);
         });
 
         rclAddress = findViewById(R.id.rcl_address);
-   /*     ShowAddress();*/
+        /*     ShowAddress();*/
 
     }
 

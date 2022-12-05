@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean validateEmail() {
-        String a = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String a = "^[a-zA-Z0-9]*@{1}gmail.com$";
         if (edtEmailDangNhap.getText().toString().trim().equals("")) {
             edtEmailDangNhap.setError("Hãy nhập gmail của bạn.");
             return false;

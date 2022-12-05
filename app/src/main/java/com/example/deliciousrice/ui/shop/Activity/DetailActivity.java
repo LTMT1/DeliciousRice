@@ -1,11 +1,8 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,21 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.deliciousrice.Activity.BarColor;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Cart;
-import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.cart.CartFragment;
-import com.example.deliciousrice.ui.favorite.FavoriteFragment;
+import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,10 +51,13 @@ public class DetailActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     int getId_customer,id_product;
     public static int Click = 0;
+    static DaoCart daoCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        BarColor.setStatusBarColor(this);
+        daoCart=new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         getId_customer=intent.getIntExtra("idcustomer",0);
         product = (Product) intent.getSerializableExtra("getdataproduct");
@@ -105,38 +104,35 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         btnaddcart.setOnClickListener(view -> {
+            ShopFragment.Cartlist= (ArrayList<Cart>) daoCart.getall();
             if (ShopFragment.Cartlist.size() > 0)//gio hang khong rong
             {
                 int sl = Integer.parseInt(tvnumbersp.getText().toString().trim());
                 boolean tontaimahang = false;
-                for (int i = 0; i < ShopFragment.Cartlist.size(); i++)
+                for (int i = 0; i <  ShopFragment.Cartlist.size(); i++)
                 {
                     if (ShopFragment.Cartlist.get(i).getId_product() == id_product)
                     {
-                        ShopFragment.Cartlist.get(i).setAmount(ShopFragment.Cartlist.get(i).getAmount() + sl);
+                        ShopFragment.Cartlist.get(i).setAmount( ShopFragment.Cartlist.get(i).getAmount() + sl);
                         ShopFragment.Cartlist.get(i).setPrice(product.getPrice() * ShopFragment.Cartlist.get(i).getAmount());
+                        UpdateProduct( ShopFragment.Cartlist.get(i).getId_product(),ShopFragment.Cartlist.get(i).getPrice(),ShopFragment.Cartlist.get(i).getAmount());
                         tontaimahang = true;
                     }
                 }
                 if (tontaimahang == false)
                 {
                     int sl1 = Integer.parseInt(tvnumbersp.getText().toString().trim());//lay so luong trong spinner
-                    //tinh tien
                     int Tien2 = sl1 * (product.getPrice());
-                    //them vao mang gio hang
-                    ShopFragment.Cartlist.add(new Cart(id_product, product.getProduct_name(), Tien2, product.getImage(), sl1));
-                    Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
+                    daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl1);
                     MainActivity2.setBugdeNumber();
                 }
-            } else //gio hang rong
+            } else
             {
-                int sl2 = Integer.parseInt(tvnumbersp.getText().toString().trim());//lay so luong trong spinner
-                //tinh tien
+                int sl2 = Integer.parseInt(tvnumbersp.getText().toString().trim());
                 int Tien2 = sl2 * (product.getPrice());
-                //them vao mang gio hang
-                ShopFragment.Cartlist.add(new Cart(id_product, product.getProduct_name(), Tien2, product.getImage(), sl2));
-                Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
+                daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl2);
             }
+            Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
         });
     }
     private void checkYeuThich(int idcus, int idbh) {
@@ -186,15 +182,23 @@ public class DetailActivity extends AppCompatActivity {
     }
     private void deleteFavorite(int idcustomer, int idproduct) {
         ApiProduct apiProduct = ApiService.getService();
-        Call<Favorite> callback = apiProduct.deletefavorite(idcustomer, idproduct);
-        callback.enqueue(new Callback<Favorite>() {
+        Call<Product> callback = apiProduct.deletefavorite(idcustomer, idproduct);
+        callback.enqueue(new Callback<Product>() {
             @Override
-            public void onResponse(Call<Favorite> call, Response<Favorite> response) {
+            public void onResponse(Call<Product> call, Response<Product> response) {
             }
 
             @Override
-            public void onFailure(Call<Favorite> call, Throwable t) {
+            public void onFailure(Call<Product> call, Throwable t) {
             }
         });
     }
+//    private void InsertData(int id_product, String name, int price,String image, int amount) {
+//
+//        String sql = "INSERT INTO tbcart(id_product, name, price, image, amount) VALUES('"+id_product+"','"+name+"','"+price+"','"+image+"','"+amount+"')";
+//        db.execSQL(sql);
+//    }
+    public static void UpdateProduct(int id, int price, int amount){
+    daoCart.update(id, price, amount);
+}
 }

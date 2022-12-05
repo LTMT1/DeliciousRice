@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Model.Product;
-import com.example.deliciousrice.Model.ProductNew;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductItemClick;
 import com.example.deliciousrice.callback.ProductNewItemClick;
@@ -35,7 +34,7 @@ public class AdapterProductNew extends RecyclerView.Adapter<AdapterProductNew.Pr
     @NonNull
     @Override
     public AdapterProductNew.ProductNewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_products_new,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_products_new, parent, false);
         return new ProductNewViewHolder(view);
     }
 

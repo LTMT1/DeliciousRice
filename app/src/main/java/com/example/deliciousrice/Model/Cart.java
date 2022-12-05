@@ -1,11 +1,11 @@
 package com.example.deliciousrice.Model;
 
 public class Cart {
-    private int id_product;
-    private String name;
-    private int price;
-    private String image;
-    private int amount;
+    public int id_product;
+    public String name;
+    public int price;
+    public String image;
+    public int amount;
 
     public Cart() {
     }
@@ -17,7 +17,6 @@ public class Cart {
         this.image = image;
         this.amount = amount;
     }
-
     public int getId_product() {
         return id_product;
     }

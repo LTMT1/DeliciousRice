@@ -21,6 +21,7 @@ import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.OnClickitem;
 import com.example.deliciousrice.ui.cart.CartFragment;
+import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 import com.squareup.picasso.Picasso;
 
@@ -31,10 +32,12 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
 
     private ArrayList<Cart> list;
     private Context context;
+    CartFragment cartFragment;
 
-    public AdapterCart(ArrayList<Cart> list, Context context) {
+    public AdapterCart(ArrayList<Cart> list, Context context, CartFragment cartFragment) {
         this.list = list;
         this.context = context;
+        this.cartFragment = cartFragment;
     }
 
     @NonNull
@@ -49,7 +52,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
         Cart cart = list.get(position);
         holder.tvname.setText(cart.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvprice.setText( decimalFormat.format(cart.getPrice()) );
+        holder.tvprice.setText(decimalFormat.format(cart.getPrice()));
         Picasso.get().load(cart.getImage())
                 .into(holder.imgsp);
         holder.tvsoluong.setText(Integer.toString(cart.getAmount()));
@@ -74,10 +77,11 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
 //        });
         holder.setOnClickitem((view, pos, giatri) -> {
             int slht = ShopFragment.Cartlist.get(position).getAmount();
-            int giaht = ShopFragment.Cartlist.get(position).getPrice();
-            if(giatri==1){
-                int slm= Integer.parseInt(holder.tvsoluong.getText().toString())-1;
-                int giamoia=(giaht * slm) / slht;;
+            int giaht =ShopFragment.Cartlist.get(position).getPrice();
+            if (giatri == 1) {
+                int slm = Integer.parseInt(holder.tvsoluong.getText().toString()) - 1;
+                int giamoia = (giaht * slm) / slht;
+                ;
                 if (slht == 1) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("Xác nhận xóa sản phẩm");
@@ -85,39 +89,40 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
                     builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ShopFragment.Cartlist.remove(position);
-                            CartFragment.CheckData();
-                            CartFragment.UpdateTongTien();
+                            cartFragment.DeleteProduct(cart.id_product);
+                            cartFragment.CheckData();
+                            cartFragment.UpdateTongTien();
                         }
                     });
                     builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            CartFragment.UpdateTongTien();
-                            CartFragment.CheckData();
+                            cartFragment.UpdateTongTien();
+                            cartFragment.CheckData();
                         }
                     });
                     builder.show();
                 } else {
                     ShopFragment.Cartlist.get(position).setAmount(slm);
                     list.get(position).setAmount(slm);
-                    ShopFragment.Cartlist.get(position).setPrice( giamoia);
+                    ShopFragment.Cartlist.get(position).setPrice(giamoia);
                 }
-            }else if(giatri==2){
-                int slm= Integer.parseInt(holder.tvsoluong.getText().toString())+1;
+            } else if (giatri == 2) {
+                int slm = Integer.parseInt(holder.tvsoluong.getText().toString()) + 1;
                 ShopFragment.Cartlist.get(position).setAmount(slm);
-                int giamoia=(giaht * slm) / slht;
+                int giamoia = (giaht * slm) / slht;
                 list.get(position).setAmount(slm);
-                ShopFragment.Cartlist.get(position).setPrice( giamoia);
+                ShopFragment.Cartlist.get(position).setPrice(giamoia);
             }
-            holder.tvsoluong.setText(ShopFragment.Cartlist.get(position).getAmount()+"");
-            holder.tvprice.setText( decimalFormat.format( ShopFragment.Cartlist.get(position).getPrice()) );
-            CartFragment.UpdateTongTien();
+            holder.tvsoluong.setText( ShopFragment.Cartlist.get(position).getAmount() + "");
+            holder.tvprice.setText(decimalFormat.format( ShopFragment.Cartlist.get(position).getPrice()));
+            DetailActivity.UpdateProduct(cart.id_product,  ShopFragment.Cartlist.get(position).getPrice(), ShopFragment.Cartlist.get(position).getAmount());
+            cartFragment.UpdateTongTien();
         });
         holder.frameLayout.setOnClickListener(view -> {
-            ShopFragment.Cartlist.remove(position);
-            CartFragment.CheckData();
-            CartFragment.UpdateTongTien();
+            cartFragment.DeleteProduct(cart.id_product);
+            cartFragment.CheckData();
+            cartFragment.UpdateTongTien();
         });
     }
 
@@ -127,7 +132,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
     }
 
 
-    public static class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvname;
         private TextView tvsoluong;
         private ImageView imgcong;
@@ -137,30 +142,31 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
         ConstraintLayout constraint;
         OnClickitem onClickitem;
         FrameLayout frameLayout;
+
         public void setOnClickitem(OnClickitem onClickitem) {
             this.onClickitem = onClickitem;
         }
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            constraint =itemView.findViewById(R.id.constraint);
+            constraint = itemView.findViewById(R.id.constraint);
             imgsp = itemView.findViewById(R.id.imgsp);
             tvname = itemView.findViewById(R.id.tvname);
             tvsoluong = itemView.findViewById(R.id.tvsoluong);
             imgcong = itemView.findViewById(R.id.imgcong);
             imgtru = itemView.findViewById(R.id.imgtru);
             tvprice = itemView.findViewById(R.id.tvprice);
-            frameLayout=itemView.findViewById(R.id.delete);
+            frameLayout = itemView.findViewById(R.id.delete);
             imgcong.setOnClickListener(this);
             imgtru.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (view==imgtru){
-                onClickitem.onclickitem(view,getAdapterPosition(),1);
-            }else if(view==imgcong){
-                onClickitem.onclickitem(view,getAdapterPosition(),2);
+            if (view == imgtru) {
+                onClickitem.onclickitem(view, getAdapterPosition(), 1);
+            } else if (view == imgcong) {
+                onClickitem.onclickitem(view, getAdapterPosition(), 2);
             }
         }
     }

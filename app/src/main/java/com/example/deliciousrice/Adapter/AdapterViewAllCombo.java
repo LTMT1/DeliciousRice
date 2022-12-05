@@ -19,7 +19,7 @@ import com.example.deliciousrice.ui.shop.Activity.ViewAllCboActivity;
 
 import java.util.ArrayList;
 
-public class AdapterViewAllCombo extends RecyclerView.Adapter<AdapterViewAllCombo.ProductViewAllHolder>{
+public class AdapterViewAllCombo extends RecyclerView.Adapter<AdapterViewAllCombo.ProductViewAllHolder> {
 
     private ArrayList<Product> data;
     private ViewAllCboActivity context;
@@ -34,7 +34,7 @@ public class AdapterViewAllCombo extends RecyclerView.Adapter<AdapterViewAllComb
     @NonNull
     @Override
     public ProductViewAllHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewallcombo_products,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewallcombo_products, parent, false);
         return new ProductViewAllHolder(view);
     }
 
@@ -65,7 +65,6 @@ public class AdapterViewAllCombo extends RecyclerView.Adapter<AdapterViewAllComb
         private TextView tvVallTime;
         private TextView tvVallGia;
         private ImageView imgVallAdd;
-
 
 
         public ProductViewAllHolder(@NonNull View itemView) {

@@ -20,8 +20,6 @@ public class SettingFragment extends Fragment {
     private ImageView imgBackSetting;
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,7 +31,7 @@ public class SettingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         imgBackSetting = view.findViewById(R.id.img_back_setting);
-        imgBackSetting.setOnClickListener(v->{
+        imgBackSetting.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_accountFragment);
         });
     }

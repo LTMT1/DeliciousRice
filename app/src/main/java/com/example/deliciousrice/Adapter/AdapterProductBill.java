@@ -36,16 +36,17 @@ public class AdapterProductBill extends RecyclerView.Adapter<AdapterProductBill.
     @NonNull
     @Override
     public AdapterProductBill.ProductBillViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_buy,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_buy, parent, false);
         return new ProductBillViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull AdapterProductBill.ProductBillViewHolder holder, int position) {
         ProductBill bill = list.get(position);
         holder.tvname.setText(bill.getProduct_name());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvprice.setText(decimalFormat.format(bill.getTotal_money())+"đ");
-        holder.tvsl.setText(bill.getAmount()+"x");
+        holder.tvprice.setText(decimalFormat.format(bill.getTotal_money()) + "đ");
+        holder.tvsl.setText(bill.getAmount() + "x");
     }
 
 
@@ -58,6 +59,7 @@ public class AdapterProductBill extends RecyclerView.Adapter<AdapterProductBill.
         private TextView tvsl;
         private TextView tvname;
         private TextView tvprice;
+
         public ProductBillViewHolder(@NonNull View itemView) {
             super(itemView);
             tvsl = itemView.findViewById(R.id.tvsl);

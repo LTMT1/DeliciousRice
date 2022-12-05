@@ -40,6 +40,7 @@ public class AddAddressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_address);
         imgBackAddAddress = findViewById(R.id.img_backAdd_Address);
         imgBackAddAddress.setOnClickListener(v -> {
+            overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
             Intent intents = new Intent(AddAddressActivity.this, AddressFragment.class);
             startActivity(intents);
 

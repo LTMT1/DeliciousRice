@@ -33,7 +33,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_products,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_products, parent, false);
         return new ProductViewHolder(view);
     }
 
@@ -55,13 +55,12 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductV
     }
 
 
-
-
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgProduct, imgBuyPoduct;
         TextView tvNameProduct, tvMassPoduct, tvPricePoduct;
         private ConstraintLayout cstrItemProduct;
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);

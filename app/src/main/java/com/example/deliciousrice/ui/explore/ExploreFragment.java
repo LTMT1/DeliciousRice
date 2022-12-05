@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +38,7 @@ public class ExploreFragment extends Fragment {
     ArrayList<Product> searchPro;
     private ProgressBar prgLoadingSearch;
     MainActivity2 main;
+    ConstraintLayout constraintLayout,constraintLayout1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,9 @@ public class ExploreFragment extends Fragment {
         searchViewProduct = view.findViewById(R.id.searchView_Product);
         rclSeachsp = view.findViewById(R.id.rcl_seachsp);
         prgLoadingSearch = view.findViewById(R.id.prgLoadingSearch);
+        constraintLayout = view.findViewById(R.id.constrvisible);
+        constraintLayout1 = view.findViewById(R.id.constrvisible1);
+
         main = (MainActivity2) getActivity();
         prgLoadingSearch.setIndeterminateDrawable(new Circle());
         searchPro = new ArrayList<>();
@@ -65,32 +71,38 @@ public class ExploreFragment extends Fragment {
     }
 
     private void searchSP(String search) {
-        String seach = search;
         searchPro.clear();
         prgLoadingSearch.setVisibility(View.VISIBLE);
         ApiProduct apiProduct = ApiService.getService();
-        Call<List<Product>> callback = apiProduct.SeachProduct(seach);
+        Call<List<Product>> callback = apiProduct.SeachProduct(search);
         callback.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
                 prgLoadingSearch.setVisibility(View.GONE);
                 searchPro = (ArrayList<Product>) response.body();
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                rclSeachsp.setLayoutManager(linearLayoutManager);
-                adapterSearch = new AdapterSearchProduct(searchPro, getContext(),productSearch ->{
-                    Intent intent=new Intent(getContext(), DetailActivity.class);
-                    intent.putExtra("idcustomer",main.getId_customer());
-                    intent.putExtra("getdataproduct",productSearch);
-                    startActivity(intent);
-                });
-                rclSeachsp.setAdapter(adapterSearch);
-
+                if(searchPro.size()==0){
+                    constraintLayout1.setVisibility(View.VISIBLE);
+                    rclSeachsp.setVisibility(View.GONE);
+                    constraintLayout.setVisibility(View.GONE);
+                }else {
+                    rclSeachsp.setVisibility(View.VISIBLE);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                    linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    rclSeachsp.setLayoutManager(linearLayoutManager);
+                    adapterSearch = new AdapterSearchProduct(searchPro, getContext(), productSearch -> {
+                        Intent intent = new Intent(getContext(), DetailActivity.class);
+                        intent.putExtra("idcustomer", main.getId_customer());
+                        intent.putExtra("getdataproduct", productSearch);
+                        startActivity(intent);
+                    });
+                    rclSeachsp.setAdapter(adapterSearch);
+                    constraintLayout.setVisibility(View.GONE);
+                    constraintLayout1.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
-
             }
         });
     }

@@ -23,7 +23,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Intent i = new Intent(this, MainActivity2.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,i,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setAutoCancel(true)
@@ -34,7 +34,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        manager.notify(0,builder.build());
+        manager.notify(0, builder.build());
     }
 
 }

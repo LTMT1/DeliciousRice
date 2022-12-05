@@ -39,7 +39,6 @@ import retrofit2.Response;
 public class ReceipFragment extends Fragment {
     private ImageView imgBackReceipt;
     private RecyclerView rclview;
-    Customer customer;
     AdapterHistoryBill adapterHistoryBill;
 
 
@@ -55,16 +54,10 @@ public class ReceipFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         imgBackReceipt = view.findViewById(R.id.img_back_Receipt);
-        imgBackReceipt.setOnClickListener(v->{
-
+        imgBackReceipt.setOnClickListener(v -> {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-
             AccountFragment fragment = new AccountFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("id_cus", 0);
-            fragment.setArguments(bundle);
-
             ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
             ft.commit();
         });
@@ -74,10 +67,11 @@ public class ReceipFragment extends Fragment {
     }
 
 
-    private void getreceipt(){
-        Bundle bundle=getArguments();
-        int idcustm =bundle.getInt("id_cus",0);
-
+    private void getreceipt() {
+        Bundle bundle = getArguments();
+        String phone=bundle.getString("phone_number","");
+        int idcustm = bundle.getInt("id_cus", 0);
+        String name_cus=bundle.getString("name_cus","");
         ApiProduct apiProduct = ApiService.getService();
         Call<List<Bill>> callback = apiProduct.getListbill(idcustm);
         callback.enqueue(new Callback<List<Bill>>() {
@@ -86,8 +80,9 @@ public class ReceipFragment extends Fragment {
                 ArrayList<Bill> bills = (ArrayList<Bill>) response.body();
                 adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext(), bill -> {
                     Intent intent = new Intent(getApplicationContext(), InvoicedetailsActivity.class);
-                    intent.putExtra("id_bill",bill.getId_bill());
-                    intent.putExtra("getData",bill);
+                    intent.putExtra("getData", bill);
+                    intent.putExtra("name",name_cus);
+                    intent.putExtra("phone",phone);
                     startActivity(intent);
                 });
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

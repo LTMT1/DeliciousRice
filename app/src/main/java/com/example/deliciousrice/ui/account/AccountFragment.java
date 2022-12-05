@@ -34,17 +34,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
 
-    private ConstraintLayout clThongtin;
-    private TextView tvname;
+    private TextView tvname,tvDangXuat;
     private CircleImageView cardView;
-    private ImageView imageView8;
-    private LinearLayout llayReceipt;
-    private LinearLayout llayAddress;
-    private ConstraintLayout clContact;
-    private ConstraintLayout clPolicy;
-    private ConstraintLayout clSetting;
-    private ConstraintLayout clDoipass;
-    private TextView tvDangXuat;
+    private LinearLayout llayReceipt,llayAddress;
+    private ConstraintLayout clContact,clPolicy,clSetting,clDoipass,clThongtin;
     private MainActivity2 main;
     Customer customer;
     FragmentTransaction transection;
@@ -78,9 +71,8 @@ public class AccountFragment extends Fragment {
         clThongtin.setOnClickListener(v -> {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-
-            InformationFragment informationFragment=new InformationFragment();
-            Bundle bundle  = new Bundle();
+            InformationFragment informationFragment = new InformationFragment();
+            Bundle bundle = new Bundle();
             bundle.putInt("id", main.getId_customer());
             bundle.putString("name", main.getUser_name());
             bundle.putString("name1", main.getBirthday());
@@ -97,6 +89,8 @@ public class AccountFragment extends Fragment {
             FragmentTransaction ft = fm.beginTransaction();
             ReceipFragment fragment = new ReceipFragment();
             Bundle bundle = new Bundle();
+            bundle.putString("name_cus",main.getUser_name());
+            bundle.putString("phone_number",main.getPhone_number());
             bundle.putInt("id_cus", main.getId_customer());
             fragment.setArguments(bundle);
 
@@ -110,9 +104,9 @@ public class AccountFragment extends Fragment {
 
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            AddressFragment addfragment=new AddressFragment();
+            AddressFragment addfragment = new AddressFragment();
 
-             Bundle bundle = new Bundle();
+            Bundle bundle = new Bundle();
             bundle.putInt("Adrress", main.getId_customer());
             addfragment.setArguments(bundle);
 
@@ -140,7 +134,7 @@ public class AccountFragment extends Fragment {
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
 
-            ChangePasFragment  fragment=new ChangePasFragment();
+            ChangePasFragment fragment = new ChangePasFragment();
             Bundle bundle = new Bundle();
             bundle.putString("name", main.getPasss());
             bundle.putString("name1", main.getEmaill());
@@ -150,13 +144,12 @@ public class AccountFragment extends Fragment {
             ft.commit();
 
 
-
         });
     }
+
     private void Anhxa(@NonNull View view) {
         tvname = view.findViewById(R.id.tvname);
         cardView = view.findViewById(R.id.cardView);
-        imageView8 = view.findViewById(R.id.imageView8);
         clThongtin = view.findViewById(R.id.cl_thongtin);
         llayReceipt = view.findViewById(R.id.llay_receipt);
         llayAddress = view.findViewById(R.id.llay_address);

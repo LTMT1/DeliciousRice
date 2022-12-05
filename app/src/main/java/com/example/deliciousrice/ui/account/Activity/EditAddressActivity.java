@@ -37,8 +37,8 @@ public class EditAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_address);
         BarColor.setStatusBarColor(this);
-        ImgBack=findViewById(R.id.img_backEd_setting);
-        ImgBack.setOnClickListener(v->{
+        ImgBack = findViewById(R.id.img_backEd_setting);
+        ImgBack.setOnClickListener(v -> {
             Intent intents = new Intent(EditAddressActivity.this, AddressFragment.class);
             startActivity(intents);
         });
@@ -48,54 +48,45 @@ public class EditAddressActivity extends AppCompatActivity {
         edEdctAddress = findViewById(R.id.ed_edctAddress);
         edEdNameAdd = findViewById(R.id.ed_edNameAdd);
 
-        adderss=new Adderss();
+        adderss = new Adderss();
 
-        Intent  intent=getIntent();
-        adderss= (Adderss) intent.getSerializableExtra("getdataAddress");
-        anInt=intent.getIntExtra("idcustomer",0);
-
-
+        Intent intent = getIntent();
+        adderss = (Adderss) intent.getSerializableExtra("getdataAddress");
+        anInt = intent.getIntExtra("idcustomer", 0);
         edEdctAddress.setText(adderss.getAddress_specifically());
         edEdNameAdd.setText(adderss.getAddress_name());
-
-
-
-
-        clDeteleAddress.setOnClickListener(v->{
+        clDeteleAddress.setOnClickListener(v -> {
             Delete_addresss();
 
         });
-        tvUpAddress.setOnClickListener(v->{
+        tvUpAddress.setOnClickListener(v -> {
             Up_Address();
         });
 
     }
 
     private void Up_Address() {
-        if (!checkllow()){
+        if (!checkllow()) {
             return;
-        }else {
+        } else {
+            String ed_mane = edEdNameAdd.getText().toString().trim();
+            String ed_addrress = edEdctAddress.getText().toString().trim();
+            apiProduct = ApiService.getService();
+            Call<String> adAdderss = apiProduct.updateAdderss(adderss.getId_address(), anInt, ed_mane, ed_addrress);
+            adAdderss.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Intent intent = new Intent(EditAddressActivity.this, AddressActivity.class);
+                    intent.putExtra("Adrress", anInt);
+                    startActivity(intent);
+                    Toast.makeText(EditAddressActivity.this, "Thay đổi địa chỉ thành công", Toast.LENGTH_SHORT).show();
+                }
 
-            String ed_mane=edEdNameAdd.getText().toString().trim();
-            String ed_addrress=edEdctAddress.getText().toString().trim();
-            apiProduct= ApiService.getService();
-            Call<String> adAdderss = apiProduct.updateAdderss(adderss.getId_address(),anInt,ed_mane,ed_addrress);
-
-
-          adAdderss.enqueue(new Callback<String>() {
-              @Override
-              public void onResponse(Call<String> call, Response<String> response) {
-                  Intent intent=new Intent(EditAddressActivity.this,AddressActivity.class);
-                  intent.putExtra("Adrress",anInt);
-                  startActivity( intent);
-                  Toast.makeText(EditAddressActivity.this, "Thay đổi địa chỉ thành công", Toast.LENGTH_SHORT).show();
-              }
-
-              @Override
-              public void onFailure(Call<String> call, Throwable t) {
-                  Toast.makeText(EditAddressActivity.this, "Thay đổi địa chỉ không thành công", Toast.LENGTH_SHORT).show();
-              }
-          });
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(EditAddressActivity.this, "Thay đổi địa chỉ không thành công", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
 
@@ -103,27 +94,28 @@ public class EditAddressActivity extends AppCompatActivity {
     }
 
     private void Delete_addresss() {
-            apiProduct= ApiService.getService();
-            Call<String> adAdderss = apiProduct.deleteAdderss(adderss.getId_address(),anInt);
-             adAdderss.enqueue(new Callback<String>() {
-              @Override
-              public void onResponse(Call<String> call, Response<String> response) {
+        apiProduct = ApiService.getService();
+        Call<String> adAdderss = apiProduct.deleteAdderss(adderss.getId_address(), anInt);
+        adAdderss.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
 
-                  Intent intent=new Intent(EditAddressActivity.this,AddressFragment.class);
-                  intent.putExtra("Adrress",anInt);
-                  startActivity( intent);
+                Intent intent = new Intent(EditAddressActivity.this, AddressFragment.class);
+                intent.putExtra("Adrress", anInt);
+                startActivity(intent);
 
-                  Toast.makeText(EditAddressActivity.this, "Địa chỉ đã được xóa.", Toast.LENGTH_SHORT).show();
-              }
+                Toast.makeText(EditAddressActivity.this, "Địa chỉ đã được xóa.", Toast.LENGTH_SHORT).show();
+            }
 
-              @Override
-              public void onFailure(Call<String> call, Throwable t) {
-                  Toast.makeText(EditAddressActivity.this, "Lỗi khi xóa đia chỉ.", Toast.LENGTH_SHORT).show();
-              }
-          });
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(EditAddressActivity.this, "Lỗi khi xóa đia chỉ.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
     public boolean checkllow() {
-        if (edEdNameAdd.getText().toString().trim().equals("")|edEdctAddress.getText().toString().trim().equals("")) {
+        if (edEdNameAdd.getText().toString().trim().equals("") | edEdctAddress.getText().toString().trim().equals("")) {
             edEdNameAdd.setError("Hãy nhập Tên.");
             edEdctAddress.setError("Hãy nhập địa chỉ của bạn");
 

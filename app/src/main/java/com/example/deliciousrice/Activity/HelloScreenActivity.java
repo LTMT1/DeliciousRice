@@ -59,8 +59,6 @@ public class HelloScreenActivity extends AppCompatActivity {
                     if (email.isEmpty() || password.isEmpty()) {
                         startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
                     } else {
-                        Log.e("TAG", "run: " + email + password);
-
                         loginApi(email, password);
                     }
                 }
@@ -100,4 +98,5 @@ public class HelloScreenActivity extends AppCompatActivity {
             }
         });
     }
+
 }

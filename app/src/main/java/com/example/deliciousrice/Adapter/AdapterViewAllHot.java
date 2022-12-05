@@ -20,7 +20,7 @@ import com.example.deliciousrice.ui.shop.Activity.ViewAllNewActivity;
 
 import java.util.ArrayList;
 
-public class AdapterViewAllHot extends RecyclerView.Adapter<AdapterViewAllHot.ProductViewAllHolder>{
+public class AdapterViewAllHot extends RecyclerView.Adapter<AdapterViewAllHot.ProductViewAllHolder> {
 
     private ArrayList<Product> data;
     private ViewAllHotActivity context;
@@ -35,7 +35,7 @@ public class AdapterViewAllHot extends RecyclerView.Adapter<AdapterViewAllHot.Pr
     @NonNull
     @Override
     public ProductViewAllHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewallhot_products,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewallhot_products, parent, false);
         return new ProductViewAllHolder(view);
     }
 
@@ -63,7 +63,6 @@ public class AdapterViewAllHot extends RecyclerView.Adapter<AdapterViewAllHot.Pr
         private TextView tvVallTime;
         private TextView tvVallGia;
         private ImageView imgVallAdd;
-
 
 
         public ProductViewAllHolder(@NonNull View itemView) {

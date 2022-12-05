@@ -26,10 +26,11 @@ public class AdapterDetailBill extends RecyclerView.Adapter<AdapterDetailBill.De
         this.list = list;
         this.context = context;
     }
+
     @NonNull
     @Override
     public DetailBillViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_buy,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_buy, parent, false);
         return new DetailBillViewHolder(view);
     }
 
@@ -38,8 +39,8 @@ public class AdapterDetailBill extends RecyclerView.Adapter<AdapterDetailBill.De
         Detailbill detailbill = list.get(position);
         holder.tvname.setText(detailbill.getProduct_name());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvprice.setText(decimalFormat.format(detailbill.getTotal_money())+"đ");
-        holder.tvsl.setText(detailbill.getAmount()+"x");
+        holder.tvprice.setText(decimalFormat.format(detailbill.getTotal_money()) + "đ");
+        holder.tvsl.setText(detailbill.getAmount() + "x");
     }
 
     @Override
@@ -51,6 +52,7 @@ public class AdapterDetailBill extends RecyclerView.Adapter<AdapterDetailBill.De
         private TextView tvsl;
         private TextView tvname;
         private TextView tvprice;
+
         public DetailBillViewHolder(@NonNull View itemView) {
             super(itemView);
             tvsl = itemView.findViewById(R.id.tvsl);

@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,12 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.deliciousrice.Adapter.AdapterFavorite;
+import com.example.deliciousrice.Activity.BarColor;
 import com.example.deliciousrice.Adapter.AdapterProductBill;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Cart;
-import com.example.deliciousrice.Model.Favorite;
 import com.example.deliciousrice.Model.ProductBill;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.cart.CartFragment;
@@ -31,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +50,7 @@ public class PayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
+        BarColor.setStatusBarColor(this);
         Anhxa();
         ListProductBuy();
         Pay();
@@ -75,7 +73,7 @@ public class PayActivity extends AppCompatActivity {
     private void ListProductBuy() {
         ArrayList<ProductBill> productBills = new ArrayList<>();
         for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
-            Cart cart = ShopFragment.Cartlist.get(i);
+            Cart cart =  ShopFragment.Cartlist.get(i);
             productBills.add(new ProductBill(cart.getName(), cart.getAmount(), cart.getPrice()));
         }
         adapterProductBill = new AdapterProductBill(productBills, PayActivity.this);
@@ -98,14 +96,14 @@ public class PayActivity extends AppCompatActivity {
             String currentDateandTime = sdf.format(new Date());
             String ednote = edtstatus.getText().toString().trim();
 
-            if (ShopFragment.Cartlist.size() > 0) {
-                addBill(id_bill, id_customer,"Hà Nội", currentDateandTime, ednote, totalmoney);
+            if ( ShopFragment.Cartlist.size() > 0) {
+                addBill(id_bill, id_customer, "Hà Nội", currentDateandTime, ednote, totalmoney);
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
+                        for (int i = 0; i <  ShopFragment.Cartlist.size(); i++) {
                             addDetailBill(i);
                         }
                     }
@@ -133,7 +131,7 @@ public class PayActivity extends AppCompatActivity {
 
     private void addBill(String bill, int idcus, String adreess, String date, String note, int money) {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.addbill(bill, idcus,adreess, date, note, money);
+        Call<String> callback = apiProduct.addbill(bill, idcus, adreess, date, note, money);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -161,7 +159,8 @@ public class PayActivity extends AppCompatActivity {
             }
         });
     }
-    private void PushNotification(){
+
+    private void PushNotification() {
         ApiProduct apiProduct = ApiService.getService();
         Call<String> callback = apiProduct.pushNotification();
         callback.enqueue(new Callback<String>() {

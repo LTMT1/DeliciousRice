@@ -10,9 +10,10 @@
         android:id="@+id/tvYeuThich"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="311dp"
         android:background="#F9514F"
         android:fontFamily="@font/be_vietnam_bold"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:text="Yêu Thích"
         android:textColor="@color/white"
         android:textSize="22sp"
@@ -21,15 +22,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rclviewfavorite"
-        android:layout_width="0dp"
-        android:layout_height="681dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvYeuThich" />
+        app:layout_constraintTop_toBottomOf="@+id/tvYeuThich"
+        tools:ignore="MissingConstraints">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rclviewfavorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvYeuThich" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constr"
+            android:layout_width="match_parent"
+            android:layout_height="383dp"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="85dp"
+                android:gravity="center"
+                android:text="Bạn chưa có sản phẩm yêu thích nào."
+                android:textColor="#474545"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.921" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/prgLoadingSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="342dp"
+        android:visibility="visible"
+        app:SpinKit_Color="@color/colorTaskBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

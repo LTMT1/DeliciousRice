@@ -18,7 +18,7 @@ import com.example.deliciousrice.callback.SearchProductItemClink;
 
 import java.util.ArrayList;
 
-public class AdapterSearchProduct extends  RecyclerView.Adapter<AdapterSearchProduct.SearchproductViewHolder> {
+public class AdapterSearchProduct extends RecyclerView.Adapter<AdapterSearchProduct.SearchproductViewHolder> {
 
     private ArrayList<Product> list;
     private Context context;
@@ -34,7 +34,7 @@ public class AdapterSearchProduct extends  RecyclerView.Adapter<AdapterSearchPro
     @NonNull
     @Override
     public SearchproductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_products,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_products, parent, false);
         return new AdapterSearchProduct.SearchproductViewHolder(view);
     }
 
@@ -44,11 +44,10 @@ public class AdapterSearchProduct extends  RecyclerView.Adapter<AdapterSearchPro
         holder.tvSeTensp.setText(product.getProduct_name());
         Glide.with(context).load(product.getImage()).centerCrop().into(holder.imgSeImgsp);
         holder.tvSeTiem.setText(product.getProcessing_time());
-        holder.tvSeGia.setText(String.valueOf(product.getPrice())+" đ");
-        holder.layoutSeach.setOnClickListener(v->{
+        holder.tvSeGia.setText(String.valueOf(product.getPrice()) + " đ");
+        holder.layoutSeach.setOnClickListener(v -> {
             searchProductItemClink.itemSearchProduct(product);
         });
-
 
 
     }
@@ -66,6 +65,7 @@ public class AdapterSearchProduct extends  RecyclerView.Adapter<AdapterSearchPro
         private TextView tvSeTiem;
         private TextView tvSeGia;
         private ImageView imgSeAdd;
+
         public SearchproductViewHolder(@NonNull View itemView) {
             super(itemView);
             layoutSeach = itemView.findViewById(R.id.layout_seach);

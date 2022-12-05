@@ -34,11 +34,10 @@ public class ChangePasFragment extends Fragment {
     private EditText edtPassChange;
     private EditText edtRePassChange;
     private EditText edtPass;
-    String pass, str_pass, str_passnew, str_repassnew,str_email;
+    String pass, str_pass, str_passnew, str_repassnew, str_email;
     private Button btnLuupass;
 
     private ImageView imgBackChangei;
-
 
 
     @Override
@@ -57,12 +56,12 @@ public class ChangePasFragment extends Fragment {
         btnLuupass = view.findViewById(R.id.btnLuupass);
         imgBackChangei = view.findViewById(R.id.img_back_Changei);
 
-        imgBackChangei.setOnClickListener(v->{
+        imgBackChangei.setOnClickListener(v -> {
 
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
 
-            AccountFragment fragment=new AccountFragment();
+            AccountFragment fragment = new AccountFragment();
             Bundle bundle = new Bundle();
             bundle.putString("name", pass);
             bundle.putString("name1", str_email);
@@ -73,15 +72,15 @@ public class ChangePasFragment extends Fragment {
 
         });
 
-        btnLuupass.setOnClickListener(v->{
+        btnLuupass.setOnClickListener(v -> {
             onCLickChangepasss(v);
         });
 
 
-
     }
+
     public void onCLickChangepasss(View view) {
-        Bundle bundle=getArguments();
+        Bundle bundle = getArguments();
         pass = bundle.getString("name");
         str_email = bundle.getString("name1");
         str_passnew = edtPassChange.getText().toString().trim();
@@ -99,10 +98,10 @@ public class ChangePasFragment extends Fragment {
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    SharedPreferences preferences = getContext().getSharedPreferences("user_file", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("matkhau", str_passnew);
-                    editor.commit();
+//                    SharedPreferences preferences = getContext().getSharedPreferences("user_file", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putString("matkhau", str_passnew);
+//                    editor.commit();
                     edtPassChange.setText("");
                     edtRePassChange.setText("");
                     edtPass.setText("");

@@ -14,12 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Model.Product;
-import com.example.deliciousrice.Model.ProductHot;
-import com.example.deliciousrice.Model.ProductNew;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductHotItemClick;
-import com.example.deliciousrice.callback.ProductItemClick;
-import com.example.deliciousrice.callback.ProductNewItemClick;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 
 import java.util.ArrayList;

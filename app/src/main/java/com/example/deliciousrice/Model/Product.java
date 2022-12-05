@@ -3,14 +3,29 @@ package com.example.deliciousrice.Model;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-
+    private  int id_customer;
     private int id_product;
     private String product_name;
     private String image;
     private String processing_time;
     private int price;
     private String description;
-    private String note;
+
+    public Product(int id_product, String product_name, String image, String processing_time, int price, String description) {
+        this.id_product = id_product;
+        this.product_name = product_name;
+        this.image = image;
+        this.processing_time = processing_time;
+        this.price = price;
+        this.description = description;
+    }
+    public int getId_customer() {
+        return id_customer;
+    }
+
+    public void setId_customer(int id_customer) {
+        this.id_customer = id_customer;
+    }
 
     public int getId_product() {
         return id_product;
@@ -58,13 +73,5 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 }

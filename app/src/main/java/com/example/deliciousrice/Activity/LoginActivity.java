@@ -36,11 +36,9 @@ public class LoginActivity extends AppCompatActivity {
         edtEmailDangNhap = findViewById(R.id.edtEmailDangNhap);
         edtPassWordDangNhap = findViewById(R.id.editPasswordDangNhap);
         TextView tvLogin = findViewById(R.id.tvDangNhap);
-
         loadingDialog = new LoadingDialog(this);
-
         tvLogin.setOnClickListener(v -> login());
-        getPreferences();
+//        getPreferences();
     }
 
     @SuppressLint("SetTextI18n")
@@ -82,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean validateEmail() {
-        String a = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String a = "^[a-zA-Z0-9]*@{1}gmail.com$";
         if (edtEmailDangNhap.getText().toString().equals("")) {
             edtEmailDangNhap.setError("Hãy nhập gmail của bạn.");
             return false;
@@ -108,18 +106,18 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void getPreferences() {
-        SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
-        edtEmailDangNhap.setText(preferences.getString("gmail", ""));
-        edtPassWordDangNhap.setText(preferences.getString("matkhau", ""));
-    }
+//    public void getPreferences() {
+//        SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
+//        edtEmailDangNhap.setText(preferences.getString("gmail", ""));
+//        edtPassWordDangNhap.setText(preferences.getString("matkhau", ""));
+//    }
 
     private void remember(String strname, String strpass) {
         SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("gmail", strname);
         editor.putString("matkhau", strpass);
-        editor.apply();
+        editor.commit();
     }
 
     //register

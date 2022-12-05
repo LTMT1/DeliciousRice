@@ -146,7 +146,11 @@ public class LoginFaGoActivity extends AppCompatActivity {
                 personEmail = acct.getEmail();
                 personId = acct.getId();
             }
-            RegisterGoogle(personId, personGivenName,personpicture, personEmail);
+            if(personpicture==null){
+                RegisterGoogle(personId, personGivenName, Uri.parse("http://chucdong.com/Deliciousrice/API/images/imagedefault.jpg"), personEmail);
+            }else{
+                RegisterGoogle(personId, personGivenName,personpicture, personEmail);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,6 +169,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 progressDialog.dismiss();
                 if (response.body().equalsIgnoreCase("Success")) {
+                    remember(personEmail);
                     startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
                 }
             }
@@ -270,6 +275,12 @@ public class LoginFaGoActivity extends AppCompatActivity {
             public void onFailure(Call<String> call, Throwable t) {
             }
         });
+    }
+    private void remember(String strname) {
+        SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("gmail", strname);
+        editor.apply();
     }
 
 }
