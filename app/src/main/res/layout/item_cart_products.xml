@@ -65,6 +65,7 @@
             android:text="Cơm gà nướng mật ong"
             android:textColor="@color/black"
             android:textSize="18sp"
+            style="@style/Text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView6"
             app:layout_constraintTop_toTopOf="parent" />

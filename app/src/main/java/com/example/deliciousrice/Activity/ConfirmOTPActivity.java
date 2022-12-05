@@ -24,12 +24,13 @@ public class ConfirmOTPActivity extends AppCompatActivity {
     private EditText editTextCheckOTP;
     Customer customer;
     TextView resend;
-    Button button;
+    TextView button;
     CountDownTimer countDownTimer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BarColor.setStatusBarColor(this);
         setContentView(R.layout.activity_confirm_otpactivity);
         editTextCheckOTP = findViewById(R.id.editTextCheckOTP);
         button = findViewById(R.id.btnContinue);

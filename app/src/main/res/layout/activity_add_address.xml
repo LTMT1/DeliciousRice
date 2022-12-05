@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.account.Activity.AddAddressActivity">
 
     <ImageView
@@ -23,7 +24,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="25dp"
         android:text="Thêm địa chỉ"
-        android:textColor="#000000"
+        style="@style/Text"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,19 +41,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView26"
         app:srcCompat="@drawable/ic_vienduoi" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_borders_address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView18">
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tv_add_Address"
@@ -94,7 +82,7 @@
         android:layout_marginTop="20dp"
         android:text="Địa chỉ"
        style="@style/Text"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_add_nameAddress" />
 
@@ -105,7 +93,6 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
         android:hint="Nhà"
-
         style="@style/Text"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,17 +102,15 @@
 
     <TextView
         android:id="@+id/textView13"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Tên"
-        style="@style/Text"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline21"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline21"

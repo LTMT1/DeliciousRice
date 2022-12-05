@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="311dp"
         android:background="#F9514F"
-        android:fontFamily="@font/be_vietnam_bold"
+        style="@style/Text_btn"
         android:gravity="center"
         android:text="Yêu Thích"
         android:textColor="@color/white"

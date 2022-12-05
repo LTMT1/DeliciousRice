@@ -94,6 +94,9 @@
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="25dp"
         app:hintEnabled="false"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeWidth="0dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,6 +125,9 @@
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="25dp"
         app:hintEnabled="false"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeWidth="0dp"
+
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +149,7 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <TextView
         android:id="@+id/tvDangKy"
         android:layout_width="0dp"
         android:layout_height="55dp"

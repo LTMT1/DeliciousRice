@@ -347,6 +347,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
+                android:buttonTint="#EB6969"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/textView44"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -357,6 +358,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
+                android:buttonTint="#EB6969"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/textView47"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -367,6 +369,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
+                android:buttonTint="#EB6969"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/textView51"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -377,6 +380,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
+                android:buttonTint="#EB6969"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/textView52"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -387,6 +391,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
+                android:buttonTint="#EB6969"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/textView54"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -424,13 +429,14 @@
 
     </ScrollView>
 
-    <Button
+    <TextView
         android:id="@+id/btnaddcart"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="45dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/bg_btn"
+        android:gravity="center"
         android:text="Thêm Giỏ Hàng"
         style="@style/Text_btn"
         app:layout_constraintBottom_toBottomOf="parent"

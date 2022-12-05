@@ -17,6 +17,7 @@
         android:fontFamily="@font/be_vietnam_bold"
         android:gravity="center_horizontal"
         android:text="Tài Khoản"
+        style="@style/Text_btn"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -42,6 +43,7 @@
             android:text="Nguyễn Văn An"
             android:textColor="#000000"
             android:textSize="20sp"
+            style="@style/Text"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,8 +99,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Lịch sử đơn hàng  "
+                style="@style/Text"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -121,8 +123,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Địa chỉ "
+                style="@style/Text"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -166,10 +168,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Liên hệ và góp ý "
-                android:textColor="#000000"
                 android:textSize="16sp"
+                style="@style/Text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView12"
                 app:layout_constraintTop_toTopOf="parent"
@@ -223,9 +224,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Điều khoản và Chính sách "
-                android:textColor="#000000"
+                style="@style/Text"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView14"
@@ -280,9 +280,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:fontFamily="@font/be_vietnam_medium"
                 android:text="Cài đặt "
-                android:textColor="#000000"
+                style="@style/Text"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView15"
@@ -314,7 +313,6 @@
             android:id="@+id/cl_doipass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -332,14 +330,12 @@
                 app:layout_constraintTop_toTopOf="@+id/textView25" />
 
             <TextView
-
                 android:id="@+id/textView25"
+                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:fontFamily="@font/be_vietnam_medium"
+                android:layout_marginStart="20dp"
                 android:text="Đổi  mật khẩu"
-                android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView13"
@@ -384,7 +380,7 @@
         android:text="@string/dang_xuat"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold"
+        style="@style/Text_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

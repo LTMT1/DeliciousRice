@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.deliciousrice.Api.ApiProduct;
@@ -35,7 +36,7 @@ public class ChangePasFragment extends Fragment {
     private EditText edtRePassChange;
     private EditText edtPass;
     String pass, str_pass, str_passnew, str_repassnew, str_email;
-    private Button btnLuupass;
+    private TextView btnLuupass;
 
     private ImageView imgBackChangei;
 

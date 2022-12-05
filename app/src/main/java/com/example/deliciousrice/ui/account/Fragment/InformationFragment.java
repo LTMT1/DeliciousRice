@@ -64,9 +64,9 @@ public class InformationFragment extends Fragment {
     private EditText editTextdate;
     private EditText editTextname;
     private ImageView imgBackInformation;
-    private ImageView iconeditsdt;
+   /* private ImageView iconeditsdt;
     private ImageView iconeditdate;
-    private ImageView iconeditname;
+    private ImageView iconeditname;*/
 
     private static final int GALLERY = 1, CAMERA = 2;
     Bitmap FixBitmap;
@@ -241,9 +241,9 @@ public class InformationFragment extends Fragment {
         editTextdate = view.findViewById(R.id.editTextdate);
         editTextname = view.findViewById(R.id.editTextname);
         imgBackInformation = view.findViewById(R.id.img_back_Information);
-        iconeditsdt = view.findViewById(R.id.iconeditsdt);
+/*        iconeditsdt = view.findViewById(R.id.iconeditsdt);
         iconeditdate = view.findViewById(R.id.iconeditdate);
-        iconeditname = view.findViewById(R.id.iconeditname);
+        iconeditname = view.findViewById(R.id.iconeditname);*/
     }
 
     private void setview() {
@@ -347,57 +347,65 @@ public class InformationFragment extends Fragment {
         });
     }
     private void UpdateCustomer(){
-        iconeditsdt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTextSDT.setEnabled(true);
-                editTextSDT.setOnKeyListener(new View.OnKeyListener() {
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            String sdt = editTextSDT.getText().toString().trim();
-                            updateSDT(id, sdt);
-                            editTextSDT.setEnabled(false);
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+
+        editTextSDT.setEnabled(true);
+        editTextSDT.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    String sdt = editTextSDT.getText().toString().trim();
+                    updateSDT(id, sdt);
+                    editTextSDT.setEnabled(false);
+                    return true;
+                }
+                return false;
             }
         });
-        iconeditname.setOnClickListener(new View.OnClickListener() {
+        editTextname.setEnabled(true);
+        editTextname.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    String name = editTextname.getText().toString().trim();
+                    updateName(id, name);
+                    editTextname.setEnabled(false);
+                    return true;
+                }
+                return false;
+            }
+        });
+        editTextdate.setEnabled(true);
+        editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
+        editTextdate.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    String birthday = editTextdate.getText().toString().trim();
+                    updateBirthday(id, birthday);
+                    editTextdate.setEnabled(false);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+     /*   editTextSDT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+        editTextname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editTextname.setEnabled(true);
-                editTextname.setOnKeyListener(new View.OnKeyListener() {
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            String name = editTextname.getText().toString().trim();
-                            updateName(id, name);
-                            editTextname.setEnabled(false);
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+
             }
         });
-        iconeditdate.setOnClickListener(new View.OnClickListener() {
+        editTextdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editTextdate.setEnabled(true);
-                editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
-                editTextdate.setOnKeyListener(new View.OnKeyListener() {
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            String birthday = editTextdate.getText().toString().trim();
-                            updateBirthday(id, birthday);
-                            editTextdate.setEnabled(false);
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+
             }
-        });
+        });*/
     }
 }

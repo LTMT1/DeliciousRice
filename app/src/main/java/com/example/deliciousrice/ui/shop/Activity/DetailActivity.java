@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView imgCong;
     private ImageView tvcuon;
     private TextView tvdetaisp;
-    private Button btnaddcart;
+    private TextView btnaddcart;
 
     Product product;
     private SQLiteDatabase db;

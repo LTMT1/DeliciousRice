@@ -126,7 +126,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <TextView
         android:id="@+id/btnLuupass"
         style="@style/Text_btn"
         android:layout_width="0dp"
