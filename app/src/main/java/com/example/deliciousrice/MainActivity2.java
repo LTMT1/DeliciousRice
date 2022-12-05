@@ -20,6 +20,7 @@ import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.ui.cart.CartFragment;
+import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,12 +61,14 @@ public class MainActivity2 extends AppCompatActivity {
     private int id_customer;
     private long backPressTime;
     private Toast mToast;
+    static DaoCart daoCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        daoCart=new DaoCart(getApplicationContext());
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
             @Override
             public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -79,12 +82,12 @@ public class MainActivity2 extends AppCompatActivity {
         FirebaseMessaging.getInstance().subscribeToTopic("test");
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
-
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.shop, R.id.explore, R.id.cart, R.id.favorite, R.id.account)
                 .build();
         NavigationUI.setupWithNavController(binding.navView, navController);
         navView.setItemIconTintList(null);
+        setBugdeNumber();
         binding.navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -215,12 +218,15 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     public static void setBugdeNumber() {
+        ShopFragment.Cartlist= (ArrayList<Cart>) daoCart.getall();
         int number = ShopFragment.Cartlist.size();
+        BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.cart);
+        badgeDrawable.setMaxCharacterCount(3);
+        badgeDrawable.setNumber(number);
         if (number > 0) {
-            BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.cart);
-            badgeDrawable.setMaxCharacterCount(3);
-            badgeDrawable.setNumber(number);
             badgeDrawable.setVisible(true);
+        }else {
+            badgeDrawable.setVisible(false);
         }
     }
 

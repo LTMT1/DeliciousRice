@@ -79,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
         id_product=product.getId_product();
     }
     private void setviewdata(){
+        MainActivity2.setBugdeNumber();
         Glide.with(this).load(product.getImage()).centerCrop().into(roundedImageView);
         tvnamesp.setText(product.getProduct_name());
         tvtimesp.setText(product.getProcessing_time());
@@ -124,7 +125,6 @@ public class DetailActivity extends AppCompatActivity {
                     int sl1 = Integer.parseInt(tvnumbersp.getText().toString().trim());//lay so luong trong spinner
                     int Tien2 = sl1 * (product.getPrice());
                     daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl1);
-                    MainActivity2.setBugdeNumber();
                 }
             } else
             {
@@ -133,6 +133,7 @@ public class DetailActivity extends AppCompatActivity {
                 daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl2);
             }
             Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
+            updateList();
         });
     }
     private void checkYeuThich(int idcus, int idbh) {
@@ -193,12 +194,11 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
-//    private void InsertData(int id_product, String name, int price,String image, int amount) {
-//
-//        String sql = "INSERT INTO tbcart(id_product, name, price, image, amount) VALUES('"+id_product+"','"+name+"','"+price+"','"+image+"','"+amount+"')";
-//        db.execSQL(sql);
-//    }
-    public static void UpdateProduct(int id, int price, int amount){
-    daoCart.UpdateCart(id, price, amount);
-}
+    public static void UpdateProduct(int id, int price, int amount) {
+        daoCart.UpdateCart(id, price, amount);
+    }
+    private void updateList(){
+        ShopFragment.Cartlist= (ArrayList<Cart>) daoCart.getall();
+        MainActivity2.setBugdeNumber();
+    }
 }

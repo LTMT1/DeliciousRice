@@ -97,5 +97,6 @@ public class CartFragment extends Fragment {
     public void DeleteProduct(final int id){
         daoCart.DeleteCart(id);
         Updatelist();
+        MainActivity2.setBugdeNumber();
     }
 }
