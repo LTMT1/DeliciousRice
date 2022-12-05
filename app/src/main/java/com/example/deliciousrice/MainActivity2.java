@@ -2,6 +2,7 @@ package com.example.deliciousrice;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,7 +11,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.example.deliciousrice.Activity.HelloScreenActivity;
+import com.example.deliciousrice.Activity.LoginFaGoActivity;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Cart;
@@ -52,8 +56,10 @@ public class MainActivity2 extends AppCompatActivity {
 
     private static ActivityMain2Binding binding;
     private String email = "", password = "";
-    private String image, user_name, phone_number, address, birthday, emaill, passs;
+    private String image,id_application, user_name, phone_number, address, birthday, emaill, passs;
     private int id_customer;
+    private long backPressTime;
+    private Toast mToast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +135,7 @@ public class MainActivity2 extends AppCompatActivity {
                 ArrayList<Customer> mangyeuthich = (ArrayList<Customer>) response.body();
                 Customer customer = mangyeuthich.get(0);
                 id_customer = customer.getId_customer();
+                id_application = customer.getId_application();
                 user_name = customer.getUser_name();
                 image = customer.getImage();
                 birthday = customer.getBirthday();
@@ -143,6 +150,10 @@ public class MainActivity2 extends AppCompatActivity {
 
             }
         });
+    }
+
+    public String getId_application() {
+        return id_application;
     }
 
     public String getEmaill() {
@@ -211,5 +222,24 @@ public class MainActivity2 extends AppCompatActivity {
             badgeDrawable.setNumber(number);
             badgeDrawable.setVisible(true);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressTime + 2000 > System.currentTimeMillis()) {
+            mToast.cancel();
+
+            Intent intent = new Intent(getApplicationContext(), HelloScreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+
+        } else {
+            mToast = Toast.makeText(MainActivity2.this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+        backPressTime = System.currentTimeMillis();
     }
 }

@@ -106,6 +106,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                             JSONObject object = jsonArray.getJSONObject(i);
                             CustomerArrayList.add(new Customer(
                                     object.getInt("id_customer"),
+                                    object.getString("id_application"),
                                     object.getString("user_name"),
                                     object.getString("image"),
                                     object.getString("birthday"),

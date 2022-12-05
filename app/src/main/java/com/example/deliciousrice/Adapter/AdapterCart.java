@@ -83,25 +83,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
                 int giamoia = (giaht * slm) / slht;
                 ;
                 if (slht == 1) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Xác nhận xóa sản phẩm");
-                    builder.setMessage("Bạn có muốn xóa sản phẩm này?");
-                    builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            cartFragment.DeleteProduct(cart.id_product);
-                            cartFragment.CheckData();
-                            cartFragment.UpdateTongTien();
-                        }
-                    });
-                    builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            cartFragment.UpdateTongTien();
-                            cartFragment.CheckData();
-                        }
-                    });
-                    builder.show();
+                    DeleteItemCart(cart.id_product);
                 } else {
                     ShopFragment.Cartlist.get(position).setAmount(slm);
                     list.get(position).setAmount(slm);
@@ -120,9 +102,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
             cartFragment.UpdateTongTien();
         });
         holder.frameLayout.setOnClickListener(view -> {
-            cartFragment.DeleteProduct(cart.id_product);
-            cartFragment.CheckData();
-            cartFragment.UpdateTongTien();
+            DeleteItemCart(cart.id_product);
         });
     }
 
@@ -169,5 +149,26 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
                 onClickitem.onclickitem(view, getAdapterPosition(), 2);
             }
         }
+    }
+    private void DeleteItemCart( int id_product){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Xác nhận xóa sản phẩm");
+        builder.setMessage("Bạn có muốn xóa sản phẩm này?");
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                cartFragment.DeleteProduct(id_product);
+                cartFragment.CheckData();
+                cartFragment.UpdateTongTien();
+            }
+        });
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                cartFragment.UpdateTongTien();
+                cartFragment.CheckData();
+            }
+        });
+        builder.show();
     }
 }

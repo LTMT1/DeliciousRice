@@ -51,15 +51,19 @@ public class DaoCart {
         values.put("amount",amount);
         return db.insert("tbcart",null,values);
     }
-    public int delete(int id) {
+    public int DeleteCart(int id) {
         return db.delete("tbcart", "id_product=?", new String[]{String.valueOf(id)});
     }
-    public int update(int id, int price,int amount){
+    public int UpdateCart(int id, int price,int amount){
         ContentValues values=new ContentValues();
         values.put("price",price);
         values.put("amount",amount);
         return db.update("tbcart",values,"id_product=?",new String[]{String.valueOf(id)});
 
+    }
+    public void DeleteData(){
+        String sql = "DELETE FROM tbcart";
+        db.execSQL(sql);
     }
     public class initData extends SQLiteOpenHelper {
 

@@ -27,7 +27,7 @@ import retrofit2.Callback;
 public class HelloScreenActivity extends AppCompatActivity {
     private ImageView imghellosceen;
     Animation animation;
-    private String email = "", password = "";
+    private String email = "", password = "", id_customer = "";
     private ProgressBar prgLoadingSplash;
 
     @Override
@@ -56,10 +56,12 @@ public class HelloScreenActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (email.isEmpty() || password.isEmpty()) {
-                        startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
-                    } else {
+                    if (!email.isEmpty() || !password.isEmpty()) {
                         loginApi(email, password);
+                    } else if (!email.isEmpty() || !id_customer.isEmpty()) {
+                        loginGGApi(email,id_customer);
+                    } else {
+                        startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
                     }
                 }
             }, 4000);
@@ -69,6 +71,7 @@ public class HelloScreenActivity extends AppCompatActivity {
     private void getDatas() {
         SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
         email = preferences.getString("gmail", "");
+        id_customer = preferences.getString("id_customer", "");
         password = preferences.getString("matkhau", "");
     }
 
@@ -95,6 +98,29 @@ public class HelloScreenActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<ResponseApi> call, @NonNull Throwable t) {
+            }
+        });
+    }
+
+    private void loginGGApi(String email, String id) {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> callback = apiProduct.loginGG(email, id);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
+                if (response.body().equals("Success")) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
+                    SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
+                    editor.clear().apply();
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
             }
         });
     }

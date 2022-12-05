@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 import com.example.deliciousrice.ui.account.Fragment.ChangePasFragment;
 import com.example.deliciousrice.ui.account.Fragment.InformationFragment;
 import com.example.deliciousrice.ui.account.Fragment.ReceipFragment;
+import com.example.deliciousrice.ui.cart.DaoCart;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,15 +43,18 @@ public class AccountFragment extends Fragment {
     private MainActivity2 main;
     Customer customer;
     FragmentTransaction transection;
+    DaoCart daoCart;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View views = inflater.inflate(R.layout.fragment_account, container, false);
         main = (MainActivity2) getActivity();
+        daoCart=new DaoCart(getActivity());
         Anhxa(views);
         setviewaccount();
         main.updateMain();
+        visibleChanePass();
         return views;
     }
 
@@ -64,6 +69,7 @@ public class AccountFragment extends Fragment {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             SharedPreferences.Editor editor = getContext().getSharedPreferences("user_file", MODE_PRIVATE).edit();
             editor.clear().commit();
+            daoCart.DeleteData();
             startActivity(intent);
         });
 
@@ -79,12 +85,10 @@ public class AccountFragment extends Fragment {
             bundle.putString("name2", main.getPhone_number());
             bundle.putString("name3", main.getImage());
             informationFragment.setArguments(bundle);
-
             ft.replace(R.id.nav_host_fragment_activity_main2, informationFragment);
             ft.commit();
         });
         llayReceipt.setOnClickListener(v -> {
-
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ReceipFragment fragment = new ReceipFragment();
@@ -93,19 +97,14 @@ public class AccountFragment extends Fragment {
             bundle.putString("phone_number",main.getPhone_number());
             bundle.putInt("id_cus", main.getId_customer());
             fragment.setArguments(bundle);
-
             ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
             ft.commit();
-
-
         });
 
         llayAddress.setOnClickListener(v -> {
-
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             AddressFragment addfragment = new AddressFragment();
-
             Bundle bundle = new Bundle();
             bundle.putInt("Adrress", main.getId_customer());
             addfragment.setArguments(bundle);
@@ -163,5 +162,12 @@ public class AccountFragment extends Fragment {
     private void setviewaccount() {
         tvname.setText(main.getUser_name());
         Glide.with(getActivity()).load(main.getImage()).centerCrop().into(cardView);
+    }
+    private void visibleChanePass(){
+        if(main.getId_application().equals("Default")){
+            clDoipass.setVisibility(View.VISIBLE);
+        }else {
+            clDoipass.setVisibility(View.GONE);
+        }
     }
 }

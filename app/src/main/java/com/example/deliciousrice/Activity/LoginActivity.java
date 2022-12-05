@@ -27,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtEmailDangNhap;
     private EditText edtPassWordDangNhap;
     private LoadingDialog loadingDialog;
+    private long backPressTime;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,5 +139,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, LoginFaGoActivity.class);
         startActivity(intent);
     }
-
+    @Override
+    public void onBackPressed() {
+            Intent intent = new Intent(getApplicationContext(), LoginFaGoActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+    }
 }

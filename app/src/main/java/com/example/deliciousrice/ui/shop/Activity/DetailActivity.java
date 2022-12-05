@@ -199,6 +199,6 @@ public class DetailActivity extends AppCompatActivity {
 //        db.execSQL(sql);
 //    }
     public static void UpdateProduct(int id, int price, int amount){
-    daoCart.update(id, price, amount);
+    daoCart.UpdateCart(id, price, amount);
 }
 }

@@ -49,9 +49,14 @@ public interface ApiProduct {
     @POST("RegisterFacebook.php")
     Call<String> registerfacebook(@Field("id") String idfacebook, @Field("image") String image, @Field("username") String username);
 
+
     @FormUrlEncoded
     @POST("RegisterGoogle.php")
     Call<String> registergoogle(@Field("id") String idgoogle, @Field("username") String username, @Field("image") String image, @Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("LoginGG.php")
+    Call<String> loginGG(@Field("email") String email, @Field("id_application") String password);
 
     @FormUrlEncoded
     @POST("DeleteFavorite.php")

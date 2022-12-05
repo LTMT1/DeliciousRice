@@ -169,7 +169,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 progressDialog.dismiss();
                 if (response.body().equalsIgnoreCase("Success")) {
-                    remember(personEmail);
+                    remember(personId,personEmail);
                     startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
                 }
             }
@@ -276,9 +276,10 @@ public class LoginFaGoActivity extends AppCompatActivity {
             }
         });
     }
-    private void remember(String strname) {
+    private void remember(String id,String strname) {
         SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("id_customer", id);
         editor.putString("gmail", strname);
         editor.apply();
     }

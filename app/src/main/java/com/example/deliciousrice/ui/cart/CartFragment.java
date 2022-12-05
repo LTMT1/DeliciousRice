@@ -95,7 +95,7 @@ public class CartFragment extends Fragment {
         });
     }
     public void DeleteProduct(final int id){
-        daoCart.delete(id);
+        daoCart.DeleteCart(id);
         Updatelist();
     }
 }
