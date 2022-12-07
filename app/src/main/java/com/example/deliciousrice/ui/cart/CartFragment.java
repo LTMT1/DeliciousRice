@@ -1,15 +1,10 @@
 package com.example.deliciousrice.ui.cart;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +22,6 @@ import com.example.deliciousrice.ui.shop.ShopFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CartFragment extends Fragment {
 
@@ -44,7 +38,7 @@ public class CartFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         Anhxa(view);
-        daoCart=new DaoCart(getActivity());
+        daoCart = new DaoCart(getActivity());
         main = (MainActivity2) getActivity();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -66,11 +60,13 @@ public class CartFragment extends Fragment {
             RClViewgiohang.setVisibility(View.VISIBLE);
         }
     }
-    private  void Updatelist() {
-        ShopFragment.Cartlist=(ArrayList<Cart>) daoCart.getall();
-        adapterCart = new AdapterCart(ShopFragment.Cartlist, getActivity(),this);
+
+    private void Updatelist() {
+        ShopFragment.Cartlist = (ArrayList<Cart>) daoCart.getall();
+        adapterCart = new AdapterCart(ShopFragment.Cartlist, getActivity(), this);
         RClViewgiohang.setAdapter(adapterCart);
     }
+
     public static void UpdateTongTien() {
         total_money = 0;
         for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
@@ -94,7 +90,8 @@ public class CartFragment extends Fragment {
             }
         });
     }
-    public void DeleteProduct(final int id){
+
+    public void DeleteProduct(final int id) {
         daoCart.DeleteCart(id);
         Updatelist();
         MainActivity2.setBugdeNumber();

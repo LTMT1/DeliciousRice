@@ -29,4 +29,11 @@
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/be_vietnam_extrabold</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryDark">@color/purple_500</item>
+        <item name="colorAccent">@color/purple_700</item>
+    </style>
 </resources>
