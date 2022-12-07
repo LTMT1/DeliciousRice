@@ -45,8 +45,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView28">
+        app:layout_constraintTop_toBottomOf="@+id/imageView28"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/consdds"
@@ -261,7 +263,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/rcyViewChiTietDH" />
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/tvshipkm"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -269,7 +271,7 @@
                 android:layout_marginRight="15dp"
                 android:text="Phí áp dụng: 5.5km"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView83"
+                app:layout_constraintEnd_toStartOf="@+id/tvmoneyship"
                 app:layout_constraintStart_toStartOf="@+id/tvSoMon"
                 app:layout_constraintTop_toBottomOf="@+id/tvSoMon" />
 
@@ -280,12 +282,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
-
-                android:text="Quán giảm 20k cho đơn có 3 món trở lên"
+                android:text="giảm 20% khi có từ 4 món trở lên"
+                android:textColor="@color/colorTaskBar"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView84"
-                app:layout_constraintStart_toStartOf="@+id/textView31"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/tvkhuyenmai"
+                app:layout_constraintStart_toStartOf="@+id/tvshipkm"
+                app:layout_constraintTop_toBottomOf="@+id/tvshipkm" />
 
             <TextView
                 android:id="@+id/tvTongTien"
@@ -301,24 +304,26 @@
                 app:layout_constraintStart_toEndOf="@+id/tvSoMon" />
 
             <TextView
-                android:id="@+id/textView83"
+                android:id="@+id/tvmoneyship"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  35.000 đ"
+                android:text="  20.000 đ"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView31"
+                app:layout_constraintBottom_toBottomOf="@+id/tvshipkm"
                 app:layout_constraintEnd_toEndOf="@+id/tvTongTien" />
 
             <TextView
-                android:id="@+id/textView84"
+                android:id="@+id/tvkhuyenmai"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  -20.000 đ"
+                android:textColor="@color/colorTaskBar"
                 android:textSize="13sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/textView63"
-                app:layout_constraintEnd_toEndOf="@+id/textView83" />
+                app:layout_constraintEnd_toEndOf="@+id/tvmoneyship" />
 
             <ImageView
                 android:id="@+id/imageView38"
@@ -353,13 +358,13 @@
                 android:layout_marginTop="10dp"
                 android:text="Tổng cộng "
                 android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView86"
+                app:layout_constraintEnd_toStartOf="@+id/tvTongtien"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView39" />
 
             <TextView
-                android:id="@+id/textView86"
+                android:id="@+id/tvTongtien"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

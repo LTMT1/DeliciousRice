@@ -111,20 +111,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView32" />
 
-            <TextView
+            <Spinner
                 android:id="@+id/tvsetaddress"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="18dp"
                 android:layout_marginTop="10dp"
-                android:text="Nhà Trọ Kiên Phượng, 292 Đường 422B, thôn Vực, Hoài Đức, Hà Nội, Việt Nam "
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvselectaddress" />
-
+                app:layout_constraintTop_toBottomOf="@+id/tvselectaddress"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView57"
@@ -233,7 +232,8 @@
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView37"
-                app:layout_constraintTop_toBottomOf="@+id/imageView35" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView35"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
                 android:id="@+id/imageView37"
@@ -400,7 +400,7 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView69"
+                    android:id="@+id/tv_khuyenmai"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -410,19 +410,19 @@
                     android:text="Khuyến mãi "
                     android:textColor="#E60707"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView70"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_tienkm"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
                 <TextView
-                    android:id="@+id/textView70"
+                    android:id="@+id/tv_tienkm"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:text="  -20.000 đ"
                     android:textColor="#E60707"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView69"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_khuyenmai"
                     app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -451,7 +451,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView166666"
+            android:id="@+id/tv_tongmoney"
             style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -480,6 +480,5 @@
             app:layout_constraintStart_toEndOf="@+id/textView7"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

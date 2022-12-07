@@ -53,16 +53,16 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="48dp"
         android:layout_marginBottom="15dp"
         android:text="Đã hủy"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgstatus"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvmoney"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.965" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/tvMuaLai"
         style="@style/Text"
         android:layout_width="130dp"
         android:layout_height="40dp"

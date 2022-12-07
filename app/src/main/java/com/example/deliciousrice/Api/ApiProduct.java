@@ -124,8 +124,8 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("insertDetailBill.php")
-    Call<String> adddetailbill(@Field("bill") String bill, @Field("idproduct")
-            int idproduct, @Field("amount") int amount, @Field("totalmoney") int totalmoney);
+    Call<String> adddetailbill(@Field("bill") String bill, @Field("name")
+            String idproduct, @Field("amount") int amount, @Field("totalmoney") int totalmoney);
 
 
     @FormUrlEncoded
@@ -136,8 +136,9 @@ public interface ApiProduct {
     @POST("notificationToken.php")
     Call<String> token(@Field("Token") String token);
 
-    @GET("getNotification.php")
-    Call<String> pushNotification();
+    @FormUrlEncoded
+    @POST("getNotification.php")
+    Call<String> pushNotification(@Field("Token") String token) ;
 
 
 }

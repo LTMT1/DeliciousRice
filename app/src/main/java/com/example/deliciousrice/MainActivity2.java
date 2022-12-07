@@ -1,31 +1,12 @@
 package com.example.deliciousrice;
 
-import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-
-import com.example.deliciousrice.Activity.HelloScreenActivity;
-import com.example.deliciousrice.Activity.LoginFaGoActivity;
-import com.example.deliciousrice.Api.ApiProduct;
-import com.example.deliciousrice.Api.ApiService;
-import com.example.deliciousrice.Model.Cart;
-import com.example.deliciousrice.Model.Customer;
-import com.example.deliciousrice.ui.cart.CartFragment;
-import com.example.deliciousrice.ui.cart.DaoCart;
-import com.example.deliciousrice.ui.shop.ShopFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,20 +16,25 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.deliciousrice.Activity.HelloScreenActivity;
+import com.example.deliciousrice.Api.ApiProduct;
+import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.Model.Cart;
+import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.databinding.ActivityMain2Binding;
+import com.example.deliciousrice.ui.cart.DaoCart;
+import com.example.deliciousrice.ui.shop.ShopFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,6 +48,7 @@ public class MainActivity2 extends AppCompatActivity {
     private long backPressTime;
     private Toast mToast;
     static DaoCart daoCart;
+    public static String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,17 +56,7 @@ public class MainActivity2 extends AppCompatActivity {
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         daoCart=new DaoCart(getApplicationContext());
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                if (!task.isSuccessful()) {
-                    return;
-                }
-                String token = task.getResult().getToken();
-                registerToken(token);
-            }
-        });
-        FirebaseMessaging.getInstance().subscribeToTopic("test");
+        getToken();
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -248,5 +225,17 @@ public class MainActivity2 extends AppCompatActivity {
         }
         backPressTime = System.currentTimeMillis();
     }
-    // anh
+    public void getToken(){
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if (!task.isSuccessful()) {
+                    return;
+                }
+                token = task.getResult().getToken();
+                registerToken(token);
+            }
+        });
+        FirebaseMessaging.getInstance().subscribeToTopic("test");
+    }
 }
