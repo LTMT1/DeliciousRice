@@ -32,7 +32,7 @@ public class AdapterSelectAddress extends ArrayAdapter<Adderss> {
         TextView tvadressselec=convertView.findViewById(R.id.tv_addresss);
         Adderss adderss=this.getItem(position);
         if(adderss!=null){
-            tvadressselec.setText(adderss.getAddress_name());
+            tvadressselec.setText(adderss.getAddress_specifically());
         }
         return convertView;
     }
@@ -43,7 +43,7 @@ public class AdapterSelectAddress extends ArrayAdapter<Adderss> {
         TextView tvadress=convertView.findViewById(R.id.tv_selectaddress);
         Adderss adderss=this.getItem(position);
         if(adderss!=null){
-            tvadress.setText(adderss.getAddress_name());
+            tvadress.setText(adderss.getAddress_specifically());
         }
         return convertView;
     }

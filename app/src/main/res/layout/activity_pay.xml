@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:text="Gian Đến"
+                android:text="Giao Đến"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView31"
                 app:layout_constraintStart_toEndOf="@+id/imageView31"
@@ -395,7 +395,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="50.000 đ"
+                    android:text="20.000 đ"
                     app:layout_constraintBottom_toBottomOf="@+id/textView67"
                     app:layout_constraintEnd_toEndOf="parent" />
 

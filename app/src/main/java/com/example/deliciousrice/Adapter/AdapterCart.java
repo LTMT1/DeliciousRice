@@ -81,7 +81,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
             if (giatri == 1) {
                 int slm = Integer.parseInt(holder.tvsoluong.getText().toString()) - 1;
                 int giamoia = (giaht * slm) / slht;
-                ;
+
                 if (slht == 1) {
                     DeleteItemCart(cart.id_product);
                 } else {

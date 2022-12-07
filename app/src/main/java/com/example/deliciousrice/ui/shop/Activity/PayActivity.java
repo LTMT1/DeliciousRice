@@ -86,6 +86,8 @@ public class PayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id_customer = intent.getIntExtra("id_customer", 0);
         getlistadress(id_customer);
+
+        //zalo pay
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -322,8 +324,8 @@ public class PayActivity extends AppCompatActivity {
                 tvsetaddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        address = adapterSelectAddress.getItem(i).getAddress_name();
-                        Toast.makeText(PayActivity.this, adapterSelectAddress.getItem(i).getAddress_name(), Toast.LENGTH_SHORT).show();
+                        address = adapterSelectAddress.getItem(i).getAddress_specifically();
+                        Toast.makeText(PayActivity.this, adapterSelectAddress.getItem(i).getAddress_specifically(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

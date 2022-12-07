@@ -283,48 +283,56 @@ public class InformationFragment extends Fragment {
     }
 
     private void updateName(int ida, String name) {
+        if (validateName()){
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.updatename(ida, name);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        });
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> callback = apiProduct.updatename(ida, name);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                    Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
+        }
+
     }
 
 
     private void updateSDT(int ida, String sdt) {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Please Wait..");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.updatesdt(ida, sdt);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
+        if (validatePhone()) {
+            final ProgressDialog progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Please Wait..");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        });
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> callback = apiProduct.updatesdt(ida, sdt);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                    Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
+
+        }
     }
 
 
@@ -348,64 +356,68 @@ public class InformationFragment extends Fragment {
     }
     private void UpdateCustomer(){
 
-        editTextSDT.setEnabled(true);
-        editTextSDT.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    String sdt = editTextSDT.getText().toString().trim();
-                    updateSDT(id, sdt);
-                    editTextSDT.setEnabled(false);
-                    return true;
+            editTextSDT.setEnabled(true);
+            editTextSDT.setOnKeyListener(new View.OnKeyListener() {
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        String sdt = editTextSDT.getText().toString().trim();
+                        updateSDT(id, sdt);
+                        editTextSDT.setEnabled(false);
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
-        editTextname.setEnabled(true);
-        editTextname.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    String name = editTextname.getText().toString().trim();
-                    updateName(id, name);
-                    editTextname.setEnabled(false);
-                    return true;
+            });
+            editTextname.setEnabled(true);
+            editTextname.setOnKeyListener(new View.OnKeyListener() {
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        String name = editTextname.getText().toString().trim();
+                        updateName(id, name);
+                        editTextname.setEnabled(false);
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
-        editTextdate.setEnabled(true);
-        editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
-        editTextdate.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    String birthday = editTextdate.getText().toString().trim();
-                    updateBirthday(id, birthday);
-                    editTextdate.setEnabled(false);
-                    return true;
+            });
+            editTextdate.setEnabled(true);
+            editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
+            editTextdate.setOnKeyListener(new View.OnKeyListener() {
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        String birthday = editTextdate.getText().toString().trim();
+                        updateBirthday(id, birthday);
+                        editTextdate.setEnabled(false);
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
-
-     /*   editTextSDT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            });
 
 
-            }
-        });
-        editTextname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTextname.setEnabled(true);
+    }
 
-            }
-        });
-        editTextdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTextdate.setEnabled(true);
+    public boolean validateName() {
+        if (editTextname.getText().toString().trim().equals("")) {
+            editTextname.setError("Hãy nhập tên của bạn.");
+            return false;
+        } else {
+            editTextname.setError(null);
+            return true;
+        }
+    }
 
-            }
-        });*/
+    public boolean validatePhone() {
+        String a = "^0[0-9]{9}$";
+        if (editTextSDT.getText().toString().trim().equals("")) {
+            editTextSDT.setError("Hãy nhập số điện thoại của bạn.");
+            return false;
+        } else if (!editTextSDT.getText().toString().trim().matches(a)) {
+            editTextSDT.setError("Nhập đúng định dạng số điện thoại.");
+            return false;
+        } else {
+            editTextSDT.setError(null);
+            return true;
+        }
     }
 }
