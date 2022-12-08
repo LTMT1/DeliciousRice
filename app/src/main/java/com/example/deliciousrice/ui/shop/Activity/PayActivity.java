@@ -199,6 +199,10 @@ public class PayActivity extends AppCompatActivity {
                     Toast.makeText(PayActivity.this, "Giỏ hàng không có sản phầm nào!", Toast.LENGTH_SHORT).show();
                 }
             }
+            else {
+                Toast.makeText(this, "Bạn chưa chọn phương thức mua hàng", Toast.LENGTH_SHORT).show();
+                loadingDialog.dismissDialog();
+            }
         });
     }
 

@@ -20,6 +20,7 @@ import com.example.deliciousrice.callback.ProductItemClick;
 import com.example.deliciousrice.callback.ProductNewItemClick;
 import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.ShopFragment;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
@@ -102,7 +103,8 @@ public class AdapterProductNew extends RecyclerView.Adapter<AdapterProductNew.Pr
     }
 
     public class ProductNewViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgProductNew, imgBuyPoductNew;
+        RoundedImageView imgProductNew;
+        ImageView imgBuyPoductNew;
         TextView tvNameProductNew, tvMassPoductNew, tvPricePoductNew;
         private ConstraintLayout cstrItemProductNew;
 

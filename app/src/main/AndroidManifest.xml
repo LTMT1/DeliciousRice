@@ -71,13 +71,6 @@
 
         </activity>
         <activity
-            android:name=".ui.account.Activity.AddAddressActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ui.account.Activity.EmailActivity"
             android:exported="false">
             <meta-data
@@ -99,16 +92,6 @@
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".SendOtpActivity" -->
         <!-- android:exported="false" /> -->
-        <activity
-            android:name=".ui.account.Activity.EditAddressActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.account.Activity.AddressActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <activity
             android:name=".Activity.LoginFaGoActivity"
             android:exported="false">
