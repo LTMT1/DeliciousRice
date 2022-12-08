@@ -227,15 +227,15 @@ public class PayActivity extends AppCompatActivity {
     }
 
     private void IsLoading() {
-        lblZpTransToken.setVisibility(View.INVISIBLE);
-        txtToken.setVisibility(View.INVISIBLE);
-        btnPay.setVisibility(View.INVISIBLE);
+//        lblZpTransToken.setVisibility(View.INVISIBLE);
+//        txtToken.setVisibility(View.INVISIBLE);
+//        btnPay.setVisibility(View.INVISIBLE);
     }
 
     private void IsDone() {
-        lblZpTransToken.setVisibility(View.VISIBLE);
-        txtToken.setVisibility(View.VISIBLE);
-        btnPay.setVisibility(View.VISIBLE);
+//        lblZpTransToken.setVisibility(View.VISIBLE);
+//        txtToken.setVisibility(View.VISIBLE);
+//        btnPay.setVisibility(View.VISIBLE);
     }
 
     private void addBill(String bill, int idcus, String adreess, String date, String note, int money) {
