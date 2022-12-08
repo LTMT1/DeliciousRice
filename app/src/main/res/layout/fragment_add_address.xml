@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
- <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".ui.account.Activity.EditAddressActivity">
-
+    tools:context=".ui.account.Fragment.AddAddressFragment">
     <ImageView
-        android:id="@+id/img_backEd_setting"
+        android:id="@+id/img_backAdd_Address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -21,19 +20,18 @@
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginTop="25dp"
-        android:text="@string/sua_dia"
-        android:textColor="#000000"
-        android:textSize="20sp"
+        android:text="Thêm địa chỉ"
         style="@style/Text"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView18"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,51 +41,15 @@
         app:srcCompat="@drawable/ic_vienduoi" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_detele_address"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/bg_borders_address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_edctAddress">
-
-
-        <ImageView
-            android:id="@+id/imageView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:src="@drawable/ic_address_delete"
-            app:layout_constraintBottom_toBottomOf="@+id/textView17"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView17" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Xóa địa chỉ "
-            android:textColor="#EC8383"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView24"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.516" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <TextView
-        android:id="@+id/tv_upAddress"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
+        android:id="@+id/tv_add_Address"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="45dp"
+        android:layout_marginHorizontal="45dp"
         android:background="@drawable/bg_btn"
         android:gravity="center"
-        android:text="@string/l_u"
+        android:text="Lưu Địa Chỉ"
         style="@style/Text_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,45 +57,45 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/ed_edctAddress"
-        style="@style/Text"
+        android:id="@+id/ed_add_ctDiachi"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
         android:drawableRight="@drawable/ic_map_search"
-        android:hint="Trường Cao Đẳng FPT Polytechnic,Trịnh Văn Bô..."
+        android:hint="Vd: "
         android:paddingRight="10dp"
+        style="@style/Text"
         android:textSize="14sp"
-        android:ellipsize="end"
-        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline21"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView15"
-        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:text="Địa chỉ"
-        android:textSize="14sp"
+        style="@style/Text"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_edNameAdd" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_add_nameAddress" />
 
     <EditText
-        android:id="@+id/ed_edNameAdd"
-        style="@style/Text"
+        android:id="@+id/ed_add_nameAddress"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
         android:hint="Nhà"
+        style="@style/Text"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -145,16 +107,14 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:text="Tên"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline22"
+        android:id="@+id/guideline21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-
-
+        app:layout_constraintGuide_percent="0.45" />
 </androidx.constraintlayout.widget.ConstraintLayout>

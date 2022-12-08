@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="311dp"
-        android:background="#F9514F"
+        android:background="#F31516"
         style="@style/Text_btn"
         android:gravity="center"
         android:text="Yêu Thích"
@@ -45,26 +45,31 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constr"
-            android:layout_width="match_parent"
-            android:layout_height="383dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:visibility="gone"
+            android:layout_gravity="center"
             tools:ignore="MissingConstraints">
 
+            <ImageView
+                android:id="@+id/imageView21"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/imghelloscreen" />
+
             <TextView
-                android:id="@+id/textView38"
-                android:layout_width="0dp"
+                android:id="@+id/TextView"
+                style="@style/Text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="85dp"
-                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="Bạn chưa có sản phẩm yêu thích nào."
-                android:textColor="#474545"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView21"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.921" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

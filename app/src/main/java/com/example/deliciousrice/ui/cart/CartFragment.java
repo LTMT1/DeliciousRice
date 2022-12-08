@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class CartFragment extends Fragment {
 
-    public static TextView textviewthongbao;
+    public static ConstraintLayout textviewthongbao;
     static RecyclerView RClViewgiohang;
     static TextView tvtongtien;
     private ConstraintLayout thanhtoan;
