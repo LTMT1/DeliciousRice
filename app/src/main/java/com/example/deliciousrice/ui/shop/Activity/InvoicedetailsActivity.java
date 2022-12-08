@@ -3,6 +3,7 @@ package com.example.deliciousrice.ui.shop.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,9 @@ public class InvoicedetailsActivity extends AppCompatActivity {
     private TextView tvshipkm,tvTongtienBill;
     private TextView tvmoneyship;
     private TextView tvkhuyenmai,textVieưgone;
+    private ImageView imgBackInvoicedetails;
+
+
 
     AdapterDetailBill adapterDetailBill;
     Bill bill;
@@ -72,6 +76,11 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         tvkhuyenmai = findViewById(R.id.tvkhuyenmai);
         tvTongtienBill=findViewById(R.id.tvTongtien);
         textVieưgone=findViewById(R.id.textView63);
+        imgBackInvoicedetails = findViewById(R.id.img_back_Invoicedetails);
+        imgBackInvoicedetails.setOnClickListener(view -> {
+
+        });
+
     }
 
     private void setData(){

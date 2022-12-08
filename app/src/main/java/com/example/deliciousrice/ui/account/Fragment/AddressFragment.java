@@ -1,7 +1,6 @@
 package com.example.deliciousrice.ui.account.Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +9,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,12 +24,8 @@ import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.account.AccountFragment;
-import com.example.deliciousrice.ui.account.Activity.AddAddressActivity;
-import com.example.deliciousrice.ui.account.Activity.AddressActivity;
-import com.example.deliciousrice.ui.account.Activity.EditAddressActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,9 +72,14 @@ public class AddressFragment extends Fragment {
         Log.e("alo id", String.valueOf(idadr));
 
         cl_insertAdsress.setOnClickListener(v -> {
-            Intent i = new Intent(getContext(), AddAddressActivity.class);
-            i.putExtra("iccome", idadr);
-            startActivity(i);
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            AddAddressFragment fragment = new AddAddressFragment();
+            Bundle bundle1 = new Bundle();
+            bundle1.putInt("iccome", idadr);
+            fragment.setArguments(bundle1);
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
 
         });
         ShowAddress();
@@ -108,11 +107,17 @@ public class AddressFragment extends Fragment {
 
 
                 adapterAddress = new AdapterAddress(addersses, AddressFragment.this, addressNew -> {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    EditAddressFragment fragment = new EditAddressFragment();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putInt("iccome", idadr);
+                    bundle2.putSerializable("getdataAddress", addressNew);
 
-                    Intent intent = new Intent(getContext(), EditAddressActivity.class);
-                    intent.putExtra("idcustomer", idadr);
-                    intent.putExtra("getdataAddress", addressNew);
-                    startActivity(intent);
+                    fragment.setArguments(bundle2);
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
 
                 });
                 rclAddress.setAdapter(adapterAddress);

@@ -45,6 +45,7 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
         Glide.with(context).load(productHot.getImage()).centerCrop().into(holder.imgProductHot);
         holder.tvProductNameHot.setText(productHot.getProduct_name());
         holder.tvPriceProductHot.setText(String.valueOf(productHot.getPrice()));
+        holder.tvTimehot.setText(productHot.getProcessing_time());
         holder.cstrItemProductHot.setOnClickListener(v -> {
             productHotItemClick.itemProductHotClick(productHot);
         });
@@ -57,15 +58,13 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
     }
 
     public class ProductHotViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView imgProductHot, imgProductFavouriteHot;
-        TextView tvProductNameHot, tvPriceProductHot;
+        ImageView imgProductHot;
+        TextView tvProductNameHot, tvPriceProductHot,tvTimehot;
         private ConstraintLayout cstrItemProductHot;
         public ProductHotViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            tvTimehot = itemView.findViewById(R.id.tv_timehot);
             imgProductHot = itemView.findViewById(R.id.imgProductHot);
-            imgProductFavouriteHot = itemView.findViewById(R.id.imgProductFavouriteHot);
             tvProductNameHot = itemView.findViewById(R.id.tvProductNameHot);
             tvPriceProductHot = itemView.findViewById(R.id.tvPriceProductHot);
             cstrItemProductHot = itemView.findViewById(R.id.layout_item_product_hot);

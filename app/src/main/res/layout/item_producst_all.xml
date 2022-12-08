@@ -43,10 +43,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_marginLeft="15dp"
         android:id="@+id/imageView"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginStart="25dp"
         android:src="@drawable/ic_clock"
         app:layout_constraintBottom_toBottomOf="@+id/tv_se_tiem"
         app:layout_constraintStart_toEndOf="@+id/cardView5"
@@ -56,10 +56,10 @@
         android:id="@+id/tv_se_tiem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/be_vietnam_medium"
-        android:text="2gam"
+        android:text="10 Phút"
         android:textColor="#7C7C7C"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -67,12 +67,12 @@
 
     <TextView
         android:id="@+id/tv_se_gia"
-        android:fontFamily="@font/be_vietnam_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
+        android:fontFamily="@font/be_vietnam_medium"
         android:text="45.000 đ"
         android:textColor="#000000"
         android:textSize="15sp"

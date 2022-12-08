@@ -11,13 +11,13 @@
 
     <TextView
         android:id="@+id/tvTaiKhoan"
+        style="@style/Text_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#F9514F"
+        android:background="#F31516"
         android:fontFamily="@font/be_vietnam_bold"
         android:gravity="center_horizontal"
         android:text="Tài Khoản"
-        style="@style/Text_btn"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"

@@ -64,9 +64,11 @@ public class InformationFragment extends Fragment {
     private EditText editTextdate;
     private EditText editTextname;
     private ImageView imgBackInformation;
-   /* private ImageView iconeditsdt;
-    private ImageView iconeditdate;
-    private ImageView iconeditname;*/
+    private ImageView imgEditTextname;
+    private ImageView imgEditTextSDT;
+    private ImageView imgEditTextdate;
+
+
 
     private static final int GALLERY = 1, CAMERA = 2;
     Bitmap FixBitmap;
@@ -241,9 +243,9 @@ public class InformationFragment extends Fragment {
         editTextdate = view.findViewById(R.id.editTextdate);
         editTextname = view.findViewById(R.id.editTextname);
         imgBackInformation = view.findViewById(R.id.img_back_Information);
-/*        iconeditsdt = view.findViewById(R.id.iconeditsdt);
-        iconeditdate = view.findViewById(R.id.iconeditdate);
-        iconeditname = view.findViewById(R.id.iconeditname);*/
+        imgEditTextname = view.findViewById(R.id.img_editTextname);
+        imgEditTextSDT = view.findViewById(R.id.img_editTextSDT);
+        imgEditTextdate = view.findViewById(R.id.img_editTextdate);
     }
 
     private void setview() {
@@ -355,7 +357,7 @@ public class InformationFragment extends Fragment {
         });
     }
     private void UpdateCustomer(){
-
+        imgEditTextSDT.setOnClickListener(view -> {
             editTextSDT.setEnabled(true);
             editTextSDT.setOnKeyListener(new View.OnKeyListener() {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -368,6 +370,8 @@ public class InformationFragment extends Fragment {
                     return false;
                 }
             });
+        });
+        imgEditTextname.setOnClickListener(view -> {
             editTextname.setEnabled(true);
             editTextname.setOnKeyListener(new View.OnKeyListener() {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -380,6 +384,8 @@ public class InformationFragment extends Fragment {
                     return false;
                 }
             });
+        });
+        imgEditTextdate.setOnClickListener(view -> {
             editTextdate.setEnabled(true);
             editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
             editTextdate.setOnKeyListener(new View.OnKeyListener() {
@@ -393,6 +399,10 @@ public class InformationFragment extends Fragment {
                     return false;
                 }
             });
+        });
+
+
+
 
 
     }
