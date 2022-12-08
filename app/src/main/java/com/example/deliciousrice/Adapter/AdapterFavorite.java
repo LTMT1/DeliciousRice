@@ -51,7 +51,7 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.Favori
         holder.tvName.setText(favorite.getProduct_name());
         Glide.with(context).load(favorite.getImage()).centerCrop().into(holder.imgProduct);
         holder.tvTime.setText(favorite.getProcessing_time());
-        holder.tvPrice.setText(String.valueOf(favorite.getPrice()));
+        holder.tvPrice.setText(String.valueOf(favorite.getPrice())+" đ");
         if (list.size() > 0) {
             holder.icontym.setImageResource(R.drawable.ic_baseline_favorite_24);
         }

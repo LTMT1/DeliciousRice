@@ -47,7 +47,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         holder.tvbill.setText("Mã HD: "+bill.getId_bill());
         holder.tvdate.setText("Ngày: "+bill.getDate());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvmoney.setText("Tổng thanh toán: "+decimalFormat.format(bill.getMoney())+"đ");
+        holder.tvmoney.setText("Tổng thanh toán: "+decimalFormat.format(bill.getMoney())+" đ");
         holder.tvstatus.setText(bill.getStatus());
         if(bill.getStatus().equals("Hoàn tất")) {
             holder.imgstatus.setVisibility(View.GONE);

@@ -44,7 +44,7 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
         Product productHot = data.get(position);
         Glide.with(context).load(productHot.getImage()).centerCrop().into(holder.imgProductHot);
         holder.tvProductNameHot.setText(productHot.getProduct_name());
-        holder.tvPriceProductHot.setText(String.valueOf(productHot.getPrice()));
+        holder.tvPriceProductHot.setText(String.valueOf(productHot.getPrice())+ " đ");
         holder.tvTimehot.setText(productHot.getProcessing_time());
         holder.cstrItemProductHot.setOnClickListener(v -> {
             productHotItemClick.itemProductHotClick(productHot);

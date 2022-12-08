@@ -53,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:iss_auto_cycle="true"
+                    android:scaleType="centerCrop"
                     app:iss_period="2500">
 
                 </com.denzcoskun.imageslider.ImageSlider>
@@ -121,8 +122,9 @@
                     android:id="@+id/imgSilde2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     app:iss_auto_cycle="true"
-                    app:iss_period="2500"/>
+                    app:iss_period="2680"/>
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -186,7 +188,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:iss_auto_cycle="true"
-                    app:iss_period="2500"/>
+                    android:scaleType="centerCrop"
+                    app:iss_period="3680"/>
             </androidx.cardview.widget.CardView>
 
             <TextView

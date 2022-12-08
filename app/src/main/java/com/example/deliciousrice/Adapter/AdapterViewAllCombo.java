@@ -45,7 +45,7 @@ public class AdapterViewAllCombo extends RecyclerView.Adapter<AdapterViewAllComb
         Glide.with(context).load(product.getImage()).centerCrop().into(holder.imgVallImgsp);
         holder.tvVallTensp.setText(product.getProduct_name());
         holder.tvVallTime.setText(product.getProcessing_time());
-        holder.tvVallGia.setText(String.valueOf(product.getPrice()));
+        holder.tvVallGia.setText(String.valueOf(product.getPrice())+" đ");
         holder.layoutViewAll.setOnClickListener(v -> {
             productItemClick.itemProductClick(product);
         });

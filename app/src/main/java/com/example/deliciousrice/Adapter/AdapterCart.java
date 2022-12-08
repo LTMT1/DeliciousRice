@@ -52,7 +52,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
         Cart cart = list.get(position);
         holder.tvname.setText(cart.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvprice.setText(decimalFormat.format(cart.getPrice()));
+        holder.tvprice.setText(decimalFormat.format(cart.getPrice())+ " đ");
         Picasso.get().load(cart.getImage())
                 .into(holder.imgsp);
         holder.tvsoluong.setText(Integer.toString(cart.getAmount()));

@@ -50,7 +50,7 @@ public class AdapterProductNew extends RecyclerView.Adapter<AdapterProductNew.Pr
         holder.tvNameProductNew.setText(productNew.getProduct_name());
         Glide.with(context).load(productNew.getImage()).centerCrop().into(holder.imgProductNew);
         holder.tvMassPoductNew.setText(productNew.getProcessing_time());
-        holder.tvPricePoductNew.setText(String.valueOf(productNew.getPrice()));
+        holder.tvPricePoductNew.setText(String.valueOf(productNew.getPrice())+ " đ");
 
         holder.imgBuyPoductNew.setOnClickListener(view -> {
             daoCart=new DaoCart(context.getContext());

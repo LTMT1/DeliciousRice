@@ -51,13 +51,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ShopFragment extends Fragment {
-    private ImageSlider imgSilde;
+    private ImageSlider imgSilde, imgSilde2, imgSilde3;
     RecyclerView recyclerView, recyclerViewNew, recyclerViewHot;
     TextView tvViewAllCbo, tvViewAllNew, tvViewAllHot;
     AdapterProduct adapterProduct;
     AdapterProductNew adapterProductNew;
     AdapterProductHot adapterProductHot;
     MainActivity2 main;
+
 
     private ProgressBar prb1, prb2, prb3;
     public static ArrayList<Cart> Cartlist;
@@ -73,22 +74,11 @@ public class ShopFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imgSilde = view.findViewById(R.id.imgSilde);
-        main = (MainActivity2) getActivity();
-        ArrayList<SlideModel> models = new ArrayList<>();
-        models.add(new SlideModel(R.drawable.img_silde1, null));
-        models.add(new SlideModel(R.drawable.img_silde2, null));
-        models.add(new SlideModel(R.drawable.img_silde3, null));
-        models.add(new SlideModel(R.drawable.img_silde4, null));
-        models.add(new SlideModel(R.drawable.img_silde5, null));
-        imgSilde.setImageList(models, ScaleTypes.CENTER_CROP);
+        anhxaID(view);
+        Slidershow();
 
-        recyclerView = view.findViewById(R.id.rcyProductCombo);
-        recyclerViewNew = view.findViewById(R.id.rcyProductNew);
-        recyclerViewHot = view.findViewById(R.id.rcyProductHot);
-        tvViewAllCbo = view.findViewById(R.id.tvViewAllCbo);
-        tvViewAllNew = view.findViewById(R.id.tvViewAllNew);
-        tvViewAllHot = view.findViewById(R.id.tvViewAllHot);
+        main = (MainActivity2) getActivity();
+
 
         tvViewAllCbo.setOnClickListener(view1 -> {
             Intent intent = new Intent(getContext(), ViewAllCboActivity.class);
@@ -104,9 +94,6 @@ public class ShopFragment extends Fragment {
             Intent intent = new Intent(getContext(), ViewAllHotActivity.class);
             startActivity(intent);
         });
-        prb1 = view.findViewById(R.id.prgLoadingPrCombo);
-        prb2 = view.findViewById(R.id.prgLoadingPrNew);
-        prb3 = view.findViewById(R.id.prgLoadingPrHot);
 
         prb1.setIndeterminateDrawable(new Wave());
         prb2.setIndeterminateDrawable(new Wave());
@@ -119,6 +106,46 @@ public class ShopFragment extends Fragment {
             Cartlist = new ArrayList<>();
         }
     }
+
+    private void Slidershow() {
+        ArrayList<SlideModel> models = new ArrayList<>();
+        models.add(new SlideModel(R.drawable.img_banner2, null));
+        models.add(new SlideModel(R.drawable.img_banner_3, null));
+        models.add(new SlideModel(R.drawable.img_banner2_2, null));
+        models.add(new SlideModel(R.drawable.img_final_banner2, null));
+        imgSilde.setImageList(models, ScaleTypes.CENTER_CROP);
+
+
+        ArrayList<SlideModel> models2 = new ArrayList<>();
+        models2.add(new SlideModel(R.drawable.img_silde1, null));
+        models2.add(new SlideModel(R.drawable.img_banner_4, null));
+        models2.add(new SlideModel(R.drawable.im_banner_6, null));
+        imgSilde2.setImageList(models2, ScaleTypes.CENTER_CROP);
+
+        ArrayList<SlideModel> models3 = new ArrayList<>();
+        models3.add(new SlideModel(R.drawable.img_sale_1, null));
+        models3.add(new SlideModel(R.drawable.img_sale_2, null));
+
+        imgSilde3.setImageList(models3, ScaleTypes.CENTER_CROP);
+
+    }
+
+    private void anhxaID(View view) {
+        imgSilde = view.findViewById(R.id.imgSilde);
+        imgSilde2 = view.findViewById(R.id.imgSilde2);
+        imgSilde3 = view.findViewById(R.id.imgSilde3);
+        recyclerView = view.findViewById(R.id.rcyProductCombo);
+        recyclerViewNew = view.findViewById(R.id.rcyProductNew);
+        recyclerViewHot = view.findViewById(R.id.rcyProductHot);
+        tvViewAllCbo = view.findViewById(R.id.tvViewAllCbo);
+        tvViewAllNew = view.findViewById(R.id.tvViewAllNew);
+        tvViewAllHot = view.findViewById(R.id.tvViewAllHot);
+        prb1 = view.findViewById(R.id.prgLoadingPrCombo);
+        prb2 = view.findViewById(R.id.prgLoadingPrNew);
+        prb3 = view.findViewById(R.id.prgLoadingPrHot);
+
+    }
+
 
     @Override
     public void onDestroyView() {
