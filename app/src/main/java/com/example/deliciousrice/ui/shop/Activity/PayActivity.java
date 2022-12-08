@@ -76,6 +76,9 @@ public class PayActivity extends AppCompatActivity {
     private TextView tvTongmoney;
     private TextView textView65;
     int tongtiensp;
+    private LoadingDialog loadingDialog;
+    SimpleDateFormat sdf;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,8 @@ public class PayActivity extends AppCompatActivity {
         getlistadress(id_customer);
 
         //zalo pay
+        loadingDialog = new LoadingDialog(this);
+
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -130,7 +135,7 @@ public class PayActivity extends AppCompatActivity {
     }
 
     private void Pay() {
-        final LoadingDialog loadingDialog = new LoadingDialog(PayActivity.this);
+//        final LoadingDialog loadingDialog = new LoadingDialog(PayActivity.this);
         btnpay.setOnClickListener(view -> {
             loadingDialog.StartLoadingDialog();
             if (radio6.isChecked()) {
@@ -146,26 +151,26 @@ public class PayActivity extends AppCompatActivity {
                 if (ShopFragment.Cartlist.size() > 0) {
                     addBill(id_bill, id_customer, address, currentDateandTime, ednote, tongtiensp);
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
-                                addDetailBill(i);
-                            }
-                        }
-                    }, 5000);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            CartFragment.textviewthongbao.setVisibility(View.VISIBLE);
-                            ShopFragment.Cartlist.clear();
-                            daoCart.DeleteData();
-                            CartFragment.UpdateTongTien();
-                            MainActivity2.setBugdeNumber();
-                            CartFragment.adapterCart.notifyDataSetChanged();
-                            loadingDialog.dismissDialog();
-                            Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
+                                        addDetailBill(i);
+                                    }
+                                }
+                            }, 5000);
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CartFragment.textviewthongbao.setVisibility(View.VISIBLE);
+                                    ShopFragment.Cartlist.clear();
+                                    daoCart.DeleteData();
+                                    CartFragment.UpdateTongTien();
+                                    MainActivity2.setBugdeNumber();
+                                    CartFragment.adapterCart.notifyDataSetChanged();
+                                    loadingDialog.dismissDialog();
+                                    Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
                             PushNotification();
                         }
                     }, 7000);
@@ -179,12 +184,12 @@ public class PayActivity extends AppCompatActivity {
                     CreateOrder orderApi = new CreateOrder();
 
                     try {
-                        JSONObject data = orderApi.createOrder("100");
+                        JSONObject data = orderApi.createOrder("1");
                         String code = data.getString("return_code");
-//                        Toast.makeText(getApplicationContext(), "return_code: " + code, Toast.LENGTH_LONG).show();
 
                         if (code.equals("1")) {
                             token = data.getString("zp_trans_token");
+                            Log.e("TAG", "Pay: " + token + data);
                             payWithZalo();
                             IsDone();
                             loadingDialog.dismissDialog();
@@ -198,8 +203,7 @@ public class PayActivity extends AppCompatActivity {
                     loadingDialog.dismissDialog();
                     Toast.makeText(PayActivity.this, "Giỏ hàng không có sản phầm nào!", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Bạn chưa chọn phương thức mua hàng", Toast.LENGTH_SHORT).show();
                 loadingDialog.dismissDialog();
             }
@@ -213,6 +217,7 @@ public class PayActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.e("TAG", "run: " + "Sucess");
                         new AlertDialog.Builder(PayActivity.this)
                                 .setTitle("Payment Success")
                                 .setMessage(String.format("TransactionId: %s - TransToken: %s", transactionId, transToken))
@@ -222,6 +227,36 @@ public class PayActivity extends AppCompatActivity {
                                     }
                                 })
                                 .setNegativeButton("Cancel", null).show();
+                        Log.e("TAG", "run: " + "Thanh toan thanh cong");
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        String currentDateandTime = sdf.format(new Date());
+                        String ednote = edtstatus.getText().toString().trim();
+                        addBill("HD1003", 32, "Ha Noi", currentDateandTime, ednote, 60000);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
+                                    addDetailBill(i);
+                                }
+                            }
+                        }, 5000);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                CartFragment.textviewthongbao.setVisibility(View.VISIBLE);
+                                ShopFragment.Cartlist.clear();
+                                daoCart.DeleteData();
+                                CartFragment.UpdateTongTien();
+                                MainActivity2.setBugdeNumber();
+                                CartFragment.adapterCart.notifyDataSetChanged();
+                                loadingDialog.dismissDialog();
+                                Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
+                                PushNotification();
+                            }
+                        }, 7000);
                     }
 
                 });
@@ -230,6 +265,7 @@ public class PayActivity extends AppCompatActivity {
 
             @Override
             public void onPaymentCanceled(String zpTransToken, String appTransID) {
+                Log.e("TAG", "run: " + "Cancel");
                 new AlertDialog.Builder(PayActivity.this)
                         .setTitle("User Cancel Payment")
                         .setMessage(String.format("zpTransToken: %s \n", zpTransToken))
@@ -243,6 +279,7 @@ public class PayActivity extends AppCompatActivity {
 
             @Override
             public void onPaymentError(ZaloPayError zaloPayError, String zpTransToken, String appTransID) {
+                Log.e("TAG", "run: " + "Error");
                 new AlertDialog.Builder(PayActivity.this)
                         .setTitle("Payment Fail")
                         .setMessage(String.format("ZaloPayErrorCode: %s \nTransToken: %s", zaloPayError.toString(), zpTransToken))
@@ -363,5 +400,11 @@ public class PayActivity extends AppCompatActivity {
             tvTongmoney.setText(decimalFormat.format(tongtiensp) + "đ");
         }
         textView65.setText("Tổng số(" + tongslproduct + " món)");
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ZaloPaySDK.getInstance().onResult(intent);
     }
 }

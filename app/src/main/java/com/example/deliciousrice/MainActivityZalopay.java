@@ -105,6 +105,7 @@ public class MainActivityZalopay extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Log.d("TAG", "run: " + "on sucesss");
                                 new AlertDialog.Builder(MainActivityZalopay.this)
                                         .setTitle("Payment Success")
                                         .setMessage(String.format("TransactionId: %s - TransToken: %s", transactionId, transToken))
@@ -122,6 +123,8 @@ public class MainActivityZalopay extends AppCompatActivity {
 
                     @Override
                     public void onPaymentCanceled(String zpTransToken, String appTransID) {
+                        Log.d("TAG", "run: " + "on canceled");
+
                         new AlertDialog.Builder(MainActivityZalopay.this)
                                 .setTitle("User Cancel Payment")
                                 .setMessage(String.format("zpTransToken: %s \n", zpTransToken))
@@ -135,6 +138,8 @@ public class MainActivityZalopay extends AppCompatActivity {
 
                     @Override
                     public void onPaymentError(ZaloPayError zaloPayError, String zpTransToken, String appTransID) {
+                        Log.d("TAG", "run: " + "on error");
+
                         new AlertDialog.Builder(MainActivityZalopay.this)
                                 .setTitle("Payment Fail")
                                 .setMessage(String.format("ZaloPayErrorCode: %s \nTransToken: %s", zaloPayError.toString(), zpTransToken))
