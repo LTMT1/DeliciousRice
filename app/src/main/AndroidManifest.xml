@@ -58,7 +58,18 @@
 
         <activity
             android:name=".ui.shop.Activity.PayActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:launchMode="singleTask">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="demozpdk"
+                    android:host="app" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".ui.account.Activity.AddAddressActivity"
             android:exported="false">

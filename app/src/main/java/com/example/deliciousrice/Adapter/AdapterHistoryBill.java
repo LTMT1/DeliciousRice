@@ -1,6 +1,7 @@
 package com.example.deliciousrice.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ReceiptItemClick;
+import com.example.deliciousrice.ui.shop.Activity.PayActivity;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -53,9 +55,17 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         }else if(bill.getStatus().equals("Đã Hủy")){
             holder.imgstatus.setVisibility(View.VISIBLE);
             holder.imgstatus1.setVisibility(View.GONE);
+        }else{
+            holder.imgstatus.setVisibility(View.GONE);
+            holder.imgstatus1.setVisibility(View.GONE);
         }
         holder.itemView.setOnClickListener(view -> {
             receiptItemClick.itemReceiptClick(bill);
+        });
+        holder.tvMuaLai.setOnClickListener(view -> {
+//            Intent intent = new Intent(context, PayActivity.class);
+//
+//            context.startActivity(intent);
         });
     }
 
@@ -72,7 +82,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         private TextView tvstatus;
         private ImageView imgstatus;
         private ImageView imgstatus1;
-
+        private TextView tvMuaLai;
         private ConstraintLayout ctrLayoutReceipt;
 
         public HistoryViewHolder(@NonNull View itemView) {
@@ -84,6 +94,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
             imgstatus = itemView.findViewById(R.id.imgstatus);
             imgstatus1 = itemView.findViewById(R.id.imgstatus1);
             ctrLayoutReceipt = itemView.findViewById(R.id.ctrLayoutReceipt);
+            tvMuaLai=itemView.findViewById(R.id.tvMuaLai);
         }
     }
 }

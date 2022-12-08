@@ -3,27 +3,27 @@ package com.example.deliciousrice.Model;
 public class Detailbill {
     private String id_bill;
     private int id_customer;
-    private int id_product;
     private String date_created;
     private String address;
     private String product_name;
     private int amount;
     private int total_money;
-    private String user_name;
+    private int priceproduct;
+    private String user_namenv;
 
     public Detailbill() {
     }
 
-    public Detailbill(String id_bill, int id_customer, int id_product, String date_created, String address, String product_name, int amount, int total_money, String user_name) {
+    public Detailbill(String id_bill, int id_customer, String date_created, String address, String product_name, int amount, int total_money, int priceproduct, String user_namenv) {
         this.id_bill = id_bill;
         this.id_customer = id_customer;
-        this.id_product = id_product;
         this.date_created = date_created;
         this.address = address;
         this.product_name = product_name;
         this.amount = amount;
         this.total_money = total_money;
-        this.user_name = user_name;
+        this.priceproduct = priceproduct;
+        this.user_namenv = user_namenv;
     }
 
     public String getId_bill() {
@@ -40,14 +40,6 @@ public class Detailbill {
 
     public void setId_customer(int id_customer) {
         this.id_customer = id_customer;
-    }
-
-    public int getId_product() {
-        return id_product;
-    }
-
-    public void setId_product(int id_product) {
-        this.id_product = id_product;
     }
 
     public String getDate_created() {
@@ -90,11 +82,19 @@ public class Detailbill {
         this.total_money = total_money;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public int getPriceproduct() {
+        return priceproduct;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setPriceproduct(int priceproduct) {
+        this.priceproduct = priceproduct;
+    }
+
+    public String getUser_namenv() {
+        return user_namenv;
+    }
+
+    public void setUser_namenv(String user_namenv) {
+        this.user_namenv = user_namenv;
     }
 }
