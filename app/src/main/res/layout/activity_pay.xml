@@ -109,28 +109,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvsetaddress" />
 
-            <TextView
-                android:id="@+id/textView58"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:text="Bạn cần thêm gì không ?"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView34" />
 
-            <TextView
-                android:id="@+id/textView59"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chọn thêm món khác ở đâu"
-                android:textColor="#787272"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/textView58"
-                app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+
 
 
             <ImageView
@@ -144,16 +125,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/rclview"
                 app:srcCompat="@drawable/ic_vienduoi" />
 
-            <ImageView
-                android:id="@+id/imageView35"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView59"
-                app:srcCompat="@drawable/ic_vienduoi" />
+
 
             <ImageView
                 android:id="@+id/imageView36"
@@ -193,7 +165,7 @@
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView37"
-                app:layout_constraintTop_toBottomOf="@+id/imageView35"
+                app:layout_constraintTop_toBottomOf="@+id/imageView34"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
@@ -246,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
-                android:text="Ví MoMo"
+                android:text="Zalo play"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView33"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -254,6 +226,7 @@
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView5"
@@ -261,8 +234,8 @@
 
                 <RadioButton
                     android:id="@+id/radioButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:buttonTint="#EB6969"
                     app:layout_constraintBottom_toBottomOf="@+id/textView5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -270,8 +243,8 @@
 
                 <RadioButton
                     android:id="@+id/radioButton7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:buttonTint="#EB6969"
                     app:layout_constraintBottom_toBottomOf="@+id/textView12"
                     app:layout_constraintEnd_toEndOf="parent"
