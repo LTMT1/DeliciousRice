@@ -1,10 +1,13 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +25,8 @@ import com.example.deliciousrice.ui.cart.DaoCart;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,12 +34,14 @@ import retrofit2.Response;
 
 public class InvoicedetailsActivity extends AppCompatActivity {
 
-    private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat,tvTongTien,tvSoMon,tvDatLai;
+    private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat,tvTongTien,tvSoMon,tvDatLai,tvCountDownTime;
     private RecyclerView rcyViewDetailReceipt;
     private TextView tvshipkm,tvTongtienBill;
     private TextView tvmoneyship;
     private TextView tvkhuyenmai,textVieưgone;
     private ImageView imgBackInvoicedetails;
+    CountDownTimer countDownTimer;
+    Boolean counterIsActive = false;
 
 
 
@@ -58,9 +65,11 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         Anhxa();
         setData();
         getDataDetailBill();
+        countDowmTime();
     }
 
     private void Anhxa() {
+        tvCountDownTime = findViewById(R.id.tvCountDownTime);
         tvMaBill = findViewById(R.id.tvMaDonHang);
         tvNameKH = findViewById(R.id.tvNameKH);
         tvPhoneKH = findViewById(R.id.tvPhoneKH);
@@ -104,7 +113,7 @@ public class InvoicedetailsActivity extends AppCompatActivity {
                 }
                 tvDiaChi.setText(detailbill.getAddress());
                 tvNameNV.setText(detailbill.getUser_namenv());
-                datLaiOnClick(detailbillArrayList);
+//                datLaiOnClick(detailbillArrayList);
                 Khuyenmai(priceproduct,tongslproduct);
                 adapterDetailBill = new AdapterDetailBill(detailbillArrayList, getApplicationContext());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -146,5 +155,31 @@ public class InvoicedetailsActivity extends AppCompatActivity {
             tvTongtienBill.setText(decimalFormat.format(tongtiensp)+"đ");
         }
         tvSoMon.setText("Tổng số("+tongslproduct+" món)");
+    }
+
+
+    private void countDowmTime(){
+
+        long duration = TimeUnit.MINUTES.toMillis(1);
+
+        new CountDownTimer(duration, 1000) {
+            @Override
+            public void onTick(long l) {
+                String sDuration = String.format(Locale.ENGLISH,"%02d : %02d"
+                    ,TimeUnit.MILLISECONDS.toMinutes(l)
+                    ,TimeUnit.MILLISECONDS.toSeconds(l) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(l)));
+
+                tvCountDownTime.setText(sDuration);
+            }
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onFinish() {
+//                tvCountDownTime.setVisibility(View.GONE);
+                tvCountDownTime.setText("Bat dau giao hang");
+                tvCountDownTime.setTextColor(R.color.purple_700);
+            }
+        }.start();
     }
 }

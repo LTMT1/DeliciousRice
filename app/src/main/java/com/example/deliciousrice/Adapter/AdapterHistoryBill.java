@@ -49,6 +49,8 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tvmoney.setText("Tổng thanh toán: "+decimalFormat.format(bill.getMoney())+" đ");
         holder.tvstatus.setText(bill.getStatus());
+
+
         if(bill.getStatus().equals("Hoàn tất")) {
             holder.imgstatus.setVisibility(View.GONE);
             holder.imgstatus1.setVisibility(View.VISIBLE);
@@ -59,12 +61,16 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
             holder.imgstatus.setVisibility(View.GONE);
             holder.imgstatus1.setVisibility(View.GONE);
         }
+
+
+
+
+
         holder.itemView.setOnClickListener(view -> {
             receiptItemClick.itemReceiptClick(bill);
         });
         holder.tvMuaLai.setOnClickListener(view -> {
 //            Intent intent = new Intent(context, PayActivity.class);
-//
 //            context.startActivity(intent);
         });
     }

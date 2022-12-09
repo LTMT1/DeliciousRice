@@ -56,6 +56,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Graduation Project/DeliciousRice/app/src/main/res/layout/item_test.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Graduation Project/DeliciousRice/app/src/main/res/layout/item_vertical_products.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Graduation Project/DeliciousRice/app/src/main/res/layout/item_vertical_products_new.xml" value="0.2269021739130435" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/drawable/icon_done.xml" value="0.1605" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/activity_detail.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/activity_information.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/activity_invoicedetails.xml" value="0.259375" />
@@ -68,14 +69,16 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/activity_view_all_new.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/fragment_cart.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/fragment_information.xml" value="0.245018115942029" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/fragment_receip.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/fragment_shop.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_hot_products.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_product_buy.xml" value="0.259375" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_receipt.xml" value="0.2269021739130435" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_receipt.xml" value="0.4" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_search_products.xml" value="0.12613981762917933" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_vertical_products.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_vertical_products_new.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_viewallcombo_products.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_viewalldetail_products.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_viewallhot_products.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/layout/item_viewallnew_products.xml" value="0.259375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/New folder/DeliciousRice/app/src/main/res/menu/bottom_nav_menu.xml" value="0.259375" />
@@ -137,7 +140,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

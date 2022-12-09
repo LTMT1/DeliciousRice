@@ -1,6 +1,8 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,6 +18,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Activity.BarColor;
+import com.example.deliciousrice.Adapter.AdapterDetailBill;
+import com.example.deliciousrice.Adapter.AdapterProductDetail;
+import com.example.deliciousrice.Adapter.AdapterViewAllHot;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
@@ -46,6 +51,8 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView tvcuon;
     private TextView tvdetaisp;
     private TextView btnaddcart;
+    private RecyclerView rcyDetailProduct;
+    AdapterProductDetail adapterProductDetail;
 
     Product product;
     private SQLiteDatabase db;
@@ -63,9 +70,11 @@ public class DetailActivity extends AppCompatActivity {
         product = (Product) intent.getSerializableExtra("getdataproduct");
         Anhxa();
         setviewdata();
+        ListProductDetail();
     }
     private void Anhxa(){
         roundedImageView = findViewById(R.id.roundedImageView);
+        rcyDetailProduct = findViewById(R.id.rcyDetailProduct);
         tvnamesp = findViewById(R.id.tvnamesp);
         tvtimesp = findViewById(R.id.tvtimesp);
         tvpricesp= findViewById(R.id.tvpricesp);
@@ -200,5 +209,31 @@ public class DetailActivity extends AppCompatActivity {
     private void updateList(){
         ShopFragment.Cartlist= (ArrayList<Cart>) daoCart.getall();
         MainActivity2.setBugdeNumber();
+    }
+
+    private  void ListProductDetail(){
+        ApiProduct apiProduct = ApiService.getService();
+        Call<ArrayList<Product>> listCallProduct = apiProduct.getListProductHot();
+        listCallProduct.enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+             //   prgLoadingSearch.setVisibility(View.GONE);
+                ArrayList<Product> productHots = new ArrayList<>();
+                productHots = response.body();
+                rcyDetailProduct.setHasFixedSize(true);
+                rcyDetailProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
+                adapterProductDetail = new AdapterProductDetail(productHots, DetailActivity.this, productHot -> {
+                    Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                    intent.putExtra("getdataproduct", productHot);
+                    startActivity(intent);
+                });
+                rcyDetailProduct.setAdapter(adapterProductDetail);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+            }
+        });
     }
 }

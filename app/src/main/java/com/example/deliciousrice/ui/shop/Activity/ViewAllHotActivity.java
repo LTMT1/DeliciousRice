@@ -44,6 +44,7 @@ public class ViewAllHotActivity extends AppCompatActivity {
         recyclerViewAllHot = findViewById(R.id.rcyViewAllHot);
         imgBackViewAllCbo = findViewById(R.id.img_back_ViewAllCbo);
         prgLoadingSearch.setIndeterminateDrawable(new Circle());
+
         imgBackViewAllCbo.setOnClickListener(view -> {
             overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
             Intent intent=new Intent(this, ShopFragment.class);
