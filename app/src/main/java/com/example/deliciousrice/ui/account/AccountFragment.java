@@ -5,11 +5,9 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,9 +20,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
-import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.Activity.LoginActivity;
 import com.example.deliciousrice.MainActivity2;
+import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 import com.example.deliciousrice.ui.account.Fragment.ChangePasFragment;
@@ -36,10 +34,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
 
-    private TextView tvname,tvDangXuat;
+    private TextView tvname, tvDangXuat;
     private CircleImageView cardView;
-    private LinearLayout llayReceipt,llayAddress;
-    private ConstraintLayout clContact,clPolicy,clSetting,clDoipass,clThongtin;
+    private LinearLayout llayReceipt, llayAddress;
+    private ConstraintLayout clContact, clPolicy, clSetting, clDoipass, clThongtin;
     private MainActivity2 main;
     Customer customer;
     FragmentTransaction transection;
@@ -50,7 +48,7 @@ public class AccountFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View views = inflater.inflate(R.layout.fragment_account, container, false);
         main = (MainActivity2) getActivity();
-        daoCart=new DaoCart(getActivity());
+        daoCart = new DaoCart(getActivity());
         Anhxa(views);
         setviewaccount();
         main.updateMain();
@@ -93,8 +91,8 @@ public class AccountFragment extends Fragment {
             FragmentTransaction ft = fm.beginTransaction();
             ReceipFragment fragment = new ReceipFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("name_cus",main.getUser_name());
-            bundle.putString("phone_number",main.getPhone_number());
+            bundle.putString("name_cus", main.getUser_name());
+            bundle.putString("phone_number", main.getPhone_number());
             bundle.putInt("id_cus", main.getId_customer());
             fragment.setArguments(bundle);
             ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
@@ -163,11 +161,17 @@ public class AccountFragment extends Fragment {
         tvname.setText(main.getUser_name());
         Glide.with(getActivity()).load(main.getImage()).centerCrop().into(cardView);
     }
-    private void visibleChanePass(){
-        if(main.getId_application().equals("Default")){
-            clDoipass.setVisibility(View.VISIBLE);
-        }else {
-            clDoipass.setVisibility(View.GONE);
+
+    private void visibleChanePass() {
+        try {
+            if (main.getId_application().equals("Default")) {
+                clDoipass.setVisibility(View.VISIBLE);
+            } else {
+                clDoipass.setVisibility(View.GONE);
+            }
+        } catch (Exception ignored) {
+
         }
+
     }
 }

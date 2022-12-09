@@ -81,6 +81,8 @@ public class PayActivity extends AppCompatActivity {
         BarColor.setStatusBarColor(this);
         //anhxa
         BindView();
+        addersses = new ArrayList<>();
+
         daoCart = new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         id_customer = intent.getIntExtra("id_customer", 0);
@@ -267,7 +269,6 @@ public class PayActivity extends AppCompatActivity {
         listAddre.enqueue(new Callback<ArrayList<Adderss>>() {
             @Override
             public void onResponse(Call<ArrayList<Adderss>> call, Response<ArrayList<Adderss>> response) {
-                addersses = new ArrayList<>();
                 addersses = response.body();
                 adapterSelectAddress = new AdapterSelectAddress(PayActivity.this, R.layout.item_address, addersses);
                 tvsetaddress.setAdapter(adapterSelectAddress);
