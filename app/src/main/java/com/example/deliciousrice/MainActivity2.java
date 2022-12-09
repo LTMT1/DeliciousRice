@@ -65,6 +65,9 @@ public class MainActivity2 extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         navView.setItemIconTintList(null);
         setBugdeNumber();
+        setStatusBarColor();
+        getDatas();
+        getdataCustomer(email);
         binding.navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -88,10 +91,12 @@ public class MainActivity2 extends AppCompatActivity {
                 return true;
             }
         });
-        setStatusBarColor();
-        getDatas();
-        getdataCustomer(email);
     }
+
+//    public static int dpToPx(Context context, int i) {
+//        Resource resource= (Resource) context.getResources();
+//        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,i,resource.))
+//    }
 
     private void setStatusBarColor() {
         Window window = this.getWindow();
@@ -123,6 +128,14 @@ public class MainActivity2 extends AppCompatActivity {
                 address = customer.getAddress();
                 emaill = customer.getEmail();
                 passs = customer.getPassword();
+                BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.account);
+                if(phone_number.equals("")){
+                    badgeDrawable.setVisible(true);
+//                            badgeDrawable.setVerticalOffset(dpToPx(MainActivity2.this,3));
+                            badgeDrawable.setBadgeTextColor(getResources().getColor(R.color.colorTaskBar));
+                }else {
+                    badgeDrawable.setVisible(false);
+                }
             }
 
             @Override

@@ -140,5 +140,6 @@ public interface ApiProduct {
     @POST("getNotification.php")
     Call<String> pushNotification(@Field("Token") String token) ;
 
-
+    @GET("getIdBill.php")
+    Call<String> getidBill();
 }

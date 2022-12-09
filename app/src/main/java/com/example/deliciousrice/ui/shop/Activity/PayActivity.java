@@ -9,7 +9,6 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -43,7 +42,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,16 +54,11 @@ import vn.zalopay.sdk.listeners.PayOrderListener;
 public class PayActivity extends AppCompatActivity {
     private TextView btnpay;
     private TextView tvmoney;
-    private TextView tvgiaohang;
-    private TextView tvtotalmoney;
     private RecyclerView rclview;
     private EditText edtstatus;
     AdapterProductBill adapterProductBill;
-    String id_bill;
+//    String id_bill;
     public RadioButton radio6, radio7;
-    TextView lblZpTransToken, txtToken;
-    Button btnCreateOrder, btnPay;
-    EditText txtAmount;
     String token = "", address;
     Spinner tvsetaddress;
     int id_customer;
@@ -77,7 +70,8 @@ public class PayActivity extends AppCompatActivity {
     private TextView textView65;
     int tongtiensp;
     private LoadingDialog loadingDialog;
-    SimpleDateFormat sdf;
+    String productList;
+    ArrayList<Adderss> addersses;
 
 
     @Override
@@ -85,19 +79,20 @@ public class PayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
         BarColor.setStatusBarColor(this);
+        //anhxa
+        BindView();
         daoCart = new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         id_customer = intent.getIntExtra("id_customer", 0);
         getlistadress(id_customer);
-
+        getIdBill();
         //zalo pay
         loadingDialog = new LoadingDialog(this);
-
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         ZaloPaySDK.init(2553, Environment.SANDBOX);
-        BindView();
+        //
         ListProductBuy();
         Pay();
     }
@@ -108,7 +103,6 @@ public class PayActivity extends AppCompatActivity {
         tvTongmoney = findViewById(R.id.tv_tongmoney);
         tvsetaddress = findViewById(R.id.tvsetaddress);
         tvmoney = findViewById(R.id.tvmoney);
-        tvgiaohang = findViewById(R.id.tvgiaohang);
         rclview = findViewById(R.id.rclview);
         btnpay = findViewById(R.id.btnpay);
         edtstatus = findViewById(R.id.edtstatus);
@@ -135,64 +129,24 @@ public class PayActivity extends AppCompatActivity {
     }
 
     private void Pay() {
-//        final LoadingDialog loadingDialog = new LoadingDialog(PayActivity.this);
         btnpay.setOnClickListener(view -> {
-            loadingDialog.StartLoadingDialog();
-            if (radio6.isChecked()) {
-                Random random = new Random();
-                int number = random.nextInt(10000000);
-
-                id_bill = "DCR" + id_customer + "-" + number;
-
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String currentDateandTime = sdf.format(new Date());
-                String ednote = edtstatus.getText().toString().trim();
-
-                if (ShopFragment.Cartlist.size() > 0) {
-                    addBill(id_bill, id_customer, address, currentDateandTime, ednote, tongtiensp);
-
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
-                                        addDetailBill(i);
-                                    }
-                                }
-                            }, 5000);
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    CartFragment.textviewthongbao.setVisibility(View.VISIBLE);
-                                    ShopFragment.Cartlist.clear();
-                                    daoCart.DeleteData();
-                                    CartFragment.UpdateTongTien();
-                                    MainActivity2.setBugdeNumber();
-                                    CartFragment.adapterCart.notifyDataSetChanged();
-                                    loadingDialog.dismissDialog();
-                                    Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
-                            PushNotification();
-                        }
-                    }, 7000);
-                } else {
-                    loadingDialog.dismissDialog();
-                    Toast.makeText(PayActivity.this, "Giỏ hàng không có sản phầm nào!", Toast.LENGTH_SHORT).show();
-                }
-            } else if (radio7.isChecked()) {
-                if (ShopFragment.Cartlist.size() > 0) {
-
+            if(addersses.size()==0){
+                Toast.makeText(this, "Bạn cần phải có địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
+            }else {
+                loadingDialog.StartLoadingDialog();
+                if (radio6.isChecked()) {
+                    insertPay();
+                } else if (radio7.isChecked()) {
                     CreateOrder orderApi = new CreateOrder();
-
                     try {
                         JSONObject data = orderApi.createOrder("1");
                         String code = data.getString("return_code");
 
                         if (code.equals("1")) {
                             token = data.getString("zp_trans_token");
-                            Log.e("TAG", "Pay: " + token + data);
                             payWithZalo();
-                            IsDone();
-                            loadingDialog.dismissDialog();
+//                            IsDone();
+                            insertPay();
                         }
 
                     } catch (Exception e) {
@@ -201,11 +155,8 @@ public class PayActivity extends AppCompatActivity {
                     }
                 } else {
                     loadingDialog.dismissDialog();
-                    Toast.makeText(PayActivity.this, "Giỏ hàng không có sản phầm nào!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Bạn chưa chọn phương thức mua hàng", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(this, "Bạn chưa chọn phương thức mua hàng", Toast.LENGTH_SHORT).show();
-                loadingDialog.dismissDialog();
             }
         });
     }
@@ -228,39 +179,10 @@ public class PayActivity extends AppCompatActivity {
                                 })
                                 .setNegativeButton("Cancel", null).show();
                         Log.e("TAG", "run: " + "Thanh toan thanh cong");
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                        String currentDateandTime = sdf.format(new Date());
-                        String ednote = edtstatus.getText().toString().trim();
-                        addBill("HD1003", 32, "Ha Noi", currentDateandTime, ednote, 60000);
-
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
-                                    addDetailBill(i);
-                                }
-                            }
-                        }, 5000);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                CartFragment.textviewthongbao.setVisibility(View.VISIBLE);
-                                ShopFragment.Cartlist.clear();
-                                daoCart.DeleteData();
-                                CartFragment.UpdateTongTien();
-                                MainActivity2.setBugdeNumber();
-                                CartFragment.adapterCart.notifyDataSetChanged();
-                                loadingDialog.dismissDialog();
-                                Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
-                                PushNotification();
-                            }
-                        }, 7000);
                     }
 
                 });
-                IsLoading();
+//                IsLoading();
             }
 
             @Override
@@ -279,7 +201,6 @@ public class PayActivity extends AppCompatActivity {
 
             @Override
             public void onPaymentError(ZaloPayError zaloPayError, String zpTransToken, String appTransID) {
-                Log.e("TAG", "run: " + "Error");
                 new AlertDialog.Builder(PayActivity.this)
                         .setTitle("Payment Fail")
                         .setMessage(String.format("ZaloPayErrorCode: %s \nTransToken: %s", zaloPayError.toString(), zpTransToken))
@@ -291,18 +212,6 @@ public class PayActivity extends AppCompatActivity {
                         .setNegativeButton("Cancel", null).show();
             }
         });
-    }
-
-    private void IsLoading() {
-//        lblZpTransToken.setVisibility(View.INVISIBLE);
-//        txtToken.setVisibility(View.INVISIBLE);
-//        btnPay.setVisibility(View.INVISIBLE);
-    }
-
-    private void IsDone() {
-//        lblZpTransToken.setVisibility(View.VISIBLE);
-//        txtToken.setVisibility(View.VISIBLE);
-//        btnPay.setVisibility(View.VISIBLE);
     }
 
     private void addBill(String bill, int idcus, String adreess, String date, String note, int money) {
@@ -320,10 +229,10 @@ public class PayActivity extends AppCompatActivity {
         });
     }
 
-    private void addDetailBill(int i) {
+    private void addDetailBill(String idbill,int i) {
         Cart cart = ShopFragment.Cartlist.get(i);
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.adddetailbill(id_bill, cart.getName(), cart.getAmount(), cart.getPrice());
+        Call<String> callback = apiProduct.adddetailbill(idbill, cart.getName(), cart.getAmount(), cart.getPrice());
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -358,7 +267,7 @@ public class PayActivity extends AppCompatActivity {
         listAddre.enqueue(new Callback<ArrayList<Adderss>>() {
             @Override
             public void onResponse(Call<ArrayList<Adderss>> call, Response<ArrayList<Adderss>> response) {
-                ArrayList<Adderss> addersses = new ArrayList<>();
+                addersses = new ArrayList<>();
                 addersses = response.body();
                 adapterSelectAddress = new AdapterSelectAddress(PayActivity.this, R.layout.item_address, addersses);
                 tvsetaddress.setAdapter(adapterSelectAddress);
@@ -406,5 +315,54 @@ public class PayActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         ZaloPaySDK.getInstance().onResult(intent);
+    }
+    private void getIdBill(){
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> listCallProduct = apiProduct.getidBill();
+            listCallProduct.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    productList = response.body();
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
+    }
+    private void insertPay(){
+//        Random random = new Random();
+//        int number = random.nextInt(10000000);
+//        id_bill = "DCR" + id_customer + "-" + number;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String currentDateandTime = sdf.format(new Date());
+        String ednote = edtstatus.getText().toString().trim();
+
+        addBill(productList, id_customer, address, currentDateandTime, ednote, tongtiensp);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
+                    addDetailBill(productList,i);
+                }
+            }
+        }, 5000);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CartFragment.textviewthongbao.setVisibility(View.VISIBLE);
+                ShopFragment.Cartlist.clear();
+                daoCart.DeleteData();
+                CartFragment.UpdateTongTien();
+                MainActivity2.setBugdeNumber();
+                CartFragment.adapterCart.notifyDataSetChanged();
+                loadingDialog.dismissDialog();
+                Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
+                PushNotification();
+            }
+        }, 7000);
     }
 }

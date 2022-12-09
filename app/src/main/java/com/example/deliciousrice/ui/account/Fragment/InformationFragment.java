@@ -11,15 +11,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
-
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Base64;
@@ -30,14 +21,29 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.account.AccountFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -51,6 +57,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -68,8 +75,7 @@ public class InformationFragment extends Fragment {
     private ImageView imgEditTextSDT;
     private ImageView imgEditTextdate;
 
-
-
+    private FirebaseAuth auth;
     private static final int GALLERY = 1, CAMERA = 2;
     Bitmap FixBitmap;
 
@@ -88,6 +94,7 @@ public class InformationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Anhxa(view);
+        auth=FirebaseAuth.getInstance();
         requestPermissions();
         setview();
         calenderDate();
@@ -285,7 +292,6 @@ public class InformationFragment extends Fragment {
     }
 
     private void updateName(int ida, String name) {
-        if (validateName()){
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
@@ -306,17 +312,11 @@ public class InformationFragment extends Fragment {
                     progressDialog.dismiss();
                 }
             });
-        }
 
     }
 
 
     private void updateSDT(int ida, String sdt) {
-        if (validatePhone()) {
-            final ProgressDialog progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage("Please Wait..");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
 
             ApiProduct apiProduct = ApiService.getService();
             Call<String> callback = apiProduct.updatesdt(ida, sdt);
@@ -324,17 +324,13 @@ public class InformationFragment extends Fragment {
                 @Override
                 public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                     Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
                     Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
                 }
             });
-
-        }
     }
 
 
@@ -347,7 +343,6 @@ public class InformationFragment extends Fragment {
                     calendar.set(Calendar.YEAR, year);
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DAY_OF_MONTH, day);
-
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy ");
                     editTextdate.setText(simpleDateFormat.format(calendar.getTime()));
                 }
@@ -359,12 +354,15 @@ public class InformationFragment extends Fragment {
     private void UpdateCustomer(){
         imgEditTextSDT.setOnClickListener(view -> {
             editTextSDT.setEnabled(true);
+            Toast.makeText(getApplicationContext(), "Ấn ENTER để lưu", Toast.LENGTH_SHORT).show();
             editTextSDT.setOnKeyListener(new View.OnKeyListener() {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                         String sdt = editTextSDT.getText().toString().trim();
-                        updateSDT(id, sdt);
-                        editTextSDT.setEnabled(false);
+                        if (validatePhone()){
+                            sendveryfyDdt(sdt);
+                            editTextSDT.setEnabled(false);
+                        }
                         return true;
                     }
                     return false;
@@ -373,12 +371,15 @@ public class InformationFragment extends Fragment {
         });
         imgEditTextname.setOnClickListener(view -> {
             editTextname.setEnabled(true);
+            Toast.makeText(getApplicationContext(), "Ấn ENTER để lưu", Toast.LENGTH_SHORT).show();
             editTextname.setOnKeyListener(new View.OnKeyListener() {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                         String name = editTextname.getText().toString().trim();
-                        updateName(id, name);
-                        editTextname.setEnabled(false);
+                        if (validateName()) {
+                            updateName(id, name);
+                            editTextname.setEnabled(false);
+                        }
                         return true;
                     }
                     return false;
@@ -387,6 +388,7 @@ public class InformationFragment extends Fragment {
         });
         imgEditTextdate.setOnClickListener(view -> {
             editTextdate.setEnabled(true);
+            Toast.makeText(getApplicationContext(), "Ấn ENTER để lưu", Toast.LENGTH_SHORT).show();
             editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
             editTextdate.setOnKeyListener(new View.OnKeyListener() {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -400,11 +402,6 @@ public class InformationFragment extends Fragment {
                 }
             });
         });
-
-
-
-
-
     }
 
     public boolean validateName() {
@@ -418,7 +415,7 @@ public class InformationFragment extends Fragment {
     }
 
     public boolean validatePhone() {
-        String a = "^0[0-9]{9}$";
+        String a = "(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\\b";
         if (editTextSDT.getText().toString().trim().equals("")) {
             editTextSDT.setError("Hãy nhập số điện thoại của bạn.");
             return false;
@@ -430,4 +427,60 @@ public class InformationFragment extends Fragment {
             return true;
         }
     }
+
+    private void sendveryfyDdt(String phone){
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(auth)
+                        .setPhoneNumber(phone)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(getActivity())                 // Activity (for callback binding)
+                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                            @Override
+                            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                signInWithPhoneAuthCredential(phoneAuthCredential);
+                            }
+
+                            @Override
+                            public void onVerificationFailed(@NonNull FirebaseException e) {
+                            }
+                            @Override
+                            public void onCodeSent(@NonNull String verificationId,
+                                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                                super.onCodeSent(verificationId,token);
+                                Entertoveryfy(phone,verificationId,id);
+                            }
+                        })
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+    }
+
+    private void Entertoveryfy(String phone, String verificationId, int id) {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        VerifyPhoneFragment addfragment = new VerifyPhoneFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        bundle.putString("verificationId", verificationId);
+        bundle.putString("sdt", phone);
+        addfragment.setArguments(bundle);
+
+        ft.replace(R.id.nav_host_fragment_activity_main2, addfragment);
+        ft.commit();
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = task.getResult().getUser();
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            }
+                        }
+                    }
+                });
+    }
+
 }

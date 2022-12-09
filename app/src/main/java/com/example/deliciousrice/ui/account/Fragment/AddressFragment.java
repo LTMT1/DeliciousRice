@@ -2,6 +2,10 @@ package com.example.deliciousrice.ui.account.Fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,12 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.deliciousrice.Adapter.AdapterAddress;
 import com.example.deliciousrice.Api.ApiProduct;
@@ -69,7 +67,6 @@ public class AddressFragment extends Fragment {
 
         Bundle bundle = getArguments();
         idadr = bundle.getInt("Adrress", 0);
-        Log.e("alo id", String.valueOf(idadr));
 
         cl_insertAdsress.setOnClickListener(v -> {
             FragmentManager fm = getFragmentManager();
