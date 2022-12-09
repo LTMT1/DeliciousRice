@@ -16,6 +16,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Mã :HKCV_0001 "
+        android:textColor="#615A5A"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,15 +26,11 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:text="30 th 9 2022"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.229"
-        app:layout_constraintStart_toEndOf="@+id/tvbill"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvstatus"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tvmoney"
@@ -59,21 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvmoney"
         app:layout_constraintVertical_bias="0.965" />
-
-    <TextView
-        android:id="@+id/tvMuaLai"
-        style="@style/Text"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/bg_btn_repurchase"
-        android:gravity="center"
-        android:text="Đặt Lại"
-        android:textColor="#ED5656"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imgstatus"

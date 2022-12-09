@@ -69,10 +69,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         holder.itemView.setOnClickListener(view -> {
             receiptItemClick.itemReceiptClick(bill);
         });
-        holder.tvMuaLai.setOnClickListener(view -> {
-//            Intent intent = new Intent(context, PayActivity.class);
-//            context.startActivity(intent);
-        });
+
     }
 
     @Override
@@ -88,7 +85,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         private TextView tvstatus;
         private ImageView imgstatus;
         private ImageView imgstatus1;
-        private TextView tvMuaLai;
+
         private ConstraintLayout ctrLayoutReceipt;
 
         public HistoryViewHolder(@NonNull View itemView) {
@@ -100,7 +97,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
             imgstatus = itemView.findViewById(R.id.imgstatus);
             imgstatus1 = itemView.findViewById(R.id.imgstatus1);
             ctrLayoutReceipt = itemView.findViewById(R.id.ctrLayoutReceipt);
-            tvMuaLai=itemView.findViewById(R.id.tvMuaLai);
+
         }
     }
 }
