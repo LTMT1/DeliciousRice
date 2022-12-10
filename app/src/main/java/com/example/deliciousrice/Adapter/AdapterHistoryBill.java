@@ -1,7 +1,6 @@
 package com.example.deliciousrice.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ReceiptItemClick;
-import com.example.deliciousrice.ui.shop.Activity.PayActivity;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.HistoryViewHolder> {
 
@@ -44,22 +41,32 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
     @Override
     public void onBindViewHolder(@NonNull AdapterHistoryBill.HistoryViewHolder holder, int position) {
         Bill bill = list.get(position);
-        holder.tvbill.setText("Mã HD: "+bill.getId_bill());
-        holder.tvdate.setText("Ngày: "+bill.getDate());
+        holder.tvbill.setText("Mã HD: DCR"+bill.getId_bill());
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        holder.tvdate.setText("Ngày: "+ sdf1.format(bill.getDate()));
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tvmoney.setText("Tổng thanh toán: "+decimalFormat.format(bill.getMoney())+" đ");
         holder.tvstatus.setText(bill.getStatus());
-
-
-        if(bill.getStatus().equals("Hoàn tất")) {
+        if(bill.getStatus().trim().equals("Hoàn tất")) {
             holder.imgstatus.setVisibility(View.GONE);
+            holder.imgstatus2.setVisibility(View.GONE);
+            holder.imgstatus3.setVisibility(View.GONE);
             holder.imgstatus1.setVisibility(View.VISIBLE);
-        }else if(bill.getStatus().equals("Đã Hủy")){
+        }else if(bill.getStatus().trim().equals("Đã Hủy")){
             holder.imgstatus.setVisibility(View.VISIBLE);
             holder.imgstatus1.setVisibility(View.GONE);
-        }else{
+            holder.imgstatus2.setVisibility(View.GONE);
+            holder.imgstatus3.setVisibility(View.GONE);
+        }else if(bill.getStatus().trim().equals("Đang chờ")){
+            holder.imgstatus2.setVisibility(View.VISIBLE);
             holder.imgstatus.setVisibility(View.GONE);
             holder.imgstatus1.setVisibility(View.GONE);
+            holder.imgstatus3.setVisibility(View.GONE);
+        }else if(bill.getStatus().trim().equals("Đang Giao Hàng")){
+            holder.imgstatus3.setVisibility(View.VISIBLE);
+            holder.imgstatus.setVisibility(View.GONE);
+            holder.imgstatus1.setVisibility(View.GONE);
+            holder.imgstatus2.setVisibility(View.GONE);
         }
 
 
@@ -84,7 +91,7 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
         private TextView tvmoney;
         private TextView tvstatus;
         private ImageView imgstatus;
-        private ImageView imgstatus1;
+        private ImageView imgstatus1,imgstatus2,imgstatus3;
 
         private ConstraintLayout ctrLayoutReceipt;
 
@@ -96,6 +103,8 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
             tvstatus=itemView.findViewById(R.id.tvstatus);
             imgstatus = itemView.findViewById(R.id.imgstatus);
             imgstatus1 = itemView.findViewById(R.id.imgstatus1);
+            imgstatus2 = itemView.findViewById(R.id.imgstatus2);
+            imgstatus3 = itemView.findViewById(R.id.imgstatus3);
             ctrLayoutReceipt = itemView.findViewById(R.id.ctrLayoutReceipt);
 
         }

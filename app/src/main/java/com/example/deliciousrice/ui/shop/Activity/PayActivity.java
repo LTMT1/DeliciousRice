@@ -147,7 +147,6 @@ public class PayActivity extends AppCompatActivity {
                         if (code.equals("1")) {
                             token = data.getString("zp_trans_token");
                             payWithZalo();
-//                            IsDone();
                             insertPay();
                         }
 
@@ -184,7 +183,6 @@ public class PayActivity extends AppCompatActivity {
                     }
 
                 });
-//                IsLoading();
             }
 
             @Override
@@ -336,7 +334,7 @@ public class PayActivity extends AppCompatActivity {
 //        Random random = new Random();
 //        int number = random.nextInt(10000000);
 //        id_bill = "DCR" + id_customer + "-" + number;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd", Locale.getDefault());
         String currentDateandTime = sdf.format(new Date());
         String ednote = edtstatus.getText().toString().trim();
 
@@ -363,6 +361,7 @@ public class PayActivity extends AppCompatActivity {
                 loadingDialog.dismissDialog();
                 Toast.makeText(PayActivity.this, "Hóa đơn của bạn đã được xử lý!", Toast.LENGTH_SHORT).show();
                 PushNotification();
+                finish();
             }
         }, 7000);
     }

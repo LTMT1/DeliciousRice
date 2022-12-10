@@ -80,5 +80,26 @@
         app:layout_constraintTop_toTopOf="@+id/tvstatus"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_done" />
-
+    <ImageView
+        android:id="@+id/imgstatus2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="25dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvstatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvstatus"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/icon_ship_hang" />
+    <ImageView
+        android:id="@+id/imgstatus3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="25dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvstatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvstatus"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_dangdoi" />
 </androidx.constraintlayout.widget.ConstraintLayout>

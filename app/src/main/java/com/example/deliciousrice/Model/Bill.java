@@ -1,16 +1,17 @@
 package com.example.deliciousrice.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Bill implements Serializable {
     private String id_bill;
     private int id_customer;
     private int id_staff;
-    private String date_created;
+    private Date date_created;
     private String status;
     private int money;
 
-    public Bill(String id_bill, int id_customer, int id_staff, String date_created, String status, int money) {
+    public Bill(String id_bill, int id_customer, int id_staff, Date date_created, String status, int money) {
         this.id_bill = id_bill;
         this.id_customer = id_customer;
         this.id_staff = id_staff;
@@ -43,11 +44,11 @@ public class Bill implements Serializable {
         this.id_staff = id_staff;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date_created;
     }
 
-    public void setDate(String date_created) {
+    public void setDate(Date date_created) {
         this.date_created = date_created;
     }
 

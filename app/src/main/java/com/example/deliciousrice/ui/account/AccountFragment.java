@@ -28,7 +28,6 @@ import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 import com.example.deliciousrice.ui.account.Fragment.ChangePasFragment;
 import com.example.deliciousrice.ui.account.Fragment.InformationFragment;
 import com.example.deliciousrice.ui.account.Fragment.ReceipFragment;
-import com.example.deliciousrice.ui.cart.DaoCart;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,14 +40,12 @@ public class AccountFragment extends Fragment {
     private MainActivity2 main;
     Customer customer;
     FragmentTransaction transection;
-    DaoCart daoCart;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View views = inflater.inflate(R.layout.fragment_account, container, false);
         main = (MainActivity2) getActivity();
-        daoCart = new DaoCart(getActivity());
         Anhxa(views);
         setviewaccount();
         main.updateMain();
@@ -67,7 +64,7 @@ public class AccountFragment extends Fragment {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             SharedPreferences.Editor editor = getContext().getSharedPreferences("user_file", MODE_PRIVATE).edit();
             editor.clear().commit();
-            daoCart.DeleteData();
+            MainActivity2.daoCart.DeleteData();
             startActivity(intent);
         });
 

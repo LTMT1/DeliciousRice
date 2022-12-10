@@ -10,11 +10,13 @@ public class Detailbill {
     private int total_money;
     private int priceproduct;
     private String user_namenv;
+    private int id_product;
+    private String image;
 
     public Detailbill() {
     }
 
-    public Detailbill(String id_bill, int id_customer, String date_created, String address, String product_name, int amount, int total_money, int priceproduct, String user_namenv) {
+    public Detailbill(String id_bill, int id_customer, String date_created, String address, String product_name, int amount, int total_money, int priceproduct, String user_namenv, int id_product, String image) {
         this.id_bill = id_bill;
         this.id_customer = id_customer;
         this.date_created = date_created;
@@ -24,6 +26,8 @@ public class Detailbill {
         this.total_money = total_money;
         this.priceproduct = priceproduct;
         this.user_namenv = user_namenv;
+        this.id_product = id_product;
+        this.image = image;
     }
 
     public String getId_bill() {
@@ -96,5 +100,21 @@ public class Detailbill {
 
     public void setUser_namenv(String user_namenv) {
         this.user_namenv = user_namenv;
+    }
+
+    public int getId_product() {
+        return id_product;
+    }
+
+    public void setId_product(int id_product) {
+        this.id_product = id_product;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

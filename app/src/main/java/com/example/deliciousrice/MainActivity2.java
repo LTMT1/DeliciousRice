@@ -3,7 +3,6 @@ package com.example.deliciousrice;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -47,7 +46,7 @@ public class MainActivity2 extends AppCompatActivity {
     private int id_customer;
     private long backPressTime;
     private Toast mToast;
-    static DaoCart daoCart;
+    public static DaoCart daoCart;
     public static String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,35 +67,8 @@ public class MainActivity2 extends AppCompatActivity {
         setStatusBarColor();
         getDatas();
         getdataCustomer(email);
-        binding.navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.shop:
-                        navController.navigate(R.id.shop);
-                        break;
-                    case R.id.explore:
-                        navController.navigate(R.id.explore);
-                        break;
-                    case R.id.cart:
-                        navController.navigate(R.id.cart);
-                        break;
-                    case R.id.favorite:
-                        navController.navigate(R.id.favorite);
-                        break;
-                    case R.id.account:
-                        navController.navigate(R.id.account);
-                        break;
-                }
-                return true;
-            }
-        });
     }
 
-//    public static int dpToPx(Context context, int i) {
-//        Resource resource= (Resource) context.getResources();
-//        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,i,resource.))
-//    }
 
     private void setStatusBarColor() {
         Window window = this.getWindow();

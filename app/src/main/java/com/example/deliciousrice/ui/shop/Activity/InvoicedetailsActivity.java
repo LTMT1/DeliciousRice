@@ -7,7 +7,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +17,15 @@ import com.example.deliciousrice.Activity.BarColor;
 import com.example.deliciousrice.Adapter.AdapterDetailBill;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
+import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Bill;
+import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Detailbill;
 import com.example.deliciousrice.R;
-import com.example.deliciousrice.ui.cart.DaoCart;
+import com.example.deliciousrice.ui.shop.ShopFragment;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -49,7 +52,6 @@ public class InvoicedetailsActivity extends AppCompatActivity {
     Bill bill;
     String Name,SDT;
     ArrayList<Detailbill> detailbillArrayList;
-    DaoCart daoCart;
 
 
     @Override
@@ -61,7 +63,6 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         SDT=intent.getStringExtra("phone");
         Name = intent.getStringExtra("name");
         bill = (Bill) intent.getSerializableExtra("getData");
-        daoCart=new DaoCart(getApplicationContext());
         Anhxa();
         setData();
         getDataDetailBill();
@@ -93,9 +94,10 @@ public class InvoicedetailsActivity extends AppCompatActivity {
     }
 
     private void setData(){
-        tvMaBill.setText(bill.getId_bill());
+        tvMaBill.setText("DCR"+bill.getId_bill());
         tvNameKH.setText(Name);
-        tvDateDat.setText(bill.getDate());
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        tvDateDat.setText(sdf1.format(bill.getDate()));
         tvPhoneKH.setText(SDT);
     }
 
@@ -111,9 +113,10 @@ public class InvoicedetailsActivity extends AppCompatActivity {
                     tongslproduct =detailbillArrayList.get(i).getAmount()+tongslproduct;
                     priceproduct =detailbillArrayList.get(i).getTotal_money()+priceproduct;
                 }
+                int id_customer=detailbill.getId_customer();
                 tvDiaChi.setText(detailbill.getAddress());
                 tvNameNV.setText(detailbill.getUser_namenv());
-//                datLaiOnClick(detailbillArrayList);
+                datLaiOnClick(detailbillArrayList,id_customer);
                 Khuyenmai(priceproduct,tongslproduct);
                 adapterDetailBill = new AdapterDetailBill(detailbillArrayList, getApplicationContext());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -128,15 +131,42 @@ public class InvoicedetailsActivity extends AppCompatActivity {
             }
         });
     }
-    private void datLaiOnClick(ArrayList<Detailbill> list){
-        for(int i=0;i<list.size();i++){
-            daoCart.InsertData(1, list.get(i).getProduct_name(),  list.get(i).getTotal_money(),"c",list.get(i).getAmount());
-        }
+    private void datLaiOnClick(ArrayList<Detailbill> list,int id_customer){
         tvDatLai.setOnClickListener(view -> {
+            for(int j=0;j<list.size();j++){
+            ShopFragment.Cartlist= (ArrayList<Cart>)  MainActivity2.daoCart.getall();
+            if (ShopFragment.Cartlist.size() > 0)//gio hang khong rong
+            {
+                boolean tontaimahang = false;
+                for (int i = 0; i <  ShopFragment.Cartlist.size(); i++)
+                {
+                    if (ShopFragment.Cartlist.get(i).getId_product() == list.get(j).getId_product())
+                    {
+                        ShopFragment.Cartlist.get(i).setAmount( ShopFragment.Cartlist.get(i).getAmount() + list.get(j).getAmount());
+                        ShopFragment.Cartlist.get(i).setPrice(list.get(j).getTotal_money() + ShopFragment.Cartlist.get(i).getPrice());
+                        DetailActivity.UpdateProduct( ShopFragment.Cartlist.get(i).getId_product(),ShopFragment.Cartlist.get(i).getPrice(),ShopFragment.Cartlist.get(i).getAmount());
+                        tontaimahang = true;
+                    }
+                }
+                if (tontaimahang == false)
+                {
+                    MainActivity2.daoCart.InsertData( list.get(j).getId_product(), list.get(j).getProduct_name(),  list.get(j).getTotal_money(), list.get(j).getImage(),list.get(j).getAmount());
+                }
+            } else
+            {
+                MainActivity2.daoCart.InsertData( list.get(j).getId_product(), list.get(j).getProduct_name(),  list.get(j).getTotal_money(), list.get(j).getImage(),list.get(j).getAmount());
+            }
+            Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
+          updateList();
+            }
             Intent intent = new Intent(getApplicationContext(), PayActivity.class);
-
+            intent.putExtra("id_customer",id_customer);
             startActivity(intent);
         });
+    }
+    private  void updateList(){
+        ShopFragment.Cartlist= (ArrayList<Cart>)  MainActivity2.daoCart.getall();
+        MainActivity2.setBugdeNumber();
     }
     private void Khuyenmai(int priceproduct,int tongslproduct){
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");

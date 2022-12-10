@@ -1,34 +1,27 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Activity.BarColor;
-import com.example.deliciousrice.Adapter.AdapterDetailBill;
 import com.example.deliciousrice.Adapter.AdapterProductDetail;
-import com.example.deliciousrice.Adapter.AdapterViewAllHot;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
-import com.example.deliciousrice.ui.cart.CartFragment;
-import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -55,19 +48,20 @@ public class DetailActivity extends AppCompatActivity {
     AdapterProductDetail adapterProductDetail;
 
     Product product;
-    private SQLiteDatabase db;
     int getId_customer,id_product;
     public static int Click = 0;
-    static DaoCart daoCart;
+    ArrayList<Product> productHots;
+//    public static DaoCart daoCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         BarColor.setStatusBarColor(this);
-        daoCart=new DaoCart(getApplicationContext());
+//        daoCart=new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         getId_customer=intent.getIntExtra("idcustomer",0);
         product = (Product) intent.getSerializableExtra("getdataproduct");
+        productHots = new ArrayList<>();
         Anhxa();
         setviewdata();
         ListProductDetail();
@@ -103,7 +97,9 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int slmoi = Integer.parseInt(tvnumbersp.getText().toString().trim()) - 1;
-                tvnumbersp.setText(Integer.toString(slmoi));
+                if(slmoi>0){
+                    tvnumbersp.setText(Integer.toString(slmoi));
+                }
             }
         });
         imgCong.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +110,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         btnaddcart.setOnClickListener(view -> {
-            ShopFragment.Cartlist= (ArrayList<Cart>) daoCart.getall();
+            ShopFragment.Cartlist= (ArrayList<Cart>)MainActivity2.daoCart.getall();
             if (ShopFragment.Cartlist.size() > 0)//gio hang khong rong
             {
                 int sl = Integer.parseInt(tvnumbersp.getText().toString().trim());
@@ -133,13 +129,13 @@ public class DetailActivity extends AppCompatActivity {
                 {
                     int sl1 = Integer.parseInt(tvnumbersp.getText().toString().trim());//lay so luong trong spinner
                     int Tien2 = sl1 * (product.getPrice());
-                    daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl1);
+                    MainActivity2.daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl1);
                 }
             } else
             {
                 int sl2 = Integer.parseInt(tvnumbersp.getText().toString().trim());
                 int Tien2 = sl2 * (product.getPrice());
-                daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl2);
+                MainActivity2.daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl2);
             }
             Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
             updateList();
@@ -204,10 +200,10 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
     public static void UpdateProduct(int id, int price, int amount) {
-        daoCart.UpdateCart(id, price, amount);
+        MainActivity2.daoCart.UpdateCart(id, price, amount);
     }
     private void updateList(){
-        ShopFragment.Cartlist= (ArrayList<Cart>) daoCart.getall();
+        ShopFragment.Cartlist= (ArrayList<Cart>)  MainActivity2.daoCart.getall();
         MainActivity2.setBugdeNumber();
     }
 
@@ -218,7 +214,6 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
              //   prgLoadingSearch.setVisibility(View.GONE);
-                ArrayList<Product> productHots = new ArrayList<>();
                 productHots = response.body();
                 rcyDetailProduct.setHasFixedSize(true);
                 rcyDetailProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));

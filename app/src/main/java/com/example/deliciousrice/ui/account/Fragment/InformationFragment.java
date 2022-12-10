@@ -12,15 +12,14 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.InputType;
 import android.util.Base64;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -74,12 +73,13 @@ public class InformationFragment extends Fragment {
     private ImageView imgEditTextname;
     private ImageView imgEditTextSDT;
     private ImageView imgEditTextdate;
+    private TextView btnupdatecus;
 
     private FirebaseAuth auth;
     private static final int GALLERY = 1, CAMERA = 2;
     Bitmap FixBitmap;
 
-    int id;
+    int id,number =0;
     String  name, name1, name2, name3;
     private int RESULT_CANCELED;
 
@@ -123,7 +123,6 @@ public class InformationFragment extends Fragment {
 
             }
         });
-
     }
 
     private void openImage() {
@@ -245,6 +244,7 @@ public class InformationFragment extends Fragment {
     }
 
     private void Anhxa(View view) {
+        btnupdatecus=view.findViewById(R.id.btnupdatecus);
         profileImage = view.findViewById(R.id.profile_image);
         editTextSDT = view.findViewById(R.id.editTextSDT);
         editTextdate = view.findViewById(R.id.editTextdate);
@@ -312,28 +312,7 @@ public class InformationFragment extends Fragment {
                     progressDialog.dismiss();
                 }
             });
-
     }
-
-
-    private void updateSDT(int ida, String sdt) {
-
-            ApiProduct apiProduct = ApiService.getService();
-            Call<String> callback = apiProduct.updatesdt(ida, sdt);
-            callback.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                    Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                }
-            });
-    }
-
-
     private void calenderDate() {
         editTextdate.setOnClickListener(view -> {
             Calendar calendar = Calendar.getInstance();
@@ -352,87 +331,52 @@ public class InformationFragment extends Fragment {
         });
     }
     private void UpdateCustomer(){
+        btnupdatecus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(number==1){
+                    String sdt = editTextSDT.getText().toString().trim();
+                    if (validatePhone()) {
+                        sendveryfyDdt(sdt);
+                        editTextSDT.setEnabled(false);
+                    }
+                }else if(number==2){
+                    String name = editTextname.getText().toString().trim();
+                    if (validateName()) {
+                        updateName(id, name);
+                        editTextname.setEnabled(false);
+                    }
+                }else if(number==3){
+                    String birthday = editTextdate.getText().toString().trim();
+                    updateBirthday(id, birthday);
+                    editTextdate.setEnabled(false);
+                }
+                btnupdatecus.setVisibility(View.GONE);
+            }
+        });
         imgEditTextSDT.setOnClickListener(view -> {
             editTextSDT.setEnabled(true);
-            Toast.makeText(getApplicationContext(), "Ấn ENTER để lưu", Toast.LENGTH_SHORT).show();
-            editTextSDT.setOnKeyListener(new View.OnKeyListener() {
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        String sdt = editTextSDT.getText().toString().trim();
-                        if (validatePhone()){
-                            sendveryfyDdt(sdt);
-                            editTextSDT.setEnabled(false);
-                        }
-                        return true;
-                    }
-                    return false;
-                }
-            });
+            btnupdatecus.setVisibility(View.VISIBLE);
+            number=1;
         });
         imgEditTextname.setOnClickListener(view -> {
             editTextname.setEnabled(true);
-            Toast.makeText(getApplicationContext(), "Ấn ENTER để lưu", Toast.LENGTH_SHORT).show();
-            editTextname.setOnKeyListener(new View.OnKeyListener() {
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        String name = editTextname.getText().toString().trim();
-                        if (validateName()) {
-                            updateName(id, name);
-                            editTextname.setEnabled(false);
-                        }
-                        return true;
-                    }
-                    return false;
-                }
-            });
+            btnupdatecus.setVisibility(View.VISIBLE);
+            number=2;
         });
         imgEditTextdate.setOnClickListener(view -> {
             editTextdate.setEnabled(true);
-            Toast.makeText(getApplicationContext(), "Ấn ENTER để lưu", Toast.LENGTH_SHORT).show();
-            editTextdate.setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
-            editTextdate.setOnKeyListener(new View.OnKeyListener() {
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        String birthday = editTextdate.getText().toString().trim();
-                        updateBirthday(id, birthday);
-                        editTextdate.setEnabled(false);
-                        return true;
-                    }
-                    return false;
-                }
-            });
+            btnupdatecus.setVisibility(View.VISIBLE);
+            number=3;
         });
     }
 
-    public boolean validateName() {
-        if (editTextname.getText().toString().trim().equals("")) {
-            editTextname.setError("Hãy nhập tên của bạn.");
-            return false;
-        } else {
-            editTextname.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validatePhone() {
-        String a = "(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\\b";
-        if (editTextSDT.getText().toString().trim().equals("")) {
-            editTextSDT.setError("Hãy nhập số điện thoại của bạn.");
-            return false;
-        } else if (!editTextSDT.getText().toString().trim().matches(a)) {
-            editTextSDT.setError("Nhập đúng định dạng số điện thoại.");
-            return false;
-        } else {
-            editTextSDT.setError(null);
-            return true;
-        }
-    }
 
     private void sendveryfyDdt(String phone){
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(auth)
                         .setPhoneNumber(phone)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setTimeout(120L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(getActivity())                 // Activity (for callback binding)
                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             @Override
@@ -442,6 +386,7 @@ public class InformationFragment extends Fragment {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
+                                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
                             }
                             @Override
                             public void onCodeSent(@NonNull String verificationId,
@@ -481,6 +426,30 @@ public class InformationFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    public boolean validateName() {
+        if (editTextname.getText().toString().trim().equals("")) {
+            editTextname.setError("Hãy nhập tên của bạn.");
+            return false;
+        } else {
+            editTextname.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validatePhone() {
+        String a = "(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\\b";
+        if (editTextSDT.getText().toString().trim().equals("")) {
+            editTextSDT.setError("Hãy nhập số điện thoại của bạn.");
+            return false;
+        } else if (!editTextSDT.getText().toString().trim().matches(a)) {
+            editTextSDT.setError("Nhập đúng định dạng số điện thoại.");
+            return false;
+        } else {
+            editTextSDT.setError(null);
+            return true;
+        }
     }
 
 }

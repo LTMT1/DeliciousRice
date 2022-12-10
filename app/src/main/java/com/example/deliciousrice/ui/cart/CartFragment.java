@@ -33,13 +33,11 @@ public class CartFragment extends Fragment {
     public static MainActivity2 main;
     public static AdapterCart adapterCart;
     public static int total_money = 0;
-    DaoCart daoCart;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         Anhxa(view);
-        daoCart = new DaoCart(getActivity());
         main = (MainActivity2) getActivity();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -63,7 +61,7 @@ public class CartFragment extends Fragment {
     }
 
     private void Updatelist() {
-        ShopFragment.Cartlist = (ArrayList<Cart>) daoCart.getall();
+        ShopFragment.Cartlist = (ArrayList<Cart>) MainActivity2.daoCart.getall();
         adapterCart = new AdapterCart(ShopFragment.Cartlist, getActivity(), this);
         RClViewgiohang.setAdapter(adapterCart);
     }
@@ -97,7 +95,7 @@ public class CartFragment extends Fragment {
     }
 
     public void DeleteProduct(final int id) {
-        daoCart.DeleteCart(id);
+        MainActivity2.daoCart.DeleteCart(id);
         Updatelist();
         MainActivity2.setBugdeNumber();
     }
