@@ -15,8 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.deliciousrice.Api.ApiProduct;
-import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,9 +27,6 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class VerifyPhoneFragment extends Fragment {
 
@@ -133,7 +128,6 @@ public class VerifyPhoneFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            updateSDT(id, phonenumber);
                             verifyCode();
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -142,19 +136,7 @@ public class VerifyPhoneFragment extends Fragment {
                     }
                 });
     }
-    private void updateSDT(int ida, String sdt) {
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.updatesdt(ida, sdt);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-            }
-        });
-    }
 
     private void verifyCode() {
         FragmentManager fm = getFragmentManager();

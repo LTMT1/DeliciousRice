@@ -16,6 +16,7 @@ import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.SearchProductItemClink;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AdapterSearchProduct extends RecyclerView.Adapter<AdapterSearchProduct.SearchproductViewHolder> {
@@ -44,7 +45,9 @@ public class AdapterSearchProduct extends RecyclerView.Adapter<AdapterSearchProd
         holder.tvSeTensp.setText(product.getProduct_name());
         Glide.with(context).load(product.getImage()).centerCrop().into(holder.imgSeImgsp);
         holder.tvSeTiem.setText(product.getProcessing_time());
-        holder.tvSeGia.setText(String.valueOf(product.getPrice()) + " đ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.tvSeGia.setText(decimalFormat.format(product.getPrice())+" đ");
+
         holder.layoutSeach.setOnClickListener(v -> {
             searchProductItemClink.itemSearchProduct(product);
         });

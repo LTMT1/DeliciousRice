@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ public class PayActivity extends AppCompatActivity {
     private TextView tvmoney;
     private RecyclerView rclview;
     private EditText edtstatus;
+    private ImageView imgBackThanhtoan;
     AdapterProductBill adapterProductBill;
 //    String id_bill;
     public RadioButton radio6, radio7;
@@ -82,7 +84,6 @@ public class PayActivity extends AppCompatActivity {
         //anhxa
         BindView();
         addersses = new ArrayList<>();
-
         daoCart = new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         id_customer = intent.getIntExtra("id_customer", 0);
@@ -111,6 +112,10 @@ public class PayActivity extends AppCompatActivity {
         radio6 = findViewById(R.id.radioButton6);
         radio7 = findViewById(R.id.radioButton7);
         textView65 = findViewById(R.id.textView65);
+        imgBackThanhtoan = findViewById(R.id.img_back_thanhtoan);
+        imgBackThanhtoan.setOnClickListener(view -> {
+
+        });
     }
 
     private void ListProductBuy() {
@@ -132,7 +137,7 @@ public class PayActivity extends AppCompatActivity {
 
     private void Pay() {
         btnpay.setOnClickListener(view -> {
-            if(addersses.size()==0){
+            if(addersses.size()==0||MainActivity2.phone_number.equals("")){
                 Toast.makeText(this, "Bạn cần phải có địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
             }else {
                 loadingDialog.StartLoadingDialog();
@@ -247,7 +252,7 @@ public class PayActivity extends AppCompatActivity {
 
     private void PushNotification() {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.pushNotification(MainActivity2.token);
+        Call<String> callback = apiProduct.pushNotification(MainActivity2.token,"1");
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

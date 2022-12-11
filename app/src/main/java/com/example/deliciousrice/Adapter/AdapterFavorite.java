@@ -20,6 +20,7 @@ import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductFavoriteItemClick;
 import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -51,7 +52,9 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.Favori
         holder.tvName.setText(favorite.getProduct_name());
         Glide.with(context).load(favorite.getImage()).centerCrop().into(holder.imgProduct);
         holder.tvTime.setText(favorite.getProcessing_time());
-        holder.tvPrice.setText(String.valueOf(favorite.getPrice())+" đ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.tvPrice.setText(decimalFormat.format(favorite.getPrice())+" đ");
+
         if (list.size() > 0) {
             holder.icontym.setImageResource(R.drawable.ic_baseline_favorite_24);
         }

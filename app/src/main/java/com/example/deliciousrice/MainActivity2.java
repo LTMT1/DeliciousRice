@@ -42,7 +42,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     private static ActivityMain2Binding binding;
     private String email = "", password = "";
-    private String image,id_application, user_name, phone_number, address, birthday, emaill, passs;
+    private String image,id_application, user_name, address, birthday, emaill, passs;
+    public static String phone_number;
     private int id_customer;
     private long backPressTime;
     private Toast mToast;

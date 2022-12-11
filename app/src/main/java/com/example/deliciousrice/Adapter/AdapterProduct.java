@@ -21,6 +21,7 @@ import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductViewHolder> {
@@ -51,7 +52,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductV
         holder.tvNameProduct.setText(product.getProduct_name());
         Glide.with(context).load(product.getImage()).centerCrop().into(holder.imgProduct);
         holder.tvMassPoduct.setText(product.getProcessing_time());
-        holder.tvPricePoduct.setText(String.valueOf(product.getPrice())+" đ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.tvPricePoduct.setText(decimalFormat.format(product.getPrice())+" đ");
+
 
         holder.imgBuyPoduct.setOnClickListener(view -> {
             daoCart=new DaoCart(context.getContext());

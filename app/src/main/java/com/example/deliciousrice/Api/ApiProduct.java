@@ -71,16 +71,12 @@ public interface ApiProduct {
     Call<List<Product>> SeachProduct(@Field("product_name") String product_name);
 
     @FormUrlEncoded
-    @POST("updateBirthdProfile.php")
-    Call<String> updatebirthday(@Field("customer") int idcustomer, @Field("birthday") String birthday);
-
-    @FormUrlEncoded
     @POST("updateNameProfile.php")
-    Call<String> updatename(@Field("customer") int idcustomer, @Field("user_name") String user_name);
+    Call<String> updatename(@Field("customer") int idcustomer, @Field("user_name") String user_name,@Field("birthday") String birthday,@Field("phone_number") String phone_number);
 
     @FormUrlEncoded
-    @POST("updateSdtProfile.php")
-    Call<String> updatesdt(@Field("customer") int idcustomer,@Field("phone_number") String phone_number);
+    @POST("CancleBill.php")
+    Call<String> canclebill(@Field("id_bill") String id_bill,@Field("status") String status);
 
     /*Địa chỉ*/
     @FormUrlEncoded
@@ -138,7 +134,7 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("getNotification.php")
-    Call<String> pushNotification(@Field("Token") String token) ;
+    Call<String> pushNotification(@Field("Token") String token,@Field("number")String number) ;
 
     @GET("getIdBill.php")
     Call<String> getidBill();

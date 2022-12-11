@@ -18,6 +18,7 @@ import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductHotItemClick;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.ProductHotViewHolder> {
@@ -44,7 +45,9 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
         Product productHot = data.get(position);
         Glide.with(context).load(productHot.getImage()).centerCrop().into(holder.imgProductHot);
         holder.tvProductNameHot.setText(productHot.getProduct_name());
-        holder.tvPriceProductHot.setText(String.valueOf(productHot.getPrice())+ " đ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.tvPriceProductHot.setText(decimalFormat.format(productHot.getPrice())+" đ");
+
         holder.tvTimehot.setText(productHot.getProcessing_time());
         holder.cstrItemProductHot.setOnClickListener(v -> {
             productHotItemClick.itemProductHotClick(productHot);

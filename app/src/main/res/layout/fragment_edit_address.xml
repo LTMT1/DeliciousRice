@@ -102,7 +102,6 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
         android:drawableRight="@drawable/ic_map_search"
-        android:hint="Trường Cao Đẳng FPT Polytechnic,Trịnh Văn Bô..."
         android:paddingRight="10dp"
         android:textSize="14sp"
         android:ellipsize="end"
@@ -131,7 +130,7 @@
         android:layout_height="45dp"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
-        android:hint="Nhà"
+
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

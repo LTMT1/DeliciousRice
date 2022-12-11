@@ -72,20 +72,23 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout8"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintStart_toEndOf="@+id/cardView6"
             app:layout_constraintTop_toBottomOf="@+id/tvname">
 
             <TextView
                 android:id="@+id/tvsoluong"
+                style="@style/Text"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/black"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imgcong"
                 app:layout_constraintStart_toEndOf="@+id/imgtru"
@@ -93,8 +96,8 @@
 
             <ImageView
                 android:id="@+id/imgcong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:src="@drawable/explore_cong"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -102,8 +105,8 @@
 
             <ImageView
                 android:id="@+id/imgtru"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:src="@drawable/explore_tru"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,12 +118,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/be_vietnam_medium"
             android:text="45.000 đ"
             android:textColor="@color/black"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.apachat.swipereveallayout.core.SwipeLayout>

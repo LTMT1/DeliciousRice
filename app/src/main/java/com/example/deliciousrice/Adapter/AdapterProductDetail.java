@@ -17,6 +17,7 @@ import com.example.deliciousrice.callback.ProductItemClick;
 import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
 import com.example.deliciousrice.ui.shop.Activity.ViewAllHotActivity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AdapterProductDetail extends RecyclerView.Adapter<AdapterProductDetail.ProductViewAllHolder> {
@@ -44,7 +45,9 @@ public class AdapterProductDetail extends RecyclerView.Adapter<AdapterProductDet
         Glide.with(context).load(product.getImage()).centerCrop().into(holder.imgVallImgsp);
         holder.tvVallTensp.setText(product.getProduct_name());
         holder.tvVallTime.setText(product.getProcessing_time());
-        holder.tvVallGia.setText(String.valueOf(product.getPrice()));
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.tvVallGia.setText(decimalFormat.format(product.getPrice())+" đ");
+
         holder.layoutViewAll.setOnClickListener(v -> {
             productItemClick.itemProductClick(product);
         });

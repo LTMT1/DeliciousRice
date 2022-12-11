@@ -34,6 +34,7 @@ public class CartFragment extends Fragment {
     public static AdapterCart adapterCart;
     public static int total_money = 0;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
@@ -45,6 +46,8 @@ public class CartFragment extends Fragment {
         Updatelist();
         CheckData();
         UpdateTongTien();
+        /*Bundle bundle=getArguments();
+        int idadr = bundle.getInt("image", 0);*/
         return view;
     }
 

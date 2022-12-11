@@ -57,12 +57,12 @@ public class AdapterHistoryBill extends RecyclerView.Adapter<AdapterHistoryBill.
             holder.imgstatus1.setVisibility(View.GONE);
             holder.imgstatus2.setVisibility(View.GONE);
             holder.imgstatus3.setVisibility(View.GONE);
-        }else if(bill.getStatus().trim().equals("Đang chờ")){
+        }else if(bill.getStatus().trim().equals("Đang Giao Hàng")){
             holder.imgstatus2.setVisibility(View.VISIBLE);
             holder.imgstatus.setVisibility(View.GONE);
             holder.imgstatus1.setVisibility(View.GONE);
             holder.imgstatus3.setVisibility(View.GONE);
-        }else if(bill.getStatus().trim().equals("Đang Giao Hàng")){
+        }else if(bill.getStatus().trim().equals("Đang chờ")){
             holder.imgstatus3.setVisibility(View.VISIBLE);
             holder.imgstatus.setVisibility(View.GONE);
             holder.imgstatus1.setVisibility(View.GONE);

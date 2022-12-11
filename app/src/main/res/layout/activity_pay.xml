@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/img_backAdd_Address"
+        android:id="@+id/img_back_thanhtoan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -218,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
-                android:text="Zalo play"
+                android:text="Zalo pay"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView33"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />

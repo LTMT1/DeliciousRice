@@ -86,8 +86,11 @@ public class DetailActivity extends AppCompatActivity {
         Glide.with(this).load(product.getImage()).centerCrop().into(roundedImageView);
         tvnamesp.setText(product.getProduct_name());
         tvtimesp.setText(product.getProcessing_time());
+
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         tvpricesp.setText(decimalFormat.format(product.getPrice())+"VND");
+
+
         tvdetaisp.setText(product.getDescription());
         checkYeuThich(getId_customer,product.getId_product());
         imgtymsp.setOnClickListener(view -> {
