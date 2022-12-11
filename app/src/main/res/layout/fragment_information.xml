@@ -84,133 +84,185 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
-    <EditText
-        android:id="@+id/editTextname"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout8"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_borders_sp"
-        android:drawableRight="@drawable/ic_pen"
-        android:enabled="false"
-        android:hint="Nhập tên"
-        android:lines="1"
-        android:maxLines="1"
-        android:paddingLeft="25dp"
-        android:paddingRight="15dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
-
-    <EditText
-        android:id="@+id/editTextSDT"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_borders_sp"
-        android:drawableRight="@drawable/ic_pen"
-        android:enabled="false"
-        android:fontFamily="@font/be_vietnam_medium"
-        android:hint="Nhập số điện thoại"
-        android:inputType="phone"
-        android:lines="1"
-        android:maxLines="1"
-        android:paddingLeft="25dp"
-        android:paddingRight="15dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:background="@drawable/bg_borders_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/textView30">
 
+        <EditText
+            android:id="@+id/editTextname"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:enabled="false"
+            android:hint="Nhập tên"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_editTextname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_editTextname"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_pen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView29"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
         android:text="@string/s_d_t"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextname" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_borders_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29">
+
+        <EditText
+            android:id="@+id/editTextSDT"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:fontFamily="@font/be_vietnam_medium"
+            android:hint="Nhập số điện thoại"
+            android:lines="1"
+            android:maxLines="1"
+            android:background="@null"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/black"
+            android:inputType="phone"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_editTextSDT"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_editTextSDT"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_pen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/be_vietnam_medium"
         android:text="@string/n_s"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSDT" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
 
-    <EditText
-        android:id="@+id/editTextdate"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_marginHorizontal="25dp"
+        android:background="@drawable/bg_borders_edit"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_borders_sp"
-        android:drawableRight="@drawable/ic_pen"
-        android:enabled="false"
-        android:fontFamily="@font/be_vietnam_medium"
-        android:hint="DD/MM/YY"
-        android:inputType="date"
-        android:lines="1"
-        android:maxLines="1"
-        android:paddingLeft="25dp"
-        android:paddingRight="15dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+        app:layout_constraintTop_toBottomOf="@+id/textView32">
 
+        <EditText
+            android:id="@+id/editTextdate"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:enabled="false"
+            android:fontFamily="@font/be_vietnam_medium"
+            android:hint="DD/MM/YY"
+            android:lines="1"
+            android:maxLines="1"
+            android:background="@null"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_editTextdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_editTextdate"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_pen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/btnedit"
+        android:id="@+id/btnupdatecus"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="45dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/bg_btn"
         android:fontFamily="@font/be_vietnam_bold"
         android:gravity="center"
-        android:text="Sửa Thông Tin"
+        android:text="Lưu"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/btnsave"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="35dp"
-        android:layout_marginBottom="35dp"
-        android:background="@drawable/bg_btn"
-        android:fontFamily="@font/be_vietnam_bold"
-        android:gravity="center"
-        android:text="Lưu Thông Tin"
         android:visibility="gone"
-        android:textColor="@color/white"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+

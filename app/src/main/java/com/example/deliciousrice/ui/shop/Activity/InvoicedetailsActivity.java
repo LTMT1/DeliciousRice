@@ -1,16 +1,15 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +28,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,9 +40,12 @@ public class InvoicedetailsActivity extends AppCompatActivity {
     private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat,tvTongTien,tvSoMon,tvDatLai,tvCountDownTime;
     private RecyclerView rcyViewDetailReceipt;
     private TextView tvshipkm,tvTongtienBill;
+    private TextView tvmoneyship;
     private TextView tvkhuyenmai,textVieưgone;
     private ImageView imgBackInvoicedetails;
-    private CardView textView7;
+    CountDownTimer countDownTimer;
+    Boolean counterIsActive = false;
+
 
 
     AdapterDetailBill adapterDetailBill;
@@ -62,16 +66,10 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         Anhxa();
         setData();
         getDataDetailBill();
-        if(bill.getStatus().trim().equals("Đang chờ")){
-            tvCountDownTime.setVisibility(View.VISIBLE);
-            cancleBill(bill.getId_bill(),"Đã Hủy");
-        }else {
-            tvCountDownTime.setVisibility(View.GONE);
-        }
+        countDowmTime();
     }
 
     private void Anhxa() {
-        //textView7 = findViewById(R.id.textView7);
         tvCountDownTime = findViewById(R.id.tvCountDownTime);
         tvMaBill = findViewById(R.id.tvMaDonHang);
         tvNameKH = findViewById(R.id.tvNameKH);
@@ -84,6 +82,7 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         tvSoMon = findViewById(R.id.tvSoMon);
         tvDatLai = findViewById(R.id.tvDatlai);
         tvshipkm = findViewById(R.id.tvshipkm);
+        tvmoneyship = findViewById(R.id.tvmoneyship);
         tvkhuyenmai = findViewById(R.id.tvkhuyenmai);
         tvTongtienBill=findViewById(R.id.tvTongtien);
         textVieưgone=findViewById(R.id.textView63);
@@ -165,7 +164,7 @@ public class InvoicedetailsActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-    private void updateList(){
+    private  void updateList(){
         ShopFragment.Cartlist= (ArrayList<Cart>)  MainActivity2.daoCart.getall();
         MainActivity2.setBugdeNumber();
     }
@@ -187,44 +186,30 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         }
         tvSoMon.setText("Tổng số("+tongslproduct+" món)");
     }
-    private void cancleBill(String id_bill, String cancle){
-        tvCountDownTime.setOnClickListener(view -> {
-            final ProgressDialog progressDialog = new ProgressDialog(InvoicedetailsActivity.this);
-            progressDialog.setMessage("Please Wait..");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-            ApiProduct apiProduct = ApiService.getService();
-            Call<String> callback = apiProduct.canclebill(id_bill, cancle);
-            callback.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                    Toast.makeText(InvoicedetailsActivity.this, "Hủy đơn hàng thành công", Toast.LENGTH_SHORT).show();
-                    PushNotification();
-                    finish();
-                    progressDialog.dismiss();
-                }
 
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(InvoicedetailsActivity.this, "Hủy đơn hàng thất bại", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-            });
-        });
-    }
-    private void PushNotification() {
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.pushNotification(MainActivity2.token,"2");
-        callback.enqueue(new Callback<String>() {
+
+    private void countDowmTime(){
+
+        long duration = TimeUnit.MINUTES.toMillis(1);
+
+        new CountDownTimer(duration, 1000) {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onTick(long l) {
+                String sDuration = String.format(Locale.ENGLISH,"%02d : %02d"
+                    ,TimeUnit.MILLISECONDS.toMinutes(l)
+                    ,TimeUnit.MILLISECONDS.toSeconds(l) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(l)));
 
+                tvCountDownTime.setText(sDuration);
             }
 
+            @SuppressLint("ResourceAsColor")
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e("that bai cc", "");
+            public void onFinish() {
+//                tvCountDownTime.setVisibility(View.GONE);
+                tvCountDownTime.setText("Bat dau giao hang");
+                tvCountDownTime.setTextColor(R.color.purple_700);
             }
-        });
+        }.start();
     }
 }
