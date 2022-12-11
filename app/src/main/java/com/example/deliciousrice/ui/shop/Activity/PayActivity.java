@@ -82,7 +82,6 @@ public class PayActivity extends AppCompatActivity {
         //anhxa
         BindView();
         addersses = new ArrayList<>();
-
         daoCart = new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         id_customer = intent.getIntExtra("id_customer", 0);
@@ -132,7 +131,7 @@ public class PayActivity extends AppCompatActivity {
 
     private void Pay() {
         btnpay.setOnClickListener(view -> {
-            if(addersses.size()==0){
+            if(addersses.size()==0||MainActivity2.phone_number.equals("")){
                 Toast.makeText(this, "Bạn cần phải có địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
             }else {
                 loadingDialog.StartLoadingDialog();
@@ -247,7 +246,7 @@ public class PayActivity extends AppCompatActivity {
 
     private void PushNotification() {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.pushNotification(MainActivity2.token);
+        Call<String> callback = apiProduct.pushNotification(MainActivity2.token,"1");
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

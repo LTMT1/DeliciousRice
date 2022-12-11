@@ -75,8 +75,7 @@
                     android:background="#E80202"
                     android:fontFamily="@font/be_vietnam_bold"
                     android:gravity="center"
-                    android:text="ĐÃ HỦY"
-                    android:textColor="@color/white"
+                    android:text="Hủy Đơn Hàng"
                     android:textSize="18dp" />
             </androidx.cardview.widget.CardView>
 

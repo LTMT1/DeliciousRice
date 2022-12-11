@@ -70,10 +70,8 @@ public class InformationFragment extends Fragment {
     private EditText editTextdate;
     private EditText editTextname;
     private ImageView imgBackInformation;
-    private ImageView imgEditTextname;
-    private ImageView imgEditTextSDT;
-    private ImageView imgEditTextdate;
-    private TextView btnupdatecus;
+    private TextView btnedit;
+    private TextView btnsave;
 
     private FirebaseAuth auth;
     private static final int GALLERY = 1, CAMERA = 2;
@@ -244,15 +242,14 @@ public class InformationFragment extends Fragment {
     }
 
     private void Anhxa(View view) {
-        btnupdatecus=view.findViewById(R.id.btnupdatecus);
         profileImage = view.findViewById(R.id.profile_image);
         editTextSDT = view.findViewById(R.id.editTextSDT);
         editTextdate = view.findViewById(R.id.editTextdate);
         editTextname = view.findViewById(R.id.editTextname);
         imgBackInformation = view.findViewById(R.id.img_back_Information);
-        imgEditTextname = view.findViewById(R.id.img_editTextname);
-        imgEditTextSDT = view.findViewById(R.id.img_editTextSDT);
-        imgEditTextdate = view.findViewById(R.id.img_editTextdate);
+        btnedit = view.findViewById(R.id.btnedit);
+        btnsave = view.findViewById(R.id.btnsave);
+
     }
 
     private void setview() {
@@ -269,36 +266,15 @@ public class InformationFragment extends Fragment {
         Glide.with(getApplicationContext()).load(name3).centerCrop().into(profileImage);
     }
 
-    private void updateBirthday(int ida, String birthday) {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Please Wait..");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.updatebirthday(ida, birthday);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        });
-    }
-
-    private void updateName(int ida, String name) {
+    private void updateName(int ida, String name,String birthday,String sdt) {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
             ApiProduct apiProduct = ApiService.getService();
-            Call<String> callback = apiProduct.updatename(ida, name);
+            Call<String> callback = apiProduct.updatename(ida, name,birthday,sdt);
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, retrofit2.Response<String> response) {
@@ -331,43 +307,27 @@ public class InformationFragment extends Fragment {
         });
     }
     private void UpdateCustomer(){
-        btnupdatecus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(number==1){
-                    String sdt = editTextSDT.getText().toString().trim();
-                    if (validatePhone()) {
-                        sendveryfyDdt(sdt);
-                        editTextSDT.setEnabled(false);
-                    }
-                }else if(number==2){
-                    String name = editTextname.getText().toString().trim();
-                    if (validateName()) {
-                        updateName(id, name);
-                        editTextname.setEnabled(false);
-                    }
-                }else if(number==3){
-                    String birthday = editTextdate.getText().toString().trim();
-                    updateBirthday(id, birthday);
-                    editTextdate.setEnabled(false);
-                }
-                btnupdatecus.setVisibility(View.GONE);
-            }
-        });
-        imgEditTextSDT.setOnClickListener(view -> {
+        btnedit.setOnClickListener(view -> {
+            btnedit.setVisibility(View.GONE);
             editTextSDT.setEnabled(true);
-            btnupdatecus.setVisibility(View.VISIBLE);
-            number=1;
-        });
-        imgEditTextname.setOnClickListener(view -> {
-            editTextname.setEnabled(true);
-            btnupdatecus.setVisibility(View.VISIBLE);
-            number=2;
-        });
-        imgEditTextdate.setOnClickListener(view -> {
             editTextdate.setEnabled(true);
-            btnupdatecus.setVisibility(View.VISIBLE);
-            number=3;
+            editTextname.setEnabled(true);
+            btnsave.setVisibility(View.VISIBLE);
+        });
+        btnsave.setOnClickListener(view -> {
+            if (!validatePhone()||!validateName()){
+             return;
+            }else {
+                String sdt = editTextSDT.getText().toString().trim();
+                String name = editTextname.getText().toString().trim();
+                String birthday = editTextdate.getText().toString().trim();
+                updateName(id,name,birthday,sdt);
+                editTextSDT.setEnabled(false);
+                editTextdate.setEnabled(false);
+                editTextname.setEnabled(false);
+                btnsave.setVisibility(View.GONE);
+                btnedit.setVisibility(View.VISIBLE);
+            }
         });
     }
 
@@ -439,7 +399,7 @@ public class InformationFragment extends Fragment {
     }
 
     public boolean validatePhone() {
-        String a = "(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\\b";
+        String a = "(((\\+|)84)|0)(3|5|7|8|9)+([0-9]{8,15})\\b";
         if (editTextSDT.getText().toString().trim().equals("")) {
             editTextSDT.setError("Hãy nhập số điện thoại của bạn.");
             return false;
