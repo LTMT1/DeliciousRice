@@ -146,13 +146,12 @@ public class PayActivity extends AppCompatActivity {
                 } else if (radio7.isChecked()) {
                     CreateOrder orderApi = new CreateOrder();
                     try {
-                        JSONObject data = orderApi.createOrder("1");
+                        JSONObject data = orderApi.createOrder(String.valueOf(tongtiensp));
                         String code = data.getString("return_code");
 
                         if (code.equals("1")) {
                             token = data.getString("zp_trans_token");
                             payWithZalo();
-                            insertPay();
                         }
 
                     } catch (Exception e) {
@@ -174,17 +173,18 @@ public class PayActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("TAG", "run: " + "Sucess");
-                        new AlertDialog.Builder(PayActivity.this)
-                                .setTitle("Payment Success")
-                                .setMessage(String.format("TransactionId: %s - TransToken: %s", transactionId, transToken))
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                })
-                                .setNegativeButton("Cancel", null).show();
-                        Log.e("TAG", "run: " + "Thanh toan thanh cong");
+                        insertPay();
+//                        Log.e("TAG", "run: " + "Sucess");
+//                        new AlertDialog.Builder(PayActivity.this)
+//                                .setTitle("Payment Success")
+//                                .setMessage(String.format("TransactionId: %s - TransToken: %s", transactionId, transToken))
+//                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                    }
+//                                })
+//                                .setNegativeButton("Cancel", null).show();
+//                        Log.e("TAG", "run: " + "Thanh toan thanh cong");
                     }
 
                 });
@@ -313,12 +313,12 @@ public class PayActivity extends AppCompatActivity {
             double khuyenmai = priceproduct * 0.2;
             tvTienkm.setText(decimalFormat.format(khuyenmai) + "đ");
             tongtiensp = (int) (priceproduct - khuyenmai + 20000);
-            tvTongmoney.setText(decimalFormat.format(tongtiensp) + "đ");
+            tvTongmoney.setText(decimalFormat.format(tongtiensp) );
         } else {
             tvKhuyenmai.setVisibility(View.GONE);
             tvTienkm.setVisibility(View.GONE);
             tongtiensp = priceproduct + 20000;
-            tvTongmoney.setText(decimalFormat.format(tongtiensp) + "đ");
+            tvTongmoney.setText(decimalFormat.format(tongtiensp) );
         }
         textView65.setText("Tổng số(" + tongslproduct + " món)");
     }
