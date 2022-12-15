@@ -67,9 +67,6 @@
         <action
             android:id="@+id/action_contactFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
-        <action
-            android:id="@+id/action_contactFragment_to_verifyPhoneFragment"
-            app:destination="@id/verifyPhoneFragment" />
     </fragment>
     <fragment
         android:id="@+id/informationFragment"
@@ -122,15 +119,6 @@
         <action
             android:id="@+id/action_editAddressFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/verifyPhoneFragment"
-        android:name="com.example.deliciousrice.ui.account.Fragment.VerifyPhoneFragment"
-        android:label="fragment_verify_phone"
-        tools:layout="@layout/fragment_verify_phone" >
-        <action
-            android:id="@+id/action_verifyPhoneFragment_to_contactFragment"
-            app:destination="@id/contactFragment" />
     </fragment>
 
 </navigation>
