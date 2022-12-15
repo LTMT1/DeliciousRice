@@ -42,20 +42,21 @@ public class MainActivity2 extends AppCompatActivity {
 
     private static ActivityMain2Binding binding;
     private String email = "", password = "";
-    private String image,id_application, user_name, address, birthday, emaill, passs;
+    private String image, id_application, user_name, address, birthday, emaill, passs;
     public static String phone_number;
     private int id_customer;
     private long backPressTime;
     private Toast mToast;
     public static DaoCart daoCart;
     public static String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        daoCart=new DaoCart(getApplicationContext());
+        daoCart = new DaoCart(getApplicationContext());
         getToken();
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
@@ -85,37 +86,41 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     public void getdataCustomer(String emails) {
-        ApiProduct apiProduct = ApiService.getService();
-        Call<List<Customer>> callback = apiProduct.getcustomer(emails);
-        callback.enqueue(new Callback<List<Customer>>() {
-            @Override
-            public void onResponse(Call<List<Customer>> call, Response<List<Customer>> response) {
-                ArrayList<Customer> mangyeuthich = (ArrayList<Customer>) response.body();
-                Customer customer = mangyeuthich.get(0);
-                id_customer = customer.getId_customer();
-                id_application = customer.getId_application();
-                user_name = customer.getUser_name();
-                image = customer.getImage();
-                birthday = customer.getBirthday();
-                phone_number = customer.getPhone_number();
-                address = customer.getAddress();
-                emaill = customer.getEmail();
-                passs = customer.getPassword();
-                BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.account);
-                if(phone_number.equals("")){
-                    badgeDrawable.setVisible(true);
+        try {
+            ApiProduct apiProduct = ApiService.getService();
+            Call<List<Customer>> callback = apiProduct.getcustomer(emails);
+            callback.enqueue(new Callback<List<Customer>>() {
+                @Override
+                public void onResponse(Call<List<Customer>> call, Response<List<Customer>> response) {
+                    ArrayList<Customer> mangyeuthich = (ArrayList<Customer>) response.body();
+                    Customer customer = mangyeuthich.get(0);
+                    id_customer = customer.getId_customer();
+                    id_application = customer.getId_application();
+                    user_name = customer.getUser_name();
+                    image = customer.getImage();
+                    birthday = customer.getBirthday();
+                    phone_number = customer.getPhone_number();
+                    address = customer.getAddress();
+                    emaill = customer.getEmail();
+                    passs = customer.getPassword();
+                    BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.account);
+                    if (phone_number.equals("")) {
+                        badgeDrawable.setVisible(true);
 //                            badgeDrawable.setVerticalOffset(dpToPx(MainActivity2.this,3));
-                            badgeDrawable.setBadgeTextColor(getResources().getColor(R.color.colorTaskBar));
-                }else {
-                    badgeDrawable.setVisible(false);
+                        badgeDrawable.setBadgeTextColor(getResources().getColor(R.color.colorTaskBar));
+                    } else {
+                        badgeDrawable.setVisible(false);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<Customer>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<Customer>> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }catch (Exception e){
+
+        }
     }
 
     public String getId_application() {
@@ -181,14 +186,14 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     public static void setBugdeNumber() {
-        ShopFragment.Cartlist= (ArrayList<Cart>) daoCart.getall();
+        ShopFragment.Cartlist = (ArrayList<Cart>) daoCart.getall();
         int number = ShopFragment.Cartlist.size();
         BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.cart);
         badgeDrawable.setMaxCharacterCount(3);
         badgeDrawable.setNumber(number);
         if (number > 0) {
             badgeDrawable.setVisible(true);
-        }else {
+        } else {
             badgeDrawable.setVisible(false);
         }
     }
@@ -211,7 +216,8 @@ public class MainActivity2 extends AppCompatActivity {
         }
         backPressTime = System.currentTimeMillis();
     }
-    public void getToken(){
+
+    public void getToken() {
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
             @Override
             public void onComplete(@NonNull Task<InstanceIdResult> task) {

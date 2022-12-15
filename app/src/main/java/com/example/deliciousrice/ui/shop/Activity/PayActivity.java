@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliciousrice.Activity.BarColor;
-import com.example.deliciousrice.Activity.LoadingDialog;
+import com.example.deliciousrice.dialog.LoadingDialog1;
 import com.example.deliciousrice.Adapter.AdapterProductBill;
 import com.example.deliciousrice.Adapter.AdapterSelectAddress;
 import com.example.deliciousrice.Api.ApiProduct;
@@ -59,7 +59,7 @@ public class PayActivity extends AppCompatActivity {
     private EditText edtstatus;
     private ImageView imgBackThanhtoan;
     AdapterProductBill adapterProductBill;
-//    String id_bill;
+    //    String id_bill;
     public RadioButton radio6, radio7;
     String token = "", address;
     Spinner tvsetaddress;
@@ -71,7 +71,7 @@ public class PayActivity extends AppCompatActivity {
     private TextView tvTongmoney;
     private TextView textView65;
     int tongtiensp;
-    private LoadingDialog loadingDialog;
+    private LoadingDialog1 loadingDialog;
     String productList;
     ArrayList<Adderss> addersses;
 
@@ -90,7 +90,7 @@ public class PayActivity extends AppCompatActivity {
         getlistadress(id_customer);
         getIdBill();
         //zalo pay
-        loadingDialog = new LoadingDialog(this);
+        loadingDialog = new LoadingDialog1(this);
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -137,9 +137,9 @@ public class PayActivity extends AppCompatActivity {
 
     private void Pay() {
         btnpay.setOnClickListener(view -> {
-            if(addersses.size()==0||MainActivity2.phone_number.equals("")){
+            if (addersses.size() == 0 || MainActivity2.phone_number.equals("")) {
                 Toast.makeText(this, "Bạn cần phải có địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 loadingDialog.StartLoadingDialog();
                 if (radio6.isChecked()) {
                     insertPay();
@@ -220,39 +220,47 @@ public class PayActivity extends AppCompatActivity {
     }
 
     private void addBill(String bill, int idcus, String adreess, String date, String note, int money) {
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.addbill(bill, idcus, adreess, date, note, money);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-            }
+        try {
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> callback = apiProduct.addbill(bill, idcus, adreess, date, note, money);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 
-    private void addDetailBill(String idbill,int i) {
-        Cart cart = ShopFragment.Cartlist.get(i);
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.adddetailbill(idbill, cart.getName(), cart.getAmount(), cart.getPrice());
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-            }
+    private void addDetailBill(String idbill, int i) {
+        try {
+            Cart cart = ShopFragment.Cartlist.get(i);
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> callback = apiProduct.adddetailbill(idbill, cart.getName(), cart.getAmount(), cart.getPrice());
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        } catch (Exception e) {
+
+        }
     }
 
     private void PushNotification() {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.pushNotification(MainActivity2.token,"1");
+        Call<String> callback = apiProduct.pushNotification(MainActivity2.token, "1");
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -261,7 +269,7 @@ public class PayActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.e("that bai cc", "");
+
             }
         });
     }
@@ -320,22 +328,24 @@ public class PayActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         ZaloPaySDK.getInstance().onResult(intent);
     }
-    private void getIdBill(){
-            ApiProduct apiProduct = ApiService.getService();
-            Call<String> listCallProduct = apiProduct.getidBill();
-            listCallProduct.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    productList = response.body();
-                }
 
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
+    private void getIdBill() {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<String> listCallProduct = apiProduct.getidBill();
+        listCallProduct.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                productList = response.body();
+            }
 
-                }
-            });
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
-    private void insertPay(){
+
+    private void insertPay() {
 //        Random random = new Random();
 //        int number = random.nextInt(10000000);
 //        id_bill = "DCR" + id_customer + "-" + number;
@@ -350,7 +360,7 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void run() {
                 for (int i = 0; i < ShopFragment.Cartlist.size(); i++) {
-                    addDetailBill(productList,i);
+                    addDetailBill(productList, i);
                 }
             }
         }, 5000);

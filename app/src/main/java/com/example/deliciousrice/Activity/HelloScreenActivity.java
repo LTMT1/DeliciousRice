@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -59,7 +58,7 @@ public class HelloScreenActivity extends AppCompatActivity {
                     if (!email.isEmpty() || !password.isEmpty()) {
                         loginApi(email, password);
                     } else if (!email.isEmpty() || !id_customer.isEmpty()) {
-                        loginGGApi(email,id_customer);
+                        loginGGApi(email, id_customer);
                     } else {
                         startActivity(new Intent(getApplicationContext(), LoginFaGoActivity.class));
                     }

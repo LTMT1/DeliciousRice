@@ -46,7 +46,7 @@ public class AdapterSearchProduct extends RecyclerView.Adapter<AdapterSearchProd
         Glide.with(context).load(product.getImage()).centerCrop().into(holder.imgSeImgsp);
         holder.tvSeTiem.setText(product.getProcessing_time());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvSeGia.setText(decimalFormat.format(product.getPrice())+" đ");
+        holder.tvSeGia.setText(decimalFormat.format(product.getPrice()) + " đ");
 
         holder.layoutSeach.setOnClickListener(v -> {
             searchProductItemClink.itemSearchProduct(product);

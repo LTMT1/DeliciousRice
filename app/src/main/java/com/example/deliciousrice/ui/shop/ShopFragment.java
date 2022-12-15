@@ -1,25 +1,16 @@
 package com.example.deliciousrice.ui.shop;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,8 +27,6 @@ import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.databinding.FragmentShopBinding;
-import com.example.deliciousrice.ui.cart.CartFragment;
-import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
 import com.example.deliciousrice.ui.shop.Activity.ViewAllCboActivity;
 import com.example.deliciousrice.ui.shop.Activity.ViewAllHotActivity;

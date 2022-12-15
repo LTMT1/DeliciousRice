@@ -1,4 +1,4 @@
-package com.example.deliciousrice.Activity;
+package com.example.deliciousrice.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 
 import com.example.deliciousrice.R;
 
-public class LoadingDialog {
+public class LoadingDialog1 {
 
     private Activity activity;
     private AlertDialog dialog;
 
-    public LoadingDialog(Activity myActivity){
+    public LoadingDialog1(Activity myActivity){
         activity = myActivity;
     }
 

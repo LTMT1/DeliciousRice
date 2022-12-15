@@ -1,10 +1,5 @@
 package com.example.deliciousrice.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,16 +8,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
@@ -31,28 +22,20 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,7 +52,6 @@ public class LoginFaGoActivity extends AppCompatActivity {
     private Toast mToast;
 
     private CallbackManager callbackManager;
-
     private GoogleSignInClient mGoogleSignInClient;
     GoogleSignInOptions signInOptions;
 
@@ -83,7 +65,6 @@ public class LoginFaGoActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
         cvLoginGoogle = findViewById(R.id.cvLoginGoogle);
         loginButton = (LoginButton) findViewById(R.id.login_button);
-
         loginFacebook();
         loginGoogle();
 
@@ -141,15 +122,15 @@ public class LoginFaGoActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
             if (acct != null) {
-                personpicture=acct.getPhotoUrl();
+                personpicture = acct.getPhotoUrl();
                 personGivenName = acct.getDisplayName();
                 personEmail = acct.getEmail();
                 personId = acct.getId();
             }
-            if(personpicture==null){
+            if (personpicture == null) {
                 RegisterGoogle(personId, personGivenName, Uri.parse("http://chucdong.com/Deliciousrice/API/images/imagedefault.jpg"), personEmail);
-            }else{
-                RegisterGoogle(personId, personGivenName,personpicture, personEmail);
+            } else {
+                RegisterGoogle(personId, personGivenName, personpicture, personEmail);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,19 +138,19 @@ public class LoginFaGoActivity extends AppCompatActivity {
     }
 
 
-    private void RegisterGoogle(String idg, String nameg,Uri picture  , String Emailg) {
+    private void RegisterGoogle(String idg, String nameg, Uri picture, String Emailg) {
         final ProgressDialog progressDialog = new ProgressDialog(LoginFaGoActivity.this);
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
         progressDialog.show();
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.registergoogle(idg,nameg ,String.valueOf(picture),Emailg);
+        Call<String> callback = apiProduct.registergoogle(idg, nameg, String.valueOf(picture), Emailg);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 progressDialog.dismiss();
                 if (response.body().equalsIgnoreCase("Success")) {
-                    remember(personId,personEmail);
+                    remember(personId, personEmail);
                     startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
                 }
             }
@@ -255,28 +236,29 @@ public class LoginFaGoActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-         mGoogleSignInClient.signOut();
+        mGoogleSignInClient.signOut();
         LoginManager.getInstance().logOut();
         super.onStart();
     }
 
     private void InsertAccface(String idf, String picturef, String namef) {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.registerfacebook(idf, picturef,namef);
+        Call<String> callback = apiProduct.registerfacebook(idf, picturef, namef);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 if (response.body().equalsIgnoreCase("Success")) {
                     startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
                 }
-        }
+            }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
             }
         });
     }
-    private void remember(String id,String strname) {
+
+    private void remember(String id, String strname) {
         SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("id_customer", id);

@@ -27,7 +27,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edtRePassWordDangKy;
     private LoadingDialog loadingDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

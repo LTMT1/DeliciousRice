@@ -3,15 +3,12 @@ package com.example.deliciousrice.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -52,7 +49,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
         Cart cart = list.get(position);
         holder.tvname.setText(cart.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvprice.setText(decimalFormat.format(cart.getPrice())+ " đ");
+        holder.tvprice.setText(decimalFormat.format(cart.getPrice()) + " đ");
         Picasso.get().load(cart.getImage())
                 .into(holder.imgsp);
         holder.tvsoluong.setText(Integer.toString(cart.getAmount()));
@@ -77,7 +74,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
 //        });
         holder.setOnClickitem((view, pos, giatri) -> {
             int slht = ShopFragment.Cartlist.get(position).getAmount();
-            int giaht =ShopFragment.Cartlist.get(position).getPrice();
+            int giaht = ShopFragment.Cartlist.get(position).getPrice();
             if (giatri == 1) {
                 int slm = Integer.parseInt(holder.tvsoluong.getText().toString()) - 1;
                 int giamoia = (giaht * slm) / slht;
@@ -96,9 +93,9 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
                 list.get(position).setAmount(slm);
                 ShopFragment.Cartlist.get(position).setPrice(giamoia);
             }
-            holder.tvsoluong.setText( ShopFragment.Cartlist.get(position).getAmount() + "");
-            holder.tvprice.setText(decimalFormat.format( ShopFragment.Cartlist.get(position).getPrice()));
-            DetailActivity.UpdateProduct(cart.id_product,  ShopFragment.Cartlist.get(position).getPrice(), ShopFragment.Cartlist.get(position).getAmount());
+            holder.tvsoluong.setText(ShopFragment.Cartlist.get(position).getAmount() + "");
+            holder.tvprice.setText(decimalFormat.format(ShopFragment.Cartlist.get(position).getPrice()));
+            DetailActivity.UpdateProduct(cart.id_product, ShopFragment.Cartlist.get(position).getPrice(), ShopFragment.Cartlist.get(position).getAmount());
             cartFragment.UpdateTongTien();
         });
         holder.frameLayout.setOnClickListener(view -> {
@@ -150,7 +147,8 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
             }
         }
     }
-    private void DeleteItemCart( int id_product){
+
+    private void DeleteItemCart(int id_product) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Xác nhận xóa sản phẩm");
         builder.setMessage("Bạn có muốn xóa sản phẩm này?");

@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +15,6 @@ import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductItemClick;
 import com.example.deliciousrice.ui.shop.Activity.ViewAllHotActivity;
-import com.example.deliciousrice.ui.shop.Activity.ViewAllNewActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

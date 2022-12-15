@@ -1,7 +1,5 @@
 package com.example.deliciousrice.Adapter;
 
-
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +34,7 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
     @NonNull
     @Override
     public AdapterProductHot.ProductHotViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hot_products,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hot_products, parent, false);
         return new ProductHotViewHolder(view);
     }
 
@@ -46,7 +44,7 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
         Glide.with(context).load(productHot.getImage()).centerCrop().into(holder.imgProductHot);
         holder.tvProductNameHot.setText(productHot.getProduct_name());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvPriceProductHot.setText(decimalFormat.format(productHot.getPrice())+" đ");
+        holder.tvPriceProductHot.setText(decimalFormat.format(productHot.getPrice()) + " đ");
 
         holder.tvTimehot.setText(productHot.getProcessing_time());
         holder.cstrItemProductHot.setOnClickListener(v -> {
@@ -62,8 +60,9 @@ public class AdapterProductHot extends RecyclerView.Adapter<AdapterProductHot.Pr
 
     public class ProductHotViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProductHot;
-        TextView tvProductNameHot, tvPriceProductHot,tvTimehot;
+        TextView tvProductNameHot, tvPriceProductHot, tvTimehot;
         private ConstraintLayout cstrItemProductHot;
+
         public ProductHotViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTimehot = itemView.findViewById(R.id.tv_timehot);

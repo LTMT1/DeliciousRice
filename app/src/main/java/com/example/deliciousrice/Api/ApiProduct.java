@@ -72,11 +72,11 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("updateNameProfile.php")
-    Call<String> updatename(@Field("customer") int idcustomer, @Field("user_name") String user_name,@Field("birthday") String birthday,@Field("phone_number") String phone_number);
+    Call<String> updatename(@Field("customer") int idcustomer, @Field("user_name") String user_name, @Field("birthday") String birthday, @Field("phone_number") String phone_number);
 
     @FormUrlEncoded
     @POST("CancleBill.php")
-    Call<String> canclebill(@Field("id_bill") String id_bill,@Field("status") String status);
+    Call<String> canclebill(@Field("id_bill") String id_bill, @Field("status") String status);
 
     /*Địa chỉ*/
     @FormUrlEncoded
@@ -134,7 +134,7 @@ public interface ApiProduct {
 
     @FormUrlEncoded
     @POST("getNotification.php")
-    Call<String> pushNotification(@Field("Token") String token,@Field("number")String number) ;
+    Call<String> pushNotification(@Field("Token") String token, @Field("number") String number);
 
     @GET("getIdBill.php")
     Call<String> getidBill();

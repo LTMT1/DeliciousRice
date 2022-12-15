@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductItemClick;
-import com.example.deliciousrice.ui.shop.Activity.ViewAllCboActivity;
 import com.example.deliciousrice.ui.shop.Activity.ViewAllNewActivity;
 
 import java.text.DecimalFormat;
@@ -47,7 +45,7 @@ public class AdapterViewAllNew extends RecyclerView.Adapter<AdapterViewAllNew.Pr
         holder.tvVallTensp.setText(product.getProduct_name());
         holder.tvVallTime.setText(product.getProcessing_time());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvVallGia.setText(decimalFormat.format(product.getPrice())+" đ");
+        holder.tvVallGia.setText(decimalFormat.format(product.getPrice()) + " đ");
 
         holder.layoutViewAll.setOnClickListener(v -> {
             productItemClick.itemProductClick(product);

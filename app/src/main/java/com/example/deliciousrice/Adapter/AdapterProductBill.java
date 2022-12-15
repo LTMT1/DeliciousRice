@@ -4,21 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.deliciousrice.Model.Bill;
-import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.Model.ProductBill;
 import com.example.deliciousrice.R;
-import com.example.deliciousrice.callback.ProductItemClick;
-import com.example.deliciousrice.ui.shop.ShopFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

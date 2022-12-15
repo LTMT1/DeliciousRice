@@ -16,7 +16,6 @@ import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
-import com.example.deliciousrice.callback.ProductItemClick;
 import com.example.deliciousrice.callback.ProductNewItemClick;
 import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.ShopFragment;

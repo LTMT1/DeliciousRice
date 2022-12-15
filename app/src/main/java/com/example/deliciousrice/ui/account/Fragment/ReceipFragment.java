@@ -4,26 +4,23 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.deliciousrice.Adapter.AdapterHistoryBill;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Bill;
-import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.account.AccountFragment;
 import com.example.deliciousrice.ui.shop.Activity.InvoicedetailsActivity;
@@ -69,9 +66,9 @@ public class ReceipFragment extends Fragment {
 
     private void getreceipt() {
         Bundle bundle = getArguments();
-        String phone=bundle.getString("phone_number","");
+        String phone = bundle.getString("phone_number", "");
         int idcustm = bundle.getInt("id_cus", 0);
-        String name_cus=bundle.getString("name_cus","");
+        String name_cus = bundle.getString("name_cus", "");
         ApiProduct apiProduct = ApiService.getService();
         Call<List<Bill>> callback = apiProduct.getListbill(idcustm);
         callback.enqueue(new Callback<List<Bill>>() {
@@ -81,8 +78,8 @@ public class ReceipFragment extends Fragment {
                 adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext(), bill -> {
                     Intent intent = new Intent(getApplicationContext(), InvoicedetailsActivity.class);
                     intent.putExtra("getData", bill);
-                    intent.putExtra("name",name_cus);
-                    intent.putExtra("phone",phone);
+                    intent.putExtra("name", name_cus);
+                    intent.putExtra("phone", phone);
                     startActivity(intent);
                 });
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

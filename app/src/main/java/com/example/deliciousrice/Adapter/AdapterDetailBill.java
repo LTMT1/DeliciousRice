@@ -10,11 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliciousrice.Model.Detailbill;
-import com.example.deliciousrice.Model.ProductBill;
 import com.example.deliciousrice.R;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterDetailBill extends RecyclerView.Adapter<AdapterDetailBill.DetailBillViewHolder> {

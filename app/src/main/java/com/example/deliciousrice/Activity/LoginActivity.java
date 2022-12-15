@@ -27,8 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtEmailDangNhap;
     private EditText edtPassWordDangNhap;
     private LoadingDialog loadingDialog;
-    private long backPressTime;
-    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView tvLogin = findViewById(R.id.tvDangNhap);
         loadingDialog = new LoadingDialog(this);
         tvLogin.setOnClickListener(v -> login());
-//        getPreferences();
     }
 
     @SuppressLint("SetTextI18n")
@@ -108,12 +105,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//    public void getPreferences() {
-//        SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
-//        edtEmailDangNhap.setText(preferences.getString("gmail", ""));
-//        edtPassWordDangNhap.setText(preferences.getString("matkhau", ""));
-//    }
-
     private void remember(String strname, String strpass) {
         SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -139,11 +130,12 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, LoginFaGoActivity.class);
         startActivity(intent);
     }
+
     @Override
     public void onBackPressed() {
-            Intent intent = new Intent(getApplicationContext(), LoginFaGoActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
+        Intent intent = new Intent(getApplicationContext(), LoginFaGoActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }
