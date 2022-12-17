@@ -104,6 +104,7 @@ public class AddressFragment extends Fragment {
 
 
                 adapterAddress = new AdapterAddress(addersses, AddressFragment.this, addressNew -> {
+
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     EditAddressFragment fragment = new EditAddressFragment();

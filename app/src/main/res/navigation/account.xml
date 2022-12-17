@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_receipFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_receipFragment_to_invoicedetailsFragment"
+            app:destination="@id/invoicedetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/policFragment"
@@ -119,6 +122,15 @@
         <action
             android:id="@+id/action_editAddressFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/invoicedetailsFragment"
+        android:name="com.example.deliciousrice.ui.shop.Activity.InvoicedetailsFragment"
+        android:label="fragment_invoicedetails"
+        tools:layout="@layout/fragment_invoicedetails" >
+        <action
+            android:id="@+id/action_invoicedetailsFragment_to_receipFragment"
+            app:destination="@id/receipFragment" />
     </fragment>
 
 </navigation>

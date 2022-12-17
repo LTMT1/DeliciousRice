@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductItemClick;
-import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
+import com.example.deliciousrice.ui.shop.Activity.DetailFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -22,10 +22,10 @@ import java.util.ArrayList;
 public class AdapterProductDetail extends RecyclerView.Adapter<AdapterProductDetail.ProductViewAllHolder> {
 
     private ArrayList<Product> data;
-    private DetailActivity context;
+    private DetailFragment context;
     private ProductItemClick productItemClick;
 
-    public AdapterProductDetail(ArrayList<Product> data, DetailActivity context, ProductItemClick productItemClick) {
+    public AdapterProductDetail(ArrayList<Product> data, DetailFragment context, ProductItemClick productItemClick) {
         this.data = data;
         this.context = context;
         this.productItemClick = productItemClick;

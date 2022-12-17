@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductItemClick;
-import com.example.deliciousrice.ui.shop.Activity.ViewAllHotActivity;
+import com.example.deliciousrice.ui.shop.Activity.ViewAllHotFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -22,10 +22,10 @@ import java.util.ArrayList;
 public class AdapterViewAllHot extends RecyclerView.Adapter<AdapterViewAllHot.ProductViewAllHolder> {
 
     private ArrayList<Product> data;
-    private ViewAllHotActivity context;
+    private ViewAllHotFragment context;
     private ProductItemClick productItemClick;
 
-    public AdapterViewAllHot(ArrayList<Product> data, ViewAllHotActivity context, ProductItemClick productItemClick) {
+    public AdapterViewAllHot(ArrayList<Product> data, ViewAllHotFragment context, ProductItemClick productItemClick) {
         this.data = data;
         this.context = context;
         this.productItemClick = productItemClick;

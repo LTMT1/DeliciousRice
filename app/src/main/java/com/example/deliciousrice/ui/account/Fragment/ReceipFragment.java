@@ -24,6 +24,7 @@ import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.account.AccountFragment;
 import com.example.deliciousrice.ui.shop.Activity.InvoicedetailsActivity;
+import com.example.deliciousrice.ui.shop.Activity.InvoicedetailsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,8 @@ public class ReceipFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
         imgBackReceipt = view.findViewById(R.id.img_back_Receipt);
         imgBackReceipt.setOnClickListener(v -> {
             FragmentManager fm = getFragmentManager();
@@ -69,18 +72,28 @@ public class ReceipFragment extends Fragment {
         String phone = bundle.getString("phone_number", "");
         int idcustm = bundle.getInt("id_cus", 0);
         String name_cus = bundle.getString("name_cus", "");
+
         ApiProduct apiProduct = ApiService.getService();
         Call<List<Bill>> callback = apiProduct.getListbill(idcustm);
         callback.enqueue(new Callback<List<Bill>>() {
             @Override
             public void onResponse(Call<List<Bill>> call, Response<List<Bill>> response) {
+                rclview.setHasFixedSize(true);
                 ArrayList<Bill> bills = (ArrayList<Bill>) response.body();
                 adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext(), bill -> {
-                    Intent intent = new Intent(getApplicationContext(), InvoicedetailsActivity.class);
-                    intent.putExtra("getData", bill);
-                    intent.putExtra("name", name_cus);
-                    intent.putExtra("phone", phone);
-                    startActivity(intent);
+
+
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    InvoicedetailsFragment fragment = new InvoicedetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("getData", bill);
+                    bundle.putString("name", name_cus);
+                    bundle.putString("phone", phone);
+                    fragment.setArguments(bundle);
+
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
                 });
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

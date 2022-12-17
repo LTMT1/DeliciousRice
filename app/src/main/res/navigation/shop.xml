@@ -9,6 +9,43 @@
         android:id="@+id/shopFragment"
         android:name="com.example.deliciousrice.ui.shop.ShopFragment"
         android:label="ShopFragment"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_viewAllHotFragment"
+            app:destination="@id/viewAllHotFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_viewAllCboFragment"
+            app:destination="@id/viewAllCboFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_viewAllNewFragment"
+            app:destination="@id/viewAllNewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAllHotFragment"
+        android:name="com.example.deliciousrice.ui.shop.Activity.ViewAllHotFragment"
+        android:label="fragment_view_all_hot"
+        tools:layout="@layout/fragment_view_all_hot" >
+        <action
+            android:id="@+id/action_viewAllHotFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAllCboFragment"
+        android:name="com.example.deliciousrice.ui.shop.Activity.ViewAllCboFragment"
+        android:label="fragment_view_all_cbo"
+        tools:layout="@layout/fragment_view_all_cbo" >
+        <action
+            android:id="@+id/action_viewAllCboFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAllNewFragment"
+        android:name="com.example.deliciousrice.ui.shop.Activity.ViewAllNewFragment"
+        android:label="fragment_view_all_new"
+        tools:layout="@layout/fragment_view_all_new" >
+        <action
+            android:id="@+id/action_viewAllNewFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+    </fragment>
 
 </navigation>

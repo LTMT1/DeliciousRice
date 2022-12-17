@@ -198,29 +198,29 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
 
-        android:layout_marginHorizontal="25dp"
-        android:background="@drawable/bg_borders_edit"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/bg_borders_edit"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32">
+        app:layout_constraintTop_toBottomOf="@+id/textView32"
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/editTextdate"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:background="@null"
             android:enabled="false"
             android:fontFamily="@font/be_vietnam_medium"
             android:hint="DD/MM/YY"
             android:lines="1"
             android:maxLines="1"
-            android:background="@null"
             android:paddingLeft="25dp"
             android:paddingRight="15dp"
             android:textColor="@color/black"
@@ -246,40 +246,38 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/bg_btn"
         android:fontFamily="@font/be_vietnam_bold"
         android:gravity="center"
         android:text="Sửa Thông Tin"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline15" />
     <TextView
         android:id="@+id/btnsave"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/bg_btn"
         android:fontFamily="@font/be_vietnam_bold"
         android:gravity="center"
         android:text="Lưu Thông Tin"
-        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline15" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.85" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -114,6 +114,9 @@ public class PayActivity extends AppCompatActivity {
         textView65 = findViewById(R.id.textView65);
         imgBackThanhtoan = findViewById(R.id.img_back_thanhtoan);
         imgBackThanhtoan.setOnClickListener(view -> {
+            Intent intent = new Intent(this, InvoicedetailsFragment.class);
+            intent.putExtra("id_customer", id_customer);
+            startActivity(intent);
 
         });
     }

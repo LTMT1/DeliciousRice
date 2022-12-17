@@ -1,20 +1,29 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-import com.example.deliciousrice.Activity.BarColor;
 import com.example.deliciousrice.Adapter.AdapterProductDetail;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
@@ -32,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailFragment extends Fragment {
     private RoundedImageView roundedImageView;
     private TextView tvnamesp;
     private TextView tvtimesp;
@@ -46,40 +55,61 @@ public class DetailActivity extends AppCompatActivity {
     private TextView btnaddcart;
     private RecyclerView rcyDetailProduct;
     AdapterProductDetail adapterProductDetail;
+    private ConstraintLayout clBankShop;
+
+
 
     Product product;
     int getId_customer,id_product;
     public static int Click = 0;
     ArrayList<Product> productHots;
-//    public static DaoCart daoCart;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        BarColor.setStatusBarColor(this);
-//        daoCart=new DaoCart(getApplicationContext());
-        Intent intent = getIntent();
-        getId_customer=intent.getIntExtra("idcustomer",0);
-        product = (Product) intent.getSerializableExtra("getdataproduct");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_detail, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        Bundle bundle=getArguments();
+        getId_customer=bundle.getInt("idcustomer",0);
+        product = (Product) bundle.getSerializable("getdataproduct");
+
+
+
         productHots = new ArrayList<>();
-        Anhxa();
+        Anhxa(view);
         setviewdata();
         ListProductDetail();
     }
-    private void Anhxa(){
-        roundedImageView = findViewById(R.id.roundedImageView);
-        rcyDetailProduct = findViewById(R.id.rcyDetailProduct);
-        tvnamesp = findViewById(R.id.tvnamesp);
-        tvtimesp = findViewById(R.id.tvtimesp);
-        tvpricesp= findViewById(R.id.tvpricesp);
-        tvnumbersp = findViewById(R.id.tvnumbersp);
-        imgtymsp = findViewById(R.id.imgtymsp);
-        imgTru = findViewById(R.id.img_tru);
-        imgCong = findViewById(R.id.img_cong);
-        tvcuon = findViewById(R.id.tvcuon);
-        tvdetaisp = findViewById(R.id.tvdetaisp);
-        btnaddcart = findViewById(R.id.btnaddcart);
+    private void Anhxa(View view){
+        roundedImageView = view.findViewById(R.id.roundedImageView);
+        rcyDetailProduct = view.findViewById(R.id.rcyDetailProduct);
+        tvnamesp = view.findViewById(R.id.tvnamesp);
+        tvtimesp = view. findViewById(R.id.tvtimesp);
+        tvpricesp= view.findViewById(R.id.tvpricesp);
+        tvnumbersp = view.findViewById(R.id.tvnumbersp);
+        imgtymsp = view.findViewById(R.id.imgtymsp);
+        imgTru = view.findViewById(R.id.img_tru);
+        imgCong = view.findViewById(R.id.img_cong);
+        tvcuon = view.findViewById(R.id.tvcuon);
+        tvdetaisp = view.findViewById(R.id.tvdetaisp);
+        btnaddcart = view.findViewById(R.id.btnaddcart);
         id_product=product.getId_product();
+        clBankShop = view.findViewById(R.id.cl_bank_shop);
+        clBankShop.setOnClickListener(view1 -> {
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ShopFragment fragment = new ShopFragment();
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
+        });
     }
     private void setviewdata(){
         MainActivity2.setBugdeNumber();
@@ -88,7 +118,7 @@ public class DetailActivity extends AppCompatActivity {
         tvtimesp.setText(product.getProcessing_time());
 
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        tvpricesp.setText(decimalFormat.format(product.getPrice())+"VND");
+        tvpricesp.setText(decimalFormat.format(product.getPrice())+" đ");
 
 
         tvdetaisp.setText(product.getDescription());
@@ -140,7 +170,7 @@ public class DetailActivity extends AppCompatActivity {
                 int Tien2 = sl2 * (product.getPrice());
                 MainActivity2.daoCart.InsertData(id_product, product.getProduct_name(), Tien2, product.getImage(), sl2);
             }
-            Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Thêm thành công.", Toast.LENGTH_SHORT).show();
             updateList();
         });
     }
@@ -151,11 +181,11 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String responseBody = response.body();
-                    if (responseBody.equals("success")) {
-                        imgtymsp.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    } else {
-                        imgtymsp.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                    }
+                if (responseBody.equals("success")) {
+                    imgtymsp.setImageResource(R.drawable.ic_baseline_favorite_24);
+                } else {
+                    imgtymsp.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                }
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
@@ -216,14 +246,20 @@ public class DetailActivity extends AppCompatActivity {
         listCallProduct.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-             //   prgLoadingSearch.setVisibility(View.GONE);
+                //   prgLoadingSearch.setVisibility(View.GONE);
                 productHots = response.body();
                 rcyDetailProduct.setHasFixedSize(true);
                 rcyDetailProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
-                adapterProductDetail = new AdapterProductDetail(productHots, DetailActivity.this, productHot -> {
-                    Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                    intent.putExtra("getdataproduct", productHot);
-                    startActivity(intent);
+                adapterProductDetail = new AdapterProductDetail(productHots, DetailFragment.this, productHot -> {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    DetailFragment fragment = new DetailFragment();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putSerializable("getdataproduct", productHot);
+                    fragment.setArguments(bundle2);
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
                 });
                 rcyDetailProduct.setAdapter(adapterProductDetail);
             }

@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductItemClick;
-import com.example.deliciousrice.ui.shop.Activity.ViewAllCboActivity;
+import com.example.deliciousrice.ui.shop.Activity.ViewAllCboFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ import java.util.ArrayList;
 public class AdapterViewAllCombo extends RecyclerView.Adapter<AdapterViewAllCombo.ProductViewAllHolder> {
 
     private ArrayList<Product> data;
-    private ViewAllCboActivity context;
+    private ViewAllCboFragment context;
     private ProductItemClick productItemClick;
 
-    public AdapterViewAllCombo(ArrayList<Product> data, ViewAllCboActivity context, ProductItemClick productItemClick) {
+    public AdapterViewAllCombo(ArrayList<Product> data, ViewAllCboFragment context, ProductItemClick productItemClick) {
         this.data = data;
         this.context = context;
         this.productItemClick = productItemClick;

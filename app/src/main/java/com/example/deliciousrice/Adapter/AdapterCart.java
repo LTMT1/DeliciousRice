@@ -18,7 +18,7 @@ import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.OnClickitem;
 import com.example.deliciousrice.ui.cart.CartFragment;
-import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
+import com.example.deliciousrice.ui.shop.Activity.DetailFragment;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 import com.squareup.picasso.Picasso;
 
@@ -95,7 +95,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
             }
             holder.tvsoluong.setText(ShopFragment.Cartlist.get(position).getAmount() + "");
             holder.tvprice.setText(decimalFormat.format(ShopFragment.Cartlist.get(position).getPrice()));
-            DetailActivity.UpdateProduct(cart.id_product, ShopFragment.Cartlist.get(position).getPrice(), ShopFragment.Cartlist.get(position).getAmount());
+            DetailFragment.UpdateProduct(cart.id_product, ShopFragment.Cartlist.get(position).getPrice(), ShopFragment.Cartlist.get(position).getAmount());
             cartFragment.UpdateTongTien();
         });
         holder.frameLayout.setOnClickListener(view -> {

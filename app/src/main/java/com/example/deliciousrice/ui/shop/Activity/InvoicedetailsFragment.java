@@ -1,21 +1,28 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.deliciousrice.Activity.BarColor;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.deliciousrice.Adapter.AdapterDetailBill;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
@@ -24,6 +31,7 @@ import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Detailbill;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.ui.account.Fragment.ReceipFragment;
 import com.example.deliciousrice.ui.shop.ShopFragment;
 
 import java.text.DecimalFormat;
@@ -35,7 +43,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InvoicedetailsActivity extends AppCompatActivity {
+
+public class InvoicedetailsFragment extends Fragment {
 
     private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat,tvTongTien,tvSoMon,tvDatLai,tvCountDownTime;
     private RecyclerView rcyViewDetailReceipt;
@@ -51,16 +60,31 @@ public class InvoicedetailsActivity extends AppCompatActivity {
     ArrayList<Detailbill> detailbillArrayList;
 
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_invoicedetails);
-        BarColor.setStatusBarColor(this);
-        Intent intent = getIntent();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_invoicedetails, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+       /* Intent intent = getIntent();
         SDT=intent.getStringExtra("phone");
         Name = intent.getStringExtra("name");
-        bill = (Bill) intent.getSerializableExtra("getData");
-        Anhxa();
+        bill = (Bill) intent.getSerializableExtra("getData");*/
+
+        Bundle bundle=getArguments();
+        SDT=bundle.getString("phone");
+        Name = bundle.getString("name");
+        bill = (Bill) bundle.getSerializable("getData");
+
+
+        Anhxa(view);
         setData();
         getDataDetailBill();
         if(bill.getStatus().trim().equals("Đang chờ")){
@@ -70,27 +94,36 @@ public class InvoicedetailsActivity extends AppCompatActivity {
             tvCountDownTime.setVisibility(View.GONE);
         }
     }
+    private void Anhxa(View view) {
 
-    private void Anhxa() {
+        tvCountDownTime = view.findViewById(R.id.tvCountDownTime);
+        tvMaBill = view.findViewById(R.id.tvMaDonHang);
+        tvNameKH = view.findViewById(R.id.tvNameKH);
+        tvPhoneKH = view.findViewById(R.id.tvPhoneKH);
+        tvNameNV = view.findViewById(R.id.tvNameNV);
+        tvDiaChi = view.findViewById(R.id.tvDiaChi);
+        tvDateDat = view.findViewById(R.id.tvDateDat);
+        rcyViewDetailReceipt = view.findViewById(R.id.rcyViewChiTietDH);
+        tvTongTien = view.findViewById(R.id.tvTongTien);
+        tvSoMon = view.findViewById(R.id.tvSoMon);
+        tvDatLai = view.findViewById(R.id.tvDatlai);
+        tvshipkm = view.findViewById(R.id.tvshipkm);
+        tvkhuyenmai = view.findViewById(R.id.tvkhuyenmai);
+        tvTongtienBill=view.findViewById(R.id.tvTongtien);
+        textVieưgone=view.findViewById(R.id.textView63);
+        imgBackInvoicedetails = view.findViewById(R.id.img_back_Invoicedetails);
+        imgBackInvoicedetails.setOnClickListener(view1 -> {
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ReceipFragment fragment = new ReceipFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("getData", bill);
+            bundle.putString("name", Name);
+            bundle.putString("phone", SDT);
+            fragment.setArguments(bundle);
 
-        tvCountDownTime = findViewById(R.id.tvCountDownTime);
-        tvMaBill = findViewById(R.id.tvMaDonHang);
-        tvNameKH = findViewById(R.id.tvNameKH);
-        tvPhoneKH = findViewById(R.id.tvPhoneKH);
-        tvNameNV = findViewById(R.id.tvNameNV);
-        tvDiaChi = findViewById(R.id.tvDiaChi);
-        tvDateDat = findViewById(R.id.tvDateDat);
-        rcyViewDetailReceipt = findViewById(R.id.rcyViewChiTietDH);
-        tvTongTien = findViewById(R.id.tvTongTien);
-        tvSoMon = findViewById(R.id.tvSoMon);
-        tvDatLai = findViewById(R.id.tvDatlai);
-        tvshipkm = findViewById(R.id.tvshipkm);
-        tvkhuyenmai = findViewById(R.id.tvkhuyenmai);
-        tvTongtienBill=findViewById(R.id.tvTongtien);
-        textVieưgone=findViewById(R.id.textView63);
-        imgBackInvoicedetails = findViewById(R.id.img_back_Invoicedetails);
-        imgBackInvoicedetails.setOnClickListener(view -> {
-
+            ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+            ft.commit();
         });
 
     }
@@ -102,7 +135,6 @@ public class InvoicedetailsActivity extends AppCompatActivity {
         tvDateDat.setText(sdf1.format(bill.getDate()));
         tvPhoneKH.setText(SDT);
     }
-
     private void getDataDetailBill(){
         ApiProduct apiProduct = ApiService.getService();
         Call<List<Detailbill>> listCallProductBill = apiProduct.getProductBill(bill.getId_customer(), bill.getId_bill());
@@ -158,7 +190,7 @@ public class InvoicedetailsActivity extends AppCompatActivity {
                 {
                     MainActivity2.daoCart.InsertData( list.get(j).getId_product(), list.get(j).getProduct_name(),  list.get(j).getTotal_money(), list.get(j).getImage(),list.get(j).getAmount());
                 }
-                Toast.makeText(this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Thêm thành công.", Toast.LENGTH_SHORT).show();
                 updateList();
             }
             Intent intent = new Intent(getApplicationContext(), PayActivity.class);
@@ -190,7 +222,7 @@ public class InvoicedetailsActivity extends AppCompatActivity {
     }
     private void cancleBill(String id_bill, String cancle){
         tvCountDownTime.setOnClickListener(view -> {
-            final ProgressDialog progressDialog = new ProgressDialog(InvoicedetailsActivity.this);
+            final ProgressDialog progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage("Please Wait..");
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -198,17 +230,28 @@ public class InvoicedetailsActivity extends AppCompatActivity {
             Call<String> callback = apiProduct.canclebill(id_bill, cancle);
             callback.enqueue(new Callback<String>() {
                 @Override
-                public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-                    Toast.makeText(InvoicedetailsActivity.this, "Hủy đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Toast.makeText(getApplicationContext(), "Hủy đơn hàng thành công", Toast.LENGTH_SHORT).show();
                     PushNotification();
-                    finish();
-                    finish();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ReceipFragment fragment = new ReceipFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("getData", bill);
+                    bundle.putString("name", Name);
+                    bundle.putString("phone", SDT);
+                    fragment.setArguments(bundle);
+
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
                     progressDialog.dismiss();
                 }
 
+
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(InvoicedetailsActivity.this, "Hủy đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Hủy đơn hàng thất bại", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             });

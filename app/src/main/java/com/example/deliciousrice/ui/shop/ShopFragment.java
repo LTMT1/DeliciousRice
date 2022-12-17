@@ -1,6 +1,5 @@
 package com.example.deliciousrice.ui.shop;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,10 +29,7 @@ import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.databinding.FragmentShopBinding;
-import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
-import com.example.deliciousrice.ui.shop.Activity.ViewAllCboActivity;
-import com.example.deliciousrice.ui.shop.Activity.ViewAllHotActivity;
-import com.example.deliciousrice.ui.shop.Activity.ViewAllNewActivity;
+import com.example.deliciousrice.ui.shop.Activity.DetailFragment;
 import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
@@ -70,18 +69,15 @@ public class ShopFragment extends Fragment {
 
 
         tvViewAllCbo.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getContext(), ViewAllCboActivity.class);
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_shopFragment_to_viewAllCboFragment);
         });
 
         tvViewAllNew.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getContext(), ViewAllNewActivity.class);
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_shopFragment_to_viewAllNewFragment);
         });
 
         tvViewAllHot.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getContext(), ViewAllHotActivity.class);
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_shopFragment_to_viewAllHotFragment);
         });
 
         prb1.setIndeterminateDrawable(new Wave());
@@ -155,10 +151,17 @@ public class ShopFragment extends Fragment {
                 //   GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
                 adapterProduct = new AdapterProduct(productList, ShopFragment.this, product -> {
-                    Intent intent = new Intent(getContext(), DetailActivity.class);
-                    intent.putExtra("idcustomer", main.getId_customer());
-                    intent.putExtra("getdataproduct", product);
-                    startActivity(intent);
+
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    DetailFragment fragment = new DetailFragment();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putInt("idcustomer",  main.getId_customer());
+                    bundle2.putSerializable("getdataproduct", product);
+                    fragment.setArguments(bundle2);
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
                 });
                 recyclerView.setAdapter(adapterProduct);
             }
@@ -183,10 +186,20 @@ public class ShopFragment extends Fragment {
                 recyclerViewNew.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
                 adapterProductNew = new AdapterProductNew(productNews, ShopFragment.this, productNew -> {
-                    Intent intent = new Intent(getContext(), DetailActivity.class);
-                    intent.putExtra("idcustomer", main.getId_customer());
-                    intent.putExtra("getdataproduct", productNew);
-                    startActivity(intent);
+
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    DetailFragment fragment = new DetailFragment();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putInt("idcustomer",  main.getId_customer());
+                    bundle2.putSerializable("getdataproduct", productNew);
+                    fragment.setArguments(bundle2);
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
+
+
+
                 });
                 recyclerViewNew.setAdapter(adapterProductNew);
 
@@ -212,10 +225,17 @@ public class ShopFragment extends Fragment {
                 recyclerViewHot.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
 
                 adapterProductHot = new AdapterProductHot(productHots, ShopFragment.this, productHot -> {
-                    Intent intent = new Intent(getContext(), DetailActivity.class);
-                    intent.putExtra("idcustomer", main.getId_customer());
-                    intent.putExtra("getdataproduct", productHot);
-                    startActivity(intent);
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    DetailFragment fragment = new DetailFragment();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putInt("idcustomer",  main.getId_customer());
+                    bundle2.putSerializable("getdataproduct", productHot);
+                    fragment.setArguments(bundle2);
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
+
                 });
                 recyclerViewHot.setAdapter(adapterProductHot);
             }

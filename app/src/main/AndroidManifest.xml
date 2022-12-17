@@ -30,19 +30,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".ui.shop.Activity.ViewAllHotActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.shop.Activity.ViewAllNewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.shop.Activity.ViewAllCboActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
@@ -80,9 +67,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".ui.shop.Activity.DetailActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.ConfirmOTPActivity"
             android:exported="false" /> <!-- <activity -->

@@ -18,7 +18,7 @@ import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.callback.ProductFavoriteItemClick;
-import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
+import com.example.deliciousrice.ui.shop.Activity.DetailFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -59,16 +59,16 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.Favori
             holder.icontym.setImageResource(R.drawable.ic_baseline_favorite_24);
         }
         holder.icontym.setOnClickListener(view -> {
-            if (DetailActivity.Click != 0) {
+            if (DetailFragment.Click != 0) {
                 Animation animation = AnimationUtils.loadAnimation(context, R.anim.anim_timclick);
                 holder.icontym.setImageResource(R.drawable.ic_baseline_favorite_24);
                 view.startAnimation(animation);
                 insertFavorite(favorite.getId_customer(), favorite.getId_product());
-                DetailActivity.Click++;
+                DetailFragment.Click++;
             } else {
                 holder.icontym.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                 deleteFavorite(favorite.getId_customer(), favorite.getId_product());
-                DetailActivity.Click--;
+                DetailFragment.Click--;
             }
         });
         holder.itemView.setOnClickListener(v -> {

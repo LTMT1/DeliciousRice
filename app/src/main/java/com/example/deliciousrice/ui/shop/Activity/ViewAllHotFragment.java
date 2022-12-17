@@ -1,18 +1,26 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.deliciousrice.Activity.BarColor;
-import com.example.deliciousrice.Adapter.AdapterProductHot;
-import com.example.deliciousrice.Adapter.AdapterViewAllCombo;
 import com.example.deliciousrice.Adapter.AdapterViewAllHot;
 import com.example.deliciousrice.Api.ApiProduct;
 import com.example.deliciousrice.Api.ApiService;
@@ -27,28 +35,33 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewAllHotActivity extends AppCompatActivity {
+
+public class ViewAllHotFragment extends Fragment {
 
     RecyclerView recyclerViewAllHot;
     AdapterViewAllHot adapterViewAllHot;
     private ImageView imgBackViewAllCbo;
     private ProgressBar prgLoadingSearch;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_all_hot);
 
-        BarColor.setStatusBarColor(this);
-        prgLoadingSearch =findViewById(R.id.prgLoadingSearch);
-        recyclerViewAllHot = findViewById(R.id.rcyViewAllHot);
-        imgBackViewAllCbo = findViewById(R.id.img_back_ViewAllCbo);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.fragment_view_all_hot, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        prgLoadingSearch =view.findViewById(R.id.prgLoadingSearch);
+        recyclerViewAllHot = view.findViewById(R.id.rcyViewAllHot);
+        imgBackViewAllCbo = view.findViewById(R.id.img_back_ViewAllCbo);
         prgLoadingSearch.setIndeterminateDrawable(new Circle());
 
-        imgBackViewAllCbo.setOnClickListener(view -> {
-            overridePendingTransition(R.anim.anim_intent_in, R.anim.anim_intent_out);
-            Intent intent=new Intent(this, ShopFragment.class);
-            startActivity(intent);
+        imgBackViewAllCbo.setOnClickListener(view1 -> {
+            Navigation.findNavController(view).navigate(R.id.action_viewAllHotFragment_to_shopFragment);
         });
         getAllProductHot();
     }
@@ -64,10 +77,17 @@ public class ViewAllHotActivity extends AppCompatActivity {
                 productHots = response.body();
                 recyclerViewAllHot.setHasFixedSize(true);
                 recyclerViewAllHot.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
-                adapterViewAllHot = new AdapterViewAllHot(productHots, ViewAllHotActivity.this, productHot -> {
-                    Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                    intent.putExtra("getdataproduct", productHot);
-                    startActivity(intent);
+                adapterViewAllHot = new AdapterViewAllHot(productHots, ViewAllHotFragment.this, productHot -> {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    DetailFragment fragment = new DetailFragment();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putSerializable("getdataproduct", productHot);
+                    fragment.setArguments(bundle2);
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
+
                 });
                 recyclerViewAllHot.setAdapter(adapterViewAllHot);
             }

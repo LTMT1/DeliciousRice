@@ -36,6 +36,12 @@
         android:layout_width="match_parent"
         android:layout_height="125dp">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView6"
@@ -70,17 +76,18 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout11"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@+id/cardView6"
             app:layout_constraintTop_toBottomOf="@+id/textView19">
 
             <TextView
                 android:id="@+id/textView15"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/black"
@@ -91,8 +98,8 @@
 
             <ImageView
                 android:id="@+id/imageView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/explore_cong"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,12 +107,14 @@
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/explore_tru"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -113,13 +122,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/be_vietnam_medium"
             android:text="45.000 đ"
             android:textColor="@color/black"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.937"
+            app:layout_constraintStart_toStartOf="@+id/guideline35" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.apachat.swipereveallayout.core.SwipeLayout>

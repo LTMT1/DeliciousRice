@@ -10,6 +10,8 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +21,7 @@ import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Product;
 import com.example.deliciousrice.R;
-import com.example.deliciousrice.ui.shop.Activity.DetailActivity;
+import com.example.deliciousrice.ui.shop.Activity.DetailFragment;
 import com.github.ybq.android.spinkit.style.Circle;
 
 import java.util.ArrayList;
@@ -65,10 +67,15 @@ public class FavoriteFragment extends Fragment {
                     rclviewfavorite.setVisibility(View.VISIBLE);
                     constr.setVisibility(View.GONE);
                     adapterFavorite = new AdapterFavorite(mangyeuthich, getActivity(), favorite -> {
-                        Intent intent = new Intent(getContext(), DetailActivity.class);
-                        intent.putExtra("idcustomer", main.getId_customer());
-                        intent.putExtra("getdataproduct", favorite);
-                        startActivity(intent);
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        DetailFragment fragment = new DetailFragment();
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putInt("idcustomer", main.getId_customer());
+                        bundle2.putSerializable("getdataproduct", favorite);
+                        fragment.setArguments(bundle2);
+                        ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                        ft.commit();
                     });
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
