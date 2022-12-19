@@ -57,7 +57,7 @@ public class ViewAllNewFragment extends Fragment {
         imgBackViewAllCbo =  view.findViewById(R.id.img_back_ViewAllnew);
         prgLoadingSearch.setIndeterminateDrawable(new Circle());
         imgBackViewAllCbo.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(R.id.action_viewAllHotFragment_to_shopFragment);
+            Navigation.findNavController(view).navigate(R.id.action_viewAllNewFragment_to_shopFragment);
         });
         getAllProductNew();
     }
