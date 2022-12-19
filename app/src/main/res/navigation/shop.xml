@@ -25,6 +25,7 @@
         android:name="com.example.deliciousrice.ui.shop.Activity.ViewAllHotFragment"
         android:label="fragment_view_all_hot"
         tools:layout="@layout/fragment_view_all_hot" >
+
         <action
             android:id="@+id/action_viewAllHotFragment_to_shopFragment"
             app:destination="@id/shopFragment" />

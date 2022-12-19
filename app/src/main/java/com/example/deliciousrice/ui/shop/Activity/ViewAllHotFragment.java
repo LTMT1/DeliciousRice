@@ -40,8 +40,10 @@ public class ViewAllHotFragment extends Fragment {
 
     RecyclerView recyclerViewAllHot;
     AdapterViewAllHot adapterViewAllHot;
-    private ImageView imgBackViewAllCbo;
+    private ImageView imgBackViewAllHot;
     private ProgressBar prgLoadingSearch;
+
+
 
 
     @Override
@@ -57,10 +59,11 @@ public class ViewAllHotFragment extends Fragment {
 
         prgLoadingSearch =view.findViewById(R.id.prgLoadingSearch);
         recyclerViewAllHot = view.findViewById(R.id.rcyViewAllHot);
-        imgBackViewAllCbo = view.findViewById(R.id.img_back_ViewAllCbo);
+        imgBackViewAllHot = view.findViewById(R.id.img_back_ViewAllHot);
+
         prgLoadingSearch.setIndeterminateDrawable(new Circle());
 
-        imgBackViewAllCbo.setOnClickListener(view1 -> {
+        imgBackViewAllHot.setOnClickListener(view1 -> {
             Navigation.findNavController(view).navigate(R.id.action_viewAllHotFragment_to_shopFragment);
         });
         getAllProductHot();

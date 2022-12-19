@@ -56,7 +56,7 @@ public class ViewAllCboFragment extends Fragment {
         imgBackViewAllCbo = view.findViewById(R.id.img_back_ViewAllCbo);
         prgLoadingSearch.setIndeterminateDrawable(new Circle());
         imgBackViewAllCbo.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(R.id.action_viewAllHotFragment_to_shopFragment);
+            Navigation.findNavController(view).navigate(R.id.action_viewAllCboFragment_to_shopFragment);
         });
         recyclerViewAll = view.findViewById(R.id.rcyViewAll);
         getAllProductCbo();
