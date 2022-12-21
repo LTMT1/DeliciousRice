@@ -64,6 +64,7 @@ public class ReceipFragment extends Fragment {
 
         rclview = view.findViewById(R.id.rclview);
         getreceipt();
+
     }
 
 
@@ -82,7 +83,6 @@ public class ReceipFragment extends Fragment {
                 ArrayList<Bill> bills = (ArrayList<Bill>) response.body();
                 adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext(), bill -> {
 
-
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     InvoicedetailsFragment fragment = new InvoicedetailsFragment();
@@ -90,6 +90,7 @@ public class ReceipFragment extends Fragment {
                     bundle.putSerializable("getData", bill);
                     bundle.putString("name", name_cus);
                     bundle.putString("phone", phone);
+                    bundle.putInt("id_cus",idcustm );
                     fragment.setArguments(bundle);
 
                     ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
@@ -99,6 +100,7 @@ public class ReceipFragment extends Fragment {
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 rclview.setLayoutManager(linearLayoutManager);
                 rclview.setAdapter(adapterHistoryBill);
+                adapterHistoryBill.notifyDataSetChanged();
             }
 
             @Override

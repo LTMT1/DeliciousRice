@@ -346,7 +346,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Khuyến mãi "
+                    android:text="Giảm 15% khi có từ 4 món trở lên "
                     android:textColor="#E60707"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_tienkm"

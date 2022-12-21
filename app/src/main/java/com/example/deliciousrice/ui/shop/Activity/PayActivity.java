@@ -1,6 +1,8 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,6 +76,7 @@ public class PayActivity extends AppCompatActivity {
     private LoadingDialog1 loadingDialog;
     String productList;
     ArrayList<Adderss> addersses;
+    Context context;
 
 
     @Override
@@ -114,9 +117,9 @@ public class PayActivity extends AppCompatActivity {
         textView65 = findViewById(R.id.textView65);
         imgBackThanhtoan = findViewById(R.id.img_back_thanhtoan);
         imgBackThanhtoan.setOnClickListener(view -> {
-            Intent intent = new Intent(this, InvoicedetailsFragment.class);
-            intent.putExtra("id_customer", id_customer);
-            startActivity(intent);
+//            Intent intent = new Intent(this, InvoicedetailsFragment.class);
+//            intent.putExtra("id_customer", id_customer);
+//            startActivity(intent);
 
         });
     }
@@ -141,7 +144,7 @@ public class PayActivity extends AppCompatActivity {
     private void Pay() {
         btnpay.setOnClickListener(view -> {
             if (addersses.size() == 0 || MainActivity2.phone_number.equals("")) {
-                Toast.makeText(this, "Bạn cần phải có địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Bạn cần phải có địa chỉ nhận hàng và số điện thoại", Toast.LENGTH_SHORT).show();
             } else {
                 loadingDialog.StartLoadingDialog();
                 if (radio6.isChecked()) {
@@ -154,7 +157,24 @@ public class PayActivity extends AppCompatActivity {
 
                         if (code.equals("1")) {
                             token = data.getString("zp_trans_token");
-                            payWithZalo();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("Bạn có chắc chắn muốn thanh toán bằng Zalo Pay không?");
+                            builder.setMessage("Nếu thanh toán bằng Zalo Pay thì bạn sẽ không được phép hủy đơn hàng sau khi thanh toán.");
+                            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    payWithZalo();
+                                }
+                            });
+                            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
+                            builder.show();
+
                         }
 
                     } catch (Exception e) {
@@ -309,12 +329,12 @@ public class PayActivity extends AppCompatActivity {
 
     private void Khuyenmai(int priceproduct, int tongslproduct) {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        tvmoney.setText(decimalFormat.format(priceproduct) + "đ");
+        tvmoney.setText(decimalFormat.format(priceproduct) + " đ");
         if (tongslproduct > 3) {
             tvKhuyenmai.setVisibility(View.VISIBLE);
             tvTienkm.setVisibility(View.VISIBLE);
-            double khuyenmai = priceproduct * 0.2;
-            tvTienkm.setText(decimalFormat.format(khuyenmai) + "đ");
+            double khuyenmai = priceproduct * 0.15;
+            tvTienkm.setText(decimalFormat.format(khuyenmai) + " đ");
             tongtiensp = (int) (priceproduct - khuyenmai + 20000);
             tvTongmoney.setText(decimalFormat.format(tongtiensp) );
         } else {

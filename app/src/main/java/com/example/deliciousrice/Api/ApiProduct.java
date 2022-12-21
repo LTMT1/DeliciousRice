@@ -78,6 +78,10 @@ public interface ApiProduct {
     @POST("CancleBill.php")
     Call<String> canclebill(@Field("id_bill") String id_bill, @Field("status") String status);
 
+    @FormUrlEncoded
+    @POST("CompletedBill.php")
+    Call<String> completedbill(@Field("id_bill") String id_bill, @Field("status") String status);
+
     /*Địa chỉ*/
     @FormUrlEncoded
     @POST("getaddress.php")

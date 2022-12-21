@@ -58,38 +58,56 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+
             <TextView
                 android:id="@+id/tvCountDownTime"
-                android:layout_marginTop="15dp"
+                style="@style/Text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="130dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_btn_repurchase"
-                style="@style/Text"
-                android:textColor="#ED5656"
                 android:fontFamily="@font/be_vietnam_bold"
                 android:gravity="center"
                 android:text="Hủy Đơn Hàng"
+                android:textColor="#ED5656"
                 android:textSize="18dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-
+            <TextView
+                android:id="@+id/tvHoanTat"
+                style="@style/Text"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="130dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_btn_hoantat"
+                android:fontFamily="@font/be_vietnam_bold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Hoàn Tất"
+                android:textColor="#0000ff"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="20dp"
                 android:background="@drawable/bg_borders_sp"
+                app:layout_constraintBottom_toTopOf="@+id/rcyViewChiTietDH"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCountDownTime">
-
+                app:layout_constraintStart_toStartOf="parent">
                 <TextView
                     android:id="@+id/textView34"
                     style="@style/Text"
@@ -281,7 +299,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
-                android:text="giảm 20% khi có từ 4 món trở lên"
+                android:text="Giảm 15% khi có từ 4 món trở lên"
                 android:textColor="@color/colorTaskBar"
                 android:textSize="13sp"
                 android:visibility="gone"

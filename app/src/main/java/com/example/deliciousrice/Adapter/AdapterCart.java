@@ -94,7 +94,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
                 ShopFragment.Cartlist.get(position).setPrice(giamoia);
             }
             holder.tvsoluong.setText(ShopFragment.Cartlist.get(position).getAmount() + "");
-            holder.tvprice.setText(decimalFormat.format(ShopFragment.Cartlist.get(position).getPrice()));
+            holder.tvprice.setText(decimalFormat.format(ShopFragment.Cartlist.get(position).getPrice())+ " đ");
             DetailFragment.UpdateProduct(cart.id_product, ShopFragment.Cartlist.get(position).getPrice(), ShopFragment.Cartlist.get(position).getAmount());
             cartFragment.UpdateTongTien();
         });

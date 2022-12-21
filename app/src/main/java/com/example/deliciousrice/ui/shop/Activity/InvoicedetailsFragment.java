@@ -46,7 +46,7 @@ import retrofit2.Response;
 
 public class InvoicedetailsFragment extends Fragment {
 
-    private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat,tvTongTien,tvSoMon,tvDatLai,tvCountDownTime;
+    private TextView tvMaBill,tvNameKH,tvPhoneKH,tvDiaChi,tvNameNV,tvDateDat,tvTongTien,tvSoMon,tvDatLai,tvCountDownTime,tvHoanTat;
     private RecyclerView rcyViewDetailReceipt;
     private TextView tvshipkm,tvTongtienBill;
     private TextView tvkhuyenmai,textVieưgone;
@@ -57,6 +57,7 @@ public class InvoicedetailsFragment extends Fragment {
     AdapterDetailBill adapterDetailBill;
     Bill bill;
     String Name,SDT;
+    int Id_cus;
     ArrayList<Detailbill> detailbillArrayList;
 
 
@@ -79,6 +80,7 @@ public class InvoicedetailsFragment extends Fragment {
         bill = (Bill) intent.getSerializableExtra("getData");*/
 
         Bundle bundle=getArguments();
+        Id_cus = bundle.getInt("id_cus");
         SDT=bundle.getString("phone");
         Name = bundle.getString("name");
         bill = (Bill) bundle.getSerializable("getData");
@@ -89,10 +91,17 @@ public class InvoicedetailsFragment extends Fragment {
         getDataDetailBill();
         if(bill.getStatus().trim().equals("Đang chờ")){
             tvCountDownTime.setVisibility(View.VISIBLE);
+            tvHoanTat.setVisibility(View.GONE);
             cancleBill(bill.getId_bill(),"Đã Hủy");
+        }else if(bill.getStatus().trim().equals("Đang giao hàng")) {
+            completedBill(bill.getId_bill(),"Hoàn tất");
+            tvCountDownTime.setVisibility(View.GONE);
+            tvHoanTat.setVisibility(View.VISIBLE);
         }else {
             tvCountDownTime.setVisibility(View.GONE);
+            tvHoanTat.setVisibility(View.GONE);
         }
+
     }
     private void Anhxa(View view) {
 
@@ -111,6 +120,7 @@ public class InvoicedetailsFragment extends Fragment {
         tvkhuyenmai = view.findViewById(R.id.tvkhuyenmai);
         tvTongtienBill=view.findViewById(R.id.tvTongtien);
         textVieưgone=view.findViewById(R.id.textView63);
+        tvHoanTat=view.findViewById(R.id.tvHoanTat);
         imgBackInvoicedetails = view.findViewById(R.id.img_back_Invoicedetails);
         imgBackInvoicedetails.setOnClickListener(view1 -> {
             FragmentManager fm = getFragmentManager();
@@ -118,12 +128,15 @@ public class InvoicedetailsFragment extends Fragment {
             ReceipFragment fragment = new ReceipFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("getData", bill);
+            bundle.putInt("id_cus",Id_cus );
             bundle.putString("name", Name);
             bundle.putString("phone", SDT);
+
             fragment.setArguments(bundle);
 
             ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
             ft.commit();
+
         });
 
     }
@@ -157,6 +170,7 @@ public class InvoicedetailsFragment extends Fragment {
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 rcyViewDetailReceipt.setLayoutManager(linearLayoutManager);
                 rcyViewDetailReceipt.setAdapter(adapterDetailBill);
+                adapterDetailBill.notifyDataSetChanged();
             }
 
             @Override
@@ -208,7 +222,7 @@ public class InvoicedetailsFragment extends Fragment {
         if(tongslproduct>3){
             textVieưgone.setVisibility(View.VISIBLE);
             tvkhuyenmai.setVisibility(View.VISIBLE);
-            double khuyenmai=priceproduct*0.2;
+            double khuyenmai=priceproduct*0.15;
             tvkhuyenmai.setText(decimalFormat.format(khuyenmai)+"đ");
             double tongtiensp=priceproduct-khuyenmai+20000;
             tvTongtienBill.setText(decimalFormat.format(tongtiensp)+"đ");
@@ -235,6 +249,47 @@ public class InvoicedetailsFragment extends Fragment {
                     PushNotification();
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
+
+                    ReceipFragment fragment = new ReceipFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("getData", bill);
+                    bundle.putInt("id_cus",Id_cus );
+                    bundle.putString("name", Name);
+                    bundle.putString("phone", SDT);
+                    fragment.setArguments(bundle);
+
+                    ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
+                    ft.commit();
+
+                    progressDialog.dismiss();
+                }
+
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Hủy đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
+        });
+    }
+
+    private void completedBill(String id_bill, String completed){
+        tvHoanTat.setOnClickListener(view -> {
+            final ProgressDialog progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Please Wait..");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            ApiProduct apiProduct = ApiService.getService();
+            Call<String> callback = apiProduct.completedbill(id_bill, completed);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Toast.makeText(getApplicationContext(), "Hoàn tất đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                    PushNotification();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+
                     ReceipFragment fragment = new ReceipFragment();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("getData", bill);
@@ -251,7 +306,7 @@ public class InvoicedetailsFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Hủy đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Hoàn tất đơn hàng thất bại", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             });

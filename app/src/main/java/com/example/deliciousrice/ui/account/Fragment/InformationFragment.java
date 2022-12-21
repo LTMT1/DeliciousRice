@@ -108,6 +108,7 @@ public class InformationFragment extends Fragment {
 
             }
         });
+        btnsave.setVisibility(View.GONE);
     }
 
     private void openImage() {
