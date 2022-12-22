@@ -78,10 +78,6 @@ public interface ApiProduct {
     @POST("CancleBill.php")
     Call<String> canclebill(@Field("id_bill") String id_bill, @Field("status") String status);
 
-    @FormUrlEncoded
-    @POST("CompletedBill.php")
-    Call<String> completedbill(@Field("id_bill") String id_bill, @Field("status") String status);
-
     /*Địa chỉ*/
     @FormUrlEncoded
     @POST("getaddress.php")
@@ -120,7 +116,7 @@ public interface ApiProduct {
     @FormUrlEncoded
     @POST("insertBill.php")
     Call<String> addbill(@Field("Bill") String bill, @Field("customer") int id_customerl, @Field("adress") String adreess, @Field("Date")
-            String Date, @Field("note") String note, @Field("money") int money);
+            String Date, @Field("note") String note, @Field("money") int money, @Field("pay") String pay);
 
     @FormUrlEncoded
     @POST("insertDetailBill.php")

@@ -1,7 +1,9 @@
 package com.example.deliciousrice.ui.shop.Activity;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,11 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliciousrice.Activity.BarColor;
-import com.example.deliciousrice.dialog.LoadingDialog1;
 import com.example.deliciousrice.Adapter.AdapterProductBill;
 import com.example.deliciousrice.Adapter.AdapterSelectAddress;
 import com.example.deliciousrice.Api.ApiProduct;
@@ -34,6 +36,7 @@ import com.example.deliciousrice.Model.Adderss;
 import com.example.deliciousrice.Model.Cart;
 import com.example.deliciousrice.Model.ProductBill;
 import com.example.deliciousrice.R;
+import com.example.deliciousrice.dialog.LoadingDialog1;
 import com.example.deliciousrice.ui.cart.CartFragment;
 import com.example.deliciousrice.ui.cart.DaoCart;
 import com.example.deliciousrice.ui.shop.ShopFragment;
@@ -65,18 +68,17 @@ public class PayActivity extends AppCompatActivity {
     public RadioButton radio6, radio7;
     String token = "", address;
     Spinner tvsetaddress;
-    int id_customer;
     AdapterSelectAddress adapterSelectAddress;
     DaoCart daoCart;
     private TextView tvKhuyenmai;
     private TextView tvTienkm;
     private TextView tvTongmoney;
     private TextView textView65;
-    int tongtiensp;
+    int tongtiensp,id_customer;
     private LoadingDialog1 loadingDialog;
     String productList;
     ArrayList<Adderss> addersses;
-    Context context;
+
 
 
     @Override
@@ -86,11 +88,10 @@ public class PayActivity extends AppCompatActivity {
         BarColor.setStatusBarColor(this);
         //anhxa
         BindView();
-        addersses = new ArrayList<>();
         daoCart = new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         id_customer = intent.getIntExtra("id_customer", 0);
-        getlistadress(id_customer);
+        addersses = (ArrayList<Adderss>) intent.getSerializableExtra("getData");
         getIdBill();
         //zalo pay
         loadingDialog = new LoadingDialog1(this);
@@ -98,6 +99,21 @@ public class PayActivity extends AppCompatActivity {
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         ZaloPaySDK.init(2553, Environment.SANDBOX);
+        //
+        adapterSelectAddress = new AdapterSelectAddress(PayActivity.this, R.layout.item_address, addersses);
+        tvsetaddress.setAdapter(adapterSelectAddress);
+        tvsetaddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                address = adapterSelectAddress.getItem(i).getAddress_specifically();
+                Toast.makeText(PayActivity.this, adapterSelectAddress.getItem(i).getAddress_specifically(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         //
         ListProductBuy();
         Pay();
@@ -120,7 +136,7 @@ public class PayActivity extends AppCompatActivity {
 //            Intent intent = new Intent(this, InvoicedetailsFragment.class);
 //            intent.putExtra("id_customer", id_customer);
 //            startActivity(intent);
-
+            System.exit(0);
         });
     }
 
@@ -143,49 +159,47 @@ public class PayActivity extends AppCompatActivity {
 
     private void Pay() {
         btnpay.setOnClickListener(view -> {
-            if (addersses.size() == 0 || MainActivity2.phone_number.equals("")) {
-                Toast.makeText(this, "Bạn cần phải có địa chỉ nhận hàng và số điện thoại", Toast.LENGTH_SHORT).show();
-            } else {
+
                 loadingDialog.StartLoadingDialog();
                 if (radio6.isChecked()) {
-                    insertPay();
+                    insertPay("0");
                 } else if (radio7.isChecked()) {
-                    CreateOrder orderApi = new CreateOrder();
-                    try {
-                        JSONObject data = orderApi.createOrder(String.valueOf(tongtiensp));
-                        String code = data.getString("return_code");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PayActivity.this);
+                    builder.setTitle("Xác nhận thanh toán bằng Zalo Pay");
+                    builder.setCancelable(false);
+                    builder.setMessage("Bạn sẽ không được phép hủy đơn hàng sau khi thanh toán.");
+                    builder.setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            CreateOrder orderApi = new CreateOrder();
+                            try {
+                                JSONObject data = orderApi.createOrder(String.valueOf(tongtiensp));
+                                String code = data.getString("return_code");
 
-                        if (code.equals("1")) {
-                            token = data.getString("zp_trans_token");
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setTitle("Bạn có chắc chắn muốn thanh toán bằng Zalo Pay không?");
-                            builder.setMessage("Nếu thanh toán bằng Zalo Pay thì bạn sẽ không được phép hủy đơn hàng sau khi thanh toán.");
-                            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                if (code.equals("1")) {
+                                    token = data.getString("zp_trans_token");
                                     payWithZalo();
                                 }
-                            });
-                            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.cancel();
-                                }
-                            });
-                            builder.show();
 
+                            } catch (Exception e) {
+                                loadingDialog.dismissDialog();
+                                e.printStackTrace();
+                            }
                         }
+                    });
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                            loadingDialog.dismissDialog();
+                        }
+                    });
+                    builder.show();
 
-                    } catch (Exception e) {
-                        loadingDialog.dismissDialog();
-                        e.printStackTrace();
-                    }
                 } else {
                     loadingDialog.dismissDialog();
                     Toast.makeText(this, "Bạn chưa chọn phương thức mua hàng", Toast.LENGTH_SHORT).show();
                 }
-            }
         });
     }
 
@@ -196,7 +210,7 @@ public class PayActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        insertPay();
+                        insertPay("1");
 //                        Log.e("TAG", "run: " + "Sucess");
 //                        new AlertDialog.Builder(PayActivity.this)
 //                                .setTitle("Payment Success")
@@ -242,10 +256,10 @@ public class PayActivity extends AppCompatActivity {
         });
     }
 
-    private void addBill(String bill, int idcus, String adreess, String date, String note, int money) {
+    private void addBill(String bill, int idcus, String adreess, String date, String note, int money,String pay) {
         try {
             ApiProduct apiProduct = ApiService.getService();
-            Call<String> callback = apiProduct.addbill(bill, idcus, adreess, date, note, money);
+            Call<String> callback = apiProduct.addbill(bill, idcus, adreess, date, note, money,pay);
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
@@ -282,49 +296,27 @@ public class PayActivity extends AppCompatActivity {
     }
 
     private void PushNotification() {
-        ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.pushNotification(MainActivity2.token, "1");
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void getlistadress(int idcustomer) {
-        ApiProduct apiProduct = ApiService.getService();
-        Call<ArrayList<Adderss>> listAddre = apiProduct.getListAddresss(idcustomer);
-        listAddre.enqueue(new Callback<ArrayList<Adderss>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Adderss>> call, Response<ArrayList<Adderss>> response) {
-                addersses = response.body();
-                adapterSelectAddress = new AdapterSelectAddress(PayActivity.this, R.layout.item_address, addersses);
-                tvsetaddress.setAdapter(adapterSelectAddress);
-                tvsetaddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        address = adapterSelectAddress.getItem(i).getAddress_specifically();
-                        Toast.makeText(PayActivity.this, adapterSelectAddress.getItem(i).getAddress_specifically(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Adderss>> call, Throwable t) {
-
-            }
-        });
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("YOUR_CHANNEL_ID",
+                    "YOUR_CHANNEL_NAME",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DESCRIPTION");
+            mNotificationManager.createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "YOUR_CHANNEL_ID")
+                .setSmallIcon(R.drawable.imghelloscreen) // notification icon
+                .setContentTitle("Đặt hàng thành công") // title for notification
+                .setContentText("Vào app ngay để biết thêm thông tin chi tiết về các đơn hàng của bạn.")// message for notification;
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Vào app ngay để biết thêm thông tin chi tiết về các đơn hàng của bạn."))
+                .setAutoCancel(true);// clear notification after click
+        Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(pi);
+        mNotificationManager.notify(0, mBuilder.build());
     }
 
     private void Khuyenmai(int priceproduct, int tongslproduct) {
@@ -368,15 +360,12 @@ public class PayActivity extends AppCompatActivity {
         });
     }
 
-    private void insertPay() {
-//        Random random = new Random();
-//        int number = random.nextInt(10000000);
-//        id_bill = "DCR" + id_customer + "-" + number;
+    private void insertPay(String Pay) {
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd", Locale.getDefault());
         String currentDateandTime = sdf.format(new Date());
         String ednote = edtstatus.getText().toString().trim();
 
-        addBill(productList, id_customer, address, currentDateandTime, ednote, tongtiensp);
+        addBill(productList, id_customer, address, currentDateandTime, ednote, tongtiensp,Pay);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

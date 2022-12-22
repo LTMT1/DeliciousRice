@@ -5,16 +5,6 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliciousrice.Adapter.AdapterDetailBill;
 import com.example.deliciousrice.Api.ApiProduct;
@@ -89,14 +87,18 @@ public class InvoicedetailsFragment extends Fragment {
         Anhxa(view);
         setData();
         getDataDetailBill();
-        if(bill.getStatus().trim().equals("Đang chờ")){
-            tvCountDownTime.setVisibility(View.VISIBLE);
+        Log.e( bill.getPayment().trim()+"", bill.getPayment().trim());
+        if(bill.getStatus().trim().equals("Đang chờ")|| bill.getPayment().trim().equals("1")){
+            tvCountDownTime.setVisibility(View.GONE);
             tvHoanTat.setVisibility(View.GONE);
             cancleBill(bill.getId_bill(),"Đã Hủy");
         }else if(bill.getStatus().trim().equals("Đang giao hàng")) {
             completedBill(bill.getId_bill(),"Hoàn tất");
             tvCountDownTime.setVisibility(View.GONE);
             tvHoanTat.setVisibility(View.VISIBLE);
+        }else if(bill.getStatus().trim().equals("Đang chờ")) {
+            tvCountDownTime.setVisibility(View.VISIBLE);
+            tvHoanTat.setVisibility(View.GONE);
         }else {
             tvCountDownTime.setVisibility(View.GONE);
             tvHoanTat.setVisibility(View.GONE);
@@ -149,35 +151,39 @@ public class InvoicedetailsFragment extends Fragment {
         tvPhoneKH.setText(SDT);
     }
     private void getDataDetailBill(){
-        ApiProduct apiProduct = ApiService.getService();
-        Call<List<Detailbill>> listCallProductBill = apiProduct.getProductBill(bill.getId_customer(), bill.getId_bill());
-        listCallProductBill.enqueue(new Callback<List<Detailbill>>() {
-            public void onResponse(Call<List<Detailbill>> call, Response<List<Detailbill>> response) {
-                detailbillArrayList = (ArrayList<Detailbill>) response.body();
-                Detailbill detailbill = detailbillArrayList.get(0);
-                int tongslproduct = 0,priceproduct=0;
-                for(int i=0;i<detailbillArrayList.size();i++){
-                    tongslproduct =detailbillArrayList.get(i).getAmount()+tongslproduct;
-                    priceproduct =detailbillArrayList.get(i).getTotal_money()+priceproduct;
+        try {
+            ApiProduct apiProduct = ApiService.getService();
+            Call<List<Detailbill>> listCallProductBill = apiProduct.getProductBill(bill.getId_customer(), bill.getId_bill());
+            listCallProductBill.enqueue(new Callback<List<Detailbill>>() {
+                public void onResponse(Call<List<Detailbill>> call, Response<List<Detailbill>> response) {
+                    detailbillArrayList = (ArrayList<Detailbill>) response.body();
+                    Detailbill detailbill = detailbillArrayList.get(0);
+                    int tongslproduct = 0,priceproduct=0;
+                    for(int i=0;i<detailbillArrayList.size();i++){
+                        tongslproduct =detailbillArrayList.get(i).getAmount()+tongslproduct;
+                        priceproduct =detailbillArrayList.get(i).getTotal_money()+priceproduct;
+                    }
+                    int id_customer=detailbill.getId_customer();
+                    tvDiaChi.setText(detailbill.getAddress());
+                    tvNameNV.setText(detailbill.getUser_namenv());
+                    datLaiOnClick(detailbillArrayList,id_customer);
+                    Khuyenmai(priceproduct,tongslproduct);
+                    adapterDetailBill = new AdapterDetailBill(detailbillArrayList, getApplicationContext());
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    rcyViewDetailReceipt.setLayoutManager(linearLayoutManager);
+                    rcyViewDetailReceipt.setAdapter(adapterDetailBill);
+                    adapterDetailBill.notifyDataSetChanged();
                 }
-                int id_customer=detailbill.getId_customer();
-                tvDiaChi.setText(detailbill.getAddress());
-                tvNameNV.setText(detailbill.getUser_namenv());
-                datLaiOnClick(detailbillArrayList,id_customer);
-                Khuyenmai(priceproduct,tongslproduct);
-                adapterDetailBill = new AdapterDetailBill(detailbillArrayList, getApplicationContext());
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                rcyViewDetailReceipt.setLayoutManager(linearLayoutManager);
-                rcyViewDetailReceipt.setAdapter(adapterDetailBill);
-                adapterDetailBill.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onFailure(Call<List<Detailbill>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<Detailbill>> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }catch (Exception e){
+
+        }
     }
     private void datLaiOnClick(ArrayList<Detailbill> list,int id_customer){
         tvDatLai.setOnClickListener(view -> {
@@ -246,7 +252,7 @@ public class InvoicedetailsFragment extends Fragment {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     Toast.makeText(getApplicationContext(), "Hủy đơn hàng thành công", Toast.LENGTH_SHORT).show();
-                    PushNotification();
+                    PushNotification(MainActivity2.token,"2");
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
 
@@ -281,12 +287,12 @@ public class InvoicedetailsFragment extends Fragment {
             progressDialog.setCancelable(false);
             progressDialog.show();
             ApiProduct apiProduct = ApiService.getService();
-            Call<String> callback = apiProduct.completedbill(id_bill, completed);
+            Call<String> callback = apiProduct.canclebill(id_bill, completed);
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     Toast.makeText(getApplicationContext(), "Hoàn tất đơn hàng thành công", Toast.LENGTH_SHORT).show();
-                    PushNotification();
+                    PushNotification(MainActivity2.token,"3");
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
 
@@ -312,9 +318,9 @@ public class InvoicedetailsFragment extends Fragment {
             });
         });
     }
-    private void PushNotification() {
+    private void PushNotification(String token,String number) {
         ApiProduct apiProduct = ApiService.getService();
-        Call<String> callback = apiProduct.pushNotification(MainActivity2.token,"2");
+        Call<String> callback = apiProduct.pushNotification(token,number);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -327,4 +333,5 @@ public class InvoicedetailsFragment extends Fragment {
             }
         });
     }
+
 }

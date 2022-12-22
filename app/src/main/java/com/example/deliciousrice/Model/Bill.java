@@ -10,14 +10,16 @@ public class Bill implements Serializable {
     private Date date_created;
     private String status;
     private int money;
+    private String payment;
 
-    public Bill(String id_bill, int id_customer, int id_staff, Date date_created, String status, int money) {
+    public Bill(String id_bill, int id_customer, int id_staff, Date date_created, String status, int money, String payment) {
         this.id_bill = id_bill;
         this.id_customer = id_customer;
         this.id_staff = id_staff;
         this.date_created = date_created;
         this.status = status;
         this.money = money;
+        this.payment = payment;
     }
 
     public String getId_bill() {
@@ -48,7 +50,7 @@ public class Bill implements Serializable {
         return date_created;
     }
 
-    public void setDate(Date date_created) {
+    public void setDate_created(Date date_created) {
         this.date_created = date_created;
     }
 
@@ -66,5 +68,13 @@ public class Bill implements Serializable {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 }
