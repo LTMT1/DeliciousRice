@@ -3,6 +3,7 @@ package com.example.deliciousrice;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ public class MainActivity2 extends AppCompatActivity {
         setBugdeNumber();
         setStatusBarColor();
         getDatas();
+        Log.e(email,"saaaaaaaa"+password);
         getdataCustomer(email);
     }
 
@@ -82,7 +84,7 @@ public class MainActivity2 extends AppCompatActivity {
     private void getDatas() {
         SharedPreferences preferences = getSharedPreferences("user_file", MODE_PRIVATE);
         email = preferences.getString("gmail", "");
-        password = preferences.getString("matkhau", "");
+        password = preferences.getString("id_customer", "");
     }
 
     public void getdataCustomer(String emails) {
@@ -103,6 +105,7 @@ public class MainActivity2 extends AppCompatActivity {
                     address = customer.getAddress();
                     emaill = customer.getEmail();
                     passs = customer.getPassword();
+                    Log.e(user_name+"","");
                     BadgeDrawable badgeDrawable = binding.navView.getOrCreateBadge(R.id.account);
                     if (phone_number.equals("")) {
                         badgeDrawable.setVisible(true);

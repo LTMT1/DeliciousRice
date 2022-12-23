@@ -88,7 +88,7 @@ public class InvoicedetailsFragment extends Fragment {
         setData();
         getDataDetailBill();
         Log.e( bill.getPayment().trim()+"", bill.getPayment().trim());
-        if(bill.getStatus().trim().equals("Đang chờ")|| bill.getPayment().trim().equals("1")){
+        if(bill.getStatus().trim().equals("Đang chờ")&& bill.getPayment().trim().equals("1")){
             tvCountDownTime.setVisibility(View.GONE);
             tvHoanTat.setVisibility(View.GONE);
             cancleBill(bill.getId_bill(),"Đã Hủy");

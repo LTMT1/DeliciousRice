@@ -53,25 +53,6 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.CartViewHolder
         Picasso.get().load(cart.getImage())
                 .into(holder.imgsp);
         holder.tvsoluong.setText(Integer.toString(cart.getAmount()));
-//        holder.tvsoluong.setOnKeyListener(new View.OnKeyListener() {
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-//                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-//                    int slm= Integer.parseInt(holder.tvsoluong.getText().toString());
-//                    int slht = ShopFragment.Cartlist.get(position).getAmount();
-//                    int giaht = ShopFragment.Cartlist.get(position).getPrice();
-//                    ShopFragment.Cartlist.get(position).setAmount(slm);
-//                    int giamoia=(giaht * slm) / slht;
-//                    list.get(position).setAmount(slm);
-//                    ShopFragment.Cartlist.get(position).setPrice( giamoia);
-//                    holder.tvsoluong.setText(ShopFragment.Cartlist.get(position).getAmount()+"");
-//                    holder.tvprice.setText( decimalFormat.format( ShopFragment.Cartlist.get(position).getPrice()) );
-//                    CartFragment.UpdateTongTien();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
         holder.setOnClickitem((view, pos, giatri) -> {
             int slht = ShopFragment.Cartlist.get(position).getAmount();
             int giaht = ShopFragment.Cartlist.get(position).getPrice();

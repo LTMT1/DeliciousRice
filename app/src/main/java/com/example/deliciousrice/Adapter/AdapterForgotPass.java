@@ -116,11 +116,8 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
         try {
             String stringSenderEmail = "deliciousrices@gmail.com";
             String stringPasswordSenderEmail = "zzoxacqeqlwxdxyb";
-
             String stringHost = "smtp.gmail.com";
-
             Properties properties = System.getProperties();
-
             properties.put("mail.smtp.host", stringHost);
             properties.put("mail.smtp.port", "465");
             properties.put("mail.smtp.ssl.enable", "true");

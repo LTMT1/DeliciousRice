@@ -88,10 +88,11 @@ public class PayActivity extends AppCompatActivity {
         BarColor.setStatusBarColor(this);
         //anhxa
         BindView();
+        addersses = new ArrayList<>();
         daoCart = new DaoCart(getApplicationContext());
         Intent intent = getIntent();
         id_customer = intent.getIntExtra("id_customer", 0);
-        addersses = (ArrayList<Adderss>) intent.getSerializableExtra("getData");
+        getlistadress(id_customer);
         getIdBill();
         //zalo pay
         loadingDialog = new LoadingDialog1(this);
@@ -100,20 +101,6 @@ public class PayActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         ZaloPaySDK.init(2553, Environment.SANDBOX);
         //
-        adapterSelectAddress = new AdapterSelectAddress(PayActivity.this, R.layout.item_address, addersses);
-        tvsetaddress.setAdapter(adapterSelectAddress);
-        tvsetaddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                address = adapterSelectAddress.getItem(i).getAddress_specifically();
-                Toast.makeText(PayActivity.this, adapterSelectAddress.getItem(i).getAddress_specifically(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         //
         ListProductBuy();
         Pay();
@@ -133,10 +120,6 @@ public class PayActivity extends AppCompatActivity {
         textView65 = findViewById(R.id.textView65);
         imgBackThanhtoan = findViewById(R.id.img_back_thanhtoan);
         imgBackThanhtoan.setOnClickListener(view -> {
-//            Intent intent = new Intent(this, InvoicedetailsFragment.class);
-//            intent.putExtra("id_customer", id_customer);
-//            startActivity(intent);
-            System.exit(0);
         });
     }
 
@@ -159,7 +142,9 @@ public class PayActivity extends AppCompatActivity {
 
     private void Pay() {
         btnpay.setOnClickListener(view -> {
-
+            if (addersses.size() == 0 || MainActivity2.phone_number.equals("")) {
+                Toast.makeText(getApplicationContext(), "Bạn cần phải có địa chỉ nhận hàng và số điện thoại để mua hàng", Toast.LENGTH_SHORT).show();
+            } else {
                 loadingDialog.StartLoadingDialog();
                 if (radio6.isChecked()) {
                     insertPay("0");
@@ -200,28 +185,21 @@ public class PayActivity extends AppCompatActivity {
                     loadingDialog.dismissDialog();
                     Toast.makeText(this, "Bạn chưa chọn phương thức mua hàng", Toast.LENGTH_SHORT).show();
                 }
+            }
         });
+
     }
 
     private void payWithZalo() {
+        loadingDialog.dismissDialog();
         ZaloPaySDK.getInstance().payOrder(PayActivity.this, token, "demozpdk://app", new PayOrderListener() {
             @Override
             public void onPaymentSucceeded(final String transactionId, final String transToken, final String appTransID) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        loadingDialog.StartLoadingDialog();
                         insertPay("1");
-//                        Log.e("TAG", "run: " + "Sucess");
-//                        new AlertDialog.Builder(PayActivity.this)
-//                                .setTitle("Payment Success")
-//                                .setMessage(String.format("TransactionId: %s - TransToken: %s", transactionId, transToken))
-//                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                    }
-//                                })
-//                                .setNegativeButton("Cancel", null).show();
-//                        Log.e("TAG", "run: " + "Thanh toan thanh cong");
                     }
 
                 });
@@ -232,32 +210,33 @@ public class PayActivity extends AppCompatActivity {
                 Log.e("TAG", "run: " + "Cancel");
                 new AlertDialog.Builder(PayActivity.this)
                         .setTitle("User Cancel Payment")
+                        .setCancelable(false)
                         .setMessage(String.format("zpTransToken: %s \n", zpTransToken))
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                             }
-                        })
-                        .setNegativeButton("Cancel", null).show();
+                        }).show();
+
             }
 
             @Override
             public void onPaymentError(ZaloPayError zaloPayError, String zpTransToken, String appTransID) {
                 new AlertDialog.Builder(PayActivity.this)
                         .setTitle("Payment Fail")
+                        .setCancelable(false)
                         .setMessage(String.format("ZaloPayErrorCode: %s \nTransToken: %s", zaloPayError.toString(), zpTransToken))
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
-                        })
-                        .setNegativeButton("Cancel", null).show();
+                        }).show();
             }
         });
     }
 
     private void addBill(String bill, int idcus, String adreess, String date, String note, int money,String pay) {
-        try {
             ApiProduct apiProduct = ApiService.getService();
             Call<String> callback = apiProduct.addbill(bill, idcus, adreess, date, note, money,pay);
             callback.enqueue(new Callback<String>() {
@@ -270,13 +249,33 @@ public class PayActivity extends AppCompatActivity {
 
                 }
             });
-        } catch (Exception e) {
-
-        }
     }
-
+    private void getlistadress(int idcustomer) {
+        ApiProduct apiProduct = ApiService.getService();
+        Call<ArrayList<Adderss>> listAddre = apiProduct.getListAddresss(idcustomer);
+        listAddre.enqueue(new Callback<ArrayList<Adderss>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Adderss>> call, Response<ArrayList<Adderss>> response) {
+                addersses = response.body();
+                adapterSelectAddress = new AdapterSelectAddress(PayActivity.this, R.layout.item_address, addersses);
+                tvsetaddress.setAdapter(adapterSelectAddress);
+                tvsetaddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        address = adapterSelectAddress.getItem(i).getAddress_specifically();
+                        Toast.makeText(PayActivity.this, adapterSelectAddress.getItem(i).getAddress_specifically(), Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                });
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Adderss>> call, Throwable t) {
+            }
+        });
+    }
     private void addDetailBill(String idbill, int i) {
-        try {
             Cart cart = ShopFragment.Cartlist.get(i);
             ApiProduct apiProduct = ApiService.getService();
             Call<String> callback = apiProduct.adddetailbill(idbill, cart.getName(), cart.getAmount(), cart.getPrice());
@@ -290,9 +289,6 @@ public class PayActivity extends AppCompatActivity {
 
                 }
             });
-        } catch (Exception e) {
-
-        }
     }
 
     private void PushNotification() {

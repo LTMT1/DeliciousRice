@@ -28,6 +28,7 @@ import com.example.deliciousrice.ui.account.Fragment.AddressFragment;
 import com.example.deliciousrice.ui.account.Fragment.ChangePasFragment;
 import com.example.deliciousrice.ui.account.Fragment.InformationFragment;
 import com.example.deliciousrice.ui.account.Fragment.ReceipFragment;
+import com.facebook.login.LoginManager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -64,6 +65,7 @@ public class AccountFragment extends Fragment {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             SharedPreferences.Editor editor = getContext().getSharedPreferences("user_file", MODE_PRIVATE).edit();
             editor.clear().commit();
+            LoginManager.getInstance().logOut();
             MainActivity2.daoCart.DeleteData();
             startActivity(intent);
         });

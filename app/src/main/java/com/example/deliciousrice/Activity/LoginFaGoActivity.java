@@ -25,7 +25,6 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -43,16 +42,14 @@ import retrofit2.Callback;
 public class LoginFaGoActivity extends AppCompatActivity {
     private CardView cvLoginGoogle;
     private LoginButton loginButton;
-
-    String name, firstname, picture;
-    int id;
-    String personGivenName, personEmail, personId;
-    Uri personpicture;
     private long backPressTime;
     private Toast mToast;
-
     private CallbackManager callbackManager;
     private GoogleSignInClient mGoogleSignInClient;
+
+    String name, firstname, picture,id;
+    String personGivenName, personEmail, personId;
+    Uri personpicture;
     GoogleSignInOptions signInOptions;
 
     @Override
@@ -219,9 +216,9 @@ public class LoginFaGoActivity extends AppCompatActivity {
                 try {
                     name = jsonObject.getString("name");
                     firstname = jsonObject.getString("first_name");
-                    id = jsonObject.getInt("id");
+                    id = jsonObject.getString("id");
                     picture = jsonObject.getJSONObject("picture").getJSONObject("data").getString("url");
-                    InsertAccface(String.valueOf(id), picture, name);
+                    InsertAccface(id, picture, name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -229,7 +226,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
             }
         });
         Bundle bundle = new Bundle();
-        bundle.putString("fields", "name,email,first_name,picture.type(large)");
+        bundle.putString("fields", "id,name,email,first_name,picture.type(large)");
         graphRequest.setParameters(bundle);
         graphRequest.executeAsync();
     }
@@ -237,7 +234,6 @@ public class LoginFaGoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         mGoogleSignInClient.signOut();
-        LoginManager.getInstance().logOut();
         super.onStart();
     }
 
@@ -248,6 +244,7 @@ public class LoginFaGoActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 if (response.body().equalsIgnoreCase("Success")) {
+                    remember(id, id + "@gmail.com");
                     startActivity(new Intent(LoginFaGoActivity.this, MainActivity2.class));
                 }
             }

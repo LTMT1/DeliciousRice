@@ -2,7 +2,6 @@ package com.example.deliciousrice.ui.account.Fragment;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,6 @@ import com.example.deliciousrice.Api.ApiService;
 import com.example.deliciousrice.Model.Bill;
 import com.example.deliciousrice.R;
 import com.example.deliciousrice.ui.account.AccountFragment;
-import com.example.deliciousrice.ui.shop.Activity.InvoicedetailsActivity;
 import com.example.deliciousrice.ui.shop.Activity.InvoicedetailsFragment;
 
 import java.util.ArrayList;
