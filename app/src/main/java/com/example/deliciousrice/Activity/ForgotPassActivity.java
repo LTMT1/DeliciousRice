@@ -1,22 +1,17 @@
 package com.example.deliciousrice.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -26,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.deliciousrice.Adapter.AdapterForgotPass;
-import com.example.deliciousrice.MainActivity2;
 import com.example.deliciousrice.Model.Customer;
 import com.example.deliciousrice.R;
 
@@ -57,10 +51,11 @@ public class ForgotPassActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
         BackToLogin();
 
+
         searchViewcustomer.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                onCLickForgotPassword();
+                onCLickForgotPassword(query);
                 return false;
             }
 
@@ -84,9 +79,8 @@ public class ForgotPassActivity extends AppCompatActivity {
 
     }
 
-    public void onCLickForgotPassword() {
+    public void onCLickForgotPassword( String seach) {
         CustomerArrayList.clear();
-        String seach = searchViewcustomer.getQuery().toString().trim();
         String apiforgotpass = "http://chucdong.com/Deliciousrice/API/FindAccount.php";
         final ProgressDialog progressDialog = new ProgressDialog(ForgotPassActivity.this);
         progressDialog.setMessage("Please Wait..");

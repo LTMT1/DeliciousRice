@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -62,7 +61,7 @@ public class PayActivity extends AppCompatActivity {
     private TextView tvmoney;
     private RecyclerView rclview;
     private EditText edtstatus;
-    private ImageView imgBackThanhtoan;
+
     AdapterProductBill adapterProductBill;
     //    String id_bill;
     public RadioButton radio6, radio7;
@@ -118,9 +117,9 @@ public class PayActivity extends AppCompatActivity {
         radio6 = findViewById(R.id.radioButton6);
         radio7 = findViewById(R.id.radioButton7);
         textView65 = findViewById(R.id.textView65);
-        imgBackThanhtoan = findViewById(R.id.img_back_thanhtoan);
-        imgBackThanhtoan.setOnClickListener(view -> {
-        });
+//        imgBackThanhtoan = findViewById(R.id.img_back_thanhtoan);
+//        imgBackThanhtoan.setOnClickListener(view -> {
+//        });
     }
 
     private void ListProductBuy() {
@@ -209,9 +208,9 @@ public class PayActivity extends AppCompatActivity {
             public void onPaymentCanceled(String zpTransToken, String appTransID) {
                 Log.e("TAG", "run: " + "Cancel");
                 new AlertDialog.Builder(PayActivity.this)
-                        .setTitle("User Cancel Payment")
+                        .setTitle("Bạn đã hủy thanh toán!")
                         .setCancelable(false)
-                        .setMessage(String.format("zpTransToken: %s \n", zpTransToken))
+//                        .setMessage(String.format("zpTransToken: %s \n", zpTransToken))
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -224,9 +223,9 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void onPaymentError(ZaloPayError zaloPayError, String zpTransToken, String appTransID) {
                 new AlertDialog.Builder(PayActivity.this)
-                        .setTitle("Payment Fail")
+                        .setTitle("Thanh toán thất bại!")
                         .setCancelable(false)
-                        .setMessage(String.format("ZaloPayErrorCode: %s \nTransToken: %s", zaloPayError.toString(), zpTransToken))
+                        .setMessage("Bạn cần phải có app ZaloPay để thanh toán")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

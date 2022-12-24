@@ -68,10 +68,9 @@ public class ReceipFragment extends Fragment {
 
     private void getreceipt() {
         Bundle bundle = getArguments();
-        String phone = bundle.getString("phone_number", "");
+        String phone = bundle.getString("phone", "");
         int idcustm = bundle.getInt("id_cus", 0);
-        String name_cus = bundle.getString("name_cus", "");
-
+        String name_cus = bundle.getString("name", "");
         ApiProduct apiProduct = ApiService.getService();
         Call<List<Bill>> callback = apiProduct.getListbill(idcustm);
         callback.enqueue(new Callback<List<Bill>>() {
@@ -80,7 +79,6 @@ public class ReceipFragment extends Fragment {
                 rclview.setHasFixedSize(true);
                 ArrayList<Bill> bills = (ArrayList<Bill>) response.body();
                 adapterHistoryBill = new AdapterHistoryBill(bills, getApplicationContext(), bill -> {
-
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     InvoicedetailsFragment fragment = new InvoicedetailsFragment();
@@ -90,7 +88,6 @@ public class ReceipFragment extends Fragment {
                     bundle.putString("phone", phone);
                     bundle.putInt("id_cus",idcustm );
                     fragment.setArguments(bundle);
-
                     ft.replace(R.id.nav_host_fragment_activity_main2, fragment);
                     ft.commit();
                 });

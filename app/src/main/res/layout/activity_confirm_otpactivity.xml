@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="35dp"
-        android:src="@drawable/ic_back"
         android:onClick="onCLickBackForgotPass"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="OnClick" />
@@ -34,6 +34,7 @@
 
     <EditText
         android:id="@+id/editTextCheckOTP"
+        style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginHorizontal="35dp"
@@ -42,7 +43,6 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Nhập mã"
-        style="@style/Text"
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,11 +52,11 @@
 
     <TextView
         android:id="@+id/textView33"
+        style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
-        style="@style/Text"
         android:gravity="center"
         android:text="@string/m_d_d_g"
         android:textSize="18sp"
@@ -67,13 +67,13 @@
 
     <TextView
         android:id="@+id/btnContinue"
+        style="@style/Text_btn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="80dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/bg_btn"
         android:gravity="center"
-        style="@style/Text_btn"
         android:text="Tiếp Tục"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,17 +84,17 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:allowClickWhenDisabled="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/be_vietnam_medium"
+        android:gravity="center"
         android:text="Gửi lại mã"
-        android:textColor="#780A0A"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnContinue"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textColor="#0C0C0C"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+        app:layout_constraintStart_toStartOf="@+id/btnContinue"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCheckOTP"
+        app:layout_constraintVertical_bias="0.653" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"

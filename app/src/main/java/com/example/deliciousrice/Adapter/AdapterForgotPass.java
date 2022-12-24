@@ -70,10 +70,10 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Xác nhận tài khoản.");
                 builder.setMessage("Chúng tôi sẽ gửi cho bạn mã để xác nhận tài khoản này là của bạn.");
-                builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Gửi", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mess = "Hello " + customer.getUser_name() + ", \n\nWe have received your password reset request. \n Your password recovery code below:" + otp + "\n\nDeliciousRice sincerely thank.";
+                        mess = "Xin chào " + customer.getUser_name() + ", \n\nChúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn. \n Mã khôi phục mật khẩu của bạn bên dưới:" + otp + "\n\nDeliciousRice chân thành cảm ơn.";
                         buttonSendEmail(customer.getEmail());
                         Intent intent = new Intent(v.getContext(), ConfirmOTPActivity.class);
                         intent.putExtra("otp", otp);
@@ -81,7 +81,7 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
                         v.getContext().startActivity(intent);
                     }
                 });
-                builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -115,7 +115,7 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
 
         try {
             String stringSenderEmail = "deliciousrices@gmail.com";
-            String stringPasswordSenderEmail = "zzoxacqeqlwxdxyb";
+            String stringPasswordSenderEmail = "jzqnirrpudyvquku";
             String stringHost = "smtp.gmail.com";
             Properties properties = System.getProperties();
             properties.put("mail.smtp.host", stringHost);
@@ -133,7 +133,7 @@ public class AdapterForgotPass extends RecyclerView.Adapter<AdapterForgotPass.Fo
             MimeMessage mimeMessage = new MimeMessage(session);
             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
-            mimeMessage.setSubject("Email verification code: " + otp);
+            mimeMessage.setSubject("Mã xác minh email: " + otp);
             mimeMessage.setText(mess);
             mimeMessage.setFrom("DeliciousRice");
             Thread thread = new Thread(new Runnable() {

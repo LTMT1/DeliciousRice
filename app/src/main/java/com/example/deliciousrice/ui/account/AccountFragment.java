@@ -90,8 +90,8 @@ public class AccountFragment extends Fragment {
             FragmentTransaction ft = fm.beginTransaction();
             ReceipFragment fragment = new ReceipFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("name_cus", main.getUser_name());
-            bundle.putString("phone_number", main.getPhone_number());
+            bundle.putString("name", main.getUser_name());
+            bundle.putString("phone", main.getPhone_number());
             bundle.putInt("id_cus", main.getId_customer());
             fragment.setArguments(bundle);
             ft.replace(R.id.nav_host_fragment_activity_main2, fragment);

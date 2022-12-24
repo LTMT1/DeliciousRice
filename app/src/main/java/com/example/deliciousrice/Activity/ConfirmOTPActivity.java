@@ -1,19 +1,15 @@
 package com.example.deliciousrice.Activity;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.deliciousrice.Adapter.AdapterForgotPass;
 import com.example.deliciousrice.Model.Customer;
@@ -97,7 +93,7 @@ public class ConfirmOTPActivity extends AppCompatActivity {
             intent.putExtra("email", customer.getEmail());
             startActivity(intent);
         } else {
-            Toast.makeText(this, "otp code is not correct.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "mã otp không chính xác.", Toast.LENGTH_SHORT).show();
         }
     }
 }

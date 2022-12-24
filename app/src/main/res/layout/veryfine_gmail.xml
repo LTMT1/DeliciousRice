@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/lyouts"
+        android:layout_width="315dp"
+        android:layout_height="351dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Xác nhận gmail" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="Chúng tôi đã gửi mã tới gmail của bạn." />
+
+        <EditText
+            android:id="@+id/edtotp"
+            style="@style/Text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:ems="10"
+            android:background="@drawable/bg_edit_text"
+            android:gravity="center"
+            android:hint="Nhập mã"
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvguilai"
+            style="@style/Text"
+            android:fontFamily="@font/be_vietnam_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Gửi lại mã"
+            android:textColor="#0C0C0C"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/btnaccess"
+            style="@style/Text_btn"
+            android:background="@drawable/bg_btn"
+            android:layout_width="250dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Tiếp Tục" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
