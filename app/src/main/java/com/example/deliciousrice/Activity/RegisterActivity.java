@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.veryfine_gmail);
                 EditText edtotp = dialog.findViewById(R.id.edtotp);
                 TextView tvguilai = dialog.findViewById(R.id.tvguilai);
-                Button btnaccess = dialog.findViewById(R.id.btnaccess);
+                TextView btnaccess = dialog.findViewById(R.id.btnaccess);
                 tvguilai.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
